@@ -10,13 +10,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,21 +21,31 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Container(
+              alignment: Alignment.center,
+              child: Image.network('https://raw.githack.com/algokelvin-373/algokelvin-373/master/my_resources/Logo%20AlgoKelvin%20v3%20(2).png',
+                height: 250,
+                width: 250,
+                fit: BoxFit.cover,
+              ),
+            ),
             const Text(
-              'You have pushed the button this many times:',
+              'Hello World Flutter Programming',
+              style: TextStyle(
+                fontSize: 20.0,
+                color: Colors.black,
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            const Text(
+              'AlgoKelvin learn Flutter Programming',
+              style: TextStyle(
+                fontSize: 16.0,
+                color: Colors.red,
+              ),
+            )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
