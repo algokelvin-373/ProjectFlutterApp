@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -10,58 +8,72 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'AlgoKelvin Flutter',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'AlgoKelvin Flutter 04 UI Rows'),
+      home: const HomePage(title: 'AlgoKelvin Flutter 04 UI Rows'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: UIRowsState(),
     );
   }
+}
+
+class UIRowsState extends StatelessWidget {
+
+  final String txtBtn1 = 'Button 1';
+  final String txtBtn2 = 'Button 2';
+  final String txtBtn3 = 'Button 3';
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          RaisedButton(
+            child: Text(txtBtn1),
+              onPressed: () {
+                showToast(context, txtBtn1);
+              }
+          ),
+          Container(width: 10),
+          RaisedButton(
+              child: Text(txtBtn2),
+              onPressed: () {
+                showToast(context, txtBtn2);
+              }
+          ),
+          Container(width: 10),
+          RaisedButton(
+              child: Text(txtBtn3),
+              onPressed: () {
+                showToast(context, txtBtn3);
+              }
+          ),
+        ],
+      ),
+    );
+  }
+
+  void showToast(BuildContext context, String msg) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text("You press $msg"),
+    ));
+  }
+
 }
