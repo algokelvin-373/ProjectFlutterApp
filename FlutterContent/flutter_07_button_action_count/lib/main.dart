@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
-      home: const HomePage(title: 'AlgoKelvin Flutter 07 Button Action Count'),
+      home: const HomePage(title: 'AlgoKelvin Flutter 07 CButton Action Count'),
     );
   }
 }
