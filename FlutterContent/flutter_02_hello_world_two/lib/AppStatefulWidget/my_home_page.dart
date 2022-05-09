@@ -14,7 +14,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     const String linkImg = 'https://raw.githack.com/algokelvin-373/'
-        'algokelvin-373/master/my_resources/Logo%20AlgoKelvin%20v3%20(2).png';
+        'algokelvin-373/master/my_resources/Logo%20AlgoKelvin%20v3%20Flutter.png';
     const String message1 = 'Hello World Flutter Programming';
     const String message2 = 'AlgoKelvin learn Flutter Programming';
     return Scaffold(
