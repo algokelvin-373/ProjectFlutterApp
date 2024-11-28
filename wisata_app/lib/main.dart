@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wisata_app/detail_screen.dart';
-import 'package:wisata_app/main_screen.dart';
+import 'package:wisata_app/base/main_screen.dart';
 
 void main() => runApp(const MyApp());
 
