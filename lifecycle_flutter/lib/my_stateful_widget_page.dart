@@ -14,6 +14,41 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _counter = 0;
 
+  // todo-widget-01: override initState method
+  @override
+  void initState() {
+    super.initState();
+    debugPrint("widget-initState");
+  }
+
+  // todo-widget-02: override didChangeDependencies method
+  @override
+  void didChangeDependencies() async {
+    super.didChangeDependencies();
+    debugPrint("widget-didChangeDependencies");
+  }
+
+  // todo-widget-04: override setState method
+  @override
+  void setState(VoidCallback fn) {
+    super.setState(fn);
+    debugPrint("widget-setstate");
+  }
+
+  // todo-widget-06: override dispose method
+  @override
+  void dispose() {
+    debugPrint("widget-dispose");
+    super.dispose();
+  }
+
+  // todo-widget-05: override deactivate method
+  @override
+  void deactivate() {
+    debugPrint("widget-deactivate");
+    super.deactivate();
+  }
+
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -31,6 +66,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
+    // todo-widget-03: setup for build method
+    debugPrint("widget-build");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
