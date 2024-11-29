@@ -26,7 +26,9 @@ class _ReturnDataScreenState extends State<ReturnDataScreen> {
             ),
             ElevatedButton(
               child: const Text('Send'),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context, _textController.text);
+              },
             ),
           ],
         ),
