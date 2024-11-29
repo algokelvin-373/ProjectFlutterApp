@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wisata_app_level_two/style/typography/tourism_theme.dart';
 
 import 'model/tourism.dart';
 import 'screen/detail/detail_screen.dart';
@@ -15,11 +16,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      title: 'Tourism App',
+      theme: TourismTheme.lightTheme,
+      darkTheme: TourismTheme.darkTheme,
+      themeMode: ThemeMode.system,
       // todo-04: add navigation route
       initialRoute: NavigationRoute.homeRoute.name,
       routes: {
