@@ -20,9 +20,12 @@ class DetailScreen extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              Image.network(
-                tourism.image,
-                fit: BoxFit.cover,
+              Hero(
+                tag: tourism.image,
+                child: Image.network(
+                  tourism.image,
+                  fit: BoxFit.cover,
+                ),
               ),
               const SizedBox.square(dimension: 16),
               Row(
