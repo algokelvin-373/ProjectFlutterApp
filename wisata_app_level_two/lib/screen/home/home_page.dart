@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wisata_app_level_two/utils/global_data.dart';
 
+import '../../static/navigation_route.dart';
 import 'tourism_card_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -22,7 +23,16 @@ class HomePage extends StatelessWidget {
           itemCount: tourismList.length,
           itemBuilder: (context, index) {
             final tourism = tourismList[index];
-            return TourismCardWidget(tourism: tourism);
+            return TourismCardWidget(
+              tourism: tourism,
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  NavigationRoute.detailRoute.name,
+                  arguments: tourism,
+                );
+              },
+            );
           },
         ),
       ),
