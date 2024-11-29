@@ -59,9 +59,23 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  fonts:
+    - family: IBMPlexSansCondensed
+      fonts:
+        - asset: assets/fonts/IBMPlexSansCondensed-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/IBMPlexSansCondensed-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/IBMPlexSansCondensed-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/IBMPlexSansCondensed-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/IBMPlexSansCondensed-Light.ttf
+          weight: 300
+        - asset: assets/fonts/IBMPlexSansCondensed-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/IBMPlexSansCondensed-Thin.ttf
+          weight: 100
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
