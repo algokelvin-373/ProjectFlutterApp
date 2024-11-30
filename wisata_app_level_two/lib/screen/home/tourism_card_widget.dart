@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wisata_app_level_two/model/tourism.dart';
+import 'package:wisata_app_level_two/data/model/tourism.dart';
 
 // todo-02: add onTap parameter in Tourism Card
 class TourismCard extends StatelessWidget {

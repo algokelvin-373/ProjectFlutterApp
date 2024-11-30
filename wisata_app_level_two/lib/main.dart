@@ -4,7 +4,7 @@ import 'package:wisata_app_level_two/provider/main/index_nav_provider.dart';
 import 'package:wisata_app_level_two/screen/main/main_screen.dart';
 import 'package:wisata_app_level_two/style/typography/tourism_theme.dart';
 
-import 'model/tourism.dart';
+import 'data/model/tourism.dart';
 import 'provider/detail/bookmark_list_provider.dart';
 import 'screen/detail/detail_screen.dart';
 import 'static/navigation_route.dart';
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
       routes: {
         NavigationRoute.mainRoute.name: (context) => const MainScreen(),
         NavigationRoute.detailRoute.name: (context) => DetailScreen(
-          tourism: ModalRoute.of(context)?.settings.arguments as Tourism,
+          tourismId: ModalRoute.of(context)?.settings.arguments as int,
         ),
       },
     );

@@ -1,4 +1,4 @@
-import 'package:wisata_app_level_two/model/tourism.dart';
+import 'package:wisata_app_level_two/data/model/tourism.dart';
 
 //List<Tourism> bookmarkTourismList = [];
 

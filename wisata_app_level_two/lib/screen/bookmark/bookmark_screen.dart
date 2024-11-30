@@ -27,7 +27,7 @@ class BookmarkScreen extends StatelessWidget {
                     Navigator.pushNamed(
                       context,
                       NavigationRoute.detailRoute.name,
-                      arguments: tourism,
+                      arguments: tourism.id,
                     );
                   },
                 );

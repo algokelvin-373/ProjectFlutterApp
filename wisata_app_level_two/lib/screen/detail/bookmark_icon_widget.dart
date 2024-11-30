@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wisata_app_level_two/model/tourism.dart';
+import 'package:wisata_app_level_two/data/model/tourism.dart';
 import 'package:wisata_app_level_two/provider/detail/bookmaart_icon_provider.dart';
 import 'package:wisata_app_level_two/provider/detail/bookmark_list_provider.dart';
 
