@@ -1,78 +1,75 @@
-import 'package:flutter/material.dart';
-import 'package:wisata_app_level_two/model/tourism.dart';
+import 'dart:async';
 
-class DetailScreen extends StatelessWidget {
-  final Tourism tourism;
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:wisata_app_level_two/provider/detail/bookmaart_icon_provider.dart';
+import 'package:wisata_app_level_two/provider/detail/tourism_detail_provider.dart';
+import 'package:wisata_app_level_two/screen/detail/bookmark_icon_widget.dart';
+import 'package:wisata_app_level_two/static/tourism_detail_result_state.dart';
+
+import 'body_of_detail_screen_widget.dart';
+
+class DetailScreen extends StatefulWidget {
+  final int tourismId;
 
   const DetailScreen({
     super.key,
-    required this.tourism,
+    required this.tourismId,
   });
+
+  @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  //final Completer<Tourism> _completerTourism = Completer<Tourism>();
+  //late Future<TourismDetailResponse> _futureTourismDetail;
+
+  @override
+  void initState() {
+    super.initState();
+    //_futureTourismDetail = ApiServices().getTourismDetail(widget.tourismId);
+    Future.microtask(() {
+      context
+          .read<TourismDetailProvider>()
+          .fetchTourismDetail(widget.tourismId);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Tourism Detail"),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Hero(
-                tag: tourism.image,
-                child: Image.network(
-                  tourism.image,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              const SizedBox.square(dimension: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          tourism.name,
-                          style: Theme.of(context).textTheme.headlineLarge,
-                        ),
-                        Text(
-                          tourism.address,
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelLarge
-                              ?.copyWith(fontWeight: FontWeight.w400),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.favorite,
-                        color: Colors.pink,
-                      ),
-                      const SizedBox.square(dimension: 4),
-                      Text(
-                        tourism.like.toString(),
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      )
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox.square(dimension: 16),
-              Text(
-                tourism.description,
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-            ],
+        actions: [
+          ChangeNotifierProvider(
+            create: (context) => BookmarkIconProvider(),
+            child: Consumer<TourismDetailProvider>(
+              builder: (context, value, child) {
+                return switch (value.resultState) {
+                  TourismDetailLoadedState(data: var tourism) =>
+                      BookmarkIconWidget(tourism: tourism),
+                  _ => const SizedBox(),
+                };
+              },
+            ),
           ),
-        ),
+        ],
+      ),
+      body: Consumer<TourismDetailProvider>(
+        builder: (context, value, child) {
+          return switch (value.resultState) {
+            TourismDetailLoadingState() => const Center(
+              child: CircularProgressIndicator(),
+            ),
+            TourismDetailLoadedState(data: var tourism) =>
+                BodyOfDetailScreenWidget(tourism: tourism),
+            TourismDetailErrorState(error: var message) => Center(
+              child: Text(message),
+            ),
+            _ => const SizedBox(),
+          };
+        },
       ),
     );
   }
