@@ -21,7 +21,6 @@ class HomeScreen extends StatelessWidget {
           return TourismCard(
             tourism: tourism,
             onTap: () {
-              // todo-05: navigate to detail screen
               Navigator.pushNamed(
                 context,
                 NavigationRoute.detailRoute.name,

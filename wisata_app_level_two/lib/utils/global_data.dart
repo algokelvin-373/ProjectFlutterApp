@@ -1,6 +1,6 @@
 import 'package:wisata_app_level_two/model/tourism.dart';
 
-List<Tourism> bookmarkTourismList = [];
+//List<Tourism> bookmarkTourismList = [];
 
 final List<Tourism> tourismList = [
   Tourism(

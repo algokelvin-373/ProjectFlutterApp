@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:wisata_app_level_two/provider/main/index_nav_provider.dart';
 import 'package:wisata_app_level_two/screen/main/main_screen.dart';
 import 'package:wisata_app_level_two/style/typography/tourism_theme.dart';
 
 import 'model/tourism.dart';
+import 'provider/detail/bookmark_list_provider.dart';
 import 'screen/detail/detail_screen.dart';
-import 'screen/home/home_page.dart';
 import 'static/navigation_route.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => IndexNavProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => BookmarkListProvider(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
