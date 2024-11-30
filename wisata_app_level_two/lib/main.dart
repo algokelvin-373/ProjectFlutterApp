@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wisata_app_level_two/screen/main/main_screen.dart';
 import 'package:wisata_app_level_two/style/typography/tourism_theme.dart';
 
 import 'model/tourism.dart';
@@ -21,9 +22,9 @@ class MyApp extends StatelessWidget {
       darkTheme: TourismTheme.darkTheme,
       themeMode: ThemeMode.system,
       // todo-04: add navigation route
-      initialRoute: NavigationRoute.homeRoute.name,
+      initialRoute: NavigationRoute.mainRoute.name,
       routes: {
-        NavigationRoute.homeRoute.name: (context) => const HomeScreen(),
+        NavigationRoute.mainRoute.name: (context) => const MainScreen(),
         NavigationRoute.detailRoute.name: (context) => DetailScreen(
           tourism: ModalRoute.of(context)?.settings.arguments as Tourism,
         ),
