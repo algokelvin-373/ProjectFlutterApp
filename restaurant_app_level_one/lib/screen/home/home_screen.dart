@@ -1,7 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:restaurant_app_level_one/data/model/restaurant.dart';
+import 'package:restaurant_app_level_one/provider/home/restaurant_list_provider.dart';
+import 'package:restaurant_app_level_one/static/restaurant_list_result.dart';
 
-class HomeScreen extends StatelessWidget {
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      context.read<RestaurantListProvider>().fetchRestaurantList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +53,24 @@ class HomeScreen extends StatelessWidget {
             ),
             // Food List
             Expanded(
-              child: ListView.builder(
-                itemCount: 5, // Number of food items
-                itemBuilder: (context, index) {
-                  return FoodItemCard();
+              child: Consumer<RestaurantListProvider>(
+                builder: (context, value, child) {
+                  return switch (value.resultState) {
+                    RestaurantListLoadingState() => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    RestaurantListLoadedState(data: var restaurantList) => ListView.builder(
+                      itemCount: restaurantList.length, // Number of food items
+                      itemBuilder: (context, index) {
+                        final restaurant = restaurantList[index];
+                        return FoodItemCard(restaurant: restaurant,);
+                      },
+                    ),
+                    RestaurantListErrorState(error: var message) => Center(
+                      child: Text(message),
+                    ),
+                    _ => const SizedBox(),
+                  };
                 },
               ),
             ),
@@ -50,7 +82,12 @@ class HomeScreen extends StatelessWidget {
 }
 
 class FoodItemCard extends StatelessWidget {
-  const FoodItemCard({super.key});
+  final Restaurant restaurant;
+
+  const FoodItemCard({
+    super.key,
+    required this.restaurant,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +107,7 @@ class FoodItemCard extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(
-                'https://via.placeholder.com/80', // Replace with actual image URL
+                'https://restaurant-api.dicoding.dev/images/medium/${restaurant.pictureId}', // Replace with actual image URL
                 width: 80,
                 height: 80,
                 fit: BoxFit.cover,
@@ -83,19 +120,19 @@ class FoodItemCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Food Name',
+                    restaurant.name,
                     style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 5),
                   Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                    restaurant.city,
                     style: TextStyle(color: Colors.white54, fontSize: 12),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(height: 5),
                   Text(
-                    '\$300.00',
+                    restaurant.rating.toString(),
                     style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -110,7 +147,7 @@ class FoodItemCard extends StatelessWidget {
                   primary: Colors.red,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                 ),
-                child: Text('Add Cart'),
+                child: Text('Kunjungi'),
               ),
             ),
           ],
