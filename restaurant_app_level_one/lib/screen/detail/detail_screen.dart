@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app_level_one/data/model/category.dart';
+import 'package:restaurant_app_level_one/data/model/customer_review.dart';
 import 'package:restaurant_app_level_one/data/model/menu_list.dart';
 import 'package:restaurant_app_level_one/data/model/restaurant_detail.dart';
 import 'package:restaurant_app_level_one/provider/detail/restaurant_detaill_provider.dart';
@@ -167,7 +168,42 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                     );
                   }).toList(),
                 ),
-                // Total and Add to Cart
+                SizedBox(height: 15),
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Reviews',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                ),
+                SizedBox(
+                  height: 1,
+                  child: Container(color: Colors.grey,),
+                ),
+                GridView.count(
+                  shrinkWrap: true, // Important to make GridView fit within Column
+                  physics: NeverScrollableScrollPhysics(), // Disable GridView's own scrolling
+                  crossAxisCount: 1, // Number of columns
+                  crossAxisSpacing: 0, // Horizontal spacing
+                  mainAxisSpacing: 0, // Vertical spacing
+                  //childAspectRatio: 3 / 4, // Adjust aspect ratio based on design
+                  children: restaurantDetail.customerReviews.map((item) {
+                    return CustomerReviewCard(
+                      customerReview: item,
+                    );
+                  }).toList(),
+                ),
+                /*Expanded(
+                  child: ListView.builder(
+                    itemCount: restaurantDetail.customerReviews.length,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final review = restaurantDetail.customerReviews[index];
+                      return CustomerReviewCard(customerReview: review);
+                    }
+                  ),
+                ),*/
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -278,6 +314,58 @@ class MenusCard extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// Comment Card
+class CustomerReviewCard extends StatelessWidget {
+  final CustomerReview customerReview;
+
+  const CustomerReviewCard({
+    super.key,
+    required this.customerReview,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Profile Image
+          Image.asset('images/ic_profile.jpg',
+              height: 20,
+              fit: BoxFit.cover
+          ),
+          SizedBox(width: 10), // Space between image and text
+          // Username and Comment
+          Expanded(
+            child: RichText(
+              text: TextSpan(
+                style: TextStyle(color: Colors.white), // Set default text color
+                children: [
+                  TextSpan(
+                    text: customerReview.name,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                  TextSpan(
+                    text: ' ${customerReview.review}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
