@@ -27,10 +27,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.black87,
       appBar: AppBar(
+        title: const Text(
+          "Restaurant App",
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.black87,
         elevation: 0,
-        leading: Icon(Icons.arrow_back, color: Colors.white),
-        actions: [Icon(Icons.menu, color: Colors.white)],
+        // leading: Icon(Icons.arrow_back, color: Colors.white),
+        // actions: [Icon(Icons.menu, color: Colors.white)],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
