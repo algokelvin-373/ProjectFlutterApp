@@ -147,6 +147,7 @@ class FoodItemCard extends StatelessWidget {
                   Navigator.pushNamed(
                     context,
                     NavigationRoute.detailRoute.name,
+                    arguments: restaurant.id,
                   );
                 },
                 style: ElevatedButton.styleFrom(
