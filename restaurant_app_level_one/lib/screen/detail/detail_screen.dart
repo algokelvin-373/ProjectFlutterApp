@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app_level_one/data/model/category.dart';
+import 'package:restaurant_app_level_one/data/model/menu_list.dart';
 import 'package:restaurant_app_level_one/data/model/restaurant_detail.dart';
 import 'package:restaurant_app_level_one/provider/detail/restaurant_detaill_provider.dart';
 import 'package:restaurant_app_level_one/static/restaurant_detail_result.dart';
@@ -60,6 +62,22 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> listCategoriesWidget = restaurantDetail.categories
+        .map((category) => buildSizeChip(category.name))
+        .toList();
+
+    List<ListMenu> listAllMenu = [];
+    List<Category> listMenuFood = restaurantDetail.menus.foods;
+    for (int index = 0; index < listMenuFood.length; index++) {
+      var food = listMenuFood[index];
+      listAllMenu.add(ListMenu(food.name, true, false));
+    }
+    List<Category> listMenuDrink = restaurantDetail.menus.drinks;
+    for (int index = 0; index < listMenuDrink.length; index++) {
+      var drink = listMenuDrink[index];
+      listAllMenu.add(ListMenu(drink.name, false, true));
+    }
+
     return CustomScrollView(
       slivers: [
         // SliverAppBar with the image
@@ -104,7 +122,13 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                   style: TextStyle(color: Colors.grey, fontSize: 14),
                 ),
                 SizedBox(height: 15),
-                // Rating, Time, Calories
+                Wrap(
+                  spacing: 4, // Horizontal spacing between chips
+                  runSpacing: 4, // Vertical spacing if they wrap to the next line
+                  alignment: WrapAlignment.start, // Align to the start
+                  children: listCategoriesWidget,
+                ),
+                SizedBox(height: 15),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -119,11 +143,30 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                   style: TextStyle(color: Colors.white70, fontSize: 14),
                 ),
                 SizedBox(height: 15),
-                Text(
-                  'Customize >',
-                  style: TextStyle(color: Colors.orangeAccent, fontSize: 16),
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Menu Food and Drink',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
                 ),
-                SizedBox(height: 25),
+                SizedBox(
+                  height: 1,
+                  child: Container(color: Colors.grey,),
+                ),
+                GridView.count(
+                  shrinkWrap: true, // Important to make GridView fit within Column
+                  physics: NeverScrollableScrollPhysics(), // Disable GridView's own scrolling
+                  crossAxisCount: 2, // Number of columns
+                  crossAxisSpacing: 8, // Horizontal spacing
+                  mainAxisSpacing: 8, // Vertical spacing
+                  childAspectRatio: 3 / 4, // Adjust aspect ratio based on design
+                  children: listAllMenu.map((item) {
+                    return MenusCard(
+                      listMenu: item,
+                    );
+                  }).toList(),
+                ),
                 // Total and Add to Cart
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -182,6 +225,64 @@ class IconText extends StatelessWidget {
           style: TextStyle(color: Colors.white70, fontSize: 14),
         ),
       ],
+    );
+  }
+}
+
+// Category
+Widget buildSizeChip(String size) {
+  return Container(
+    decoration: BoxDecoration(
+      color: Colors.grey[200],
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Text(
+        size,
+        style: TextStyle(
+          color: Colors.black54,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
+  );
+}
+
+// Menu Food and Drink
+class MenusCard extends StatelessWidget {
+  final ListMenu listMenu;
+
+  const MenusCard({
+    super.key,
+    required this.listMenu,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset((listMenu.isFood) ? 'images/ic_food.jpg' : 'images/ic_drink.jpg',
+              height: 100,
+              fit: BoxFit.cover
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              listMenu.name,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
