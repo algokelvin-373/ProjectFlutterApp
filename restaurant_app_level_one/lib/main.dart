@@ -5,6 +5,7 @@ import 'package:restaurant_app_level_one/provider/home/restaurant_list_provider.
 import 'package:restaurant_app_level_one/screen/home/home_screen.dart';
 import 'package:restaurant_app_level_one/style/typography/restaurant_theme.dart';
 
+import 'screen/detail/detail_screen.dart';
 import 'static/navigation_route.dart';
 
 void main() {
@@ -42,6 +43,7 @@ class RestaurantApp extends StatelessWidget {
       initialRoute: NavigationRoute.homeRoute.name,
       routes: {
         NavigationRoute.homeRoute.name: (context) => const HomeScreen(),
+        NavigationRoute.detailRoute.name: (context) => const DetailScreen(),
       },
     );
   }

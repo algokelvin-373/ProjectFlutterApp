@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app_level_one/data/model/restaurant.dart';
 import 'package:restaurant_app_level_one/provider/home/restaurant_list_provider.dart';
+import 'package:restaurant_app_level_one/static/navigation_route.dart';
 import 'package:restaurant_app_level_one/static/restaurant_list_result.dart';
 
 
@@ -142,7 +143,12 @@ class FoodItemCard extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(top: 10),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    NavigationRoute.detailRoute.name,
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.red,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
