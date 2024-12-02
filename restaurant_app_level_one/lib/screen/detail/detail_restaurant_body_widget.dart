@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app_level_one/data/api/api_services.dart';
 import 'package:restaurant_app_level_one/data/model/category.dart';
 import 'package:restaurant_app_level_one/data/model/menu_list.dart';
 import 'package:restaurant_app_level_one/data/model/restaurant_detail.dart';
 import 'package:restaurant_app_level_one/data/model/review_request.dart';
 import 'package:restaurant_app_level_one/provider/detail/restaurant_review_provider.dart';
-import 'package:restaurant_app_level_one/static/restaurant_detail_result.dart';
 import 'package:restaurant_app_level_one/static/restaurant_review_result.dart';
 import 'package:restaurant_app_level_one/utils/global_function.dart';
 
@@ -151,8 +149,8 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                   child: Container(color: Colors.grey,),
                 ),
                 ListView.builder(
-                  shrinkWrap: true, // Agar sesuai dengan konten di dalam Column
-                  physics: NeverScrollableScrollPhysics(), // Menonaktifkan scroll bawaan
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: restaurantDetail.customerReviews.length,
                   itemBuilder: (context, index) {
                     return CustomerReviewCard(
@@ -182,7 +180,7 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                                     border: OutlineInputBorder(),
                                   ),
                                 ),
-                                spaceVertical(15),
+                                const SizedBox(height: 15),
                                 TextField(
                                   controller: reviewController,
                                   decoration: const InputDecoration(
@@ -221,10 +219,29 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                                       review,
                                     );
 
-                                    // Panggil method provider untuk mengirimkan review
                                     context.read<RestaurantReviewProvider>().fetchRestaurantReview(reviewRequest);
+                                    Future.delayed(const Duration(seconds: 1), () {
+                                      final resultState = context.read<RestaurantReviewProvider>().resultState;
 
-                                    Navigator.of(context).pop(); // Menutup dialog setelah submit
+                                      if (resultState is RestaurantReviewLoadedState) {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          const SnackBar(
+                                            content: Text("Review added successfully!"),
+                                            backgroundColor: Colors.green,
+                                            duration: Duration(seconds: 2),
+                                          ),
+                                        );
+                                        Navigator.of(context).pop();
+                                      } else if (resultState is RestaurantReviewErrorState) {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            content: Text("Failed to add review: ${resultState.error}"),
+                                            backgroundColor: Colors.red,
+                                            duration: const Duration(seconds: 2),
+                                          ),
+                                        );
+                                      }
+                                    });
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(content: Text('Please fill in both fields')),
