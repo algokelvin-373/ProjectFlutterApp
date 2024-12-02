@@ -7,7 +7,7 @@ import 'package:restaurant_app_level_one/static/restaurant_review_result.dart';
 class RestaurantReviewProvider extends ChangeNotifier {
   final ApiServices _apiServices;
 
-  List<CustomerReview> _customerReviews = [];
+  final List<CustomerReview> _customerReviews = [];
 
   List<CustomerReview> get customerReviews => _customerReviews;
 
