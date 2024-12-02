@@ -10,7 +10,7 @@ Widget buildSizeChip(String size) {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Text(
         size,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.black54,
           fontWeight: FontWeight.bold,
         ),

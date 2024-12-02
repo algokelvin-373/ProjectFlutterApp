@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:restaurant_app_level_one/data/api/api_services.dart';
 import 'package:restaurant_app_level_one/data/model/category.dart';
 import 'package:restaurant_app_level_one/data/model/menu_list.dart';
 import 'package:restaurant_app_level_one/data/model/restaurant_detail.dart';
+import 'package:restaurant_app_level_one/data/model/review_request.dart';
+import 'package:restaurant_app_level_one/provider/detail/restaurant_review_provider.dart';
+import 'package:restaurant_app_level_one/static/restaurant_detail_result.dart';
+import 'package:restaurant_app_level_one/static/restaurant_review_result.dart';
 import 'package:restaurant_app_level_one/utils/global_function.dart';
 
 import 'build_size_chip.dart';
@@ -34,6 +40,11 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
       var drink = listMenuDrink[index];
       listAllMenu.add(ListMenu(drink.name, false, true));
     }
+
+    final reviewProvider = Provider.of<RestaurantReviewProvider>(context);
+
+    TextEditingController nameController = TextEditingController();
+    TextEditingController reviewController = TextEditingController();
 
     return CustomScrollView(
       slivers: [
@@ -69,23 +80,27 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                   children: [
                     Text(
                       restaurantDetail.name,
-                      style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
                 spaceVertical(10),
                 Text(
                   restaurantDetail.address,
-                  style: TextStyle(color: Colors.grey, fontSize: 14),
+                  style: const TextStyle(color: Colors.grey, fontSize: 14),
                 ),
-                SizedBox(height: 15),
+                spaceVertical(15),
                 Wrap(
                   spacing: 4, // Horizontal spacing between chips
                   runSpacing: 4, // Vertical spacing if they wrap to the next line
                   alignment: WrapAlignment.start, // Align to the start
                   children: listCategoriesWidget,
                 ),
-                SizedBox(height: 15),
+                spaceVertical(15),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -93,14 +108,13 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                     IconText(icon: Icons.location_city, label: restaurantDetail.city),
                   ],
                 ),
-                SizedBox(height: 20),
-                // Nutritional Info
+                spaceVertical(20),
                 Text(
                   restaurantDetail.description,
-                  style: TextStyle(color: Colors.white70, fontSize: 14),
+                  style: const TextStyle(color: Colors.white70, fontSize: 14),
                 ),
-                SizedBox(height: 15),
-                Align(
+                spaceVertical(15),
+                const Align(
                   alignment: Alignment.center,
                   child: Text(
                     'Menu Food and Drink',
@@ -112,20 +126,20 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                   child: Container(color: Colors.grey,),
                 ),
                 GridView.count(
-                  shrinkWrap: true, // Important to make GridView fit within Column
-                  physics: NeverScrollableScrollPhysics(), // Disable GridView's own scrolling
-                  crossAxisCount: 2, // Number of columns
-                  crossAxisSpacing: 8, // Horizontal spacing
-                  mainAxisSpacing: 8, // Vertical spacing
-                  childAspectRatio: 3 / 4, // Adjust aspect ratio based on design
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                  childAspectRatio: 3 / 4,
                   children: listAllMenu.map((item) {
                     return MenusCard(
                       listMenu: item,
                     );
                   }).toList(),
                 ),
-                SizedBox(height: 15),
-                Align(
+                spaceVertical(15),
+                const Align(
                   alignment: Alignment.center,
                   child: Text(
                     'Reviews',
@@ -146,34 +160,84 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                     );
                   },
                 ),
-                /*Expanded(
-                  child: ListView.builder(
-                    itemCount: restaurantDetail.customerReviews.length,
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      final review = restaurantDetail.customerReviews[index];
-                      return CustomerReviewCard(customerReview: review);
-                    }
-                  ),
-                ),*/
-                /*Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Total amount',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
-                    ),
-                    Text(
-                      '\$30.00',
-                      style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 15),
+                spaceVertical(15),
                 Center(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            title: const Text('Add Review'),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                TextField(
+                                  controller: nameController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Name',
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                                spaceVertical(15),
+                                TextField(
+                                  controller: reviewController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Review',
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  maxLines: 3,
+                                ),
+                                const SizedBox(height: 15),
+                                // Tempatkan Consumer di sini untuk memantau status dari provider
+                                Consumer<RestaurantReviewProvider>(
+                                  builder: (context, provider, child) {
+                                    return provider.resultState is RestaurantReviewLoadingState
+                                        ? const CircularProgressIndicator()
+                                        : const SizedBox();  // Tampilkan progress indicator saat loading
+                                  },
+                                ),
+                              ],
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('Cancel'),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  final name = nameController.text;
+                                  final review = reviewController.text;
+
+                                  if (name.isNotEmpty && review.isNotEmpty) {
+                                    final reviewRequest = ReviewRequest(
+                                      restaurantDetail.id,
+                                      name,
+                                      review,
+                                    );
+
+                                    // Panggil method provider untuk mengirimkan review
+                                    context.read<RestaurantReviewProvider>().fetchRestaurantReview(reviewRequest);
+
+                                    Navigator.of(context).pop(); // Menutup dialog setelah submit
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(content: Text('Please fill in both fields')),
+                                    );
+                                  }
+                                },
+                                child: const Text('Submit'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.orangeAccent,
                       shape: RoundedRectangleBorder(
@@ -182,11 +246,11 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                     ),
                     child: Text(
-                      'Add to cart',
+                      'Add Review',
                       style: TextStyle(fontSize: 18, color: Colors.white),
                     ),
                   ),
-                ),*/
+                ),
               ],
             ),
           ),
