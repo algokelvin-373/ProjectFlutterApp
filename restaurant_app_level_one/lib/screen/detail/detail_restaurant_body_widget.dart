@@ -136,18 +136,15 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                   height: 1,
                   child: Container(color: Colors.grey,),
                 ),
-                GridView.count(
-                  shrinkWrap: true, // Important to make GridView fit within Column
-                  physics: NeverScrollableScrollPhysics(), // Disable GridView's own scrolling
-                  crossAxisCount: 1, // Number of columns
-                  crossAxisSpacing: 0, // Horizontal spacing
-                  mainAxisSpacing: 0, // Vertical spacing
-                  //childAspectRatio: 3 / 4, // Adjust aspect ratio based on design
-                  children: restaurantDetail.customerReviews.map((item) {
+                ListView.builder(
+                  shrinkWrap: true, // Agar sesuai dengan konten di dalam Column
+                  physics: NeverScrollableScrollPhysics(), // Menonaktifkan scroll bawaan
+                  itemCount: restaurantDetail.customerReviews.length,
+                  itemBuilder: (context, index) {
                     return CustomerReviewCard(
-                      customerReview: item,
+                      customerReview: restaurantDetail.customerReviews[index],
                     );
-                  }).toList(),
+                  },
                 ),
                 /*Expanded(
                   child: ListView.builder(
@@ -160,7 +157,7 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                     }
                   ),
                 ),*/
-                Row(
+                /*Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -189,7 +186,7 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                       style: TextStyle(fontSize: 18, color: Colors.white),
                     ),
                   ),
-                ),
+                ),*/
               ],
             ),
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app_level_one/data/model/customer_review.dart';
+import 'package:restaurant_app_level_one/utils/global_function.dart';
 
 class CustomerReviewCard extends StatelessWidget {
   final CustomerReview customerReview;
@@ -12,38 +13,46 @@ class CustomerReviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0), // Kurangi padding vertikal
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Profile Image
-          Image.asset('images/ic_profile.jpg',
-              height: 20,
-              fit: BoxFit.cover
+          ClipOval(
+            child: Image.asset(
+              'images/ic_profile.jpg',
+              height: 50,
+              width: 50,
+              fit: BoxFit.cover,
+            ),
           ),
-          SizedBox(width: 10), // Space between image and text
-          // Username and Comment
+          spaceHorizontal(10),
           Expanded(
-            child: RichText(
-              text: TextSpan(
-                style: TextStyle(color: Colors.white), // Set default text color
-                children: [
-                  TextSpan(
-                    text: customerReview.name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                    ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  customerReview.name,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
                   ),
-                  TextSpan(
-                    text: ' ${customerReview.review}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontSize: 14,
-                    ),
+                ),
+                Text(
+                  customerReview.date,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
                   ),
-                ],
-              ),
+                ),
+                Text(
+                  customerReview.review,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
