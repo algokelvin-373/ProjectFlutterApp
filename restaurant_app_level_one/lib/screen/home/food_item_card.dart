@@ -26,13 +26,16 @@ class FoodItemCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Image
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                'https://restaurant-api.dicoding.dev/images/medium/${restaurant.pictureId}', // Replace with actual image URL
-                width: 80,
-                height: 80,
-                fit: BoxFit.cover,
+            Hero(
+              tag: 'https://restaurant-api.dicoding.dev/images/medium/${restaurant.pictureId}',
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  'https://restaurant-api.dicoding.dev/images/medium/${restaurant.pictureId}',
+                  width: 80,
+                  height: 80,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             spaceHorizontal(10),

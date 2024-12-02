@@ -53,9 +53,16 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
           pinned: true,
           backgroundColor: Colors.black,
           flexibleSpace: FlexibleSpaceBar(
-            background: Image.network(
-              'https://restaurant-api.dicoding.dev/images/large/${restaurantDetail.pictureId}',
-              fit: BoxFit.cover,
+            title: Text(
+              restaurantDetail.name,
+              style: const TextStyle(color: Colors.white),
+            ),
+            background: Hero(
+              tag: 'https://restaurant-api.dicoding.dev/images/large/${restaurantDetail.pictureId}',
+              child: Image.network(
+                'https://restaurant-api.dicoding.dev/images/large/${restaurantDetail.pictureId}',
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
