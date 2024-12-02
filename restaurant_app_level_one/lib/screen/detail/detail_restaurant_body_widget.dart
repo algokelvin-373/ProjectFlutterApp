@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app_level_one/data/model/category.dart';
+import 'package:restaurant_app_level_one/data/model/customer_review.dart';
 import 'package:restaurant_app_level_one/data/model/menu_list.dart';
 import 'package:restaurant_app_level_one/data/model/restaurant_detail.dart';
 import 'package:restaurant_app_level_one/data/model/review_request.dart';
@@ -72,7 +73,6 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Food Name and Counter
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -148,7 +148,23 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                   height: 1,
                   child: Container(color: Colors.grey,),
                 ),
-                ListView.builder(
+                Consumer<RestaurantReviewProvider>(
+                  builder: (context, provider, child) {
+                    final count = provider.customerReviews.length;
+                    final listReviewCustomer = count > 0 ? provider.customerReviews : restaurantDetail.customerReviews;
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: listReviewCustomer.length,
+                      itemBuilder: (context, index) {
+                        return CustomerReviewCard(
+                          customerReview: listReviewCustomer[index],
+                        );
+                      },
+                    );
+                  },
+                ),
+                /*ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: restaurantDetail.customerReviews.length,
@@ -157,7 +173,7 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                       customerReview: restaurantDetail.customerReviews[index],
                     );
                   },
-                ),
+                ),*/
                 spaceVertical(15),
                 Center(
                   child: ElevatedButton(
@@ -190,12 +206,11 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                                   maxLines: 3,
                                 ),
                                 const SizedBox(height: 15),
-                                // Tempatkan Consumer di sini untuk memantau status dari provider
                                 Consumer<RestaurantReviewProvider>(
                                   builder: (context, provider, child) {
                                     return provider.resultState is RestaurantReviewLoadingState
                                         ? const CircularProgressIndicator()
-                                        : const SizedBox();  // Tampilkan progress indicator saat loading
+                                        : const SizedBox();
                                   },
                                 ),
                               ],
@@ -208,7 +223,7 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                                 child: const Text('Cancel'),
                               ),
                               ElevatedButton(
-                                onPressed: () {
+                                onPressed: () async {
                                   final name = nameController.text;
                                   final review = reviewController.text;
 
@@ -219,29 +234,40 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                                       review,
                                     );
 
-                                    context.read<RestaurantReviewProvider>().fetchRestaurantReview(reviewRequest);
-                                    Future.delayed(const Duration(seconds: 1), () {
-                                      final resultState = context.read<RestaurantReviewProvider>().resultState;
+                                    try {
+                                      context.read<RestaurantReviewProvider>().fetchRestaurantReview(reviewRequest);
+                                      Future.delayed(const Duration(seconds: 1), () async {
+                                        final resultState = context.read<RestaurantReviewProvider>().resultState;
 
-                                      if (resultState is RestaurantReviewLoadedState) {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          const SnackBar(
-                                            content: Text("Review added successfully!"),
-                                            backgroundColor: Colors.green,
-                                            duration: Duration(seconds: 2),
-                                          ),
-                                        );
-                                        Navigator.of(context).pop();
-                                      } else if (resultState is RestaurantReviewErrorState) {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(
-                                            content: Text("Failed to add review: ${resultState.error}"),
-                                            backgroundColor: Colors.red,
-                                            duration: const Duration(seconds: 2),
-                                          ),
-                                        );
-                                      }
-                                    });
+                                        if (resultState is RestaurantReviewLoadedState) {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            const SnackBar(
+                                              content: Text("Review added successfully!"),
+                                              backgroundColor: Colors.green,
+                                              duration: Duration(seconds: 2),
+                                            ),
+                                          );
+                                          final listCustomerReviewNew = resultState.data;
+                                          context.read<RestaurantReviewProvider>().addReview(listCustomerReviewNew);
+                                          Navigator.of(context).pop();
+                                        } else if (resultState is RestaurantReviewErrorState) {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text("Failed to add review: ${resultState.error}"),
+                                              backgroundColor: Colors.red,
+                                              duration: const Duration(seconds: 2),
+                                            ),
+                                          );
+                                        }
+                                      });
+                                    } catch (e) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text("Failed to add review: $e"),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    }
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(content: Text('Please fill in both fields')),
@@ -262,7 +288,7 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                       ),
                       padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Add Review',
                       style: TextStyle(fontSize: 18, color: Colors.white),
                     ),

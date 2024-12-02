@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app_level_one/data/api/api_services.dart';
+import 'package:restaurant_app_level_one/data/model/customer_review.dart';
 import 'package:restaurant_app_level_one/data/model/review_request.dart';
 import 'package:restaurant_app_level_one/static/restaurant_review_result.dart';
 
 class RestaurantReviewProvider extends ChangeNotifier {
   final ApiServices _apiServices;
+
+  List<CustomerReview> _customerReviews = [];
+
+  List<CustomerReview> get customerReviews => _customerReviews;
 
   RestaurantReviewProvider(this._apiServices,);
 
@@ -30,5 +35,10 @@ class RestaurantReviewProvider extends ChangeNotifier {
       _resultState = RestaurantReviewErrorState(e.toString());
       notifyListeners();
     }
+  }
+
+  void addReview(List<CustomerReview> review) {
+    _customerReviews.addAll(review);
+    notifyListeners();
   }
 }
