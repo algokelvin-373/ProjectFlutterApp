@@ -258,6 +258,7 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                                               duration: const Duration(seconds: 2),
                                             ),
                                           );
+                                          Navigator.of(context).pop();
                                         }
                                       });
                                     } catch (e) {

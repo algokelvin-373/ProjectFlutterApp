@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app_level_one/data/model/restaurant.dart';
 import 'package:restaurant_app_level_one/provider/home/restaurant_list_provider.dart';
 import 'package:restaurant_app_level_one/static/restaurant_list_result.dart';
 import 'package:restaurant_app_level_one/utils/global_function.dart';
@@ -15,11 +16,26 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late List<Restaurant> _getListRestaurant = [];
+
+  final TextEditingController _searchController = TextEditingController();
+  List<Restaurant> _filteredRestaurant = [];
+
   @override
   void initState() {
     super.initState();
     Future.microtask(() {
       context.read<RestaurantListProvider>().fetchRestaurantList();
+    });
+    _searchController.addListener(_filterRestaurant);
+  }
+
+  void _filterRestaurant() {
+    final query = _searchController.text.toLowerCase();
+    setState(() {
+      _filteredRestaurant = _getListRestaurant.where((restaurant) {
+        return restaurant.name.toLowerCase().contains(query);
+      }).toList();
     });
   }
 
@@ -80,8 +96,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(30),
               ),
-              child: const TextField(
-                decoration: InputDecoration(
+              child: TextField(
+                controller: _searchController,
+                decoration: const InputDecoration(
                   hintText: "Search From Here",
                   border: InputBorder.none,
                   suffixIcon: Icon(Icons.search),
@@ -98,10 +115,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   } else if (value.resultState is RestaurantListLoadedState) {
                     final restaurantList = (value.resultState as RestaurantListLoadedState).data;
+                    _getListRestaurant = restaurantList;
+
+                    if (_filteredRestaurant.isEmpty && _searchController.text.isEmpty) {
+                      _filteredRestaurant = _getListRestaurant;
+                    }
+
                     return ListView.builder(
-                      itemCount: restaurantList.length,
+                      itemCount: _filteredRestaurant.length,
                       itemBuilder: (context, index) {
-                        final restaurant = restaurantList[index];
+                        final restaurant = _filteredRestaurant[index];
                         return FoodItemCard(restaurant: restaurant);
                       },
                     );
