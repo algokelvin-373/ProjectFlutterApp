@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:restaurant_app_level_one/data/model/restaurant_detail_response.dart';
 import 'package:restaurant_app_level_one/data/model/restaurant_list_response.dart';
 import 'package:restaurant_app_level_one/data/model/restaurant_review_response.dart';
+import 'package:restaurant_app_level_one/data/model/restaurant_search_response.dart';
 import 'package:restaurant_app_level_one/data/model/review_request.dart';
 
 class ApiServices {
@@ -15,6 +16,15 @@ class ApiServices {
       return RestaurantListResponse.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to load restaurant list');
+    }
+  }
+
+  Future<RestaurantSearchResponse> getRestaurantBySearch(String search) async {
+    final response = await http.get(Uri.parse("$_baseUrl/search?q=$search"));
+    if (response.statusCode == 200) {
+      return RestaurantSearchResponse.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to load search restaurant list');
     }
   }
 
