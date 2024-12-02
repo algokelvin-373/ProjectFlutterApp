@@ -28,23 +28,61 @@ class _DetailScreenState extends State<DetailScreen> {
     });
   }
 
+  void _showErrorDialog(String message, String id) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          title: const Text('Error Message'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                message,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  context.read<RestaurantDetailProvider>().fetchRestaurantDetail(id); // Refresh data
+                },
+                child: const Text('Refresh'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Consumer<RestaurantDetailProvider>(
         builder: (context, value, child) {
-          return switch (value.resultState) {
-            RestaurantDetailLoadingState() => const Center(
+          if (value.resultState is RestaurantDetailLoadingState) {
+            return const Center(
               child: CircularProgressIndicator(),
-            ),
-            RestaurantDetailLoadedState(data: var restaurant) =>
-                DetailRestaurantBodyWidget(restaurantDetail: restaurant),
-            RestaurantDetailErrorState(error: var message) => Center(
-              child: Text(message),
-            ),
-            _ => const SizedBox(),
-          };
+            );
+          } else if (value.resultState is RestaurantDetailLoadedState) {
+            final restaurantDetail = (value.resultState as RestaurantDetailLoadedState).data;
+            return DetailRestaurantBodyWidget(restaurantDetail: restaurantDetail);
+          } else if (value.resultState is RestaurantDetailErrorState)  {
+            final message = (value.resultState as RestaurantDetailErrorState).error;
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              _showErrorDialog(message, widget.restaurantId);
+            });
+            return const Center(child: Text("Error loading data."));
+          } else {
+            return const SizedBox();
+          }
         },
       ),
     );

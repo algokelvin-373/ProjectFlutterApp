@@ -23,6 +23,39 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          title: const Text('Error Message'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                message,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  context.read<RestaurantListProvider>().fetchRestaurantList(); // Refresh data
+                },
+                child: const Text('Refresh'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,22 +92,28 @@ class _HomeScreenState extends State<HomeScreen> {
             Expanded(
               child: Consumer<RestaurantListProvider>(
                 builder: (context, value, child) {
-                  return switch (value.resultState) {
-                    RestaurantListLoadingState() => const Center(
+                  if (value.resultState is RestaurantListLoadingState) {
+                    return const Center(
                       child: CircularProgressIndicator(),
-                    ),
-                    RestaurantListLoadedState(data: var restaurantList) => ListView.builder(
-                      itemCount: restaurantList.length, // Number of food items
+                    );
+                  } else if (value.resultState is RestaurantListLoadedState) {
+                    final restaurantList = (value.resultState as RestaurantListLoadedState).data;
+                    return ListView.builder(
+                      itemCount: restaurantList.length,
                       itemBuilder: (context, index) {
                         final restaurant = restaurantList[index];
-                        return FoodItemCard(restaurant: restaurant,);
+                        return FoodItemCard(restaurant: restaurant);
                       },
-                    ),
-                    RestaurantListErrorState(error: var message) => Center(
-                      child: Text(message),
-                    ),
-                    _ => const SizedBox(),
-                  };
+                    );
+                  } else if (value.resultState is RestaurantListErrorState) {
+                    final message = (value.resultState as RestaurantListErrorState).error;
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      _showErrorDialog(message);
+                    });
+                    return const Center(child: Text("Error loading data."));
+                  } else {
+                    return const SizedBox();
+                  }
                 },
               ),
             ),
