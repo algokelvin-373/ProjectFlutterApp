@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app_level_one/data/model/restaurant.dart';
 import 'package:restaurant_app_level_one/provider/home/restaurant_list_provider.dart';
-import 'package:restaurant_app_level_one/static/navigation_route.dart';
 import 'package:restaurant_app_level_one/static/restaurant_list_result.dart';
+import 'package:restaurant_app_level_one/utils/global_function.dart';
+
+import 'food_item_card.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -33,8 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         backgroundColor: Colors.black87,
         elevation: 0,
-        // leading: Icon(Icons.arrow_back, color: Colors.white),
-        // actions: [Icon(Icons.menu, color: Colors.white)],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -42,13 +41,13 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Search Bar
             Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              margin: verticalSymmetric(10),
+              padding: horizontalSymmetric(10),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(30),
               ),
-              child: TextField(
+              child: const TextField(
                 decoration: InputDecoration(
                   hintText: "Search From Here",
                   border: InputBorder.none,
@@ -77,88 +76,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     _ => const SizedBox(),
                   };
                 },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class FoodItemCard extends StatelessWidget {
-  final Restaurant restaurant;
-
-  const FoodItemCard({
-    super.key,
-    required this.restaurant,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: Colors.black87,
-      elevation: 4,
-      margin: EdgeInsets.symmetric(vertical: 10),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Image
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                'https://restaurant-api.dicoding.dev/images/medium/${restaurant.pictureId}', // Replace with actual image URL
-                width: 80,
-                height: 80,
-                fit: BoxFit.cover,
-              ),
-            ),
-            SizedBox(width: 10),
-            // Food Details
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    restaurant.name,
-                    style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    restaurant.city,
-                    style: TextStyle(color: Colors.white54, fontSize: 12),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    restaurant.rating.toString(),
-                    style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-            // Add Cart Button
-            Container(
-              margin: EdgeInsets.only(top: 10),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    NavigationRoute.detailRoute.name,
-                    arguments: restaurant.id,
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.red,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                ),
-                child: Text('Kunjungi'),
               ),
             ),
           ],
