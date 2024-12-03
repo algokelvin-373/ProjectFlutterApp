@@ -7,13 +7,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Colors.black87,
       appBar: AppBar(
-        title: const Text(
-          "Restaurant App",
-          //style: TextStyle(color: Colors.white),
-        ),
-        //backgroundColor: Colors.black87,
+        title: const Text("Restaurant App"),
         elevation: 0,
       ),
       body: const HomeScreenBodyWidget(),

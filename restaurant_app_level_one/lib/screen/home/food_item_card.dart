@@ -14,7 +14,6 @@ class FoodItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      //color: Colors.black87,
       elevation: 4,
       margin: verticalSymmetric(10),
       shape: RoundedRectangleBorder(
@@ -46,7 +45,6 @@ class FoodItemCard extends StatelessWidget {
                   Text(
                     restaurant.name,
                     style: const TextStyle(
-                        //color: Colors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                     ),
@@ -55,7 +53,6 @@ class FoodItemCard extends StatelessWidget {
                   Text(
                     restaurant.city,
                     style: const TextStyle(
-                        //color: Colors.white54,
                         fontSize: 12,
                     ),
                     maxLines: 2,
@@ -65,7 +62,6 @@ class FoodItemCard extends StatelessWidget {
                   Text(
                     restaurant.rating.toString(),
                     style: const TextStyle(
-                        //color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                     ),

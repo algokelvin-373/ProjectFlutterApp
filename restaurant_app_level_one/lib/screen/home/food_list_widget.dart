@@ -113,7 +113,6 @@ class _FoodListWidgetState extends State<FoodListWidget> {
               Text(
                 message,
                 style: const TextStyle(
-                  //color: Colors.black,
                   fontSize: 14,
                 ),
               ),

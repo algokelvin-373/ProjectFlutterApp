@@ -45,7 +45,6 @@ class _HomeScreenBodyWidgetState extends State<HomeScreenBodyWidget> {
               },
             ),
           ),
-          // Food List
           FoodListWidget(searchController: _searchController)
         ],
       ),

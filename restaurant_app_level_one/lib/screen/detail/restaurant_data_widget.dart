@@ -72,7 +72,6 @@ class _RestaurantDataWidgetState extends State<RestaurantDataWidget> {
         Text(
           widget.restaurantDetail.description,
           style: const TextStyle(
-              //color: Colors.white70,
               fontSize: 14,
           ),
         ),
