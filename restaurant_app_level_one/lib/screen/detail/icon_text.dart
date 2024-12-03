@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_app_level_one/utils/global_function.dart';
 
 class IconText extends StatelessWidget {
   final IconData icon;
@@ -15,10 +16,13 @@ class IconText extends StatelessWidget {
     return Row(
       children: [
         Icon(icon, color: Colors.orangeAccent),
-        SizedBox(width: 5),
+        spaceHorizontal(5),
         Text(
           label,
-          style: TextStyle(color: Colors.white70, fontSize: 14),
+          style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 14
+          ),
         ),
       ],
     );

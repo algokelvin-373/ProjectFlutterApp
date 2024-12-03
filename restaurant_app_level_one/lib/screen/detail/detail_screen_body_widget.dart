@@ -1,54 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:restaurant_app_level_one/data/model/category.dart';
-import 'package:restaurant_app_level_one/data/model/customer_review.dart';
-import 'package:restaurant_app_level_one/data/model/menu_list.dart';
 import 'package:restaurant_app_level_one/data/model/restaurant_detail.dart';
-import 'package:restaurant_app_level_one/data/model/review_request.dart';
-import 'package:restaurant_app_level_one/provider/detail/restaurant_review_provider.dart';
-import 'package:restaurant_app_level_one/static/restaurant_review_result.dart';
-import 'package:restaurant_app_level_one/utils/global_function.dart';
+import 'package:restaurant_app_level_one/screen/detail/restaurant_data_widget.dart';
+import 'package:restaurant_app_level_one/screen/detail/restaurant_image_widget.dart';
 
-import 'build_size_chip.dart';
-import 'comment_card.dart';
-import 'icon_text.dart';
-import 'menus_card.dart';
 
-class DetailRestaurantBodyWidget extends StatelessWidget {
+class DetailScreenBodyWidget extends StatelessWidget {
   final RestaurantDetail restaurantDetail;
 
-  const DetailRestaurantBodyWidget({
+  const DetailScreenBodyWidget({
     super.key,
     required this.restaurantDetail,
   });
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> listCategoriesWidget = restaurantDetail.categories
-        .map((category) => buildSizeChip(category.name))
-        .toList();
-
-    List<ListMenu> listAllMenu = [];
-    List<Category> listMenuFood = restaurantDetail.menus.foods;
-    for (int index = 0; index < listMenuFood.length; index++) {
-      var food = listMenuFood[index];
-      listAllMenu.add(ListMenu(food.name, true, false));
-    }
-    List<Category> listMenuDrink = restaurantDetail.menus.drinks;
-    for (int index = 0; index < listMenuDrink.length; index++) {
-      var drink = listMenuDrink[index];
-      listAllMenu.add(ListMenu(drink.name, false, true));
-    }
-
-    final reviewProvider = Provider.of<RestaurantReviewProvider>(context);
-
-    TextEditingController nameController = TextEditingController();
-    TextEditingController reviewController = TextEditingController();
-
     return CustomScrollView(
       slivers: [
-        // SliverAppBar with the image
-        SliverAppBar(
+        RestaurantImageWidget(restaurantDetail: restaurantDetail),
+        /*SliverAppBar(
           expandedHeight: 350,
           pinned: true,
           backgroundColor: Colors.black,
@@ -65,8 +34,7 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
               ),
             ),
           ),
-        ),
-        // SliverList for the details section
+        ),*/
         SliverToBoxAdapter(
           child: Container(
             padding: EdgeInsets.all(20),
@@ -77,7 +45,8 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                 topRight: Radius.circular(40),
               ),
             ),
-            child: Column(
+            child: RestaurantDataWidget(restaurantDetail: restaurantDetail),
+            /*child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
@@ -119,13 +88,7 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                   style: const TextStyle(color: Colors.white70, fontSize: 14),
                 ),
                 spaceVertical(15),
-                const Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Menu Food and Drink',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                ),
+                textCenter('Menu Food and Drink'),
                 SizedBox(
                   height: 1,
                   child: Container(color: Colors.grey,),
@@ -144,13 +107,7 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                   }).toList(),
                 ),
                 spaceVertical(15),
-                const Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Reviews',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                ),
+                textCenter('Reviews'),
                 SizedBox(
                   height: 1,
                   child: Container(color: Colors.grey,),
@@ -171,16 +128,6 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                     );
                   },
                 ),
-                /*ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: restaurantDetail.customerReviews.length,
-                  itemBuilder: (context, index) {
-                    return CustomerReviewCard(
-                      customerReview: restaurantDetail.customerReviews[index],
-                    );
-                  },
-                ),*/
                 spaceVertical(15),
                 Center(
                   child: ElevatedButton(
@@ -290,7 +237,7 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.orangeAccent,
+                      backgroundColor: Colors.orangeAccent,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -303,7 +250,7 @@ class DetailRestaurantBodyWidget extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
+            ),*/
           ),
         ),
       ],

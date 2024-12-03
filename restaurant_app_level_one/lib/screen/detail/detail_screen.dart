@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app_level_one/provider/detail/restaurant_detail_provider.dart';
 import 'package:restaurant_app_level_one/static/restaurant_detail_result.dart';
 
-import 'detail_restaurant_body_widget.dart';
+import 'detail_screen_body_widget.dart';
 
 class DetailScreen extends StatefulWidget {
   final String restaurantId;
@@ -50,7 +50,8 @@ class _DetailScreenState extends State<DetailScreen> {
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
-                  context.read<RestaurantDetailProvider>().fetchRestaurantDetail(id); // Refresh data
+                  context.read<RestaurantDetailProvider>()
+                      .fetchRestaurantDetail(id); // Refresh data
                 },
                 child: const Text('Refresh'),
               ),
@@ -73,7 +74,7 @@ class _DetailScreenState extends State<DetailScreen> {
             );
           } else if (value.resultState is RestaurantDetailLoadedState) {
             final restaurantDetail = (value.resultState as RestaurantDetailLoadedState).data;
-            return DetailRestaurantBodyWidget(restaurantDetail: restaurantDetail);
+            return DetailScreenBodyWidget(restaurantDetail: restaurantDetail);
           } else if (value.resultState is RestaurantDetailErrorState)  {
             final message = (value.resultState as RestaurantDetailErrorState).error;
             WidgetsBinding.instance.addPostFrameCallback((_) {
