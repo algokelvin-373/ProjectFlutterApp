@@ -1,4 +1,4 @@
-name: calculator_widget_testing
+name: calculator_unit_testing
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -34,6 +34,11 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  provider: ^6.1.2
+  math_expressions: ^2.6.0
+  equatable: ^2.0.5
+  test: ^1.25.2
+  mocktail: ^1.0.4
 
 dev_dependencies:
   flutter_test:
