@@ -41,7 +41,10 @@ class _RestaurantAddReviewWidgetState extends State<RestaurantAddReviewWidget> {
         ),
         child: const Text(
           'Add Review',
-          style: TextStyle(fontSize: 18, color: Colors.white),
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.black,
+          ),
         ),
       ),
     );

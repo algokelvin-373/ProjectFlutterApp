@@ -33,7 +33,6 @@ class _RestaurantDataWidgetState extends State<RestaurantDataWidget> {
             Text(
               widget.restaurantDetail.name,
               style: const TextStyle(
-                color: Colors.white,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
@@ -72,7 +71,10 @@ class _RestaurantDataWidgetState extends State<RestaurantDataWidget> {
         spaceVertical(20),
         Text(
           widget.restaurantDetail.description,
-          style: const TextStyle(color: Colors.white70, fontSize: 14),
+          style: const TextStyle(
+              //color: Colors.white70,
+              fontSize: 14,
+          ),
         ),
         spaceVertical(15),
         textCenter('Menu Food and Drink'),

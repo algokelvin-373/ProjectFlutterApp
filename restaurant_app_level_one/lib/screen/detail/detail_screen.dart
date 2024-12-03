@@ -43,7 +43,6 @@ class _DetailScreenState extends State<DetailScreen> {
               Text(
                 message,
                 style: const TextStyle(
-                  color: Colors.black,
                   fontSize: 14,
                 ),
               ),
@@ -65,7 +64,6 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       body: Consumer<RestaurantDetailProvider>(
         builder: (context, value, child) {
           if (value.resultState is RestaurantDetailLoadingState) {

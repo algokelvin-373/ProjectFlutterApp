@@ -26,7 +26,7 @@ class _HomeScreenBodyWidgetState extends State<HomeScreenBodyWidget> {
             margin: verticalSymmetric(10),
             padding: horizontalSymmetric(10),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Colors.grey,
               borderRadius: BorderRadius.circular(30),
             ),
             child: TextField(

@@ -33,7 +33,6 @@ class CustomerReviewCard extends StatelessWidget {
                 Text(
                   customerReview.name,
                   style: const TextStyle(
-                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
@@ -41,14 +40,12 @@ class CustomerReviewCard extends StatelessWidget {
                 Text(
                   customerReview.date,
                   style: const TextStyle(
-                    color: Colors.white,
                     fontSize: 12,
                   ),
                 ),
                 Text(
                   customerReview.review,
                   style: const TextStyle(
-                    color: Colors.white,
                     fontSize: 12,
                   ),
                 ),

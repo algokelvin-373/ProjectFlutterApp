@@ -21,7 +21,9 @@ Align textCenter(String text) {
     alignment: Alignment.center,
     child: Text(
       text,
-      style: const TextStyle(color: Colors.white, fontSize: 20),
+      style: const TextStyle(
+        fontSize: 20,
+      ),
     ),
   );
 }

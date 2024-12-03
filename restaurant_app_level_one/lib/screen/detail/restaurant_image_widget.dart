@@ -11,11 +11,11 @@ class RestaurantImageWidget extends StatelessWidget {
     return SliverAppBar(
       expandedHeight: 350,
       pinned: true,
-      backgroundColor: Colors.black,
+      //backgroundColor: Colors.black,
       flexibleSpace: FlexibleSpaceBar(
         title: Text(
           restaurantDetail.name,
-          style: const TextStyle(color: Colors.white),
+          //style: const TextStyle(color: Colors.white),
         ),
         background: Hero(
           tag: 'https://restaurant-api.dicoding.dev/images/large/${restaurantDetail.pictureId}',
