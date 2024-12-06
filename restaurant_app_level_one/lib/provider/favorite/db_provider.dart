@@ -66,6 +66,7 @@ class DbProvider extends ChangeNotifier {
   Future<void> removeRestaurantById(String id) async {
     try {
       await _service.removeItem(id);
+      await loadAllRestaurant();
       _message = "Your favorite is removed";
       notifyListeners();
     } catch (e) {
