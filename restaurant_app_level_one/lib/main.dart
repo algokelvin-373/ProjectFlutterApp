@@ -49,7 +49,7 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (context) => DbProvider(
-            context.read<DbService>(),),
+            context.read<DbService>()),
         ),
       ],
       child: const RestaurantApp(),

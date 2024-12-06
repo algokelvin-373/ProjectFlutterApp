@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app_level_one/provider/favorite/db_provider.dart';
@@ -16,7 +17,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      context.read<DbProvider>().loadAllRestaurant();
+      final provider = Provider.of<DbProvider>(context, listen: false);
+      provider.loadAllRestaurant();
+      //context.read<DbProvider>().loadAllRestaurant();
     });
   }
 
@@ -29,6 +32,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       body: Consumer<DbProvider>(
         builder: (_, value, __) {
           final restaurantList = value.restaurantList ?? [];
+          if (kDebugMode) {
+            print("Get Data DB Local: $restaurantList");
+          }
           return switch (restaurantList.isNotEmpty) {
             true => ListView.builder(
               itemCount: restaurantList.length,
