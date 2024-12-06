@@ -14,8 +14,15 @@ class RestaurantAddReviewWidget extends StatefulWidget {
 }
 
 class _RestaurantAddReviewWidgetState extends State<RestaurantAddReviewWidget> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController reviewController = TextEditingController();
+  final nameController = TextEditingController();
+  final reviewController = TextEditingController();
+
+  @override
+  dispose(){
+    nameController.dispose();
+    reviewController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

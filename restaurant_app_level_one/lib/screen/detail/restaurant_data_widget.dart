@@ -8,19 +8,14 @@ import 'package:restaurant_app_level_one/utils/global_function.dart';
 import 'build_size_chip.dart';
 import 'icon_text.dart';
 
-class RestaurantDataWidget extends StatefulWidget {
+class RestaurantDataWidget extends StatelessWidget {
   final RestaurantDetail restaurantDetail;
 
   const RestaurantDataWidget({super.key, required this.restaurantDetail});
 
   @override
-  State<RestaurantDataWidget> createState() => _RestaurantDataWidgetState();
-}
-
-class _RestaurantDataWidgetState extends State<RestaurantDataWidget> {
-  @override
   Widget build(BuildContext context) {
-    List<Widget> listCategoriesWidget = widget.restaurantDetail.categories
+    List<Widget> listCategoriesWidget = restaurantDetail.categories
         .map((category) => buildSizeChip(category.name))
         .toList();
 
@@ -31,7 +26,7 @@ class _RestaurantDataWidgetState extends State<RestaurantDataWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              widget.restaurantDetail.name,
+              restaurantDetail.name,
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -41,7 +36,7 @@ class _RestaurantDataWidgetState extends State<RestaurantDataWidget> {
         ),
         spaceVertical(10),
         Text(
-          widget.restaurantDetail.address,
+          restaurantDetail.address,
           style: const TextStyle(
               color: Colors.grey,
               fontSize: 14
@@ -60,17 +55,17 @@ class _RestaurantDataWidgetState extends State<RestaurantDataWidget> {
           children: [
             IconText(
                 icon: Icons.star,
-                label: widget.restaurantDetail.rating.toString()
+                label: restaurantDetail.rating.toString()
             ),
             IconText(
                 icon: Icons.location_city,
-                label: widget.restaurantDetail.city
+                label: restaurantDetail.city
             ),
           ],
         ),
         spaceVertical(20),
         Text(
-          widget.restaurantDetail.description,
+          restaurantDetail.description,
           style: const TextStyle(
               fontSize: 14,
           ),
@@ -78,13 +73,13 @@ class _RestaurantDataWidgetState extends State<RestaurantDataWidget> {
         spaceVertical(15),
         textCenter('Menu Food and Drink'),
         lines(),
-        RestaurantMenusWidget(restaurantDetail: widget.restaurantDetail),
+        RestaurantMenusWidget(restaurantDetail: restaurantDetail),
         spaceVertical(15),
         textCenter('Reviews'),
         lines(),
-        RestaurantReviewsWidget(restaurantDetail: widget.restaurantDetail),
+        RestaurantReviewsWidget(restaurantDetail: restaurantDetail),
         spaceVertical(15),
-        RestaurantAddReviewWidget(restaurantId: widget.restaurantDetail.id),
+        RestaurantAddReviewWidget(restaurantId: restaurantDetail.id),
       ],
     );
   }

@@ -65,7 +65,7 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Consumer<RestaurantDetailProvider>(
-        builder: (context, value, child) {
+        builder: (_, value, __) {
           if (value.resultState is RestaurantDetailLoadingState) {
             return const Center(
               child: CircularProgressIndicator(),
