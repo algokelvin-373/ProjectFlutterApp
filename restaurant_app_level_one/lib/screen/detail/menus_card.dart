@@ -20,7 +20,7 @@ class MenusCard extends StatelessWidget {
         children: [
           Image.asset((listMenu.isFood) ? 'images/ic_food.jpg' : 'images/ic_drink.jpg',
               height: 100,
-              fit: BoxFit.cover
+              fit: BoxFit.cover,
           ),
           Align(
             alignment: Alignment.center,

@@ -12,10 +12,11 @@ class RestaurantListProvider extends ChangeNotifier {
   RestaurantListResultState get resultState => _resultState;
 
   Future<void> fetchRestaurantList() async {
-    try {
-      _resultState = RestaurantListLoadingState();
-      notifyListeners();
+    // Set to loading state before making API call
+    _resultState = RestaurantListLoadingState();
+    notifyListeners();  // Notify listeners about the state change
 
+    try {
       final result = await _apiServices.getRestaurantList();
 
       if (result.error) {
