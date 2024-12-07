@@ -10,11 +10,16 @@ import 'package:restaurant_app_level_one/provider/home/restaurant_search_provide
 import 'package:restaurant_app_level_one/provider/main/index_nav_provider.dart';
 import 'package:restaurant_app_level_one/screen/main/main_screen.dart';
 import 'package:restaurant_app_level_one/style/typography/restaurant_theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'screen/detail/detail_screen.dart';
 import 'static/navigation_route.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  bool isDarkMode = prefs.getBool('isDarkMode') ?? false;
+
   runApp(
     MultiProvider(
       providers: [
@@ -52,21 +57,42 @@ void main() {
             context.read<DbService>()),
         ),
       ],
-      child: const RestaurantApp(),
+      child: RestaurantApp(isDarkMode: isDarkMode),
     ),
   );
 }
 
-class RestaurantApp extends StatelessWidget {
-  const RestaurantApp({super.key});
+class RestaurantApp extends StatefulWidget {
+  final bool isDarkMode;
+
+  const RestaurantApp({super.key, required this.isDarkMode});
+
+  @override
+  State<RestaurantApp> createState() => _RestaurantAppState();
+}
+
+class _RestaurantAppState extends State<RestaurantApp> {
+  late bool _isDarkMode;
+
+  @override
+  void initState() {
+    super.initState();
+    _isDarkMode = widget.isDarkMode;
+  }
+
+  void _toggleTheme() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _isDarkMode = !_isDarkMode;
+      prefs.setBool('isDarkMode', _isDarkMode);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Restaurant App',
-      theme: RestaurantTheme.lightTheme,
-      darkTheme: RestaurantTheme.darkTheme,
-      themeMode: ThemeMode.system,
+      theme: widget.isDarkMode ? RestaurantTheme.darkTheme : RestaurantTheme.lightTheme,
       initialRoute: NavigationRoute.mainRoute.name,
       routes: {
         NavigationRoute.mainRoute.name: (context) => const MainScreen(),
