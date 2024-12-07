@@ -4,6 +4,10 @@ class Menu {
   List<Category> foods;
   List<Category> drinks;
 
+  Menu.empty()
+    : foods = [],
+      drinks = [];
+
   Menu({
     required this.foods,
     required this.drinks,
