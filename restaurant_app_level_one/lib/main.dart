@@ -8,6 +8,7 @@ import 'package:restaurant_app_level_one/provider/favorite/db_provider.dart';
 import 'package:restaurant_app_level_one/provider/home/restaurant_list_provider.dart';
 import 'package:restaurant_app_level_one/provider/home/restaurant_search_provider.dart';
 import 'package:restaurant_app_level_one/provider/main/index_nav_provider.dart';
+import 'package:restaurant_app_level_one/provider/theme/theme_provider.dart';
 import 'package:restaurant_app_level_one/screen/main/main_screen.dart';
 import 'package:restaurant_app_level_one/style/typography/restaurant_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,6 +29,9 @@ void main() async {
         ),
         Provider(
           create: (context) => DbService(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ThemeProvider(),
         ),
         ChangeNotifierProvider(
           create: (context) => IndexNavProvider(),
@@ -62,43 +66,28 @@ void main() async {
   );
 }
 
-class RestaurantApp extends StatefulWidget {
+class RestaurantApp extends StatelessWidget {
   final bool isDarkMode;
 
   const RestaurantApp({super.key, required this.isDarkMode});
 
   @override
-  State<RestaurantApp> createState() => _RestaurantAppState();
-}
-
-class _RestaurantAppState extends State<RestaurantApp> {
-  late bool _isDarkMode;
-
-  @override
-  void initState() {
-    super.initState();
-    _isDarkMode = widget.isDarkMode;
-  }
-
-  void _toggleTheme() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _isDarkMode = !_isDarkMode;
-      prefs.setBool('isDarkMode', _isDarkMode);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Restaurant App',
-      theme: widget.isDarkMode ? RestaurantTheme.darkTheme : RestaurantTheme.lightTheme,
-      initialRoute: NavigationRoute.mainRoute.name,
-      routes: {
-        NavigationRoute.mainRoute.name: (context) => const MainScreen(),
-        NavigationRoute.detailRoute.name: (context) => DetailScreen(
-          restaurantId: ModalRoute.of(context)?.settings.arguments as String,
-        ),
+    return Consumer<ThemeProvider>(
+      builder: (_, value, __) {
+        return MaterialApp(
+          title: 'Restaurant App',
+          theme: RestaurantTheme.lightTheme,
+          darkTheme: RestaurantTheme.darkTheme,
+          themeMode: value.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+          initialRoute: NavigationRoute.mainRoute.name,
+          routes: {
+            NavigationRoute.mainRoute.name: (context) => const MainScreen(),
+            NavigationRoute.detailRoute.name: (context) => DetailScreen(
+              restaurantId: ModalRoute.of(context)?.settings.arguments as String,
+            ),
+          },
+        );
       },
     );
   }
