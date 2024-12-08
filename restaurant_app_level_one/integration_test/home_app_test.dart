@@ -30,7 +30,7 @@ void main() {
           ChangeNotifierProvider(
               create: (_) => RestaurantSearchProvider(apiServices)),
         ],
-        child: const RestaurantApp(isDarkMode: true), // Widget utama yang diuji
+        child: const RestaurantApp(isDarkMode: true),
       ),
     );
 
@@ -41,5 +41,8 @@ void main() {
 
     // Show Loading Indicator
     await evaluateRobot.showLoading();
+
+    // Show List Restaurant Based on Search Data
+    await evaluateRobot.showListRestaurantBySearch();
   });
 }

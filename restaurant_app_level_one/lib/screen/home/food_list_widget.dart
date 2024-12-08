@@ -79,6 +79,7 @@ class _FoodListWidgetState extends State<FoodListWidget> {
     } else if (search.resultState is RestaurantSearchLoadedState) {
       final restaurantListBySearch = (search.resultState as RestaurantSearchLoadedState).data;
       return ListView.builder(
+        key: const ValueKey("listSearchRestaurant"),
         itemCount: restaurantListBySearch.length,
         itemBuilder: (context, index) {
           final restaurant = restaurantListBySearch[index];
