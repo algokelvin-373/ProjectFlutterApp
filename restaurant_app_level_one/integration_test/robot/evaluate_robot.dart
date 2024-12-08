@@ -12,6 +12,7 @@ class EvaluateRobot {
   final searchFieldKey = const ValueKey("searchField");
   final loadingIndicatorKey = const ValueKey("loadingIndicator");
   final listSearchRestaurantKey = const ValueKey("listSearchRestaurant");
+  final listRestaurantKey = const ValueKey("listRestaurant");
 
   Future<void> loadUI(Widget widget) async {
     await tester.pumpWidget(widget);
@@ -33,6 +34,12 @@ class EvaluateRobot {
     expect(loadingIndicator, findsOneWidget);
     await tester.pumpAndSettle();
     print('Finish Show Loading');
+  }
+
+  Future<void> showListRestaurant() async {
+    final listSearchRestaurant = find.byKey(listRestaurantKey);
+    expect(listSearchRestaurant, findsOneWidget);
+    await tester.pump();
   }
 
   Future<void> showListRestaurantBySearch() async {

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +9,7 @@ import 'package:restaurant_app_level_one/provider/main/index_nav_provider.dart';
 import 'package:restaurant_app_level_one/provider/notification/notification_provider.dart';
 import 'package:restaurant_app_level_one/provider/theme/theme_provider.dart';
 
-import 'robot/evaluate_robot.dart';
+import '../robot/evaluate_robot.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();

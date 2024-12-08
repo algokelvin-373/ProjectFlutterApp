@@ -47,11 +47,12 @@ class _FoodListWidgetState extends State<FoodListWidget> {
   Widget _widgetListRestaurant(RestaurantListProvider list) {
     if (list.resultState is RestaurantListLoadingState) {
       return const Center(
-        child: CircularProgressIndicator(key: ValueKey("loadingIndicator")),
+        child: CircularProgressIndicator(key: ValueKey("loadingIndicatorAll")),
       );
     } else if (list.resultState is RestaurantListLoadedState) {
       final restaurantList = (list.resultState as RestaurantListLoadedState).data;
       return ListView.builder(
+        key: const ValueKey("listRestaurant"),
         itemCount: restaurantList.length,
         itemBuilder: (context, index) {
           final restaurant = restaurantList[index];
