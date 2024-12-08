@@ -27,19 +27,18 @@ class NotificationService {
       now.year,
       now.month,
       now.day,
-      23, // Jam 9 malam (21:00)
-      22, // Menit 0
+      11, // Jam 11 siang (11:00)
+      0, // Menit 0
     );
     print("Notifikasi dijadwalkan pada: $scheduledTime");
 
-    // Jika waktu telah lewat hari ini, jadwalkan untuk esok hari
     final adjustedTime =
     scheduledTime.isBefore(now) ? scheduledTime.add(Duration(days: 1)) : scheduledTime;
 
     await _notifications.zonedSchedule(
       0,
       'Daily Reminder',
-      'Jangan lupa untuk bersiap tidur!',
+      'Jangan lupa untuk makan siang!',
       adjustedTime,
       const NotificationDetails(
         android: AndroidNotificationDetails(

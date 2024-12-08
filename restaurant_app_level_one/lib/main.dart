@@ -15,9 +15,7 @@ import 'package:restaurant_app_level_one/service/notification_service.dart';
 import 'package:restaurant_app_level_one/style/typography/restaurant_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'provider/notification/local_notification_provider.dart';
 import 'screen/detail/detail_screen.dart';
-import 'service/local_notification_service.dart';
 import 'static/navigation_route.dart';
 
 void main() async {
@@ -37,9 +35,7 @@ void main() async {
           create: (context) => DbService(),
         ),
         ChangeNotifierProvider(
-          create: (_) => LocalNotificationProvider(
-              LocalNotificationService(),
-          )..requestPermissions(),
+          create: (_) => NotificationProvider(),
         ),
         ChangeNotifierProvider(
           create: (_) => ThemeProvider(),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app_level_one/provider/notification/local_notification_provider.dart';
 import 'package:restaurant_app_level_one/provider/notification/notification_provider.dart';
 import 'package:restaurant_app_level_one/provider/theme/theme_provider.dart';
 import 'package:restaurant_app_level_one/screen/home/home_screen_body_widget.dart';
@@ -15,11 +14,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-  Future<void> _scheduleDailyTenAMNotification() async {
-    // todo-03-action-01: run a schedule notification
-    context.read<LocalNotificationProvider>().scheduleDailyTenAMNotification();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,31 +32,21 @@ class _HomeScreenState extends State<HomeScreen> {
               color: themeProvider.isDarkMode ? Colors.white : Colors.grey,
             ),
           ),
-          ElevatedButton(
-            onPressed: () async {
-              await _scheduleDailyTenAMNotification();
-            },
-            child: const Text(
-              "Schedule",
-              textAlign: TextAlign.center,
-            ),
-          ),
-          /*IconButton(
+          IconButton(
             onPressed: () async {
               print('Click for notification');
-              await _scheduleDailyTenAMNotification();
-              *//*notificationProvider.toggleReminder();
+              notificationProvider.toggleReminder();
               if (notificationProvider.isReminderOn) {
                 await NotificationService.scheduleNotification();
               } else {
                 await NotificationService.cancelNotification();
-              }*//*
+              }
             },
             icon: Icon(
               Icons.notifications,
               color: Colors.grey,
             ),
-          ),*/
+          ),
         ],
       ),
       body: const HomeScreenBodyWidget(),
