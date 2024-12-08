@@ -27,8 +27,8 @@ class NotificationService {
       now.year,
       now.month,
       now.day,
-      22, // Jam 9 malam (21:00)
-      35, // Menit 0
+      23, // Jam 9 malam (21:00)
+      22, // Menit 0
     );
     print("Notifikasi dijadwalkan pada: $scheduledTime");
 
