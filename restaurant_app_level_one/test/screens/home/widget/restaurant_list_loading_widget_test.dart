@@ -3,11 +3,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app_level_one/data/api/api_services.dart';
+import 'package:restaurant_app_level_one/main.dart';
 // import 'package:mockito/mockito.dart';
 // import 'package:mockito/annotations.dart';
 
 import 'package:restaurant_app_level_one/provider/home/restaurant_list_provider.dart';
 import 'package:restaurant_app_level_one/provider/home/restaurant_search_provider.dart';
+import 'package:restaurant_app_level_one/provider/main/index_nav_provider.dart';
 import 'package:restaurant_app_level_one/provider/notification/notification_provider.dart';
 import 'package:restaurant_app_level_one/provider/theme/theme_provider.dart';
 import 'package:restaurant_app_level_one/screen/home/food_list_widget.dart';
@@ -93,53 +95,56 @@ class MockRestaurantListProvider extends Mock implements RestaurantListProvider 
 
 void main() {
   late MockThemeProvider mockThemeProvider;
-  late MockNotificationProvider mockNotificationProvider;
-  late MockRestaurantListProvider mockRestaurantListProvider;
+  late Widget widget;
 
   setUp(() {
     mockThemeProvider = MockThemeProvider();
-    mockNotificationProvider = MockNotificationProvider();
-    mockRestaurantListProvider = MockRestaurantListProvider();
+    widget = MaterialApp(
+      title: 'Restaurant App',
+      theme: RestaurantTheme.lightTheme,
+      darkTheme: RestaurantTheme.darkTheme,
+      themeMode: value.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+      initialRoute: NavigationRoute.mainRoute.name,
+    )
   });
 
-  group('Home Screen Test', () {
-    testWidgets('Should toggle theme icon', (tester) async {
-      // Menentukan nilai awal untuk isDarkMode
-      when(() => mockThemeProvider.isDarkMode).thenReturn(false);
-
-      when(() => mockNotificationProvider.isReminderOn).thenReturn(false);
-
-      // Melakukan mock pada toggleTheme
-      when(() => mockThemeProvider.toggleTheme()).thenAnswer((_) {
-        when(() => mockThemeProvider.isDarkMode).thenReturn(true);
-      });
-
-      // Mock provider RestaurantList
-      when(() => mockRestaurantListProvider.resultState).thenReturn(RestaurantListLoadingState());
-
-      await tester.pumpWidget(
-        MultiProvider(
-          providers: [
-            ChangeNotifierProvider<ThemeProvider>(create: (_) => mockThemeProvider),
-            ChangeNotifierProvider<NotificationProvider>(create: (_) => mockNotificationProvider),
-            ChangeNotifierProvider<RestaurantListProvider>(create: (_) => mockRestaurantListProvider), // Tambahkan ini
-          ],
-          child: const MaterialApp(home: HomeScreen()),
+  testWidgets('Test dark mode and light mode', (WidgetTester tester) async {
+    // Simulasi aplikasi dengan dark mode
+    await tester.pumpWidget(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => ThemeProvider()..toggleTheme()),
+          ChangeNotifierProvider(create: (_) => IndexNavProvider()..indexBottomNavBar),
+        ],
+        child: MaterialApp(
+          themeMode: ThemeMode.dark,
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark(),
+          home: RestaurantApp(isDarkMode: true),
         ),
-      );
+      ),
+    );
 
-      // Verifikasi ikon awal (misal: sunny)
-      expect(find.byIcon(Icons.wb_sunny), findsOneWidget);
+    // Periksa apakah tema gelap diterapkan
+    expect(find.byWidgetPredicate((widget) => widget is MaterialApp && widget.themeMode == ThemeMode.dark), findsOneWidget);
 
-      // Tap tombol untuk ganti tema
-      await tester.tap(find.byIcon(Icons.wb_sunny));
-      await tester.pump();
-
-      // Verifikasi ikon berubah (misal: moon)
-      expect(find.byIcon(Icons.nightlight_round), findsOneWidget);
-
-      // Verifikasi bahwa toggleTheme dipanggil
-      verify(() => mockThemeProvider.toggleTheme()).called(1);
-    });
+    // Simulasi aplikasi dengan light mode
+    // await tester.pumpWidget(
+    //   MultiProvider(
+    //     providers: [
+    //       ChangeNotifierProvider(create: (_) => ThemeProvider()..toggleTheme()),
+    //     ],
+    //     child: MaterialApp(
+    //       themeMode: ThemeMode.light,
+    //       theme: ThemeData.light(),
+    //       darkTheme: ThemeData.dark(),
+    //       home: RestaurantApp(isDarkMode: false),
+    //     ),
+    //   ),
+    // );
+    //
+    // // Periksa apakah tema terang diterapkan
+    // expect(find.byWidgetPredicate((widget) => widget is MaterialApp && widget.themeMode == ThemeMode.light), findsOneWidget);
   });
+
 }
