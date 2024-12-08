@@ -47,7 +47,7 @@ class _FoodListWidgetState extends State<FoodListWidget> {
   Widget _widgetListRestaurant(RestaurantListProvider list) {
     if (list.resultState is RestaurantListLoadingState) {
       return const Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(key: ValueKey("loadingIndicator")),
       );
     } else if (list.resultState is RestaurantListLoadedState) {
       final restaurantList = (list.resultState as RestaurantListLoadedState).data;
@@ -74,7 +74,7 @@ class _FoodListWidgetState extends State<FoodListWidget> {
   Widget _widgetSearchRestaurant(RestaurantSearchProvider search, String searchQuery) {
     if (search.resultState is RestaurantSearchLoadingState) {
       return const Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(key: ValueKey("loadingIndicator")),
       );
     } else if (search.resultState is RestaurantSearchLoadedState) {
       final restaurantListBySearch = (search.resultState as RestaurantSearchLoadedState).data;

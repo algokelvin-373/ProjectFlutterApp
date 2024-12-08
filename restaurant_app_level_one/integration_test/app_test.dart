@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,7 @@ import 'robot/evaluate_robot.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets("integrate all feature", (tester) async {
+  testWidgets("Integrate Search Restaurant", (tester) async {
     final evaluateRobot = EvaluateRobot(tester);
     final apiServices = ApiServices();
 
@@ -24,13 +25,21 @@ void main() {
           ChangeNotifierProvider(create: (_) => ThemeProvider()),
           ChangeNotifierProvider(create: (_) => IndexNavProvider()),
           ChangeNotifierProvider(create: (_) => NotificationProvider()),
-          ChangeNotifierProvider(create: (_) => RestaurantListProvider(apiServices)),
-          ChangeNotifierProvider(create: (_) => RestaurantSearchProvider(apiServices)),
+          ChangeNotifierProvider(
+              create: (_) => RestaurantListProvider(apiServices)),
+          ChangeNotifierProvider(
+              create: (_) => RestaurantSearchProvider(apiServices)),
         ],
         child: const RestaurantApp(isDarkMode: true), // Widget utama yang diuji
       ),
     );
 
     await tester.pumpAndSettle();
+
+    // Search Data and Input Text Search Data
+    await evaluateRobot.inputSearchText('Kafein');
+
+    // Show Loading Indicator
+    await evaluateRobot.showLoading();
   });
 }
