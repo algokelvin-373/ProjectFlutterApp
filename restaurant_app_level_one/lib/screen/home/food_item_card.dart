@@ -43,6 +43,7 @@ class FoodItemCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
+                    key: const ValueKey("textRestaurantName"),
                     restaurant.name,
                     style: const TextStyle(
                         fontSize: 18,

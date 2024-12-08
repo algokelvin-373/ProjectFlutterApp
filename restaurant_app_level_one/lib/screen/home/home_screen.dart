@@ -15,43 +15,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  /*bool _isReminderOn = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadReminderPreference();
-  }
-
-  Future<void> _loadReminderPreference() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _isReminderOn = prefs.getBool('dailyReminder') ?? false;
-    });
-  }
-
-  Future<void> _updateReminderPreference(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('dailyReminder', value);
-    setState(() {
-      _isReminderOn = value;
-    });
-    if (value) {
-      _scheduleDailyReminder();
-    } else {
-      _cancelDailyReminder();
-    }
-  }
-
-  void _scheduleDailyReminder() {
-    print('Reminder Scheduled at 11:00 AM');
-    NotificationService.scheduleNotification();
-  }
-
-  void _cancelDailyReminder() {
-    print('Reminder Canceled');
-    NotificationService.cancelNotification();
-  }*/
 
   Future<void> _scheduleDailyTenAMNotification() async {
     // todo-03-action-01: run a schedule notification
