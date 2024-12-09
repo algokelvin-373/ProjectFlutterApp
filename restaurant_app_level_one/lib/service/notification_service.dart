@@ -24,16 +24,29 @@ class NotificationService {
   }
 
   static Future<void> scheduleNotification() async {
+    const androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      "3",
+      "ScheduleNotification",
+      importance: Importance.max,
+      priority: Priority.high,
+      ticker: 'ticker',
+    );
+
+    const notificationDetails = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+    );
+
     final now = tz.TZDateTime.now(tz.local);
     final scheduledTime = tz.TZDateTime(
       tz.local,
       now.year,
       now.month,
       now.day,
-      12, // Jam 11 siang (11:00)
-      46, // Menit 0
+      11, // Jam 11 siang (11:00)
+      0, // Menit 0
     );
     print("Notifikasi dijadwalkan pada: $scheduledTime");
+    print("Nilai Id : $scheduledTime");
 
     final adjustedTime =
     scheduledTime.isBefore(now) ? scheduledTime.add(const Duration(days: 1)) : scheduledTime;
@@ -43,18 +56,11 @@ class NotificationService {
       'Daily Reminder',
       'Jangan lupa untuk makan siang!',
       adjustedTime,
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'daily_reminder_channel',
-          'Daily Reminder',
-          channelDescription: 'Channel for daily reminders',
-          importance: Importance.high,
-          priority: Priority.high,
-        ),
-      ),
-      androidScheduleMode: AndroidScheduleMode.inexact,
+      notificationDetails,
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       uiLocalNotificationDateInterpretation:
         UILocalNotificationDateInterpretation.absoluteTime,
+      matchDateTimeComponents: DateTimeComponents.time,
     );
   }
 
