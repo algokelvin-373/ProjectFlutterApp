@@ -30,6 +30,7 @@ class _HomeScreenBodyWidgetState extends State<HomeScreenBodyWidget> {
               borderRadius: BorderRadius.circular(30),
             ),
             child: TextField(
+              key: const ValueKey("searchField"),
               controller: _searchController,
               decoration: const InputDecoration(
                 hintText: "Search From Here",

@@ -14,6 +14,18 @@ class RestaurantDetail {
   double rating;
   List<CustomerReview> customerReviews;
 
+  RestaurantDetail.empty()
+      : id = '',
+        name = '',
+        description = '',
+        city = '',
+        address = '',
+        pictureId = '',
+        categories = [],
+        menus = Menu.empty(),
+        rating = 0.0,
+        customerReviews = [];
+
   RestaurantDetail({
     required this.id,
     required this.name,
