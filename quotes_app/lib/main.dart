@@ -1,21 +1,35 @@
-import 'package:declarative_navigation/screen/quotes_list_screen.dart';
 import 'package:flutter/material.dart';
 
-import 'model/quote.dart';
+import 'routes/router_delegate.dart';
 
 void main() {
   runApp(const QuotesApp());
 }
 
-class QuotesApp extends StatelessWidget {
-  const QuotesApp({Key? key}) : super(key: key);
+class QuotesApp extends StatefulWidget {
+  const QuotesApp({super.key});
+
+  @override
+  State<QuotesApp> createState() => _QuotesAppState();
+}
+
+class _QuotesAppState extends State<QuotesApp> {
+  late MyRouterDelegate myRouterDelegate;
+  String? selectedQuote;
+
+  @override
+  void initState() {
+    super.initState();
+    myRouterDelegate = MyRouterDelegate();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Quotes App',
-      home: QuotesListScreen(
-        quotes: quotes,
+      home: Router(
+        routerDelegate: myRouterDelegate,
+        backButtonDispatcher: RootBackButtonDispatcher(),
       ),
     );
   }
