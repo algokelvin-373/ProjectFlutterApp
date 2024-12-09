@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quotes_app/screen/form_screen.dart';
 import 'package:quotes_app/screen/quote_detail_screen.dart';
 import 'package:quotes_app/screen/quotes_list_screen.dart';
 
@@ -12,6 +13,7 @@ class MyRouterDelegate extends RouterDelegate
   MyRouterDelegate(): _navigatorKey = GlobalKey<NavigatorState>();
 
   String? selectedQuote;
+  bool isForm = false;
 
   @override
   GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
@@ -28,13 +30,28 @@ class MyRouterDelegate extends RouterDelegate
               onTapped: (String quoteId) {
                 selectedQuote = quoteId;
                 notifyListeners();
-              }),
+              },
+            toFormScreen: () {
+                isForm = true;
+                notifyListeners();
+            },
+          ),
         ),
         if (selectedQuote != null)
           MaterialPage(
             key: ValueKey("QuoteDetailsScreen-$selectedQuote"),
             child: QuoteDetailsScreen(
               quoteId: selectedQuote!,
+            ),
+          ),
+        if (isForm)
+          MaterialPage(
+            key: ValueKey("FormScreen"),
+            child: FormScreen(
+              onSend: () {
+                isForm = false;
+                notifyListeners();
+              },
             ),
           ),
       ],
@@ -45,6 +62,7 @@ class MyRouterDelegate extends RouterDelegate
         }
 
         selectedQuote = null;
+        isForm = false;
         notifyListeners();
 
         return true;
