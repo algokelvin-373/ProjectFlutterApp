@@ -6,9 +6,9 @@ class QuoteDetailsScreen extends StatelessWidget {
   final String quoteId;
 
   const QuoteDetailsScreen({
-    Key? key,
+    super.key,
     required this.quoteId,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

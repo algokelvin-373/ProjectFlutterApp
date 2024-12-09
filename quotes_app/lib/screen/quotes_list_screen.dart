@@ -1,42 +1,27 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quotes_app/routes/page_manager.dart';
 
 import '../model/quote.dart';
+import '../provider/auth_provider.dart';
 
 class QuotesListScreen extends StatelessWidget {
   final List<Quote> quotes;
   final Function(String) onTapped;
-  final Function() toFormScreen;
+  final Function() onLogout;
 
   const QuotesListScreen({
     super.key,
     required this.quotes,
     required this.onTapped,
-    required this.toFormScreen,
+    required this.onLogout,
   });
 
   @override
   Widget build(BuildContext context) {
+    final authWatch = context.watch<AuthProvider>();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Quotes App"),
-        actions: [
-          IconButton(
-            onPressed: () async {
-              final scaffoldMessengerState = ScaffoldMessenger.of(context);
-              final pageManager = context.read<PageManager>();
-              toFormScreen();
-              final dataString = await pageManager.waitForResult();
-
-              scaffoldMessengerState.showSnackBar(
-                SnackBar(content: Text("My name is $dataString")),
-              );
-            },
-            icon: const Icon(Icons.quiz),
-          ),
-        ],
       ),
       body: ListView(
         children: [
@@ -48,6 +33,21 @@ class QuotesListScreen extends StatelessWidget {
               onTap: () => onTapped(quote.id),
             )
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final authRead = context.read<AuthProvider>();
+          final result = await authRead.logout();
+          if (result) onLogout();
+        },
+        tooltip: "Logout",
+
+
+        child: authWatch.isLoadingLogout
+            ? const CircularProgressIndicator(
+          color: Colors.white,
+        )
+            : const Icon(Icons.logout),
       ),
     );
   }
