@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest_all.dart' as tz;
@@ -18,6 +19,8 @@ class NotificationService {
 
     await _notifications.initialize(settings);
     tz.initializeTimeZones();
+    final String timeZoneName = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(timeZoneName));
   }
 
   static Future<void> scheduleNotification() async {
@@ -27,13 +30,13 @@ class NotificationService {
       now.year,
       now.month,
       now.day,
-      11, // Jam 11 siang (11:00)
-      0, // Menit 0
+      12, // Jam 11 siang (11:00)
+      46, // Menit 0
     );
     print("Notifikasi dijadwalkan pada: $scheduledTime");
 
     final adjustedTime =
-    scheduledTime.isBefore(now) ? scheduledTime.add(Duration(days: 1)) : scheduledTime;
+    scheduledTime.isBefore(now) ? scheduledTime.add(const Duration(days: 1)) : scheduledTime;
 
     await _notifications.zonedSchedule(
       0,

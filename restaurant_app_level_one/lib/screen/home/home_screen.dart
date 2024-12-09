@@ -36,15 +36,17 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () async {
               print('Click for notification');
               notificationProvider.toggleReminder();
-              if (notificationProvider.isReminderOn) {
+              if (!notificationProvider.isReminderOn) {
+                print('Click for scheduleNotification');
                 await NotificationService.scheduleNotification();
               } else {
+                print('Click for cancelNotification');
                 await NotificationService.cancelNotification();
               }
             },
             icon: Icon(
-              Icons.notifications,
-              color: Colors.grey,
+              notificationProvider.isReminderOn ? Icons.notifications_active : Icons.notifications,
+              color: notificationProvider.isReminderOn ? Colors.blue : Colors.grey,
             ),
           ),
         ],
