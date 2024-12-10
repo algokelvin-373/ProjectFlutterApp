@@ -89,11 +89,11 @@ class _HomeScreenState extends State<HomeScreen> {
           /// todo-04-ui-01: update the video preview using boolean check
           isVideoInitialize
               ? AspectRatio(
-                  aspectRatio: controller!.value.aspectRatio,
-                  child: VideoPlayer(
-                    controller!,
-                  ),
-                )
+            aspectRatio: controller!.value.aspectRatio,
+            child: VideoPlayer(
+              controller!,
+            ),
+          )
               : const CircularProgressIndicator(),
           Container(
             padding: const EdgeInsets.symmetric(vertical: 16),
