@@ -1,7 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'dart:io';
 
-import '../provider/home_provider.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:gallery_photo_camera/provider/home_provider.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,15 +33,13 @@ class _HomePageState extends State<HomePage> {
           children: [
             Expanded(
               flex: 3,
-              child: context.watch<HomeProvider>().imagePath == null
-                  ? const Align(
-                alignment: Alignment.center,
-                child: Icon(
-                  Icons.image,
-                  size: 100,
-                ),
-              )
-                  : _showImage(),
+              child:
+                  context.watch<HomeProvider>().imagePath == null
+                      ? const Align(
+                        alignment: Alignment.center,
+                        child: Icon(Icons.image, size: 100),
+                      )
+                      : _showImage(),
             ),
             Expanded(
               child: Row(
@@ -59,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -68,13 +69,51 @@ class _HomePageState extends State<HomePage> {
 
   _onUpload() async {}
 
-  _onGalleryView() async {}
+  _onGalleryView() async {
+    final provider = context.read<HomeProvider>();
 
-  _onCameraView() async {}
+    final isMacOS = defaultTargetPlatform == TargetPlatform.macOS;
+    final isLinux = defaultTargetPlatform == TargetPlatform.linux;
+    if (isMacOS || isLinux) {
+      return;
+    }
+
+    final picker = ImagePicker();
+
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      provider.setImageFile(pickedFile);
+      provider.setImagePath(pickedFile.path);
+    }
+  }
+
+  _onCameraView() async {
+    final provider = context.read<HomeProvider>();
+
+    final isAndroid = defaultTargetPlatform == TargetPlatform.android;
+    final isiOS = defaultTargetPlatform == TargetPlatform.iOS;
+    final isNotMobile = !(isAndroid || isiOS);
+    if (isNotMobile) {
+      return;
+    }
+
+    final picker = ImagePicker();
+
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      provider.setImageFile(pickedFile);
+      provider.setImagePath(pickedFile.path);
+    }
+  }
 
   _onCustomCameraView() async {}
 
   Widget _showImage() {
-    return Container();
+    final imagePath = context.read<HomeProvider>().imagePath;
+    return kIsWeb
+        ? Image.network(imagePath.toString(), fit: BoxFit.contain)
+        : Image.file(File(imagePath.toString()), fit: BoxFit.contain);
   }
 }
