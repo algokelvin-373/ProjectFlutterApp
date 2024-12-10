@@ -2,10 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 class CameraScreen extends StatefulWidget {
-  const CameraScreen({
-    super.key,
-    required this.cameras,
-  });
+  const CameraScreen({super.key, required this.cameras});
 
   final List<CameraDescription> cameras;
 
@@ -13,11 +10,13 @@ class CameraScreen extends StatefulWidget {
   State<CameraScreen> createState() => _CameraScreenState();
 }
 
-class _CameraScreenState extends State<CameraScreen> with WidgetsBindingObserver {
-  bool _isBackCameraSelected = true;
+class _CameraScreenState extends State<CameraScreen>
+    with WidgetsBindingObserver {
   bool _isCameraInitialized = false;
 
   CameraController? controller;
+
+  bool _isBackCameraSelected = true;
 
   void onNewCameraSelected(CameraDescription cameraDescription) async {
     final previousCameraController = controller;
@@ -42,35 +41,6 @@ class _CameraScreenState extends State<CameraScreen> with WidgetsBindingObserver
     }
   }
 
-  void _onCameraSwitch() {
-    if (widget.cameras.length == 1) {
-      return;
-    }
-
-    setState(() {
-      _isCameraInitialized = false;
-    });
-
-    onNewCameraSelected(widget.cameras[_isBackCameraSelected ? 1 : 0]);
-
-    setState(() {
-      _isBackCameraSelected = !_isBackCameraSelected;
-    });
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    final CameraController? cameraController = controller;
-    if (cameraController == null || !cameraController.value.isInitialized) {
-      return;
-    }
-    if (state == AppLifecycleState.inactive) {
-      cameraController.dispose();
-    } else if (state == AppLifecycleState.resumed) {
-      onNewCameraSelected(cameraController.description);
-    }
-  }
-
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
@@ -83,6 +53,21 @@ class _CameraScreenState extends State<CameraScreen> with WidgetsBindingObserver
     WidgetsBinding.instance.removeObserver(this);
     controller?.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final CameraController? cameraController = controller;
+
+    if (cameraController == null || !cameraController.value.isInitialized) {
+      return;
+    }
+
+    if (state == AppLifecycleState.inactive) {
+      cameraController.dispose();
+    } else if (state == AppLifecycleState.resumed) {
+      onNewCameraSelected(cameraController.description);
+    }
   }
 
   @override
@@ -132,4 +117,17 @@ class _CameraScreenState extends State<CameraScreen> with WidgetsBindingObserver
     navigator.pop(image);
   }
 
+  void _onCameraSwitch() {
+    if (widget.cameras.length == 1) return;
+
+    setState(() {
+      _isCameraInitialized = false;
+    });
+
+    onNewCameraSelected(widget.cameras[_isBackCameraSelected ? 1 : 0]);
+
+    setState(() {
+      _isBackCameraSelected = !_isBackCameraSelected;
+    });
+  }
 }
