@@ -1,5 +1,5 @@
 buildscript {
-    val kotlin_version by extra("1.8.0")  // Define the Kotlin version using 'extra'
+    val kotlin_version by extra("1.8.10")  // Define the Kotlin version using 'extra'
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
