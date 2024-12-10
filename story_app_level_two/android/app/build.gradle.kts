@@ -1,3 +1,10 @@
+buildscript {
+    val kotlin_version by extra("1.8.0")  // Define the Kotlin version using 'extra'
+    dependencies {
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+    }
+}
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -32,8 +39,6 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
         }
     }
