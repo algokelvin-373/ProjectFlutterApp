@@ -54,7 +54,7 @@ class BenefitTable extends StatelessWidget {
               ),
             ],
           );
-        }).toList(),
+        }),
       ],
     );
   }
