@@ -94,7 +94,8 @@ class _StoryAppState extends State<StoryApp> {
   void initState() {
     super.initState();
     final authRepository = AuthRepository();
-    authProvider = AuthProvider(authRepository);
+    final apiServices = ApiServices();
+    authProvider = AuthProvider(authRepository, apiServices);
 
     myRouterDelegate = MyRouterDelegate(authRepository);
     myRouteInformationParser = MyRouteInformationParser();

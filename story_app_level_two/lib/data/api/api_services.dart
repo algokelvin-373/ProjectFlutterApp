@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:story_app_level_two/data/model/login/login_request.dart';
+import 'package:story_app_level_two/data/model/login/login_response.dart';
 
 import '../model/restaurant_detail_response.dart';
 import '../model/restaurant_list_response.dart';
@@ -9,7 +11,30 @@ import '../model/restaurant_search_response.dart';
 import '../model/review_request.dart';
 
 class ApiServices {
-  static const String _baseUrl = "https://restaurant-api.dicoding.dev";
+  static const String _baseUrl = "https://story-api.dicoding.dev/v1";
+
+  Future<LoginResponse> login(LoginRequest request) async {
+    print('masuk login services');
+    final response = await http.post(
+      Uri.parse("$_baseUrl/login"),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: jsonEncode({
+        'email': request.email,
+        'password': request.password,
+      }),
+    );
+
+    print('response: ${response.body}');
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return LoginResponse.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to Login');
+    }
+  }
 
   Future<RestaurantListResponse> getRestaurantList() async {
     final response = await http.get(Uri.parse("$_baseUrl/list"));
