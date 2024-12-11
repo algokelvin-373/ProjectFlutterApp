@@ -1,4 +1,3 @@
-
 import 'restaurant_detail.dart';
 
 class RestaurantDetailResponse {
@@ -12,15 +11,16 @@ class RestaurantDetailResponse {
     required this.restaurant,
   });
 
-  factory RestaurantDetailResponse.fromJson(Map<String, dynamic> json) => RestaurantDetailResponse(
-    error: json["error"],
-    message: json["message"],
-    restaurant: RestaurantDetail.fromJson(json["restaurant"]),
-  );
+  factory RestaurantDetailResponse.fromJson(Map<String, dynamic> json) =>
+      RestaurantDetailResponse(
+        error: json["error"],
+        message: json["message"],
+        restaurant: RestaurantDetail.fromJson(json["restaurant"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "error": error,
-    "message": message,
-    "restaurant": restaurant.toJson(),
-  };
+        "error": error,
+        "message": message,
+        "restaurant": restaurant.toJson(),
+      };
 }

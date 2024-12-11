@@ -4,5 +4,6 @@ enum NavigationRoute {
   mainRoute("/");
 
   final String name;
+
   const NavigationRoute(this.name);
 }

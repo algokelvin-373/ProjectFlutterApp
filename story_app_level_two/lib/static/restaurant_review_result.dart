@@ -1,4 +1,3 @@
-
 import '../data/model/customer_review.dart';
 
 sealed class RestaurantReviewResultState {}

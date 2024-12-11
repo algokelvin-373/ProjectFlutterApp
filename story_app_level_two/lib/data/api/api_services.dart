@@ -38,7 +38,8 @@ class ApiServices {
     }
   }
 
-  Future<RestaurantReviewResponse> addRestaurantReview(ReviewRequest review) async {
+  Future<RestaurantReviewResponse> addRestaurantReview(
+      ReviewRequest review) async {
     final response = await http.post(
       Uri.parse("$_baseUrl/review"),
       headers: {

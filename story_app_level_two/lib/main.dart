@@ -67,8 +67,7 @@ void main() async {
           ),
         ),
         ChangeNotifierProvider(
-          create: (context) => DbProvider(
-            context.read<DbService>()),
+          create: (context) => DbProvider(context.read<DbService>()),
         ),
       ],
       child: RestaurantApp(isDarkMode: isDarkMode),
@@ -94,8 +93,9 @@ class RestaurantApp extends StatelessWidget {
           routes: {
             NavigationRoute.mainRoute.name: (context) => const MainScreen(),
             NavigationRoute.detailRoute.name: (context) => DetailScreen(
-              restaurantId: ModalRoute.of(context)?.settings.arguments as String,
-            ),
+                  restaurantId:
+                      ModalRoute.of(context)?.settings.arguments as String,
+                ),
           },
         );
       },

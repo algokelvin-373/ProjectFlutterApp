@@ -34,9 +34,11 @@ class _FoodListWidgetState extends State<FoodListWidget> {
       child: Consumer2<RestaurantListProvider, RestaurantSearchProvider>(
         builder: (context, list, search, child) {
           final searchQuery = widget.searchController.text.trim();
-          if (searchQuery.isEmpty) { // Get List Restaurant - RestaurantListProvider
+          if (searchQuery.isEmpty) {
+            // Get List Restaurant - RestaurantListProvider
             return _widgetListRestaurant(list);
-          } else { // Get List Restaurant by Search Data
+          } else {
+            // Get List Restaurant by Search Data
             return _widgetSearchRestaurant(search, searchQuery);
           }
         },
@@ -50,7 +52,8 @@ class _FoodListWidgetState extends State<FoodListWidget> {
         child: CircularProgressIndicator(key: ValueKey("loadingIndicatorAll")),
       );
     } else if (list.resultState is RestaurantListLoadedState) {
-      final restaurantList = (list.resultState as RestaurantListLoadedState).data;
+      final restaurantList =
+          (list.resultState as RestaurantListLoadedState).data;
       return ListView.builder(
         key: const ValueKey("listRestaurant"),
         itemCount: restaurantList.length,
@@ -63,7 +66,9 @@ class _FoodListWidgetState extends State<FoodListWidget> {
       final message = (list.resultState as RestaurantListErrorState).error;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showErrorDialog(message, () {
-          context.read<RestaurantListProvider>().fetchRestaurantList(); // Refresh data
+          context
+              .read<RestaurantListProvider>()
+              .fetchRestaurantList(); // Refresh data
         });
       });
       return const Center(child: Text("Error loading data."));
@@ -72,13 +77,15 @@ class _FoodListWidgetState extends State<FoodListWidget> {
     }
   }
 
-  Widget _widgetSearchRestaurant(RestaurantSearchProvider search, String searchQuery) {
+  Widget _widgetSearchRestaurant(
+      RestaurantSearchProvider search, String searchQuery) {
     if (search.resultState is RestaurantSearchLoadingState) {
       return const Center(
         child: CircularProgressIndicator(key: ValueKey("loadingIndicator")),
       );
     } else if (search.resultState is RestaurantSearchLoadedState) {
-      final restaurantListBySearch = (search.resultState as RestaurantSearchLoadedState).data;
+      final restaurantListBySearch =
+          (search.resultState as RestaurantSearchLoadedState).data;
       return ListView.builder(
         key: const ValueKey("listSearchRestaurant"),
         itemCount: restaurantListBySearch.length,
@@ -91,7 +98,9 @@ class _FoodListWidgetState extends State<FoodListWidget> {
       final message = (search.resultState as RestaurantSearchErrorState).error;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showErrorDialog(message, () {
-          context.read<RestaurantSearchProvider>().fetchRestaurantSearch(searchQuery); // Refresh search data
+          context
+              .read<RestaurantSearchProvider>()
+              .fetchRestaurantSearch(searchQuery); // Refresh search data
         });
       });
       return const Center(child: Text("Error loading data."));

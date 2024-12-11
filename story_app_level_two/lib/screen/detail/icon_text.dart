@@ -20,9 +20,7 @@ class IconText extends StatelessWidget {
         spaceHorizontal(5),
         Text(
           label,
-          style: const TextStyle(
-              fontSize: 14
-          ),
+          style: const TextStyle(fontSize: 14),
         ),
       ],
     );

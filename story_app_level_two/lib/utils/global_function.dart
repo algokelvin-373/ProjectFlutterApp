@@ -29,8 +29,5 @@ Align textCenter(String text) {
 }
 
 SizedBox lines() {
-  return SizedBox(
-    height: 1,
-    child: Container(color: Colors.grey)
-  );
+  return SizedBox(height: 1, child: Container(color: Colors.grey));
 }

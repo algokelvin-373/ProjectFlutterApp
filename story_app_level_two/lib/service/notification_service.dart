@@ -1,8 +1,8 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
   static final _notifications = FlutterLocalNotificationsPlugin();
@@ -48,8 +48,9 @@ class NotificationService {
     print("Notifikasi dijadwalkan pada: $scheduledTime");
     print("Nilai Id : $scheduledTime");
 
-    final adjustedTime =
-    scheduledTime.isBefore(now) ? scheduledTime.add(const Duration(days: 1)) : scheduledTime;
+    final adjustedTime = scheduledTime.isBefore(now)
+        ? scheduledTime.add(const Duration(days: 1))
+        : scheduledTime;
 
     await _notifications.zonedSchedule(
       0,
@@ -59,7 +60,7 @@ class NotificationService {
       notificationDetails,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       uiLocalNotificationDateInterpretation:
-        UILocalNotificationDateInterpretation.absoluteTime,
+          UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.time,
     );
   }

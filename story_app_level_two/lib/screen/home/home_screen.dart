@@ -14,7 +14,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
@@ -28,7 +27,9 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             onPressed: themeProvider.toggleTheme,
             icon: Icon(
-              themeProvider.isDarkMode ? Icons.nightlight_round : Icons.wb_sunny,
+              themeProvider.isDarkMode
+                  ? Icons.nightlight_round
+                  : Icons.wb_sunny,
               color: themeProvider.isDarkMode ? Colors.white : Colors.grey,
             ),
           ),
@@ -45,8 +46,11 @@ class _HomeScreenState extends State<HomeScreen> {
               }
             },
             icon: Icon(
-              notificationProvider.isReminderOn ? Icons.notifications_active : Icons.notifications,
-              color: notificationProvider.isReminderOn ? Colors.blue : Colors.grey,
+              notificationProvider.isReminderOn
+                  ? Icons.notifications_active
+                  : Icons.notifications,
+              color:
+                  notificationProvider.isReminderOn ? Colors.blue : Colors.grey,
             ),
           ),
         ],

@@ -19,9 +19,10 @@ class MenusCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset((listMenu.isFood) ? 'images/ic_food.jpg' : 'images/ic_drink.jpg',
-              height: 100,
-              fit: BoxFit.cover,
+          Image.asset(
+            (listMenu.isFood) ? 'images/ic_food.jpg' : 'images/ic_drink.jpg',
+            height: 100,
+            fit: BoxFit.cover,
           ),
           Align(
             alignment: Alignment.center,

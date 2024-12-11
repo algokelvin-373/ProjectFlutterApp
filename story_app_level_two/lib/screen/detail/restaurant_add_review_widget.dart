@@ -11,7 +11,8 @@ class RestaurantAddReviewWidget extends StatefulWidget {
   const RestaurantAddReviewWidget({super.key, required this.restaurantId});
 
   @override
-  State<RestaurantAddReviewWidget> createState() => _RestaurantAddReviewWidgetState();
+  State<RestaurantAddReviewWidget> createState() =>
+      _RestaurantAddReviewWidgetState();
 }
 
 class _RestaurantAddReviewWidgetState extends State<RestaurantAddReviewWidget> {
@@ -19,7 +20,7 @@ class _RestaurantAddReviewWidgetState extends State<RestaurantAddReviewWidget> {
   final reviewController = TextEditingController();
 
   @override
-  dispose(){
+  dispose() {
     nameController.dispose();
     reviewController.dispose();
     super.dispose();
@@ -122,9 +123,12 @@ class _RestaurantAddReviewWidgetState extends State<RestaurantAddReviewWidget> {
       );
 
       try {
-        context.read<RestaurantReviewProvider>().fetchRestaurantReview(reviewRequest);
+        context
+            .read<RestaurantReviewProvider>()
+            .fetchRestaurantReview(reviewRequest);
         Future.delayed(const Duration(seconds: 1), () async {
-          final resultState = context.read<RestaurantReviewProvider>().resultState;
+          final resultState =
+              context.read<RestaurantReviewProvider>().resultState;
 
           if (resultState is RestaurantReviewLoadedState) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -135,7 +139,9 @@ class _RestaurantAddReviewWidgetState extends State<RestaurantAddReviewWidget> {
               ),
             );
             final listCustomerReviewNew = resultState.data;
-            context.read<RestaurantReviewProvider>().addReview(listCustomerReviewNew);
+            context
+                .read<RestaurantReviewProvider>()
+                .addReview(listCustomerReviewNew);
             Navigator.of(context).pop();
           } else if (resultState is RestaurantReviewErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(

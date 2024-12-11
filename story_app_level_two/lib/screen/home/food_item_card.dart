@@ -27,7 +27,8 @@ class FoodItemCard extends StatelessWidget {
           children: [
             // Image
             Hero(
-              tag: 'https://restaurant-api.dicoding.dev/images/medium/${restaurant.pictureId}',
+              tag:
+                  'https://restaurant-api.dicoding.dev/images/medium/${restaurant.pictureId}',
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.network(
@@ -47,15 +48,15 @@ class FoodItemCard extends StatelessWidget {
                     key: const ValueKey("textRestaurantName"),
                     restaurant.name,
                     style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   spaceVertical(5),
                   Text(
                     restaurant.city,
                     style: const TextStyle(
-                        fontSize: 12,
+                      fontSize: 12,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -64,8 +65,8 @@ class FoodItemCard extends StatelessWidget {
                   Text(
                     restaurant.rating.toString(),
                     style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
@@ -84,7 +85,8 @@ class FoodItemCard extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.orangeAccent,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
                 ),
                 child: const Text(
                   'Visit',

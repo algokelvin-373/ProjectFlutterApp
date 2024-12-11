@@ -1,4 +1,3 @@
-
 import '../data/model/restaurant.dart';
 
 sealed class RestaurantListResultState {}

@@ -12,7 +12,9 @@ class RestaurantReviewProvider extends ChangeNotifier {
 
   List<CustomerReview> get customerReviews => _customerReviews;
 
-  RestaurantReviewProvider(this._apiServices,);
+  RestaurantReviewProvider(
+    this._apiServices,
+  );
 
   RestaurantReviewResultState _resultState = RestaurantReviewNoneState();
 

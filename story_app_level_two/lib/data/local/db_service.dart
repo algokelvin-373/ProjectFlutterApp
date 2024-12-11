@@ -67,8 +67,7 @@ class DbService {
   Future<Restaurant> getItemById(String id) async {
     final db = await _initializeDb();
     final results =
-    await db.query(_tableName, where: "id = ?", whereArgs: [id], limit: 1);
-
+        await db.query(_tableName, where: "id = ?", whereArgs: [id], limit: 1);
 
     return results.map((result) => Restaurant.fromJson(result)).first;
   }
@@ -77,7 +76,7 @@ class DbService {
     final db = await _initializeDb();
 
     final result =
-    await db.delete(_tableName, where: "id = ?", whereArgs: [id]);
+        await db.delete(_tableName, where: "id = ?", whereArgs: [id]);
     return result;
   }
 }

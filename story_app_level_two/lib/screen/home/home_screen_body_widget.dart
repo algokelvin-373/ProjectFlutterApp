@@ -41,7 +41,9 @@ class _HomeScreenBodyWidgetState extends State<HomeScreenBodyWidget> {
                 if (query.trim().isEmpty) {
                   context.read<RestaurantListProvider>().fetchRestaurantList();
                 } else {
-                  context.read<RestaurantSearchProvider>().fetchRestaurantSearch(query);
+                  context
+                      .read<RestaurantSearchProvider>()
+                      .fetchRestaurantSearch(query);
                 }
               },
             ),

@@ -15,7 +15,9 @@ class RestaurantReviewsWidget extends StatelessWidget {
     return Consumer<RestaurantReviewProvider>(
       builder: (context, provider, child) {
         final count = provider.customerReviews.length;
-        final listReviewCustomer = count > 0 ? provider.customerReviews : restaurantDetail.customerReviews;
+        final listReviewCustomer = count > 0
+            ? provider.customerReviews
+            : restaurantDetail.customerReviews;
         return ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),

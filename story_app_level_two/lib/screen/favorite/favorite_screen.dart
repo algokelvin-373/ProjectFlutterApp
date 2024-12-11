@@ -37,22 +37,22 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           }
           return switch (restaurantList.isNotEmpty) {
             true => ListView.builder(
-              itemCount: restaurantList.length,
-              itemBuilder: (_, index) {
-                final restaurant = restaurantList[index];
-                return FoodItemCard(
-                  restaurant: restaurant,
-                );
-              },
-            ),
-            _ => const Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("No Favorite"),
-                ],
+                itemCount: restaurantList.length,
+                itemBuilder: (_, index) {
+                  final restaurant = restaurantList[index];
+                  return FoodItemCard(
+                    restaurant: restaurant,
+                  );
+                },
               ),
-            ),
+            _ => const Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("No Favorite"),
+                  ],
+                ),
+              ),
           };
         },
       ),

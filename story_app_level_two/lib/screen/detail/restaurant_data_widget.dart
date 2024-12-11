@@ -61,10 +61,7 @@ class _RestaurantDataWidgetState extends State<RestaurantDataWidget> {
         spaceVertical(10),
         Text(
           widget.restaurantDetail.address,
-          style: const TextStyle(
-              color: Colors.grey,
-              fontSize: 14
-          ),
+          style: const TextStyle(color: Colors.grey, fontSize: 14),
         ),
         spaceVertical(15),
         Wrap(
@@ -79,19 +76,16 @@ class _RestaurantDataWidgetState extends State<RestaurantDataWidget> {
           children: [
             IconText(
                 icon: Icons.star,
-                label: widget.restaurantDetail.rating.toString()
-            ),
+                label: widget.restaurantDetail.rating.toString()),
             IconText(
-                icon: Icons.location_city,
-                label: widget.restaurantDetail.city
-            ),
+                icon: Icons.location_city, label: widget.restaurantDetail.city),
           ],
         ),
         spaceVertical(20),
         Text(
           widget.restaurantDetail.description,
           style: const TextStyle(
-              fontSize: 14,
+            fontSize: 14,
           ),
         ),
         spaceVertical(15),

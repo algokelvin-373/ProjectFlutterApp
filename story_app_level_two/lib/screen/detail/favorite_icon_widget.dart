@@ -28,7 +28,8 @@ class _FavoriteIconWidgetState extends State<FavoriteIconWidget> {
     Future.microtask(() async {
       await dbProvider.loadRestaurantById(widget.restaurant.id);
       final value = dbProvider.restaurant == null
-          ? false : dbProvider.restaurant!.id == widget.restaurant.id;
+          ? false
+          : dbProvider.restaurant!.id == widget.restaurant.id;
       favoriteIconProvider.isFavorite = value;
     });
   }
@@ -46,20 +47,21 @@ class _FavoriteIconWidgetState extends State<FavoriteIconWidget> {
           favoriteIconProvider.isFavorite = false;
         } else {
           final data = Restaurant(
-              id: widget.restaurant.id,
-              name: widget.restaurant.name,
-              description: widget.restaurant.description,
-              pictureId: widget.restaurant.pictureId,
-              city: widget.restaurant.city,
-              rating: widget.restaurant.rating,
+            id: widget.restaurant.id,
+            name: widget.restaurant.name,
+            description: widget.restaurant.description,
+            pictureId: widget.restaurant.pictureId,
+            city: widget.restaurant.city,
+            rating: widget.restaurant.rating,
           );
           await dbProvider.saveRestaurant(data);
           favoriteIconProvider.isFavorite = true;
         }
       },
       icon: Icon(
-        context.watch<FavoriteIconProvider>()
-            .isFavorite ? Icons.favorite : Icons.favorite_border,
+        context.watch<FavoriteIconProvider>().isFavorite
+            ? Icons.favorite
+            : Icons.favorite_border,
         color: Colors.red,
       ),
     );

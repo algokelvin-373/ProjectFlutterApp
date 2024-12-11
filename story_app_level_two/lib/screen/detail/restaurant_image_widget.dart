@@ -17,7 +17,8 @@ class RestaurantImageWidget extends StatelessWidget {
           restaurantDetail.name,
         ),
         background: Hero(
-          tag: 'https://restaurant-api.dicoding.dev/images/large/${restaurantDetail.pictureId}',
+          tag:
+              'https://restaurant-api.dicoding.dev/images/large/${restaurantDetail.pictureId}',
           child: Image.network(
             'https://restaurant-api.dicoding.dev/images/large/${restaurantDetail.pictureId}',
             fit: BoxFit.cover,

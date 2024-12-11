@@ -18,12 +18,12 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-
   @override
   void initState() {
     super.initState();
     Future.microtask(() {
-      context.read<RestaurantDetailProvider>()
+      context
+          .read<RestaurantDetailProvider>()
           .fetchRestaurantDetail(widget.restaurantId);
     });
   }
@@ -49,7 +49,8 @@ class _DetailScreenState extends State<DetailScreen> {
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
-                  context.read<RestaurantDetailProvider>()
+                  context
+                      .read<RestaurantDetailProvider>()
                       .fetchRestaurantDetail(id); // Refresh data
                 },
                 child: const Text('Refresh'),
@@ -71,10 +72,12 @@ class _DetailScreenState extends State<DetailScreen> {
               child: CircularProgressIndicator(),
             );
           } else if (value.resultState is RestaurantDetailLoadedState) {
-            final restaurantDetail = (value.resultState as RestaurantDetailLoadedState).data;
+            final restaurantDetail =
+                (value.resultState as RestaurantDetailLoadedState).data;
             return DetailScreenBodyWidget(restaurantDetail: restaurantDetail);
-          } else if (value.resultState is RestaurantDetailErrorState)  {
-            final message = (value.resultState as RestaurantDetailErrorState).error;
+          } else if (value.resultState is RestaurantDetailErrorState) {
+            final message =
+                (value.resultState as RestaurantDetailErrorState).error;
             WidgetsBinding.instance.addPostFrameCallback((_) {
               _showErrorDialog(message, widget.restaurantId);
             });
