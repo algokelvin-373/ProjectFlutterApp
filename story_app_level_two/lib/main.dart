@@ -80,7 +80,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
   bool isDarkMode = prefs.getBool('isDarkMode') ?? false;
-  runApp(StoryApp(isDarkMode: isDarkMode));
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => ThemeProvider(),
+        ),
+      ],
+      child: StoryApp(isDarkMode: isDarkMode),
+    ),
+  );
 }
 
 class StoryApp extends StatefulWidget {
@@ -111,11 +121,18 @@ class _StoryAppState extends State<StoryApp> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => authProvider,
-      child: MaterialApp.router(
-        title: 'Story App',
-        routerDelegate: myRouterDelegate,
-        routeInformationParser: myRouteInformationParser,
-        backButtonDispatcher: RootBackButtonDispatcher(),
+      child: Consumer<ThemeProvider>(
+        builder: (_, value, __) {
+          return MaterialApp.router(
+            title: 'Story App',
+            theme: RestaurantTheme.lightTheme,
+            darkTheme: RestaurantTheme.darkTheme,
+            themeMode: value.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+            routerDelegate: myRouterDelegate,
+            routeInformationParser: myRouteInformationParser,
+            backButtonDispatcher: RootBackButtonDispatcher(),
+          );
+        },
       ),
     );
     /*return Consumer<ThemeProvider>(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:story_app_level_two/utils/global_function.dart';
 
 class LoginScreen extends StatefulWidget {
   final Function() onLogin;
@@ -18,7 +19,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF0E1621),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -33,68 +33,77 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Colors.blue,
                 ),
               ),
-              SizedBox(height: 20),
+              spaceVertical(20),
               Center(
                 child: Text(
                   'Sign in to your Account',
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              spaceVertical(10),
               Center(
-                child: RichText(
-                  text: TextSpan(
-                    text: "Don't have an account? ",
-                    style: TextStyle(color: Colors.white),
-                    children: [
-                      TextSpan(
-                        text: 'Sign Up',
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't have an account? ",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        print('Click Sign Up');
+                        widget.onRegister();
+                      },
+                      child: Text(
+                        'Sign Up',
                         style: TextStyle(
                           color: Colors.blue,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(height: 30),
+              spaceVertical(30),
               TextField(
-                style: TextStyle(color: Colors.white),
+                //style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.email, color: Colors.white),
+                  prefixIcon: Icon(Icons.email),
                   hintText: 'Email',
                   hintStyle: TextStyle(color: Colors.grey),
                   filled: true,
-                  fillColor: Color(0xFF1C2A35),
+                  //fillColor: Color(0xFF1C2A35),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide.none,
                   ),
                 ),
               ),
-              SizedBox(height: 15),
+              spaceVertical(15),
               TextField(
                 obscureText: true,
-                style: TextStyle(color: Colors.white),
+                //style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.lock, color: Colors.white),
-                  suffixIcon: Icon(Icons.visibility, color: Colors.white),
+                  prefixIcon: Icon(Icons.lock),
+                  suffixIcon: Icon(Icons.visibility),
                   hintText: 'Password',
                   hintStyle: TextStyle(color: Colors.grey),
                   filled: true,
-                  fillColor: Color(0xFF1C2A35),
+                  //fillColor: Color(0xFF1C2A35),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide.none,
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              spaceVertical(10),
               Center(
                 child: TextButton(
                   onPressed: () {},
@@ -104,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              spaceVertical(20),
               Center(
                 child: ElevatedButton(
                   onPressed: () {},
