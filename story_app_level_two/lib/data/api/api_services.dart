@@ -28,11 +28,17 @@ class ApiServices {
     );
 
     print('response: ${response.body}');
+    print('response: ${response.statusCode}');
 
+    final responseData = jsonDecode(response.body) as Map<String, dynamic>;
     if (response.statusCode == 200 || response.statusCode == 201) {
-      return LoginResponse.fromJson(jsonDecode(response.body));
+      return LoginResponse.fromJson(responseData);
     } else {
-      throw Exception('Failed to Login');
+      return LoginResponse(
+        error: responseData['error'],
+        message: responseData['message'],
+        loginResult: null,
+      );
     }
   }
 

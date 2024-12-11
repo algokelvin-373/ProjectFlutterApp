@@ -3,7 +3,7 @@ import 'login_result.dart';
 class LoginResponse {
   bool error;
   String message;
-  LoginResult loginResult;
+  LoginResult? loginResult;
 
   LoginResponse({
     required this.error,
@@ -14,12 +14,12 @@ class LoginResponse {
   factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
         error: json["error"],
         message: json["message"],
-        loginResult: LoginResult.fromJson(json["loginResult"]),
+        loginResult: LoginResult?.fromJson(json["loginResult"]),
       );
 
   Map<String, dynamic> toJson() => {
         "error": error,
         "message": message,
-        "loginResult": loginResult.toJson(),
+        "loginResult": loginResult?.toJson(),
       };
 }

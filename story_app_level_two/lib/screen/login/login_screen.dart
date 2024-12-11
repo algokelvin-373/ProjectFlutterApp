@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:story_app_level_two/data/model/login/login_request.dart';
 import 'package:story_app_level_two/provider/auth/auth_provider.dart';
+import 'package:story_app_level_two/screen/login/button_login_process_widget.dart';
 import 'package:story_app_level_two/utils/global_function.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -32,8 +33,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = Provider.of<AuthProvider>(context);
-
     return Scaffold(
       body: Form(
         key: formKey,
@@ -132,7 +131,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 spaceVertical(20),
-                context.watch<AuthProvider>().isLoadingLogin
+                ButtonLoginProcessWidget(
+                  onLogin: widget.onLogin,
+                  formKey: formKey,
+                  emailController: _emailController,
+                  passwordController: _passwordController,
+                ),
+                /*context.watch<AuthProvider>().isLoadingLogin
                     ? const Center(child: CircularProgressIndicator())
                     : Center(
                   child: ElevatedButton(
@@ -163,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
 
                         //print('Value result - $result');
-                        /*if (result) {
+                        *//*if (result) {
                           print('Masuk if result');
                           widget.onLogin();
                         } else {
@@ -174,7 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Text("Your email or password is invalid"),
                             ),
                           );
-                        }*/
+                        }*//*
                       } else {
                         print('Error formKey');
                       }
@@ -194,7 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: TextStyle(fontSize: 16),
                     ),
                   ),
-                ),
+                ),*/
               ],
             ),
           ),
