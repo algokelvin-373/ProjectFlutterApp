@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:story_app_level_two/data/model/page_configuration.dart';
 import 'package:story_app_level_two/db/auth_repository.dart';
 import 'package:story_app_level_two/screen/home/home_screen.dart';
+import 'package:story_app_level_two/screen/main/main_screen.dart';
 import 'package:story_app_level_two/screen/register/register_screen.dart';
 
 import '../screen/login/login_screen.dart';
@@ -72,7 +73,7 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
   List<Page> get _loggedInStack => [
     MaterialPage(
       key: const ValueKey("StoryListPage"),
-      child: HomeScreen(),
+      child: MainScreen(),
     ),
   ];
 

@@ -84,8 +84,46 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        Provider(
+          create: (context) => ApiServices(),
+        ),
+        Provider(
+          create: (context) => DbService(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => NotificationProvider(),
+        ),
         ChangeNotifierProvider(
           create: (_) => ThemeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => NotificationProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => IndexNavProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RestaurantListProvider(
+            context.read<ApiServices>(),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RestaurantSearchProvider(
+            context.read<ApiServices>(),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RestaurantDetailProvider(
+            context.read<ApiServices>(),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RestaurantReviewProvider(
+            context.read<ApiServices>(),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => DbProvider(context.read<DbService>()),
         ),
       ],
       child: StoryApp(isDarkMode: isDarkMode),

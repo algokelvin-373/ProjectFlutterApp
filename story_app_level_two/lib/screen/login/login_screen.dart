@@ -116,7 +116,10 @@ class _LoginScreenState extends State<LoginScreen> {
               spaceVertical(20),
               Center(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    print('Click Login');
+                    widget.onLogin();
+                  },
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(horizontal: 120, vertical: 15),
                     backgroundColor: Colors.blue,
