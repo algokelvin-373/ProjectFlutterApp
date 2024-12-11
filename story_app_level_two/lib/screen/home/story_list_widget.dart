@@ -43,8 +43,7 @@ class _StoryListWidgetState extends State<StoryListWidget> {
         child: CircularProgressIndicator(key: ValueKey("loadingIndicatorAll")),
       );
     } else if (list.resultState is StoryListLoadedState) {
-      final storyList =
-          (list.resultState as StoryListLoadedState).data;
+      final storyList = (list.resultState as StoryListLoadedState).data;
       return ListView.builder(
         key: const ValueKey("listStory"),
         itemCount: storyList.length,
@@ -57,9 +56,7 @@ class _StoryListWidgetState extends State<StoryListWidget> {
       final message = (list.resultState as StoryListErrorState).error;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showErrorDialog(message, () {
-          context
-              .read<StoryListProvider>()
-              .fetchStoryList(); // Refresh data
+          context.read<StoryListProvider>().fetchStoryList(); // Refresh data
         });
       });
       return const Center(child: Text("Error loading data."));

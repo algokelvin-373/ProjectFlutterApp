@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:story_app_level_two/data/model/login/login_request.dart';
-import 'package:story_app_level_two/provider/auth/auth_provider.dart';
 import 'package:story_app_level_two/screen/login/button_login_process_widget.dart';
 import 'package:story_app_level_two/utils/global_function.dart';
 
@@ -137,69 +134,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   emailController: _emailController,
                   passwordController: _passwordController,
                 ),
-                /*context.watch<AuthProvider>().isLoadingLogin
-                    ? const Center(child: CircularProgressIndicator())
-                    : Center(
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      print('Click Login');
-                      if (formKey.currentState != null && formKey.currentState!.validate()) {
-                        final scaffoldMessage = ScaffoldMessenger.of(context);
-                        final request = LoginRequest(
-                          email: _emailController.text,
-                          password: _passwordController.text,
-                        );
-                        print('Login: email - ${_emailController.text}');
-                        print('Login: pass - ${_passwordController.text}');
-
-                        await context.read<AuthProvider>().login(request);
-
-                        final result = authProvider.isLoggedIn;
-                        if (result) {
-                          print('Success Login');
-                          widget.onLogin();
-                        } else {
-                          scaffoldMessage.showSnackBar(
-                            const SnackBar(
-                              content:
-                              Text("Your email or password is invalid"),
-                            ),
-                          );
-                        }
-
-                        //print('Value result - $result');
-                        *//*if (result) {
-                          print('Masuk if result');
-                          widget.onLogin();
-                        } else {
-                          print('Masuk else login failed');
-                          scaffoldMessage.showSnackBar(
-                            const SnackBar(
-                              content:
-                              Text("Your email or password is invalid"),
-                            ),
-                          );
-                        }*//*
-                      } else {
-                        print('Error formKey');
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 120,
-                        vertical: 15,
-                      ),
-                      backgroundColor: Colors.blue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Text(
-                      'Log In',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
-                ),*/
               ],
             ),
           ),
