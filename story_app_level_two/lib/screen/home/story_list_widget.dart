@@ -6,11 +6,8 @@ import '../../static/story_list_result.dart';
 import 'story_item_card_widget.dart';
 
 class StoryListWidget extends StatefulWidget {
-  final TextEditingController searchController;
-
   const StoryListWidget({
     super.key,
-    required this.searchController,
   });
 
   @override
@@ -44,8 +41,14 @@ class _StoryListWidgetState extends State<StoryListWidget> {
       );
     } else if (list.resultState is StoryListLoadedState) {
       final storyList = (list.resultState as StoryListLoadedState).data;
-      return ListView.builder(
-        key: const ValueKey("listStory"),
+      return GridView.builder(
+        key: const ValueKey("gridStory"),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 8.0,
+          mainAxisSpacing: 8.0,
+          childAspectRatio: 0.65,
+        ),
         itemCount: storyList.length,
         itemBuilder: (context, index) {
           final story = storyList[index];

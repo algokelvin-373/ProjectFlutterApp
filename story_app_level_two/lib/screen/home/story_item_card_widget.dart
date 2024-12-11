@@ -35,13 +35,24 @@ class StoryItemCardWidget extends StatelessWidget {
   Widget photoWidget() {
     return Stack(
       children: [
-        CachedNetworkImage(
-          cacheKey: "cache-key",
-          imageUrl: story.photoUrl,
-          progressIndicatorBuilder: (context, url, progress) => Center(
-            child: CircularProgressIndicator(value: progress.progress),
+        Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Center(
+            child: CachedNetworkImage(
+              cacheKey: "cache-key",
+              imageUrl: story.photoUrl,
+              imageBuilder: (context, imageProvider) => ClipOval(
+                child: Image(
+                  image: imageProvider,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              progressIndicatorBuilder: (context, url, progress) => Center(
+                child: CircularProgressIndicator(value: progress.progress),
+              ),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+            ),
           ),
-          errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
       ],
     );
@@ -53,17 +64,14 @@ class StoryItemCardWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            story.name,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+          Center(
+            child: Text(
+              story.name,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          spaceVertical(4),
-          Text(
-            story.description,
-            style: TextStyle(fontSize: 14),
           ),
         ],
       ),

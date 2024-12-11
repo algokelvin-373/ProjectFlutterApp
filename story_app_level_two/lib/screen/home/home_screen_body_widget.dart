@@ -10,14 +10,12 @@ class HomeScreenBodyWidget extends StatefulWidget {
 }
 
 class _HomeScreenBodyWidgetState extends State<HomeScreenBodyWidget> {
-  final TextEditingController _searchController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
-        children: [StoryListWidget(searchController: _searchController)],
+        children: [StoryListWidget()],
       ),
     );
   }
