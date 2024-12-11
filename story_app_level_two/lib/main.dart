@@ -11,7 +11,7 @@ import 'data/local/db_service.dart';
 import 'provider/detail/restaurant_detail_provider.dart';
 import 'provider/detail/restaurant_review_provider.dart';
 import 'provider/favorite/db_provider.dart';
-import 'provider/home/restaurant_list_provider.dart';
+import 'provider/home/story_list_provider.dart';
 import 'provider/home/restaurant_search_provider.dart';
 import 'provider/main/index_nav_provider.dart';
 import 'provider/notification/notification_provider.dart';
@@ -48,7 +48,7 @@ void main() async {
           create: (_) => IndexNavProvider(),
         ),
         ChangeNotifierProvider(
-          create: (context) => RestaurantListProvider(
+          create: (context) => StoryListProvider(
             context.read<ApiServices>(),
           ),
         ),

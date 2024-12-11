@@ -1,37 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../provider/home/restaurant_list_provider.dart';
+import '../../provider/home/story_list_provider.dart';
 import '../../provider/home/restaurant_search_provider.dart';
 import '../../static/restaurant_list_result.dart';
 import '../../static/restaurant_search_result.dart';
-import 'food_item_card.dart';
+import 'story_item_card_widget.dart';
 
-class FoodListWidget extends StatefulWidget {
+class StoryListWidget extends StatefulWidget {
   final TextEditingController searchController;
 
-  const FoodListWidget({
+  const StoryListWidget({
     super.key,
     required this.searchController,
   });
 
   @override
-  State<FoodListWidget> createState() => _FoodListWidgetState();
+  State<StoryListWidget> createState() => _StoryListWidgetState();
 }
 
-class _FoodListWidgetState extends State<FoodListWidget> {
+class _StoryListWidgetState extends State<StoryListWidget> {
   @override
   void initState() {
     super.initState();
     Future.microtask(() {
-      context.read<RestaurantListProvider>().fetchRestaurantList();
+      context.read<StoryListProvider>().fetchStoryList();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Consumer2<RestaurantListProvider, RestaurantSearchProvider>(
+      child: Consumer2<StoryListProvider, RestaurantSearchProvider>(
         builder: (context, list, search, child) {
           final searchQuery = widget.searchController.text.trim();
           if (searchQuery.isEmpty) {
@@ -46,29 +46,29 @@ class _FoodListWidgetState extends State<FoodListWidget> {
     );
   }
 
-  Widget _widgetListRestaurant(RestaurantListProvider list) {
-    if (list.resultState is RestaurantListLoadingState) {
+  Widget _widgetListRestaurant(StoryListProvider list) {
+    if (list.resultState is StoryListLoadingState) {
       return const Center(
         child: CircularProgressIndicator(key: ValueKey("loadingIndicatorAll")),
       );
-    } else if (list.resultState is RestaurantListLoadedState) {
+    } else if (list.resultState is StoryListLoadedState) {
       final restaurantList =
-          (list.resultState as RestaurantListLoadedState).data;
+          (list.resultState as StoryListLoadedState).data;
       return ListView.builder(
         key: const ValueKey("listRestaurant"),
         itemCount: restaurantList.length,
         itemBuilder: (context, index) {
           final restaurant = restaurantList[index];
-          return FoodItemCard(restaurant: restaurant);
+          return StoryItemCardWidget(restaurant: restaurant);
         },
       );
-    } else if (list.resultState is RestaurantListErrorState) {
-      final message = (list.resultState as RestaurantListErrorState).error;
+    } else if (list.resultState is StoryListErrorState) {
+      final message = (list.resultState as StoryListErrorState).error;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showErrorDialog(message, () {
           context
-              .read<RestaurantListProvider>()
-              .fetchRestaurantList(); // Refresh data
+              .read<StoryListProvider>()
+              .fetchStoryList(); // Refresh data
         });
       });
       return const Center(child: Text("Error loading data."));
@@ -91,7 +91,7 @@ class _FoodListWidgetState extends State<FoodListWidget> {
         itemCount: restaurantListBySearch.length,
         itemBuilder: (context, index) {
           final restaurant = restaurantListBySearch[index];
-          return FoodItemCard(restaurant: restaurant);
+          return StoryItemCardWidget(restaurant: restaurant);
         },
       );
     } else if (search.resultState is RestaurantSearchErrorState) {

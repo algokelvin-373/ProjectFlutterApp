@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 
 import '../../data/local/db_service.dart';
-import '../../data/model/restaurant.dart';
+import '../../data/model/story/story.dart';
 
-class DbProvider extends ChangeNotifier {
+/*class DbProvider extends ChangeNotifier {
   final DbService _service;
 
   DbProvider(this._service);
@@ -77,8 +77,8 @@ class DbProvider extends ChangeNotifier {
     }
   }
 
-/*bool checkItemBookmark(int id) {
+*//*bool checkItemBookmark(int id) {
     final isSameTourism = _restaurant!.id == id;
     return isSameTourism;
-  }*/
-}
+  }*//*
+}*/

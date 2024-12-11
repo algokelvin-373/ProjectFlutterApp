@@ -1,4 +1,4 @@
-import '../data/model/restaurant.dart';
+import '../data/model/story/story.dart';
 
 sealed class RestaurantSearchResultState {}
 

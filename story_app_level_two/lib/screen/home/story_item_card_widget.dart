@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../data/model/restaurant.dart';
+import '../../data/model/story/story.dart';
 import '../../static/navigation_route.dart';
 import '../../utils/global_function.dart';
 
-class FoodItemCard extends StatelessWidget {
+class StoryItemCardWidget extends StatelessWidget {
   final Restaurant restaurant;
 
-  const FoodItemCard({
+  const StoryItemCardWidget({
     super.key,
     required this.restaurant,
   });

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../provider/home/restaurant_list_provider.dart';
+import '../../provider/home/story_list_provider.dart';
 import '../../provider/home/restaurant_search_provider.dart';
 import '../../utils/global_function.dart';
-import 'food_list_widget.dart';
+import 'story_list_widget.dart';
 
 class HomeScreenBodyWidget extends StatefulWidget {
   const HomeScreenBodyWidget({super.key});
@@ -39,7 +39,7 @@ class _HomeScreenBodyWidgetState extends State<HomeScreenBodyWidget> {
               ),
               onChanged: (query) {
                 if (query.trim().isEmpty) {
-                  context.read<RestaurantListProvider>().fetchRestaurantList();
+                  context.read<StoryListProvider>().fetchStoryList();
                 } else {
                   context
                       .read<RestaurantSearchProvider>()
@@ -48,7 +48,7 @@ class _HomeScreenBodyWidgetState extends State<HomeScreenBodyWidget> {
               },
             ),
           ),
-          FoodListWidget(searchController: _searchController)
+          StoryListWidget(searchController: _searchController)
         ],
       ),
     );

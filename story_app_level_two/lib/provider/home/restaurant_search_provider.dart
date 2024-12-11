@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../data/api/api_services.dart';
 import '../../static/restaurant_search_result.dart';
 
-class RestaurantSearchProvider extends ChangeNotifier {
+/*class RestaurantSearchProvider extends ChangeNotifier {
   final ApiServices _apiServices;
 
   RestaurantSearchProvider(this._apiServices);
@@ -31,4 +31,4 @@ class RestaurantSearchProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-}
+}*/

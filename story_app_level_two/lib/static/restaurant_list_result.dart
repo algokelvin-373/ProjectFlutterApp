@@ -1,19 +1,19 @@
-import '../data/model/restaurant.dart';
+import '../data/model/story/story.dart';
 
-sealed class RestaurantListResultState {}
+sealed class StoryListResultState {}
 
-class RestaurantListNoneState extends RestaurantListResultState {}
+class StoryListNoneState extends StoryListResultState {}
 
-class RestaurantListLoadingState extends RestaurantListResultState {}
+class StoryListLoadingState extends StoryListResultState {}
 
-class RestaurantListErrorState extends RestaurantListResultState {
+class StoryListErrorState extends StoryListResultState {
   final String error;
 
-  RestaurantListErrorState(this.error);
+  StoryListErrorState(this.error);
 }
 
-class RestaurantListLoadedState extends RestaurantListResultState {
-  final List<Restaurant> data;
+class StoryListLoadedState extends StoryListResultState {
+  final List<Story> data;
 
-  RestaurantListLoadedState(this.data);
+  StoryListLoadedState(this.data);
 }
