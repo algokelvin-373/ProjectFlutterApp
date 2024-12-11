@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../data/api/api_services.dart';
 import '../../db/auth_repository.dart';
-import '../../static/restaurant_list_result.dart';
+import '../../static/story_list_result.dart';
 
 class StoryListProvider extends ChangeNotifier {
-  final AuthRepository authRepository;
+  final AuthRepository _authRepository;
   final ApiServices _apiServices;
 
-  StoryListProvider(this._apiServices, this.authRepository);
+  StoryListProvider(this._apiServices, this._authRepository);
 
   StoryListResultState _resultState = StoryListNoneState();
 
@@ -24,7 +24,7 @@ class StoryListProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      String token = await authRepository.getToken();
+      String token = await _authRepository.getToken();
       print('Token: $token');
       final result = await _apiServices.getStoryList(token);
 

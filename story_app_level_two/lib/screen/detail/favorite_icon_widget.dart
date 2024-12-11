@@ -46,7 +46,7 @@ class _FavoriteIconWidgetState extends State<FavoriteIconWidget> {
           await dbProvider.removeRestaurantById(widget.restaurant.id);
           favoriteIconProvider.isFavorite = false;
         } else {
-          final data = Restaurant(
+          /*final data = Restaurant(
             id: widget.restaurant.id,
             name: widget.restaurant.name,
             description: widget.restaurant.description,
@@ -55,7 +55,7 @@ class _FavoriteIconWidgetState extends State<FavoriteIconWidget> {
             rating: widget.restaurant.rating,
           );
           await dbProvider.saveRestaurant(data);
-          favoriteIconProvider.isFavorite = true;
+          favoriteIconProvider.isFavorite = true;*/
         }
       },
       icon: Icon(

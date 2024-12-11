@@ -12,7 +12,6 @@ import 'provider/detail/restaurant_detail_provider.dart';
 import 'provider/detail/restaurant_review_provider.dart';
 import 'provider/favorite/db_provider.dart';
 import 'provider/home/story_list_provider.dart';
-import 'provider/home/restaurant_search_provider.dart';
 import 'provider/main/index_nav_provider.dart';
 import 'provider/notification/notification_provider.dart';
 import 'provider/theme/theme_provider.dart';
@@ -35,6 +34,9 @@ void main() async {
         Provider(
           create: (_) => DbService(),
         ),
+        Provider(
+          create: (_) => AuthRepository(),
+        ),
         ChangeNotifierProvider(
           create: (_) => NotificationProvider(),
         ),
@@ -50,11 +52,7 @@ void main() async {
         ChangeNotifierProvider(
           create: (context) => StoryListProvider(
             context.read<ApiServices>(),
-          ),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => RestaurantSearchProvider(
-            context.read<ApiServices>(),
+            context.read<AuthRepository>(),
           ),
         ),
         ChangeNotifierProvider(

@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import '../../data/local/db_service.dart';
 import '../../data/model/story/story.dart';
 
-/*class DbProvider extends ChangeNotifier {
+class DbProvider extends ChangeNotifier {
   final DbService _service;
 
   DbProvider(this._service);
@@ -12,16 +12,16 @@ import '../../data/model/story/story.dart';
 
   String get message => _message;
 
-  List<Restaurant>? _restaurantList;
+  List<Story>? _restaurantList;
 
-  List<Restaurant>? get restaurantList => _restaurantList;
+  List<Story>? get restaurantList => _restaurantList;
 
-  Restaurant? _restaurant;
+  Story? _restaurant;
 
-  Restaurant? get restaurant => _restaurant;
+  Story? get restaurant => _restaurant;
 
-  Future<void> saveRestaurant(Restaurant value) async {
-    try {
+  Future<void> saveRestaurant(Story value) async {
+    /*try {
       final result = await _service.insertRestaurantFavorite(value);
 
       final isError = result == 0;
@@ -33,11 +33,11 @@ import '../../data/model/story/story.dart';
     } catch (e) {
       _message = "Failed to save your data";
     }
-    notifyListeners();
+    notifyListeners();*/
   }
 
   Future<void> loadAllRestaurant() async {
-    try {
+    /*try {
       _restaurantList = await _service.getAllItems();
       _restaurant = null;
       _message = "All of your data is loaded";
@@ -51,18 +51,18 @@ import '../../data/model/story/story.dart';
       if (kDebugMode) {
         print("Error: $e");
       }
-    }
+    }*/
   }
 
   Future<void> loadRestaurantById(String id) async {
-    try {
+    /*try {
       _restaurant = await _service.getItemById(id);
       _message = "Your data is loaded";
       notifyListeners();
     } catch (e) {
       _message = "Failed to load your data";
       notifyListeners();
-    }
+    }*/
   }
 
   Future<void> removeRestaurantById(String id) async {
@@ -77,8 +77,8 @@ import '../../data/model/story/story.dart';
     }
   }
 
-*//*bool checkItemBookmark(int id) {
+  bool checkItemBookmark(int id) {
     final isSameTourism = _restaurant!.id == id;
     return isSameTourism;
-  }*//*
-}*/
+  }
+}

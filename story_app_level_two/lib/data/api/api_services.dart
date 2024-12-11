@@ -7,7 +7,6 @@ import 'package:story_app_level_two/data/model/login/login_response.dart';
 import '../model/restaurant_detail_response.dart';
 import '../model/story/story_list_response.dart';
 import '../model/restaurant_review_response.dart';
-import '../model/story/restaurant_search_response.dart';
 import '../model/review_request.dart';
 
 class ApiServices {
@@ -52,6 +51,7 @@ class ApiServices {
     );
 
     final responseData = jsonDecode(response.body) as Map<String, dynamic>;
+    print('Response: $responseData');
     if (response.statusCode == 200 || response.statusCode == 201) {
       return StoryListResponse.fromJson(responseData);
     } else {
@@ -62,15 +62,6 @@ class ApiServices {
       );
     }
   }
-
-  /*Future<RestaurantSearchResponse> getRestaurantBySearch(String search) async {
-    final response = await http.get(Uri.parse("$_baseUrl/search?q=$search"));
-    if (response.statusCode == 200) {
-      return RestaurantSearchResponse.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception('Failed to load search restaurant list');
-    }
-  }*/
 
   Future<RestaurantDetailResponse> getRestaurantDetail(String id) async {
     final response = await http.get(Uri.parse("$_baseUrl/detail/$id"));

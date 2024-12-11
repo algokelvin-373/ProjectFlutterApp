@@ -41,7 +41,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 itemBuilder: (_, index) {
                   final restaurant = restaurantList[index];
                   return StoryItemCardWidget(
-                    restaurant: restaurant,
+                    story: restaurant,
                   );
                 },
               ),

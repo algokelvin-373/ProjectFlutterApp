@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:story_app_level_two/data/model/story/story.dart';
 
-import '../../data/model/story/story.dart';
 import '../../static/navigation_route.dart';
 import '../../utils/global_function.dart';
 
 class StoryItemCardWidget extends StatelessWidget {
-  final Restaurant restaurant;
+  final Story story;
 
   const StoryItemCardWidget({
     super.key,
-    required this.restaurant,
+    required this.story,
   });
 
   @override
@@ -27,12 +27,11 @@ class StoryItemCardWidget extends StatelessWidget {
           children: [
             // Image
             Hero(
-              tag:
-                  'https://restaurant-api.dicoding.dev/images/medium/${restaurant.pictureId}',
+              tag: story.photoUrl,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.network(
-                  'https://restaurant-api.dicoding.dev/images/medium/${restaurant.pictureId}',
+                  story.photoUrl,
                   width: 80,
                   height: 80,
                   fit: BoxFit.cover,
@@ -46,7 +45,7 @@ class StoryItemCardWidget extends StatelessWidget {
                 children: [
                   Text(
                     key: const ValueKey("textRestaurantName"),
-                    restaurant.name,
+                    story.name,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -54,7 +53,7 @@ class StoryItemCardWidget extends StatelessWidget {
                   ),
                   spaceVertical(5),
                   Text(
-                    restaurant.city,
+                    story.description,
                     style: const TextStyle(
                       fontSize: 12,
                     ),
@@ -62,13 +61,13 @@ class StoryItemCardWidget extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   spaceVertical(5),
-                  Text(
-                    restaurant.rating.toString(),
+                  /*Text(
+                    story.rating.toString(),
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
-                  ),
+                  ),*/
                 ],
               ),
             ),
@@ -80,7 +79,7 @@ class StoryItemCardWidget extends StatelessWidget {
                   Navigator.pushNamed(
                     context,
                     NavigationRoute.detailRoute.name,
-                    arguments: restaurant.id,
+                    arguments: story.id,
                   );
                 },
                 style: ElevatedButton.styleFrom(
