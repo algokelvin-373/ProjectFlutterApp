@@ -16,14 +16,11 @@ import 'provider/home/restaurant_search_provider.dart';
 import 'provider/main/index_nav_provider.dart';
 import 'provider/notification/notification_provider.dart';
 import 'provider/theme/theme_provider.dart';
-import 'screen/detail/detail_screen.dart';
-import 'screen/main/main_screen.dart';
 import 'service/notification_service.dart';
-import 'static/navigation_route.dart';
 import 'style/typography/restaurant_theme.dart';
 
 void main() async {
-  /*WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await NotificationService.initialize();
   await NotificationService.requestNotificationPermission();
   final prefs = await SharedPreferences.getInstance();
@@ -33,10 +30,10 @@ void main() async {
     MultiProvider(
       providers: [
         Provider(
-          create: (context) => ApiServices(),
+          create: (_) => ApiServices(),
         ),
         Provider(
-          create: (context) => DbService(),
+          create: (_) => DbService(),
         ),
         ChangeNotifierProvider(
           create: (_) => NotificationProvider(),
@@ -48,59 +45,7 @@ void main() async {
           create: (_) => NotificationProvider(),
         ),
         ChangeNotifierProvider(
-          create: (context) => IndexNavProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => RestaurantListProvider(
-            context.read<ApiServices>(),
-          ),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => RestaurantSearchProvider(
-            context.read<ApiServices>(),
-          ),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => RestaurantDetailProvider(
-            context.read<ApiServices>(),
-          ),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => RestaurantReviewProvider(
-            context.read<ApiServices>(),
-          ),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => DbProvider(context.read<DbService>()),
-        ),
-      ],
-      child: RestaurantApp(isDarkMode: isDarkMode),
-    ),
-  );*/
-  WidgetsFlutterBinding.ensureInitialized();
-  final prefs = await SharedPreferences.getInstance();
-  bool isDarkMode = prefs.getBool('isDarkMode') ?? false;
-
-  runApp(
-    MultiProvider(
-      providers: [
-        Provider(
-          create: (context) => ApiServices(),
-        ),
-        Provider(
-          create: (context) => DbService(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => NotificationProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => ThemeProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => NotificationProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => IndexNavProvider(),
+          create: (_) => IndexNavProvider(),
         ),
         ChangeNotifierProvider(
           create: (context) => RestaurantListProvider(
@@ -173,23 +118,5 @@ class _StoryAppState extends State<StoryApp> {
         },
       ),
     );
-    /*return Consumer<ThemeProvider>(
-      builder: (_, value, __) {
-        return MaterialApp(
-          title: 'Restaurant App',
-          theme: RestaurantTheme.lightTheme,
-          darkTheme: RestaurantTheme.darkTheme,
-          themeMode: value.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-          initialRoute: NavigationRoute.mainRoute.name,
-          routes: {
-            NavigationRoute.mainRoute.name: (context) => const MainScreen(),
-            NavigationRoute.detailRoute.name: (context) => DetailScreen(
-                  restaurantId:
-                      ModalRoute.of(context)?.settings.arguments as String,
-                ),
-          },
-        );
-      },
-    );*/
   }
 }
