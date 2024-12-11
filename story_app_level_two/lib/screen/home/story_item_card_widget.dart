@@ -1,7 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:story_app_level_two/data/model/story/story.dart';
 
-import '../../static/navigation_route.dart';
 import '../../utils/global_function.dart';
 
 class StoryItemCardWidget extends StatelessWidget {
@@ -15,88 +15,57 @@ class StoryItemCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       elevation: 4,
-      margin: verticalSymmetric(10),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(12),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Image
-            Hero(
-              tag: story.photoUrl,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.network(
-                  story.photoUrl,
-                  width: 80,
-                  height: 80,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            spaceHorizontal(10),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    key: const ValueKey("textRestaurantName"),
-                    story.name,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  spaceVertical(5),
-                  Text(
-                    story.description,
-                    style: const TextStyle(
-                      fontSize: 12,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  spaceVertical(5),
-                  /*Text(
-                    story.rating.toString(),
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),*/
-                ],
-              ),
-            ),
-            // Add Cart Button
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    NavigationRoute.detailRoute.name,
-                    arguments: story.id,
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orangeAccent,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                ),
-                child: const Text(
-                  'Visit',
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ),
-          ],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          photoWidget(),
+          spaceVertical(8),
+          bodyStoryWidget(),
+          spaceVertical(12),
+        ],
+      ),
+    );
+  }
+
+  Widget photoWidget() {
+    return Stack(
+      children: [
+        CachedNetworkImage(
+          cacheKey: "cache-key",
+          imageUrl: story.photoUrl,
+          progressIndicatorBuilder: (context, url, progress) => Center(
+            child: CircularProgressIndicator(value: progress.progress),
+          ),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
+      ],
+    );
+  }
+
+  Widget bodyStoryWidget() {
+    return  Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            story.name,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          spaceVertical(4),
+          Text(
+            story.description,
+            style: TextStyle(fontSize: 14),
+          ),
+        ],
       ),
     );
   }
