@@ -5,6 +5,7 @@ import '../data/model/user.dart';
 class AuthRepository {
   final String stateKey = "state";
   final String userKey = "user";
+  final String tokenKey = "token";
 
   Future<bool> isLoggedIn() async {
     final preferences = await SharedPreferences.getInstance();
@@ -16,6 +17,12 @@ class AuthRepository {
     final preferences = await SharedPreferences.getInstance();
     await Future.delayed(const Duration(seconds: 2));
     return preferences.setBool(stateKey, true);
+  }
+
+  Future<void> token(String token) async {
+    final preferences = await SharedPreferences.getInstance();
+    await Future.delayed(const Duration(seconds: 2));
+    preferences.setString(tokenKey, token);
   }
 
   Future<bool> logout() async {

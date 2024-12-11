@@ -34,44 +34,33 @@ class AuthProvider extends ChangeNotifier {
     try {
       final result = await _apiServices.login(request);
 
-      //isLoadingLogin = false;
-
-      print('Result: ${result.message}');
-      print('Result: ${result.loginResult.name}');
-      print('Result: ${result.loginResult.token}');
       if (result.error) {
         print('Masuk error');
         _resultState = AuthErrorState(result.message);
+        isLoadingLogin = false;
         notifyListeners();
         //return false;
       } else {
         print('Masuk login');
+        print('Result: ${result.message}');
+        print('Result: ${result.loginResult.name}');
+        print('Result: ${result.loginResult.token}');
         _resultState = AuthLoadedState(result);
+        final token = result.loginResult.token;
+        await authRepository.login();
+        await authRepository.token(token);
+        isLoadingLogin = false;
         isLoggedIn = true;
-        //isLoggedIn = await authRepository.isLoggedIn();
-        //isLoadingLogin = false;
         notifyListeners();
-        //return isLoggedIn;
       }
     } on Exception catch (e) {
       print('Masuk exception');
       _resultState = AuthErrorState(e.toString());
+      isLoadingLogin = false;
       notifyListeners();
-      //return false;
     }
-
-
-    /*isLoadingLogin = true;
-    notifyListeners();
-    final userState = await authRepository.getUser();
-    if (user == userState) {
-      await authRepository.login();
-    }
-    isLoggedIn = await authRepository.isLoggedIn();
-    isLoadingLogin = false;
-    notifyListeners();
-    return isLoggedIn;*/
   }
+
   Future<bool> logout() async {
     isLoadingLogout = true;
     notifyListeners();
@@ -84,6 +73,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
     return !isLoggedIn;
   }
+
   Future<bool> saveUser(User user) async {
     isLoadingRegister = true;
     notifyListeners();
