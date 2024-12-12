@@ -36,7 +36,6 @@ dependencies:
   cupertino_icons: ^1.0.8
   provider: ^6.1.2
   http: ^1.1.0
-  sqflite: ^2.4.1
   path: ^1.8.3
   shared_preferences: ^2.0.15
   flutter_local_notifications: ^18.0.1

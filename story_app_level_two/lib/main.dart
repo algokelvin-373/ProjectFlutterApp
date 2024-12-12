@@ -7,9 +7,7 @@ import 'package:story_app_level_two/routes/route_information_parser.dart';
 import 'package:story_app_level_two/routes/router_delegate.dart';
 
 import 'data/api/api_services.dart';
-import 'data/local/db_service.dart';
 import 'provider/detail/story_detail_provider.dart';
-import 'provider/favorite/db_provider.dart';
 import 'provider/home/story_list_provider.dart';
 import 'provider/main/index_nav_provider.dart';
 import 'provider/notification/notification_provider.dart';
@@ -29,9 +27,6 @@ void main() async {
       providers: [
         Provider(
           create: (_) => ApiServices(),
-        ),
-        Provider(
-          create: (_) => DbService(),
         ),
         Provider(
           create: (_) => AuthRepository(),
@@ -59,9 +54,6 @@ void main() async {
             context.read<AuthRepository>(),
             context.read<ApiServices>(),
           ),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => DbProvider(context.read<DbService>()),
         ),
       ],
       child: StoryApp(isDarkMode: isDarkMode),
