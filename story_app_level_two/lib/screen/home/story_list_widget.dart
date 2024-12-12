@@ -6,8 +6,11 @@ import '../../static/story_list_result.dart';
 import 'story_item_card_widget.dart';
 
 class StoryListWidget extends StatefulWidget {
+  final Function(String) onTapped;
+
   const StoryListWidget({
     super.key,
+    required this.onTapped,
   });
 
   @override
@@ -52,7 +55,10 @@ class _StoryListWidgetState extends State<StoryListWidget> {
         itemCount: storyList.length,
         itemBuilder: (context, index) {
           final story = storyList[index];
-          return StoryItemCardWidget(story: story);
+          return StoryItemCardWidget(
+            story: story,
+            onTapped: widget.onTapped,
+          );
         },
       );
     } else if (list.resultState is StoryListErrorState) {

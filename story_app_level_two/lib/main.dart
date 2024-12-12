@@ -55,7 +55,8 @@ void main() async {
           ),
         ),
         ChangeNotifierProvider(
-          create: (context) => RestaurantDetailProvider(
+          create: (context) => StoryDetailProvider(
+            context.read<AuthRepository>(),
             context.read<ApiServices>(),
           ),
         ),

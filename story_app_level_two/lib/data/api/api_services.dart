@@ -5,10 +5,7 @@ import 'package:story_app_level_two/data/model/login/login_request.dart';
 import 'package:story_app_level_two/data/model/login/login_response.dart';
 import 'package:story_app_level_two/data/model/story/story_detail_response.dart';
 
-import '../model/restaurant_detail_response.dart';
 import '../model/story/story_list_response.dart';
-import '../model/restaurant_review_response.dart';
-import '../model/review_request.dart';
 
 class ApiServices {
   static const String _baseUrl = "https://story-api.dicoding.dev/v1";
@@ -64,8 +61,14 @@ class ApiServices {
     }
   }
 
-  Future<StoryDetailResponse> getStoryDetail(String id) async {
-    final response = await http.get(Uri.parse("$_baseUrl/stories/$id"));
+  Future<StoryDetailResponse> getStoryDetail(String token, String id) async {
+    final response = await http.get(
+      Uri.parse("$_baseUrl/stories/$id"),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
+    );
 
     final responseData = jsonDecode(response.body) as Map<String, dynamic>;
     print('Response: $responseData');
@@ -77,28 +80,6 @@ class ApiServices {
         message: responseData['message'],
         story: null,
       );
-    }
-  }
-
-  Future<RestaurantReviewResponse> addRestaurantReview(
-      ReviewRequest review) async {
-    final response = await http.post(
-      Uri.parse("$_baseUrl/review"),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: jsonEncode({
-        'id': review.id,
-        'name': review.name,
-        'review': review.review,
-      }),
-    );
-
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      return RestaurantReviewResponse.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception('Failed to post review');
     }
   }
 }

@@ -11,29 +11,26 @@ class StoryImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverAppBar(
-      expandedHeight: 350,
-      pinned: true,
-      flexibleSpace: FlexibleSpaceBar(
-        title: Text(linkImage),
-        background: Hero(
-          tag: linkImage,
-          child: CachedNetworkImage(
-            cacheKey: "cache-key",
-            imageUrl: linkImage,
-            imageBuilder: (context, imageProvider) => ClipOval(
-              child: Image(
-                image: imageProvider,
-                fit: BoxFit.cover,
-              ),
-            ),
-            progressIndicatorBuilder: (context, url, progress) => Center(
-              child: CircularProgressIndicator(value: progress.progress),
-            ),
-            errorWidget: (context, url, error) => const Icon(Icons.error),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Hero(
+            tag: linkImage,
+            child: _loadImage(),
           ),
-        ),
+        ],
       ),
+    );
+  }
+
+  Widget _loadImage() {
+    return CachedNetworkImage(
+      cacheKey: "cache-key",
+      imageUrl: linkImage,
+      imageBuilder: (context, imageProvider) => Image(image: imageProvider),
+      progressIndicatorBuilder: (context, url, progress) =>
+          Center(child: CircularProgressIndicator(value: progress.progress)),
+      errorWidget: (context, url, error) => const Icon(Icons.error),
     );
   }
 }

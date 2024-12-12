@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../../data/api/api_services.dart';
+import '../../db/auth_repository.dart';
 import '../../static/story_detail_result.dart';
 
-class RestaurantDetailProvider extends ChangeNotifier {
+class StoryDetailProvider extends ChangeNotifier {
+  final AuthRepository _authRepository;
   final ApiServices _apiServices;
 
-  RestaurantDetailProvider(
+  StoryDetailProvider(
+    this._authRepository,
     this._apiServices,
   );
 
@@ -14,12 +17,13 @@ class RestaurantDetailProvider extends ChangeNotifier {
 
   StoryDetailResultState get resultState => _resultState;
 
-  Future<void> fetchRestaurantDetail(String id) async {
+  Future<void> fetchStoryDetail(String id) async {
     try {
       _resultState = StoryDetailLoadingState();
       notifyListeners();
 
-      final result = await _apiServices.getStoryDetail(id);
+      String token = await _authRepository.getToken();
+      final result = await _apiServices.getStoryDetail(token, id);
 
       if (result.error) {
         _resultState = StoryDetailErrorState(result.message);

@@ -22,9 +22,7 @@ class _DetailScreenState extends State<DetailScreen> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      context
-          .read<RestaurantDetailProvider>()
-          .fetchRestaurantDetail(widget.storyId);
+      context.read<StoryDetailProvider>().fetchStoryDetail(widget.storyId);
     });
   }
 
@@ -49,9 +47,8 @@ class _DetailScreenState extends State<DetailScreen> {
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
-                  context
-                      .read<RestaurantDetailProvider>()
-                      .fetchRestaurantDetail(id); // Refresh data
+                  context.read<StoryDetailProvider>()
+                      .fetchStoryDetail(id); // Refresh data
                 },
                 child: const Text('Refresh'),
               ),
@@ -62,28 +59,31 @@ class _DetailScreenState extends State<DetailScreen> {
     );
   }
 
+  Widget _detailStoryWidget(StoryDetailProvider value) {
+    if (value.resultState is StoryDetailLoadingState) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    } else if (value.resultState is StoryDetailLoadedState) {
+      final storyDetail = (value.resultState as StoryDetailLoadedState).data;
+      return DetailScreenBodyWidget(storyDetail: storyDetail);
+    } else if (value.resultState is StoryDetailErrorState) {
+      final message = (value.resultState as StoryDetailErrorState).error;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showErrorDialog(message, widget.storyId);
+      });
+      return const Center(child: Text("Error loading data."));
+    } else {
+      return const SizedBox();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<RestaurantDetailProvider>(
+      body: Consumer<StoryDetailProvider>(
         builder: (_, value, __) {
-          if (value.resultState is StoryDetailLoadingState) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (value.resultState is StoryDetailLoadedState) {
-            final storyDetail = (value.resultState as StoryDetailLoadedState).data;
-            return DetailScreenBodyWidget(storyDetail: storyDetail);
-          } else if (value.resultState is StoryDetailErrorState) {
-            final message =
-                (value.resultState as StoryDetailErrorState).error;
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              _showErrorDialog(message, widget.storyId);
-            });
-            return const Center(child: Text("Error loading data."));
-          } else {
-            return const SizedBox();
-          }
+          return _detailStoryWidget(value);
         },
       ),
     );

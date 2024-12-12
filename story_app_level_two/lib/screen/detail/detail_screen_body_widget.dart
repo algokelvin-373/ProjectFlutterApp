@@ -15,11 +15,12 @@ class DetailScreenBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        StoryImageWidget(linkImage: storyDetail!.photoUrl),
-        SliverToBoxAdapter(
-          child: Container(
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          StoryImageWidget(linkImage: storyDetail!.photoUrl),
+          Container(
             padding: const EdgeInsets.all(20),
             decoration: const BoxDecoration(
               //color: Colors.black87,
@@ -30,8 +31,8 @@ class DetailScreenBodyWidget extends StatelessWidget {
             ),
             child: StoryDataWidget(storyDetail: storyDetail),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

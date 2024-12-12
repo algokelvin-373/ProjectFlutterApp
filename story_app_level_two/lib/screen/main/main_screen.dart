@@ -21,7 +21,7 @@ class MainScreen extends StatelessWidget {
       body: Consumer<IndexNavProvider>(
         builder: (context, value, child) {
           return switch (value.indexBottomNavBar) {
-            0 => const HomeScreen(),
+            0 => HomeScreen(onTapped: onTapped),
             _ => const FavoriteScreen(),
           };
         },

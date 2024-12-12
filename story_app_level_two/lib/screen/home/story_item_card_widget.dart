@@ -6,17 +6,20 @@ import '../../utils/global_function.dart';
 
 class StoryItemCardWidget extends StatelessWidget {
   final Story story;
+  final Function(String) onTapped;
 
   const StoryItemCardWidget({
     super.key,
     required this.story,
+    required this.onTapped,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        print('Card tapped!');
+        print('Card tapped! ${story.id}');
+        onTapped(story.id);
       },
       child: Card(
         margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),

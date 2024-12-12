@@ -6,14 +6,14 @@ import '../../provider/theme/theme_provider.dart';
 import '../../service/notification_service.dart';
 import 'home_screen_body_widget.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  final Function(String) onTapped;
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
+  const HomeScreen({
+    super.key,
+    required this.onTapped,
+  });
 
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: const HomeScreenBodyWidget(),
+      body: HomeScreenBodyWidget(onTapped: onTapped),
     );
   }
 }

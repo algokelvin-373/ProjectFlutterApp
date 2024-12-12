@@ -17,8 +17,6 @@ class StoryDataWidget extends StatefulWidget {
 }
 
 class _StoryDataWidgetState extends State<StoryDataWidget> {
-  bool isFavorite = true;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -36,14 +34,8 @@ class _StoryDataWidgetState extends State<StoryDataWidget> {
             ),
           ],
         ),
-        spaceVertical(10),
-        Text(
-          widget.storyDetail!.name,
-          style: const TextStyle(color: Colors.grey, fontSize: 14),
-        ),
         spaceVertical(15),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconText(
                 icon: Icons.date_range,
@@ -58,15 +50,6 @@ class _StoryDataWidgetState extends State<StoryDataWidget> {
           ),
         ),
         spaceVertical(15),
-        // textCenter('Menu Food and Drink'),
-        // lines(),
-        // RestaurantMenusWidget(restaurantDetail: widget.storyDetail),
-        // spaceVertical(15),
-        // textCenter('Reviews'),
-        // lines(),
-        // RestaurantReviewsWidget(restaurantDetail: widget.storyDetail),
-        // spaceVertical(15),
-        // RestaurantAddReviewWidget(restaurantId: widget.storyDetail.id),
       ],
     );
   }
