@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Center(
                   child: Icon(
-                    Icons.shield,
+                    Icons.work_history,
                     size: 60,
                     color: Colors.blue,
                   ),

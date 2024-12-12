@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../provider/detail/restaurant_detail_provider.dart';
-import '../../static/restaurant_detail_result.dart';
+import '../../provider/detail/story_detail_provider.dart';
+import '../../static/story_detail_result.dart';
 import 'detail_screen_body_widget.dart';
 
 class DetailScreen extends StatefulWidget {
-  final String restaurantId;
+  final String storyId;
 
   const DetailScreen({
     super.key,
-    required this.restaurantId,
+    required this.storyId,
   });
 
   @override
@@ -24,7 +24,7 @@ class _DetailScreenState extends State<DetailScreen> {
     Future.microtask(() {
       context
           .read<RestaurantDetailProvider>()
-          .fetchRestaurantDetail(widget.restaurantId);
+          .fetchRestaurantDetail(widget.storyId);
     });
   }
 
@@ -67,19 +67,18 @@ class _DetailScreenState extends State<DetailScreen> {
     return Scaffold(
       body: Consumer<RestaurantDetailProvider>(
         builder: (_, value, __) {
-          if (value.resultState is RestaurantDetailLoadingState) {
+          if (value.resultState is StoryDetailLoadingState) {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (value.resultState is RestaurantDetailLoadedState) {
-            final restaurantDetail =
-                (value.resultState as RestaurantDetailLoadedState).data;
-            return DetailScreenBodyWidget(restaurantDetail: restaurantDetail);
-          } else if (value.resultState is RestaurantDetailErrorState) {
+          } else if (value.resultState is StoryDetailLoadedState) {
+            final storyDetail = (value.resultState as StoryDetailLoadedState).data;
+            return DetailScreenBodyWidget(storyDetail: storyDetail);
+          } else if (value.resultState is StoryDetailErrorState) {
             final message =
-                (value.resultState as RestaurantDetailErrorState).error;
+                (value.resultState as StoryDetailErrorState).error;
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              _showErrorDialog(message, widget.restaurantId);
+              _showErrorDialog(message, widget.storyId);
             });
             return const Center(child: Text("Error loading data."));
           } else {
