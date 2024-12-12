@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Restaurant App"),
+        title: const Text("Story App"),
         elevation: 0,
         actions: [
           IconButton(

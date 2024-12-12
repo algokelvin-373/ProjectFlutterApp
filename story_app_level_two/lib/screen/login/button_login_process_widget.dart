@@ -20,7 +20,8 @@ class ButtonLoginProcessWidget extends StatefulWidget {
   });
 
   @override
-  State<ButtonLoginProcessWidget> createState() => _ButtonLoginProcessWidgetState();
+  State<ButtonLoginProcessWidget> createState() =>
+      _ButtonLoginProcessWidgetState();
 }
 
 class _ButtonLoginProcessWidgetState extends State<ButtonLoginProcessWidget> {
@@ -29,51 +30,6 @@ class _ButtonLoginProcessWidgetState extends State<ButtonLoginProcessWidget> {
     return context.watch<AuthProvider>().isLoadingLogin
         ? const Center(child: CircularProgressIndicator())
         : btnLoginAction();
-        /*: Center(
-            child: ElevatedButton(
-              onPressed: () async {
-                print('Click Login');
-                if (widget.formKey.currentState != null &&
-                    widget.formKey.currentState!.validate()) {
-                  final scaffoldMessage = ScaffoldMessenger.of(context);
-                  final request = LoginRequest(
-                    email: _emailController.text,
-                    password: _passwordController.text,
-                  );
-                  print('Login: email - ${_emailController.text}');
-                  print('Login: pass - ${_passwordController.text}');
-
-                  await context.read<AuthProvider>().login(request);
-
-                  final result = authProvider.isLoggedIn;
-                  if (result) {
-                    print('Success Login');
-                    widget.onLogin();
-                  } else {
-                    scaffoldMessage.showSnackBar(
-                      const SnackBar(
-                        content: Text("Your email or password is invalid"),
-                      ),
-                    );
-                  }
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 120,
-                  vertical: 15,
-                ),
-                backgroundColor: Colors.blue,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: Text(
-                'Log In',
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-          );*/
   }
 
   Widget btnLoginAction() {
@@ -107,8 +63,7 @@ class _ButtonLoginProcessWidgetState extends State<ButtonLoginProcessWidget> {
               } else {
                 scaffoldMessage.showSnackBar(
                   const SnackBar(
-                    content:
-                    Text("Your email or password is invalid"),
+                    content: Text("Your email or password is invalid"),
                   ),
                 );
               }

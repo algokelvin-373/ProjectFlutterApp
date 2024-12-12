@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../model/restaurant.dart';
+import '../model/story/story.dart';
 
 class DbService {
   static const String _databaseName = 'restaurant-app.db';
@@ -32,7 +32,7 @@ class DbService {
     );
   }
 
-  Future<int> insertRestaurantFavorite(Restaurant restaurant) async {
+  /*Future<int> insertRestaurantFavorite(Restaurant restaurant) async {
     if (kDebugMode) {
       print("Masuk insert data...");
     }
@@ -70,7 +70,7 @@ class DbService {
         await db.query(_tableName, where: "id = ?", whereArgs: [id], limit: 1);
 
     return results.map((result) => Restaurant.fromJson(result)).first;
-  }
+  }*/
 
   Future<int> removeItem(String id) async {
     final db = await _initializeDb();

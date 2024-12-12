@@ -13,6 +13,12 @@ class AuthRepository {
     return preferences.getBool(stateKey) ?? false;
   }
 
+  Future<String> getToken() async {
+    final preferences = await SharedPreferences.getInstance();
+    await Future.delayed(const Duration(seconds: 2));
+    return preferences.getString(tokenKey) ?? "";
+  }
+
   Future<bool> login() async {
     final preferences = await SharedPreferences.getInstance();
     await Future.delayed(const Duration(seconds: 2));

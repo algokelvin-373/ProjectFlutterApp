@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/favorite/db_provider.dart';
-import '../home/food_item_card.dart';
+import '../home/story_item_card_widget.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
@@ -40,8 +40,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 itemCount: restaurantList.length,
                 itemBuilder: (_, index) {
                   final restaurant = restaurantList[index];
-                  return FoodItemCard(
-                    restaurant: restaurant,
+                  return StoryItemCardWidget(
+                    story: restaurant,
                   );
                 },
               ),

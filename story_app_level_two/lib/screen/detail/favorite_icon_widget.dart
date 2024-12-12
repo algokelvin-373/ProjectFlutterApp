@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../data/model/restaurant.dart';
+import '../../data/model/story/story.dart';
 import '../../data/model/restaurant_detail.dart';
 import '../../provider/detail/favorite_icon_provider.dart';
 import '../../provider/favorite/db_provider.dart';
@@ -46,7 +46,7 @@ class _FavoriteIconWidgetState extends State<FavoriteIconWidget> {
           await dbProvider.removeRestaurantById(widget.restaurant.id);
           favoriteIconProvider.isFavorite = false;
         } else {
-          final data = Restaurant(
+          /*final data = Restaurant(
             id: widget.restaurant.id,
             name: widget.restaurant.name,
             description: widget.restaurant.description,
@@ -55,7 +55,7 @@ class _FavoriteIconWidgetState extends State<FavoriteIconWidget> {
             rating: widget.restaurant.rating,
           );
           await dbProvider.saveRestaurant(data);
-          favoriteIconProvider.isFavorite = true;
+          favoriteIconProvider.isFavorite = true;*/
         }
       },
       icon: Icon(
