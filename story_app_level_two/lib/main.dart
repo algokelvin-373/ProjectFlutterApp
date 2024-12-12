@@ -10,7 +10,6 @@ import 'data/api/api_services.dart';
 import 'provider/detail/story_detail_provider.dart';
 import 'provider/home/story_list_provider.dart';
 import 'provider/main/index_nav_provider.dart';
-import 'provider/notification/notification_provider.dart';
 import 'provider/theme/theme_provider.dart';
 import 'service/notification_service.dart';
 import 'style/typography/restaurant_theme.dart';
@@ -32,13 +31,7 @@ void main() async {
           create: (_) => AuthRepository(),
         ),
         ChangeNotifierProvider(
-          create: (_) => NotificationProvider(),
-        ),
-        ChangeNotifierProvider(
           create: (_) => ThemeProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => NotificationProvider(),
         ),
         ChangeNotifierProvider(
           create: (_) => IndexNavProvider(),

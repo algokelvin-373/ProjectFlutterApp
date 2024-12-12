@@ -49,16 +49,33 @@ class StoryItemCardWidget extends StatelessWidget {
             child: CachedNetworkImage(
               cacheKey: "cache-key",
               imageUrl: story.photoUrl,
-              imageBuilder: (context, imageProvider) => ClipOval(
-                child: Image(
-                  image: imageProvider,
-                  fit: BoxFit.cover,
+              imageBuilder: (context, imageProvider) => Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-              progressIndicatorBuilder: (context, url, progress) => Center(
-                child: CircularProgressIndicator(value: progress.progress),
+              progressIndicatorBuilder: (context, url, progress) => SizedBox(
+                width: 100,
+                height: 100,
+                child: Center(
+                  child: CircularProgressIndicator(value: progress.progress),
+                ),
               ),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
+              errorWidget: (context, url, error) => Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.grey[300],
+                ),
+                child: const Icon(Icons.error, size: 40),
+              ),
             ),
           ),
         ),
@@ -68,9 +85,9 @@ class StoryItemCardWidget extends StatelessWidget {
 
   Widget bodyStoryWidget() {
     return  Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      padding: const EdgeInsets.symmetric(horizontal: 4.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
             child: Text(

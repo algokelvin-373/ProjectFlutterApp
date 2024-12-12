@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../provider/notification/notification_provider.dart';
 import '../../provider/theme/theme_provider.dart';
-import '../../service/notification_service.dart';
 import 'home_screen_body_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,7 +15,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    final notificationProvider = Provider.of<NotificationProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -31,26 +28,6 @@ class HomeScreen extends StatelessWidget {
                   ? Icons.nightlight_round
                   : Icons.wb_sunny,
               color: themeProvider.isDarkMode ? Colors.white : Colors.grey,
-            ),
-          ),
-          IconButton(
-            onPressed: () async {
-              print('Click for notification');
-              notificationProvider.toggleReminder();
-              if (!notificationProvider.isReminderOn) {
-                print('Click for scheduleNotification');
-                await NotificationService.scheduleNotification();
-              } else {
-                print('Click for cancelNotification');
-                await NotificationService.cancelNotification();
-              }
-            },
-            icon: Icon(
-              notificationProvider.isReminderOn
-                  ? Icons.notifications_active
-                  : Icons.notifications,
-              color:
-                  notificationProvider.isReminderOn ? Colors.blue : Colors.grey,
             ),
           ),
         ],
