@@ -1,22 +1,52 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class PostStoryScreen extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:story_app_level_two/utils/global_function.dart';
+
+class PostStoryScreen extends StatefulWidget {
   const PostStoryScreen({super.key});
+
+  @override
+  State<PostStoryScreen> createState() => _PostStoryScreenState();
+}
+
+class _PostStoryScreenState extends State<PostStoryScreen> {
+  File? _imageFile;
+  final _picker = ImagePicker();
+
+  // For Get Image from Camera
+  Future<void> _pickImageFromCamera() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      setState(() {
+        _imageFile = File(pickedFile.path);
+      });
+    }
+  }
+
+  // For Get Image from Gallery
+  Future<void> _pickImageFromGallery() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _imageFile = File(pickedFile.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('New Story'),
+        title: const Text('Add New Story'),
         centerTitle: true,
-        backgroundColor: Colors.grey[300],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Placeholder untuk gambar
             Container(
               height: 180,
               width: double.infinity,
@@ -24,29 +54,54 @@ class PostStoryScreen extends StatelessWidget {
                 color: Colors.grey[300],
                 borderRadius: BorderRadius.circular(12.0),
               ),
-              child: const Icon(
+              child: (_imageFile == null)
+                  ? Icon(Icons.image, size: 80, color: Colors.grey)
+                  : ClipRRect(
+                      borderRadius: BorderRadius.circular(12.0),
+                      child: Image.file(
+                        _imageFile!,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+              /*child: const Icon(
                 Icons.image,
                 size: 80,
                 color: Colors.grey,
-              ),
+              ),*/
             ),
-            const SizedBox(height: 20),
-            // Tombol Camera dan Gallery
+            spaceVertical(20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Camera'),
+                  onPressed: _pickImageFromCamera,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: Text(
+                    'Camera',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Gallery'),
+                  onPressed: _pickImageFromGallery,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: Text(
+                    'Gallery',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ],
             ),
-            const SizedBox(height: 20),
-            // TextField untuk deskripsi
+            spaceVertical(20),
             TextField(
               maxLines: 5,
               decoration: InputDecoration(
@@ -56,19 +111,21 @@ class PostStoryScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            // Tombol Upload
+            spaceVertical(20),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 14.0),
-                  backgroundColor: Colors.grey[300],
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  backgroundColor: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
                 onPressed: () {},
                 child: const Text(
                   'Upload',
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ),
