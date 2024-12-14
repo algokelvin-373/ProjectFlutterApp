@@ -8,8 +8,7 @@ import 'package:story_app_level_two/routes/router_delegate.dart';
 
 import 'data/api/api_services.dart';
 import 'data/local/db_service.dart';
-import 'provider/detail/restaurant_detail_provider.dart';
-import 'provider/detail/restaurant_review_provider.dart';
+import 'provider/detail/story_detail_provider.dart';
 import 'provider/favorite/db_provider.dart';
 import 'provider/home/story_list_provider.dart';
 import 'provider/main/index_nav_provider.dart';
@@ -56,12 +55,8 @@ void main() async {
           ),
         ),
         ChangeNotifierProvider(
-          create: (context) => RestaurantDetailProvider(
-            context.read<ApiServices>(),
-          ),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => RestaurantReviewProvider(
+          create: (context) => StoryDetailProvider(
+            context.read<AuthRepository>(),
             context.read<ApiServices>(),
           ),
         ),

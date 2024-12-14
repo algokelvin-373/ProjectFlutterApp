@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:story_app_level_two/data/model/page_configuration.dart';
 import 'package:story_app_level_two/db/auth_repository.dart';
-import 'package:story_app_level_two/screen/home/home_screen.dart';
+import 'package:story_app_level_two/screen/detail/detail_screen.dart';
 import 'package:story_app_level_two/screen/main/main_screen.dart';
 import 'package:story_app_level_two/screen/register/register_screen.dart';
 
@@ -28,7 +28,7 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
 
   List<Page> historyStack = [];
 
-  String? selectedQuote;
+  String? selectedStory;
   bool isForm = false;
   bool? isLoggedIn;
   bool isRegister = false;
@@ -73,8 +73,22 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
   List<Page> get _loggedInStack => [
     MaterialPage(
       key: const ValueKey("StoryListPage"),
-      child: MainScreen(),
+      child: MainScreen(
+        onTapped: (String storyId) {
+          selectedStory = storyId;
+          notifyListeners();
+        },
+        onLogout: () {
+          isLoggedIn = false;
+          notifyListeners();
+        },
+      ),
     ),
+    if (selectedStory != null)
+      MaterialPage(
+        key: ValueKey(selectedStory),
+        child: DetailScreen(storyId: selectedStory!),
+      ),
   ];
 
   @override
@@ -96,7 +110,7 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
         }
 
         isRegister = false;
-        selectedQuote = null;
+        selectedStory = null;
         isForm = false;
         notifyListeners();
 
@@ -117,12 +131,12 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
         configuration.isLoginPage ||
         configuration.isSplashPage) {
       isUnknown = false;
-      selectedQuote = null;
+      selectedStory = null;
       isRegister = false;
     } else if (configuration.isDetailPage) {
       isUnknown = false;
       isRegister = false;
-      selectedQuote = configuration.quoteId.toString();
+      selectedStory = configuration.quoteId.toString();
     } else {
       print(' Could not set new route');
     }
@@ -139,10 +153,10 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
       return PageConfiguration.login();
     } else if (isUnknown == true) {
       return PageConfiguration.unknown();
-    } else if (selectedQuote == null) {
+    } else if (selectedStory == null) {
       return PageConfiguration.home();
-    } else if (selectedQuote != null) {
-      return PageConfiguration.detailQuote(selectedQuote!);
+    } else if (selectedStory != null) {
+      return PageConfiguration.detailQuote(selectedStory!);
     } else {
       return null;
     }

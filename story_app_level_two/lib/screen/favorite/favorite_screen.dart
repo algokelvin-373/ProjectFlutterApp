@@ -29,32 +29,11 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       appBar: AppBar(
         title: const Text("Favorite List"),
       ),
-      body: Consumer<DbProvider>(
-        builder: (_, value, __) {
-          final restaurantList = value.restaurantList ?? [];
-          if (kDebugMode) {
-            print("Get Data DB Local: $restaurantList");
-          }
-          return switch (restaurantList.isNotEmpty) {
-            true => ListView.builder(
-                itemCount: restaurantList.length,
-                itemBuilder: (_, index) {
-                  final restaurant = restaurantList[index];
-                  return StoryItemCardWidget(
-                    story: restaurant,
-                  );
-                },
-              ),
-            _ => const Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("No Favorite"),
-                  ],
-                ),
-              ),
-          };
-        },
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text("No Favorite"),
+        ],
       ),
     );
   }

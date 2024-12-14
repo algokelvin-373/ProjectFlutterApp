@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 
 import 'story_list_widget.dart';
 
-class HomeScreenBodyWidget extends StatefulWidget {
-  const HomeScreenBodyWidget({super.key});
+class HomeScreenBodyWidget extends StatelessWidget {
+  final Function(String) onTapped;
 
-  @override
-  State<HomeScreenBodyWidget> createState() => _HomeScreenBodyWidgetState();
-}
+  const HomeScreenBodyWidget({
+    super.key,
+    required this.onTapped,
+  });
 
-class _HomeScreenBodyWidgetState extends State<HomeScreenBodyWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
-        children: [StoryListWidget()],
+        children: [StoryListWidget(onTapped: onTapped)],
       ),
     );
   }

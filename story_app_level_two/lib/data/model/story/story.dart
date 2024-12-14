@@ -1,11 +1,13 @@
+import 'dart:ffi';
+
 class Story {
   String id;
   String name;
   String description;
   String photoUrl;
   DateTime createdAt;
-  dynamic lat;
-  dynamic lon;
+  Float? lat;
+  Float? lon;
 
   Story({
     required this.id,

@@ -6,28 +6,36 @@ import '../../utils/global_function.dart';
 
 class StoryItemCardWidget extends StatelessWidget {
   final Story story;
+  final Function(String) onTapped;
 
   const StoryItemCardWidget({
     super.key,
     required this.story,
+    required this.onTapped,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          photoWidget(),
-          spaceVertical(8),
-          bodyStoryWidget(),
-          spaceVertical(12),
-        ],
+    return InkWell(
+      onTap: () {
+        print('Card tapped! ${story.id}');
+        onTapped(story.id);
+      },
+      child: Card(
+        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            photoWidget(),
+            spaceVertical(8),
+            bodyStoryWidget(),
+            spaceVertical(12),
+          ],
+        ),
       ),
     );
   }

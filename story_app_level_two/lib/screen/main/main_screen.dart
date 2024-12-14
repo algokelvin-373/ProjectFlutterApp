@@ -6,7 +6,14 @@ import '../favorite/favorite_screen.dart';
 import '../home/home_screen.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+  final Function(String) onTapped;
+  final Function() onLogout;
+
+  const MainScreen({
+    super.key,
+    required this.onTapped,
+    required this.onLogout,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +21,7 @@ class MainScreen extends StatelessWidget {
       body: Consumer<IndexNavProvider>(
         builder: (context, value, child) {
           return switch (value.indexBottomNavBar) {
-            0 => const HomeScreen(),
+            0 => HomeScreen(onTapped: onTapped),
             _ => const FavoriteScreen(),
           };
         },

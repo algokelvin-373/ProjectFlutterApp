@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:story_app_level_two/data/model/story/story.dart';
 
 import '../../data/model/restaurant_detail.dart';
-import 'restaurant_data_widget.dart';
-import 'restaurant_image_widget.dart';
+import 'story_data_widget.dart';
+import 'story_image_widget.dart';
 
 class DetailScreenBodyWidget extends StatelessWidget {
-  final RestaurantDetail restaurantDetail;
+  final Story? storyDetail;
 
   const DetailScreenBodyWidget({
     super.key,
-    required this.restaurantDetail,
+    required this.storyDetail,
   });
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        RestaurantImageWidget(restaurantDetail: restaurantDetail),
-        SliverToBoxAdapter(
-          child: Container(
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          StoryImageWidget(linkImage: storyDetail!.photoUrl),
+          Container(
             padding: const EdgeInsets.all(20),
             decoration: const BoxDecoration(
               //color: Colors.black87,
@@ -27,10 +29,10 @@ class DetailScreenBodyWidget extends StatelessWidget {
                 topRight: Radius.circular(40),
               ),
             ),
-            child: RestaurantDataWidget(restaurantDetail: restaurantDetail),
+            child: StoryDataWidget(storyDetail: storyDetail),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
