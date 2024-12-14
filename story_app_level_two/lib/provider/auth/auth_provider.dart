@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:story_app_level_two/data/model/login/login_request.dart';
+import 'package:story_app_level_two/data/model/register/register_request.dart';
+import 'package:story_app_level_two/data/model/register/register_response.dart';
 import 'package:story_app_level_two/db/auth_repository.dart';
 import 'package:story_app_level_two/static/auth_result.dart';
 
@@ -16,6 +18,9 @@ class AuthProvider extends ChangeNotifier {
   bool isLoadingLogout = false;
   bool isLoadingRegister = false;
   bool isLoggedIn = false;
+
+  RegisterResponse _responseRegister =
+      RegisterResponse(error: false, message: "");
 
   AuthResultState _resultState = AuthNoneState();
 
@@ -53,6 +58,33 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future<void> register(RegisterRequest request) async {
+    _resultState = AuthLoadingState();
+    isLoadingRegister = true;
+    notifyListeners();
+
+    try {
+      final result = await _apiServices.register(request);
+
+      if (result.error) {
+        _resultState = AuthErrorState(result.message);
+        isLoadingRegister = false;
+        notifyListeners();
+      } else {
+        _resultState = RegisterLoadedState(result);
+        isLoadingRegister = false;
+        notifyListeners();
+      }
+      _responseRegister = result;
+    } on Exception catch (e) {
+      _resultState = AuthErrorState(e.toString());
+      isLoadingRegister = false;
+      notifyListeners();
+    }
+  }
+
+  Future<RegisterResponse> getResultRegister() async => _responseRegister;
 
   Future<bool> logout() async {
     isLoadingLogout = true;

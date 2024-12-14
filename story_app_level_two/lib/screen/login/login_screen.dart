@@ -107,16 +107,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                spaceVertical(10),
-                Center(
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Forgot Your Password?',
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                ),
                 spaceVertical(20),
                 ButtonLoginProcessWidget(
                   onLogin: widget.onLogin,
