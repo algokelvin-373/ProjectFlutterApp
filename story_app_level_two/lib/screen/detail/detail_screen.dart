@@ -8,10 +8,7 @@ import 'detail_screen_body_widget.dart';
 class DetailScreen extends StatefulWidget {
   final String storyId;
 
-  const DetailScreen({
-    super.key,
-    required this.storyId,
-  });
+  const DetailScreen({super.key, required this.storyId});
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
@@ -38,17 +35,13 @@ class _DetailScreenState extends State<DetailScreen> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                message,
-                style: const TextStyle(
-                  fontSize: 14,
-                ),
-              ),
+              Text(message, style: const TextStyle(fontSize: 14)),
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
-                  context.read<StoryDetailProvider>()
-                      .fetchStoryDetail(id); // Refresh data
+                  context.read<StoryDetailProvider>().fetchStoryDetail(
+                    id,
+                  ); // Refresh data
                 },
                 child: const Text('Refresh'),
               ),
@@ -61,9 +54,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
   Widget _detailStoryWidget(StoryDetailProvider value) {
     if (value.resultState is StoryDetailLoadingState) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
+      return const Center(child: CircularProgressIndicator());
     } else if (value.resultState is StoryDetailLoadedState) {
       final storyDetail = (value.resultState as StoryDetailLoadedState).data;
       return DetailScreenBodyWidget(storyDetail: storyDetail);

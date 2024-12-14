@@ -10,14 +10,14 @@ import '../screen/splash/splash_screen.dart';
 
 class MyRouterDelegate extends RouterDelegate<PageConfiguration>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
-
   final GlobalKey<NavigatorState> _navigatorKey;
   final AuthRepository authRepository;
 
   @override
   GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
 
-  MyRouterDelegate(this.authRepository) : _navigatorKey = GlobalKey<NavigatorState>() {
+  MyRouterDelegate(this.authRepository)
+    : _navigatorKey = GlobalKey<NavigatorState>() {
     _init();
   }
 
@@ -35,10 +35,7 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
   bool? isUnknown;
 
   List<Page> get _splashStack => const [
-    MaterialPage(
-      key: ValueKey("SplashPage"),
-      child: SplashScreen(),
-    ),
+    MaterialPage(key: ValueKey("SplashPage"), child: SplashScreen()),
   ];
 
   List<Page> get _loggedOutStack => [
@@ -119,7 +116,6 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
     );
   }
 
-
   @override
   Future<void> setNewRoutePath(PageConfiguration configuration) async {
     if (configuration.isUnknownPage) {
@@ -138,7 +134,6 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
       isRegister = false;
       selectedStory = configuration.quoteId.toString();
     } else {
-      print(' Could not set new route');
     }
     notifyListeners();
   }
@@ -161,5 +156,4 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
       return null;
     }
   }
-
 }

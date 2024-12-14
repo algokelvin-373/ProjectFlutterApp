@@ -41,20 +41,13 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
-                  child: Icon(
-                    Icons.work_history,
-                    size: 60,
-                    color: Colors.blue,
-                  ),
+                  child: Icon(Icons.work_history, size: 60, color: Colors.blue),
                 ),
                 spaceVertical(20),
                 Center(
                   child: Text(
                     'Sign in to your Account',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                 ),
                 spaceVertical(10),
@@ -64,13 +57,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       Text(
                         "Don't have an account? ",
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
+                        style: TextStyle(fontSize: 18),
                       ),
                       GestureDetector(
                         onTap: () {
-                          print('Click Sign Up');
                           widget.onRegister();
                         },
                         child: Text(

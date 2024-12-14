@@ -4,10 +4,10 @@ import '../data/model/page_configuration.dart';
 
 class MyRouteInformationParser
     extends RouteInformationParser<PageConfiguration> {
-
   @override
   Future<PageConfiguration> parseRouteInformation(
-      RouteInformation routeInformation) async {
+    RouteInformation routeInformation,
+  ) async {
     final uri = Uri.parse(routeInformation.location.toString());
 
     if (uri.pathSegments.isEmpty) {
@@ -57,5 +57,4 @@ class MyRouteInformationParser
       return null;
     }
   }
-
 }

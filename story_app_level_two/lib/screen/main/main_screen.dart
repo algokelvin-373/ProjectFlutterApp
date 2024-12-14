@@ -9,11 +9,7 @@ class MainScreen extends StatelessWidget {
   final Function(String) onTapped;
   final Function() onLogout;
 
-  const MainScreen({
-    super.key,
-    required this.onTapped,
-    required this.onLogout,
-  });
+  const MainScreen({super.key, required this.onTapped, required this.onLogout});
 
   @override
   Widget build(BuildContext context) {

@@ -25,7 +25,6 @@ class StoryListProvider extends ChangeNotifier {
 
     try {
       String token = await _authRepository.getToken();
-      print('Token: $token');
       final result = await _apiServices.getStoryList(token);
 
       if (result.error) {

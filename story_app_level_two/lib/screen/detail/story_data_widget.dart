@@ -7,10 +7,7 @@ import 'icon_text.dart';
 class StoryDataWidget extends StatefulWidget {
   final Story? storyDetail;
 
-  const StoryDataWidget({
-    super.key,
-    required this.storyDetail,
-  });
+  const StoryDataWidget({super.key, required this.storyDetail});
 
   @override
   State<StoryDataWidget> createState() => _StoryDataWidgetState();
@@ -27,10 +24,7 @@ class _StoryDataWidgetState extends State<StoryDataWidget> {
           children: [
             Text(
               widget.storyDetail!.name,
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -38,16 +32,15 @@ class _StoryDataWidgetState extends State<StoryDataWidget> {
         Row(
           children: [
             IconText(
-                icon: Icons.date_range,
-                label: widget.storyDetail!.createdAt.toString()),
+              icon: Icons.date_range,
+              label: widget.storyDetail!.createdAt.toString(),
+            ),
           ],
         ),
         spaceVertical(20),
         Text(
           widget.storyDetail!.description,
-          style: const TextStyle(
-            fontSize: 14,
-          ),
+          style: const TextStyle(fontSize: 14),
         ),
         spaceVertical(15),
       ],

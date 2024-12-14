@@ -6,11 +6,7 @@ class IconText extends StatelessWidget {
   final IconData icon;
   final String label;
 
-  const IconText({
-    super.key,
-    required this.icon,
-    required this.label,
-  });
+  const IconText({super.key, required this.icon, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +14,7 @@ class IconText extends StatelessWidget {
       children: [
         Icon(icon, color: Colors.orangeAccent),
         spaceHorizontal(5),
-        Text(
-          label,
-          style: const TextStyle(fontSize: 14),
-        ),
+        Text(label, style: const TextStyle(fontSize: 14)),
       ],
     );
   }

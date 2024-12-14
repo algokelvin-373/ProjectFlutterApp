@@ -16,14 +16,10 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Favorite List"),
-      ),
+      appBar: AppBar(title: const Text("Favorite List")),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text("No Favorite"),
-        ],
+        children: [Text("No Favorite")],
       ),
     );
   }
