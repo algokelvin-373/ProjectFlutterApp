@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:story_app_level_two/provider/upload/upload_provider.dart';
 import 'package:story_app_level_two/utils/global_function.dart';
 
 import '../../provider/home/story_list_provider.dart';
@@ -17,31 +18,42 @@ class PostStoryScreen extends StatefulWidget {
 }
 
 class _PostStoryScreenState extends State<PostStoryScreen> {
-  File? _imageFile;
+  //File? _imageFile;
+  final descriptionController = TextEditingController();
   final _picker = ImagePicker();
 
   // For Get Image from Camera
   Future<void> _pickImageFromCamera() async {
+    final provider = context.read<UploadProvider>();
     final pickedFile = await _picker.pickImage(source: ImageSource.camera);
     if (pickedFile != null) {
       setState(() {
-        _imageFile = File(pickedFile.path);
+        provider.setImageFile(pickedFile);
+        provider.setImagePath(pickedFile.path);
+        //_imageFile = File(pickedFile.path);
       });
     }
   }
 
   // For Get Image from Gallery
   Future<void> _pickImageFromGallery() async {
+    final provider = context.read<UploadProvider>();
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
-        _imageFile = File(pickedFile.path);
+        provider.setImageFile(pickedFile);
+        provider.setImagePath(pickedFile.path);
+        //_imageFile = File(pickedFile.path);
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.read<UploadProvider>();
+    final imgPath = provider.imagePath;
+    final imgFile = provider.imageFile;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add New Story'),
@@ -59,12 +71,12 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
                 color: Colors.grey[300],
                 borderRadius: BorderRadius.circular(12.0),
               ),
-              child: (_imageFile == null)
+              child: (imgPath.toString() == '')
                   ? Icon(Icons.image, size: 80, color: Colors.grey)
                   : ClipRRect(
                       borderRadius: BorderRadius.circular(12.0),
                       child: Image.file(
-                        _imageFile!,
+                        File(imgPath.toString()),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -103,6 +115,7 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
             ),
             spaceVertical(20),
             TextField(
+              controller: descriptionController,
               maxLines: 5,
               decoration: InputDecoration(
                 hintText: 'Description',
@@ -122,11 +135,89 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                onPressed: () {
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    context.read<StoryListProvider>().fetchStoryList(); // Refresh data
-                    widget.onPostStory();
-                  });
+                onPressed: () async {
+                  final maxFileSize = 1 * 1024 * 1024;
+                  final scaffoldMessage = ScaffoldMessenger.of(context);
+                  final uploadProvider = context.read<UploadProvider>();
+
+                  if (imgPath == '' || imgFile == null) {
+                    scaffoldMessage.showSnackBar(SnackBar(
+                      content: Text(
+                        'No image selected. Please choose an image.',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      backgroundColor: Colors.red,
+                    ));
+                    return;
+                  }
+
+                  // Image Processing - (Resize then Compress)
+                  final fileName = imgFile.path;
+                  final bytes = await imgFile.readAsBytes();
+                  final bytesResize = await uploadProvider.resizeImage(bytes);
+                  final bytesCompress =
+                      await uploadProvider.compressImage(bytesResize);
+
+                  // Check Size Image Not More Than 1 MB
+                  final imgFinalSize = bytesCompress.length;
+                  if (imgFinalSize > maxFileSize) {
+                    scaffoldMessage.showSnackBar(SnackBar(
+                      content: Text(
+                        'File size exceeds 1 MB. Please select a smaller file.',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      backgroundColor: Colors.red,
+                    ));
+                    return;
+                  }
+
+                  try {
+                    final description = descriptionController.text;
+                    await uploadProvider.upload(
+                      bytesCompress,
+                      fileName,
+                      description,
+                    );
+
+                    final response = uploadProvider.uploadStoryResponse;
+                    if (response != null) {
+                      provider.setImageFile(null);
+                      provider.setImagePath('');
+                    }
+
+                    bool? result = response?.error;
+                    if (!(result!)) {
+                      scaffoldMessage.showSnackBar(SnackBar(
+                        content: Text(
+                          'Upload Success: ${response?.message}',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: Colors.green,
+                      ));
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        context
+                            .read<StoryListProvider>()
+                            .fetchStoryList(); // Refresh data
+                        widget.onPostStory();
+                      });
+                    } else {
+                      scaffoldMessage.showSnackBar(SnackBar(
+                        content: Text(
+                          'Upload Failed: ${response?.message}',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: Colors.red,
+                      ));
+                    }
+                  } catch (error) {
+                    scaffoldMessage.showSnackBar(SnackBar(
+                      content: Text(
+                        'Upload Story Error: $error',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      backgroundColor: Colors.red,
+                    ));
+                  }
                 },
                 child: const Text(
                   'Upload',

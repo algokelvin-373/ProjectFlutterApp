@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
 import 'package:story_app_level_two/data/model/login/login_request.dart';
@@ -6,8 +7,10 @@ import 'package:story_app_level_two/data/model/login/login_response.dart';
 import 'package:story_app_level_two/data/model/register/register_request.dart';
 import 'package:story_app_level_two/data/model/register/register_response.dart';
 import 'package:story_app_level_two/data/model/story/story_detail_response.dart';
+import 'package:story_app_level_two/data/model/upload/upload_story_request.dart';
 
 import '../model/story/story_list_response.dart';
+import '../model/upload/upload_story_response.dart';
 
 class ApiServices {
   static const String _baseUrl = "https://story-api.dicoding.dev/v1";
@@ -99,6 +102,45 @@ class ApiServices {
         message: responseData['message'],
         story: null,
       );
+    }
+  }
+
+  Future<UploadStoryResponse> uploadStory(
+      String token, UploadStoryRequest uploadStoryRequest) async {
+    final uri = Uri.parse("$_baseUrl/stories");
+    var request = http.MultipartRequest('POST', uri);
+
+    final imgBytes = uploadStoryRequest.bytes;
+    final fileName = uploadStoryRequest.fileName;
+    final description = uploadStoryRequest.description;
+
+    final multiPartFile = http.MultipartFile.fromBytes(
+      "photo",
+      imgBytes,
+      filename: fileName,
+    );
+
+    final Map<String, String> fields = {"description": description};
+    final Map<String, String> headers = {
+      "Content-type": "multipart/form-data",
+      "Authorization": "Bearer $token"
+    };
+
+    request.files.add(multiPartFile);
+    request.fields.addAll(fields);
+    request.headers.addAll(headers);
+
+    final http.StreamedResponse streamedResponse = await request.send();
+    final int statusCode = streamedResponse.statusCode;
+
+    final Uint8List responseList = await streamedResponse.stream.toBytes();
+    final String responseData = String.fromCharCodes(responseList);
+    print('Response: $responseData');
+
+    if (statusCode == 200 || statusCode == 201) {
+      return UploadStoryResponse.fromJson(responseData);
+    } else {
+      throw Exception("Upload file error");
     }
   }
 }

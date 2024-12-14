@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:story_app_level_two/db/auth_repository.dart';
 import 'package:story_app_level_two/provider/auth/auth_provider.dart';
+import 'package:story_app_level_two/provider/upload/upload_provider.dart';
 import 'package:story_app_level_two/routes/route_information_parser.dart';
 import 'package:story_app_level_two/routes/router_delegate.dart';
 
@@ -38,6 +40,12 @@ void main() async {
                 context.read<AuthRepository>(),
                 context.read<ApiServices>(),
               ),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => UploadProvider(
+            context.read<ApiServices>(),
+            context.read<AuthRepository>(),
+          ),
         ),
       ],
       child: StoryApp(isDarkMode: isDarkMode),
