@@ -37,7 +37,6 @@ class _ButtonLoginProcessWidgetState extends State<ButtonLoginProcessWidget> {
     return Center(
       child: ElevatedButton(
         onPressed: () async {
-          print('Click Login');
           if (widget.formKey.currentState != null &&
               widget.formKey.currentState!.validate()) {
             final scaffoldMessage = ScaffoldMessenger.of(context);
@@ -45,14 +44,11 @@ class _ButtonLoginProcessWidgetState extends State<ButtonLoginProcessWidget> {
               email: widget.emailController.text,
               password: widget.passwordController.text,
             );
-            print('Login: email - ${widget.emailController.text}');
-            print('Login: pass - ${widget.passwordController.text}');
 
             await context.read<AuthProvider>().login(request);
 
             final result = authProvider.isLoggedIn;
             if (result) {
-              print('Success Login');
               widget.onLogin();
             } else {
               final errorState = authProvider.resultState;

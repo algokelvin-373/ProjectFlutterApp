@@ -11,7 +11,6 @@ class ApiServices {
   static const String _baseUrl = "https://story-api.dicoding.dev/v1";
 
   Future<LoginResponse> login(LoginRequest request) async {
-    print('masuk login services');
     final response = await http.post(
       Uri.parse("$_baseUrl/login"),
       headers: {
@@ -20,9 +19,6 @@ class ApiServices {
       },
       body: jsonEncode({'email': request.email, 'password': request.password}),
     );
-
-    print('response: ${response.body}');
-    print('response: ${response.statusCode}');
 
     final responseData = jsonDecode(response.body) as Map<String, dynamic>;
     if (response.statusCode == 200 || response.statusCode == 201) {
@@ -46,7 +42,6 @@ class ApiServices {
     );
 
     final responseData = jsonDecode(response.body) as Map<String, dynamic>;
-    print('Response: $responseData');
     if (response.statusCode == 200 || response.statusCode == 201) {
       return StoryListResponse.fromJson(responseData);
     } else {
@@ -68,7 +63,6 @@ class ApiServices {
     );
 
     final responseData = jsonDecode(response.body) as Map<String, dynamic>;
-    print('Response: $responseData');
     if (response.statusCode == 200 || response.statusCode == 201) {
       return StoryDetailResponse.fromJson(responseData);
     } else {

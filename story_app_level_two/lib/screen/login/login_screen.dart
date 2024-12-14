@@ -61,7 +61,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          print('Click Sign Up');
                           widget.onRegister();
                         },
                         child: Text(

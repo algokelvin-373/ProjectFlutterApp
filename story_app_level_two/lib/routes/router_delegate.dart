@@ -134,7 +134,6 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
       isRegister = false;
       selectedStory = configuration.quoteId.toString();
     } else {
-      print(' Could not set new route');
     }
     notifyListeners();
   }

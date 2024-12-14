@@ -18,7 +18,6 @@ class StoryItemCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        print('Card tapped! ${story.id}');
         onTapped(story.id);
       },
       child: Card(

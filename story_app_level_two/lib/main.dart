@@ -11,13 +11,10 @@ import 'provider/detail/story_detail_provider.dart';
 import 'provider/home/story_list_provider.dart';
 import 'provider/main/index_nav_provider.dart';
 import 'provider/theme/theme_provider.dart';
-import 'service/notification_service.dart';
 import 'style/typography/restaurant_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await NotificationService.initialize();
-  await NotificationService.requestNotificationPermission();
   final prefs = await SharedPreferences.getInstance();
   bool isDarkMode = prefs.getBool('isDarkMode') ?? false;
 
