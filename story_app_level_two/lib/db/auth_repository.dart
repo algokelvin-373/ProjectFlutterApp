@@ -37,10 +37,10 @@ class AuthRepository {
     return preferences.setBool(stateKey, false);
   }
 
-  Future<bool> saveUser(User user) async {
+  Future<void> saveUser(String name) async {
     final preferences = await SharedPreferences.getInstance();
     await Future.delayed(const Duration(seconds: 2));
-    return preferences.setString(userKey, user.toJson());
+    preferences.setString(userKey, name);
   }
 
   Future<bool> deleteUser() async {
@@ -49,16 +49,9 @@ class AuthRepository {
     return preferences.setString(userKey, "");
   }
 
-  Future<User?> getUser() async {
+  Future<bool> deleteToken() async {
     final preferences = await SharedPreferences.getInstance();
     await Future.delayed(const Duration(seconds: 2));
-    final json = preferences.getString(userKey) ?? "";
-    User? user;
-    try {
-      user = User.fromJson(json);
-    } catch (e) {
-      user = null;
-    }
-    return user;
+    return preferences.setString(tokenKey, "");
   }
 }
