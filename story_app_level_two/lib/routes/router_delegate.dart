@@ -3,6 +3,7 @@ import 'package:story_app_level_two/data/model/page_configuration.dart';
 import 'package:story_app_level_two/db/auth_repository.dart';
 import 'package:story_app_level_two/screen/detail/detail_screen.dart';
 import 'package:story_app_level_two/screen/main/main_screen.dart';
+import 'package:story_app_level_two/screen/post_story/post_story_screen.dart';
 import 'package:story_app_level_two/screen/register/register_screen.dart';
 
 import '../screen/login/login_screen.dart';
@@ -29,6 +30,7 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
   List<Page> historyStack = [];
 
   String? selectedStory;
+  bool postStoryPage = false;
   bool isForm = false;
   bool? isLoggedIn;
   bool isRegister = false;
@@ -79,12 +81,21 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
           isLoggedIn = false;
           notifyListeners();
         },
+        onPostStory: () {
+          postStoryPage = true;
+          notifyListeners();
+        },
       ),
     ),
     if (selectedStory != null)
       MaterialPage(
         key: ValueKey(selectedStory),
         child: DetailScreen(storyId: selectedStory!),
+      ),
+    if (postStoryPage)
+      MaterialPage(
+        key: const ValueKey("PostStoryPage"),
+        child: PostStoryScreen(),
       ),
   ];
 
@@ -108,6 +119,7 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
 
         isRegister = false;
         selectedStory = null;
+        postStoryPage = false;
         isForm = false;
         notifyListeners();
 

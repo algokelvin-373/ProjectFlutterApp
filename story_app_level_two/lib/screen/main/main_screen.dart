@@ -7,11 +7,13 @@ import '../home/home_screen.dart';
 
 class MainScreen extends StatelessWidget {
   final Function(String) onTapped;
+  final Function() onPostStory;
   final Function() onLogout;
 
   const MainScreen({
     super.key,
     required this.onTapped,
+    required this.onPostStory,
     required this.onLogout,
   });
 
@@ -21,7 +23,7 @@ class MainScreen extends StatelessWidget {
       body: Consumer<IndexNavProvider>(
         builder: (context, value, child) {
           return switch (value.indexBottomNavBar) {
-            0 => HomeScreen(onTapped: onTapped),
+            0 => HomeScreen(onTapped: onTapped, onPostStory: onPostStory),
             _ => ProfileUserScreen(onLogout: onLogout),
           };
         },

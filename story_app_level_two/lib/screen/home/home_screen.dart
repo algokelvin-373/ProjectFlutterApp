@@ -6,8 +6,13 @@ import 'home_screen_body_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   final Function(String) onTapped;
+  final Function() onPostStory;
 
-  const HomeScreen({super.key, required this.onTapped});
+  const HomeScreen({
+    super.key,
+    required this.onTapped,
+    required this.onPostStory,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +29,13 @@ class HomeScreen extends StatelessWidget {
               themeProvider.isDarkMode
                   ? Icons.nightlight_round
                   : Icons.wb_sunny,
+              color: themeProvider.isDarkMode ? Colors.white : Colors.grey,
+            ),
+          ),
+          IconButton(
+            onPressed: () => onPostStory(),
+            icon: Icon(
+              Icons.add,
               color: themeProvider.isDarkMode ? Colors.white : Colors.grey,
             ),
           ),
