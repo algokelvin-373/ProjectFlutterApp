@@ -29,6 +29,11 @@ class UploadProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setIsUploading(bool value) {
+    isUploading = value;
+    notifyListeners();
+  }
+
   Future<void> upload(
     List<int> bytes,
     String fileName,
@@ -37,7 +42,6 @@ class UploadProvider extends ChangeNotifier {
     try {
       message = "";
       uploadStoryResponse = null;
-      isUploading = true;
       notifyListeners();
 
       final request = UploadStoryRequest(bytes, fileName, description);
