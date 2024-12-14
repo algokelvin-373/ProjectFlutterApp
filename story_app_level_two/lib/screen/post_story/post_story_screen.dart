@@ -2,7 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:story_app_level_two/utils/global_function.dart';
+
+import '../../provider/home/story_list_provider.dart';
 
 class PostStoryScreen extends StatefulWidget {
   final Function() onPostStory;
@@ -120,7 +123,10 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
                   ),
                 ),
                 onPressed: () {
-                  widget.onPostStory();
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    context.read<StoryListProvider>().fetchStoryList(); // Refresh data
+                    widget.onPostStory();
+                  });
                 },
                 child: const Text(
                   'Upload',
