@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:story_app_level_two/data/model/story/story.dart';
 
-import '../../data/model/restaurant_detail.dart';
 import 'story_data_widget.dart';
 import 'story_image_widget.dart';
 

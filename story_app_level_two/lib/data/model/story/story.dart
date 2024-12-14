@@ -6,8 +6,8 @@ class Story {
   String description;
   String photoUrl;
   DateTime createdAt;
-  Float? lat;
-  Float? lon;
+  dynamic lat;
+  dynamic lon;
 
   Story({
     required this.id,

@@ -50,7 +50,7 @@ class _StoryListWidgetState extends State<StoryListWidget> {
           crossAxisCount: 2,
           crossAxisSpacing: 8.0,
           mainAxisSpacing: 8.0,
-          childAspectRatio: 0.65,
+          childAspectRatio: 0.8,
         ),
         itemCount: storyList.length,
         itemBuilder: (context, index) {
