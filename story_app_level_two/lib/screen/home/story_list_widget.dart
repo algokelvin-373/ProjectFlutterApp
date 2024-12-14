@@ -41,14 +41,8 @@ class _StoryListWidgetState extends State<StoryListWidget> {
       );
     } else if (list.resultState is StoryListLoadedState) {
       final storyList = (list.resultState as StoryListLoadedState).data;
-      return GridView.builder(
-        key: const ValueKey("gridStory"),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 8.0,
-          mainAxisSpacing: 8.0,
-          childAspectRatio: 0.8,
-        ),
+      return ListView.builder(
+        key: const ValueKey("listStory"),
         itemCount: storyList.length,
         itemBuilder: (context, index) {
           final story = storyList[index];

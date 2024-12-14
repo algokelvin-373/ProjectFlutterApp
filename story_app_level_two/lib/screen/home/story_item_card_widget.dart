@@ -20,23 +20,18 @@ class StoryItemCardWidget extends StatelessWidget {
         onTapped(story.id);
       },
       child: Card(
-        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        elevation: 4,
+        margin: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+        elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            return SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  photoWidget(),
-                  spaceVertical(8),
-                  bodyStoryWidget(),
-                  spaceVertical(12),
-                ],
-              ),
-            );
-          },
+        child: ListView(
+          shrinkWrap: true,
+          padding: const EdgeInsets.all(0),
+          children: [
+            photoWidget(),
+            spaceVertical(8),
+            bodyStoryWidget(),
+            spaceVertical(12),
+          ],
         ),
       ),
     );
