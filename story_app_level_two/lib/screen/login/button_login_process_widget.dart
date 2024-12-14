@@ -71,19 +71,13 @@ class _ButtonLoginProcessWidgetState extends State<ButtonLoginProcessWidget> {
           }
         },
         style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.symmetric(
-            horizontal: 120,
-            vertical: 15,
-          ),
+          padding: EdgeInsets.symmetric(horizontal: 120, vertical: 15),
           backgroundColor: Colors.blue,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        child: Text(
-          'Log In',
-          style: TextStyle(fontSize: 16),
-        ),
+        child: Text('Log In', style: TextStyle(fontSize: 16)),
       ),
     );
   }

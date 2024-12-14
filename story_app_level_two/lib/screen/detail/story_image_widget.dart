@@ -4,22 +4,12 @@ import 'package:flutter/material.dart';
 class StoryImageWidget extends StatelessWidget {
   final String linkImage;
 
-  const StoryImageWidget({
-    super.key,
-    required this.linkImage,
-  });
+  const StoryImageWidget({super.key, required this.linkImage});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Hero(
-            tag: linkImage,
-            child: _loadImage(),
-          ),
-        ],
-      ),
+      child: Column(children: [Hero(tag: linkImage, child: _loadImage())]),
     );
   }
 
@@ -28,8 +18,10 @@ class StoryImageWidget extends StatelessWidget {
       cacheKey: "cache-key",
       imageUrl: linkImage,
       imageBuilder: (context, imageProvider) => Image(image: imageProvider),
-      progressIndicatorBuilder: (context, url, progress) =>
-          Center(child: CircularProgressIndicator(value: progress.progress)),
+      progressIndicatorBuilder:
+          (context, url, progress) => Center(
+            child: CircularProgressIndicator(value: progress.progress),
+          ),
       errorWidget: (context, url, error) => const Icon(Icons.error),
     );
   }

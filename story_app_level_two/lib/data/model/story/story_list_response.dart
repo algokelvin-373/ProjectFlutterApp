@@ -15,13 +15,14 @@ class StoryListResponse {
       StoryListResponse(
         error: json["error"],
         message: json["message"],
-        listStory:
-            List<Story>.from(json["listStory"].map((x) => Story.fromJson(x))),
+        listStory: List<Story>.from(
+          json["listStory"].map((x) => Story.fromJson(x)),
+        ),
       );
 
   Map<String, dynamic> toJson() => {
-        "error": error,
-        "message": message,
-        "listStory": List<dynamic>.from(listStory.map((x) => x.toJson())),
-      };
+    "error": error,
+    "message": message,
+    "listStory": List<dynamic>.from(listStory.map((x) => x.toJson())),
+  };
 }

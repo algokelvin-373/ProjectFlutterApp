@@ -18,10 +18,7 @@ class ApiServices {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-      body: jsonEncode({
-        'email': request.email,
-        'password': request.password,
-      }),
+      body: jsonEncode({'email': request.email, 'password': request.password}),
     );
 
     print('response: ${response.body}');

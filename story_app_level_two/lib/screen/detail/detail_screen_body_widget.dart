@@ -7,10 +7,7 @@ import 'story_image_widget.dart';
 class DetailScreenBodyWidget extends StatelessWidget {
   final Story? storyDetail;
 
-  const DetailScreenBodyWidget({
-    super.key,
-    required this.storyDetail,
-  });
+  const DetailScreenBodyWidget({super.key, required this.storyDetail});
 
   @override
   Widget build(BuildContext context) {

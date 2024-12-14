@@ -7,10 +7,7 @@ import 'home_screen_body_widget.dart';
 class HomeScreen extends StatelessWidget {
   final Function(String) onTapped;
 
-  const HomeScreen({
-    super.key,
-    required this.onTapped,
-  });
+  const HomeScreen({super.key, required this.onTapped});
 
   @override
   Widget build(BuildContext context) {

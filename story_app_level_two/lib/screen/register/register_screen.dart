@@ -65,9 +65,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 children: [
                   Text(
                     'Already have an account? ',
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
+                    style: TextStyle(fontSize: 18),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -147,10 +145,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: Text(
-                    'Register',
-                    style: TextStyle(fontSize: 16),
-                  ),
+                  child: Text('Register', style: TextStyle(fontSize: 16)),
                 ),
               ),
               spaceVertical(20),

@@ -48,9 +48,10 @@ class NotificationService {
     print("Notifikasi dijadwalkan pada: $scheduledTime");
     print("Nilai Id : $scheduledTime");
 
-    final adjustedTime = scheduledTime.isBefore(now)
-        ? scheduledTime.add(const Duration(days: 1))
-        : scheduledTime;
+    final adjustedTime =
+        scheduledTime.isBefore(now)
+            ? scheduledTime.add(const Duration(days: 1))
+            : scheduledTime;
 
     await _notifications.zonedSchedule(
       0,

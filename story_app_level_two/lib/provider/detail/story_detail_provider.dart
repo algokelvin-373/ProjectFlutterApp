@@ -8,10 +8,7 @@ class StoryDetailProvider extends ChangeNotifier {
   final AuthRepository _authRepository;
   final ApiServices _apiServices;
 
-  StoryDetailProvider(
-    this._authRepository,
-    this._apiServices,
-  );
+  StoryDetailProvider(this._authRepository, this._apiServices);
 
   StoryDetailResultState _resultState = StoryDetailNoneState();
 

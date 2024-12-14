@@ -24,29 +24,23 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        Provider(
-          create: (_) => ApiServices(),
-        ),
-        Provider(
-          create: (_) => AuthRepository(),
+        Provider(create: (_) => ApiServices()),
+        Provider(create: (_) => AuthRepository()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => IndexNavProvider()),
+        ChangeNotifierProvider(
+          create:
+              (context) => StoryListProvider(
+                context.read<ApiServices>(),
+                context.read<AuthRepository>(),
+              ),
         ),
         ChangeNotifierProvider(
-          create: (_) => ThemeProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => IndexNavProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => StoryListProvider(
-            context.read<ApiServices>(),
-            context.read<AuthRepository>(),
-          ),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => StoryDetailProvider(
-            context.read<AuthRepository>(),
-            context.read<ApiServices>(),
-          ),
+          create:
+              (context) => StoryDetailProvider(
+                context.read<AuthRepository>(),
+                context.read<ApiServices>(),
+              ),
         ),
       ],
       child: StoryApp(isDarkMode: isDarkMode),
