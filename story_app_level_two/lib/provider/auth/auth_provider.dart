@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:story_app_level_two/data/model/login/login_request.dart';
 import 'package:story_app_level_two/data/model/register/register_request.dart';
 import 'package:story_app_level_two/data/model/register/register_response.dart';
@@ -6,7 +7,6 @@ import 'package:story_app_level_two/db/auth_repository.dart';
 import 'package:story_app_level_two/static/auth_result.dart';
 
 import '../../data/api/api_services.dart';
-import '../../data/model/user.dart';
 
 class AuthProvider extends ChangeNotifier {
   final AuthRepository authRepository;
@@ -18,6 +18,10 @@ class AuthProvider extends ChangeNotifier {
   bool isLoadingLogout = false;
   bool isLoadingRegister = false;
   bool isLoggedIn = false;
+
+  String _username = '';
+
+  String get username => _username;
 
   RegisterResponse _responseRegister =
       RegisterResponse(error: false, message: "");
@@ -46,7 +50,9 @@ class AuthProvider extends ChangeNotifier {
       } else {
         _resultState = AuthLoadedState(result);
         final token = result.loginResult?.token;
+        final name = result.loginResult?.name;
         await authRepository.login();
+        await authRepository.saveUser(name!);
         await authRepository.token(token!);
         isLoadingLogin = false;
         isLoggedIn = true;
@@ -92,6 +98,7 @@ class AuthProvider extends ChangeNotifier {
     final logout = await authRepository.logout();
     if (logout) {
       await authRepository.deleteUser();
+      await authRepository.deleteToken();
     }
     isLoggedIn = await authRepository.isLoggedIn();
     isLoadingLogout = false;
@@ -99,12 +106,10 @@ class AuthProvider extends ChangeNotifier {
     return !isLoggedIn;
   }
 
-  Future<bool> saveUser(User user) async {
-    isLoadingRegister = true;
+  Future<void> loadUser() async {
+    final preferences = await SharedPreferences.getInstance();
+    await Future.delayed(const Duration(seconds: 2));
+    _username = preferences.getString("user") ?? "Guest";
     notifyListeners();
-    final userState = await authRepository.saveUser(user);
-    isLoadingRegister = false;
-    notifyListeners();
-    return userState;
   }
 }

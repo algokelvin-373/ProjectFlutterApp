@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:story_app_level_two/screen/profile/profile_screen.dart';
 
 import '../../provider/main/index_nav_provider.dart';
-import '../favorite/favorite_screen.dart';
 import '../home/home_screen.dart';
 
 class MainScreen extends StatelessWidget {
   final Function(String) onTapped;
   final Function() onLogout;
 
-  const MainScreen({super.key, required this.onTapped, required this.onLogout});
+  const MainScreen({
+    super.key,
+    required this.onTapped,
+    required this.onLogout,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +22,7 @@ class MainScreen extends StatelessWidget {
         builder: (context, value, child) {
           return switch (value.indexBottomNavBar) {
             0 => HomeScreen(onTapped: onTapped),
-            _ => const FavoriteScreen(),
+            _ => ProfileUserScreen(onLogout: onLogout),
           };
         },
       ),
@@ -34,9 +38,9 @@ class MainScreen extends StatelessWidget {
             tooltip: "Home",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: "Favorite",
-            tooltip: "Favorite",
+            icon: Icon(Icons.person),
+            label: "Profile",
+            tooltip: "Profile",
           ),
         ],
       ),
