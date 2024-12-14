@@ -16,10 +16,7 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
-          child: LoginBodyScreen(
-            onLogin: onLogin,
-            onRegister: onRegister,
-          ),
+          child: LoginBodyScreen(onLogin: onLogin, onRegister: onRegister),
         ),
       ),
     );

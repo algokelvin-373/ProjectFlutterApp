@@ -52,39 +52,42 @@ class _ButtonRegisterProcessWidgetState
             if (result.error) {
               final errorState = authRegister.resultState;
               if (errorState is AuthErrorState) {
-                scaffoldMessage.showSnackBar(SnackBar(
-                  content: Text(
-                    errorState.error,
-                    style: TextStyle(color: Colors.white),
+                scaffoldMessage.showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      errorState.error,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    backgroundColor: Colors.red,
                   ),
-                  backgroundColor: Colors.red,
-                ));
+                );
               } else {
-                scaffoldMessage.showSnackBar(SnackBar(
-                  content: Text(
-                    "Failed for Register",
-                    style: TextStyle(color: Colors.white),
+                scaffoldMessage.showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      "Failed for Register",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    backgroundColor: Colors.red,
                   ),
-                  backgroundColor: Colors.red,
-                ));
+                );
               }
             } else {
-              scaffoldMessage.showSnackBar(SnackBar(
-                content: Text(
-                  result.message,
-                  style: TextStyle(color: Colors.white),
+              scaffoldMessage.showSnackBar(
+                SnackBar(
+                  content: Text(
+                    result.message,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  backgroundColor: Colors.green,
                 ),
-                backgroundColor: Colors.green,
-              ));
+              );
               widget.onRegister();
             }
           }
         },
         style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.symmetric(
-            horizontal: 120,
-            vertical: 15,
-          ),
+          padding: EdgeInsets.symmetric(horizontal: 120, vertical: 15),
           backgroundColor: Colors.blue,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),

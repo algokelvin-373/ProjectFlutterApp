@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:story_app_level_two/db/auth_repository.dart';
@@ -42,10 +41,11 @@ void main() async {
               ),
         ),
         ChangeNotifierProvider(
-          create: (context) => UploadProvider(
-            context.read<ApiServices>(),
-            context.read<AuthRepository>(),
-          ),
+          create:
+              (context) => UploadProvider(
+                context.read<ApiServices>(),
+                context.read<AuthRepository>(),
+              ),
         ),
       ],
       child: StoryApp(isDarkMode: isDarkMode),

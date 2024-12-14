@@ -23,8 +23,10 @@ class AuthProvider extends ChangeNotifier {
 
   String get username => _username;
 
-  RegisterResponse _responseRegister =
-      RegisterResponse(error: false, message: "");
+  RegisterResponse _responseRegister = RegisterResponse(
+    error: false,
+    message: "",
+  );
 
   AuthResultState _resultState = AuthNoneState();
 

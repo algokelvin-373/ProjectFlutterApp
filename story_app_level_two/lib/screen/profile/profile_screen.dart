@@ -37,15 +37,12 @@ class _ProfileUserScreenState extends State<ProfileUserScreen> {
             ),
             Text(
               (authProvider.username == '') ? '...' : authProvider.username,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             spaceVertical(20),
             authWatch.isLoadingLogout
-              ? const CircularProgressIndicator()
-              : btnLogoutAction(),
+                ? const CircularProgressIndicator()
+                : btnLogoutAction(),
             spaceVertical(20),
           ],
         ),
@@ -60,37 +57,36 @@ class _ProfileUserScreenState extends State<ProfileUserScreen> {
         final authRead = context.read<AuthProvider>();
         final result = await authRead.logout();
         if (result) {
-          scaffoldMessage.showSnackBar(SnackBar(
-            content: Text(
-              'Success Logout',
-              style: TextStyle(color: Colors.white),
+          scaffoldMessage.showSnackBar(
+            SnackBar(
+              content: Text(
+                'Success Logout',
+                style: TextStyle(color: Colors.white),
+              ),
+              backgroundColor: Colors.green,
             ),
-            backgroundColor: Colors.green,
-          ));
+          );
           widget.onLogout();
         } else {
-          scaffoldMessage.showSnackBar(SnackBar(
-            content: Text(
-              'Failed Logout',
-              style: TextStyle(color: Colors.white),
+          scaffoldMessage.showSnackBar(
+            SnackBar(
+              content: Text(
+                'Failed Logout',
+                style: TextStyle(color: Colors.white),
+              ),
+              backgroundColor: Colors.red,
             ),
-            backgroundColor: Colors.red,
-          ));
+          );
         }
       },
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.symmetric(horizontal: 120, vertical: 5),
         backgroundColor: Colors.blue,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
       child: Text(
         'Logout',
-        style: TextStyle(
-          fontSize: 16,
-          color: Colors.white,
-        ),
+        style: TextStyle(fontSize: 16, color: Colors.white),
       ),
     );
   }

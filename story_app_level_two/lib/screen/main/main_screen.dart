@@ -25,7 +25,11 @@ class MainScreen extends StatelessWidget {
       body: Consumer<IndexNavProvider>(
         builder: (context, value, child) {
           return switch (value.indexBottomNavBar) {
-            0 => HomeScreen(onTapped: onTapped, onPostStory: onPostStory, onRefreshHomeScreen: onRefreshHomeScreen),
+            0 => HomeScreen(
+              onTapped: onTapped,
+              onPostStory: onPostStory,
+              onRefreshHomeScreen: onRefreshHomeScreen,
+            ),
             _ => ProfileUserScreen(onLogout: onLogout),
           };
         },

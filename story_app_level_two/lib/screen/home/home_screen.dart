@@ -36,7 +36,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      print('I call this way for refresh');
       widget.onRefreshHomeScreen(); // refresh this after upload story
     }
   }

@@ -72,7 +72,6 @@ class ApiServices {
     );
 
     final responseData = jsonDecode(response.body) as Map<String, dynamic>;
-    print('Here This Way');
     if (response.statusCode == 200 || response.statusCode == 201) {
       return StoryListResponse.fromJson(responseData);
     } else {
@@ -106,7 +105,9 @@ class ApiServices {
   }
 
   Future<UploadStoryResponse> uploadStory(
-      String token, UploadStoryRequest uploadStoryRequest) async {
+    String token,
+    UploadStoryRequest uploadStoryRequest,
+  ) async {
     final uri = Uri.parse("$_baseUrl/stories");
     var request = http.MultipartRequest('POST', uri);
 
@@ -123,7 +124,7 @@ class ApiServices {
     final Map<String, String> fields = {"description": description};
     final Map<String, String> headers = {
       "Content-type": "multipart/form-data",
-      "Authorization": "Bearer $token"
+      "Authorization": "Bearer $token",
     };
 
     request.files.add(multiPartFile);
@@ -135,8 +136,6 @@ class ApiServices {
 
     final Uint8List responseList = await streamedResponse.stream.toBytes();
     final String responseData = String.fromCharCodes(responseList);
-    print('Response: $responseData');
-
     if (statusCode == 200 || statusCode == 201) {
       return UploadStoryResponse.fromJson(responseData);
     } else {

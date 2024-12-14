@@ -103,7 +103,6 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
         key: const ValueKey("PostStoryPage"),
         child: PostStoryScreen(
           onPostStory: () {
-            print('Ada action router_delegate disini');
             postStoryPage = false;
             refreshHomeScreen = true;
             notifyListeners();
@@ -158,8 +157,7 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
       isUnknown = false;
       isRegister = false;
       selectedStory = configuration.quoteId.toString();
-    } else {
-    }
+    } else {}
     notifyListeners();
   }
 

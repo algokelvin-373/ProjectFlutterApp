@@ -1,4 +1,3 @@
-
 class Story {
   String id;
   String name;
