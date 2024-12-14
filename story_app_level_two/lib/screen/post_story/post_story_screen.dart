@@ -5,7 +5,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:story_app_level_two/utils/global_function.dart';
 
 class PostStoryScreen extends StatefulWidget {
-  const PostStoryScreen({super.key});
+  final Function() onPostStory;
+
+  const PostStoryScreen({super.key, required this.onPostStory});
 
   @override
   State<PostStoryScreen> createState() => _PostStoryScreenState();
@@ -63,11 +65,6 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
                         fit: BoxFit.cover,
                       ),
                     ),
-              /*child: const Icon(
-                Icons.image,
-                size: 80,
-                color: Colors.grey,
-              ),*/
             ),
             spaceVertical(20),
             Row(
@@ -122,7 +119,9 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  widget.onPostStory();
+                },
                 child: const Text(
                   'Upload',
                   style: TextStyle(color: Colors.white),

@@ -9,12 +9,14 @@ class MainScreen extends StatelessWidget {
   final Function(String) onTapped;
   final Function() onPostStory;
   final Function() onLogout;
+  final Function() onRefreshHomeScreen;
 
   const MainScreen({
     super.key,
     required this.onTapped,
     required this.onPostStory,
     required this.onLogout,
+    required this.onRefreshHomeScreen,
   });
 
   @override
@@ -23,7 +25,7 @@ class MainScreen extends StatelessWidget {
       body: Consumer<IndexNavProvider>(
         builder: (context, value, child) {
           return switch (value.indexBottomNavBar) {
-            0 => HomeScreen(onTapped: onTapped, onPostStory: onPostStory),
+            0 => HomeScreen(onTapped: onTapped, onPostStory: onPostStory, onRefreshHomeScreen: onRefreshHomeScreen),
             _ => ProfileUserScreen(onLogout: onLogout),
           };
         },

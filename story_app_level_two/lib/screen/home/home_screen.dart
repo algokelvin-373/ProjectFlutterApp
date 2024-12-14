@@ -4,15 +4,42 @@ import 'package:provider/provider.dart';
 import '../../provider/theme/theme_provider.dart';
 import 'home_screen_body_widget.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   final Function(String) onTapped;
   final Function() onPostStory;
+  final Function() onRefreshHomeScreen;
 
   const HomeScreen({
     super.key,
     required this.onTapped,
     required this.onPostStory,
+    required this.onRefreshHomeScreen,
   });
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      print('I call this way for refresh');
+      widget.onRefreshHomeScreen(); // refresh this after upload story
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +60,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () => onPostStory(),
+            onPressed: () => widget.onPostStory(),
             icon: Icon(
               Icons.add,
               color: themeProvider.isDarkMode ? Colors.white : Colors.grey,
@@ -41,7 +68,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: HomeScreenBodyWidget(onTapped: onTapped),
+      body: HomeScreenBodyWidget(onTapped: widget.onTapped),
     );
   }
 }

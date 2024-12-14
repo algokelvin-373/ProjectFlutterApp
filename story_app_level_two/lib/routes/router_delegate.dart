@@ -30,6 +30,7 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
   List<Page> historyStack = [];
 
   String? selectedStory;
+  bool refreshHomeScreen = false;
   bool postStoryPage = false;
   bool isForm = false;
   bool? isLoggedIn;
@@ -85,6 +86,11 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
           postStoryPage = true;
           notifyListeners();
         },
+        onRefreshHomeScreen: () {
+          if (isLoggedIn == true) {
+            notifyListeners();
+          }
+        },
       ),
     ),
     if (selectedStory != null)
@@ -95,7 +101,14 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
     if (postStoryPage)
       MaterialPage(
         key: const ValueKey("PostStoryPage"),
-        child: PostStoryScreen(),
+        child: PostStoryScreen(
+          onPostStory: () {
+            print('Ada action router_delegate disini');
+            postStoryPage = false;
+            refreshHomeScreen = true;
+            notifyListeners();
+          },
+        ),
       ),
   ];
 
