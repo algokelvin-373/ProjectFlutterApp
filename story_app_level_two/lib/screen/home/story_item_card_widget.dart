@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:story_app_level_two/data/model/story/story.dart';
 
@@ -21,17 +20,23 @@ class StoryItemCardWidget extends StatelessWidget {
         onTapped(story.id);
       },
       child: Card(
-        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            photoWidget(),
-            spaceVertical(8),
-            bodyStoryWidget(),
-            spaceVertical(12),
-          ],
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  photoWidget(),
+                  spaceVertical(8),
+                  bodyStoryWidget(),
+                  spaceVertical(12),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );
@@ -41,43 +46,15 @@ class StoryItemCardWidget extends StatelessWidget {
     return Stack(
       children: [
         Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Center(
-            child: CachedNetworkImage(
-              cacheKey: "cache-key",
-              imageUrl: story.photoUrl,
-              imageBuilder:
-                  (context, imageProvider) => Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      image: DecorationImage(
-                        image: imageProvider,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-              progressIndicatorBuilder:
-                  (context, url, progress) => SizedBox(
-                    width: 100,
-                    height: 100,
-                    child: Center(
-                      child: CircularProgressIndicator(
-                        value: progress.progress,
-                      ),
-                    ),
-                  ),
-              errorWidget:
-                  (context, url, error) => Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.grey[300],
-                    ),
-                    child: const Icon(Icons.error, size: 40),
-                  ),
+            child: FadeInImage.assetNetwork(
+              placeholder: 'images/blocks.gif',
+              image: story.photoUrl,
+              fadeInDuration: const Duration(seconds: 2),
+              fadeOutDuration: const Duration(seconds: 2),
+              height: 100,
+              width: 100,
             ),
           ),
         ),
@@ -94,7 +71,7 @@ class StoryItemCardWidget extends StatelessWidget {
           Center(
             child: Text(
               story.name,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
           ),
         ],

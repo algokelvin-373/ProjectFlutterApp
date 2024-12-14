@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class StoryImageWidget extends StatelessWidget {
@@ -14,7 +13,14 @@ class StoryImageWidget extends StatelessWidget {
   }
 
   Widget _loadImage() {
-    return CachedNetworkImage(
+    return FadeInImage.assetNetwork(
+      placeholder: 'images/blocks.gif',
+      image: linkImage,
+      fadeInDuration: const Duration(seconds: 2),
+      fadeOutDuration: const Duration(seconds: 2),
+    );
+    // It's not work for show Image because not match when show photos
+    /*return CachedNetworkImage(
       cacheKey: "cache-key",
       imageUrl: linkImage,
       imageBuilder: (context, imageProvider) => Image(image: imageProvider),
@@ -23,6 +29,6 @@ class StoryImageWidget extends StatelessWidget {
             child: CircularProgressIndicator(value: progress.progress),
           ),
       errorWidget: (context, url, error) => const Icon(Icons.error),
-    );
+    );*/
   }
 }
