@@ -21,8 +21,8 @@ class StoryListResponse {
       );
 
   Map<String, dynamic> toJson() => {
-    "error": error,
-    "message": message,
-    "listStory": List<dynamic>.from(listStory.map((x) => x.toJson())),
-  };
+        "error": error,
+        "message": message,
+        "listStory": List<dynamic>.from(listStory.map((x) => x.toJson())),
+      };
 }

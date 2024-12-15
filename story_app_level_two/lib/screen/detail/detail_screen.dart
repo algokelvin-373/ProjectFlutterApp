@@ -40,8 +40,8 @@ class _DetailScreenState extends State<DetailScreen> {
                 onPressed: () {
                   Navigator.of(context).pop();
                   context.read<StoryDetailProvider>().fetchStoryDetail(
-                    id,
-                  ); // Refresh data
+                        id,
+                      ); // Refresh data
                 },
                 child: const Text('Refresh'),
               ),

@@ -27,25 +27,22 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => IndexNavProvider()),
         ChangeNotifierProvider(
-          create:
-              (context) => StoryListProvider(
-                context.read<ApiServices>(),
-                context.read<AuthRepository>(),
-              ),
+          create: (context) => StoryListProvider(
+            context.read<ApiServices>(),
+            context.read<AuthRepository>(),
+          ),
         ),
         ChangeNotifierProvider(
-          create:
-              (context) => StoryDetailProvider(
-                context.read<AuthRepository>(),
-                context.read<ApiServices>(),
-              ),
+          create: (context) => StoryDetailProvider(
+            context.read<AuthRepository>(),
+            context.read<ApiServices>(),
+          ),
         ),
         ChangeNotifierProvider(
-          create:
-              (context) => UploadProvider(
-                context.read<ApiServices>(),
-                context.read<AuthRepository>(),
-              ),
+          create: (context) => UploadProvider(
+            context.read<ApiServices>(),
+            context.read<AuthRepository>(),
+          ),
         ),
       ],
       child: StoryApp(isDarkMode: isDarkMode),

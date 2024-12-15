@@ -19,8 +19,8 @@ class StoryDetailResponse {
       );
 
   Map<String, dynamic> toJson() => {
-    "error": error,
-    "message": message,
-    "story": story?.toJson(),
-  };
+        "error": error,
+        "message": message,
+        "story": story?.toJson(),
+      };
 }

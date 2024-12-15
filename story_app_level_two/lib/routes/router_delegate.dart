@@ -18,7 +18,7 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
   GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
 
   MyRouterDelegate(this.authRepository)
-    : _navigatorKey = GlobalKey<NavigatorState>() {
+      : _navigatorKey = GlobalKey<NavigatorState>() {
     _init();
   }
 
@@ -38,78 +38,78 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
   bool? isUnknown;
 
   List<Page> get _splashStack => const [
-    MaterialPage(key: ValueKey("SplashPage"), child: SplashScreen()),
-  ];
+        MaterialPage(key: ValueKey("SplashPage"), child: SplashScreen()),
+      ];
 
   List<Page> get _loggedOutStack => [
-    MaterialPage(
-      key: const ValueKey("LoginPage"),
-      child: LoginScreen(
-        onLogin: () {
-          isLoggedIn = true;
-          notifyListeners();
-        },
-        onRegister: () {
-          isRegister = true;
-          notifyListeners();
-        },
-      ),
-    ),
-    if (isRegister == true)
-      MaterialPage(
-        child: RegisterScreen(
-          onLogin: () {
-            isRegister = false;
-            notifyListeners();
-          },
-          onRegister: () {
-            isRegister = false;
-            notifyListeners();
-          },
+        MaterialPage(
+          key: const ValueKey("LoginPage"),
+          child: LoginScreen(
+            onLogin: () {
+              isLoggedIn = true;
+              notifyListeners();
+            },
+            onRegister: () {
+              isRegister = true;
+              notifyListeners();
+            },
+          ),
         ),
-      ),
-  ];
+        if (isRegister == true)
+          MaterialPage(
+            child: RegisterScreen(
+              onLogin: () {
+                isRegister = false;
+                notifyListeners();
+              },
+              onRegister: () {
+                isRegister = false;
+                notifyListeners();
+              },
+            ),
+          ),
+      ];
 
   List<Page> get _loggedInStack => [
-    MaterialPage(
-      key: const ValueKey("StoryListPage"),
-      child: MainScreen(
-        onTapped: (String storyId) {
-          selectedStory = storyId;
-          notifyListeners();
-        },
-        onLogout: () {
-          isLoggedIn = false;
-          notifyListeners();
-        },
-        onPostStory: () {
-          postStoryPage = true;
-          notifyListeners();
-        },
-        onRefreshHomeScreen: () {
-          if (isLoggedIn == true) {
-            notifyListeners();
-          }
-        },
-      ),
-    ),
-    if (selectedStory != null)
-      MaterialPage(
-        key: ValueKey(selectedStory),
-        child: DetailScreen(storyId: selectedStory!),
-      ),
-    if (postStoryPage)
-      MaterialPage(
-        key: const ValueKey("PostStoryPage"),
-        child: PostStoryScreen(
-          onPostStory: () {
-            postStoryPage = false;
-            refreshHomeScreen = true;
-            notifyListeners();
-          },
+        MaterialPage(
+          key: const ValueKey("StoryListPage"),
+          child: MainScreen(
+            onTapped: (String storyId) {
+              selectedStory = storyId;
+              notifyListeners();
+            },
+            onLogout: () {
+              isLoggedIn = false;
+              notifyListeners();
+            },
+            onPostStory: () {
+              postStoryPage = true;
+              notifyListeners();
+            },
+            onRefreshHomeScreen: () {
+              if (isLoggedIn == true) {
+                notifyListeners();
+              }
+            },
+          ),
         ),
-      ),
-  ];
+        if (selectedStory != null)
+          MaterialPage(
+            key: ValueKey(selectedStory),
+            child: DetailScreen(storyId: selectedStory!),
+          ),
+        if (postStoryPage)
+          MaterialPage(
+            key: const ValueKey("PostStoryPage"),
+            child: PostStoryScreen(
+              onPostStory: () {
+                postStoryPage = false;
+                refreshHomeScreen = true;
+                notifyListeners();
+              },
+            ),
+          ),
+      ];
 
   @override
   Widget build(BuildContext context) {

@@ -26,10 +26,10 @@ class MainScreen extends StatelessWidget {
         builder: (context, value, child) {
           return switch (value.indexBottomNavBar) {
             0 => HomeScreen(
-              onTapped: onTapped,
-              onPostStory: onPostStory,
-              onRefreshHomeScreen: onRefreshHomeScreen,
-            ),
+                onTapped: onTapped,
+                onPostStory: onPostStory,
+                onRefreshHomeScreen: onRefreshHomeScreen,
+              ),
             _ => ProfileUserScreen(onLogout: onLogout),
           };
         },

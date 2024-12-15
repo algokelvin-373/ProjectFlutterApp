@@ -5,40 +5,40 @@ class PageConfiguration {
   final String? quoteId;
 
   PageConfiguration.splash()
-    : unknown = false,
-      register = false,
-      loggedIn = null,
-      quoteId = null;
+      : unknown = false,
+        register = false,
+        loggedIn = null,
+        quoteId = null;
 
   PageConfiguration.login()
-    : unknown = false,
-      register = false,
-      loggedIn = false,
-      quoteId = null;
+      : unknown = false,
+        register = false,
+        loggedIn = false,
+        quoteId = null;
 
   PageConfiguration.register()
-    : unknown = false,
-      register = true,
-      loggedIn = false,
-      quoteId = null;
+      : unknown = false,
+        register = true,
+        loggedIn = false,
+        quoteId = null;
 
   PageConfiguration.home()
-    : unknown = false,
-      register = false,
-      loggedIn = true,
-      quoteId = null;
+      : unknown = false,
+        register = false,
+        loggedIn = true,
+        quoteId = null;
 
   PageConfiguration.detailQuote(String id)
-    : unknown = false,
-      register = false,
-      loggedIn = true,
-      quoteId = id;
+      : unknown = false,
+        register = false,
+        loggedIn = true,
+        quoteId = id;
 
   PageConfiguration.unknown()
-    : unknown = true,
-      register = false,
-      loggedIn = null,
-      quoteId = null;
+      : unknown = true,
+        register = false,
+        loggedIn = null,
+        quoteId = null;
 
   bool get isSplashPage =>
       unknown == false &&

@@ -12,14 +12,14 @@ class LoginResponse {
   });
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
-    error: json["error"],
-    message: json["message"],
-    loginResult: LoginResult?.fromJson(json["loginResult"]),
-  );
+        error: json["error"],
+        message: json["message"],
+        loginResult: LoginResult?.fromJson(json["loginResult"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "error": error,
-    "message": message,
-    "loginResult": loginResult?.toJson(),
-  };
+        "error": error,
+        "message": message,
+        "loginResult": loginResult?.toJson(),
+      };
 }

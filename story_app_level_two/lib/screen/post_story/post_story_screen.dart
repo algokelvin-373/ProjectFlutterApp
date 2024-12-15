@@ -66,16 +66,15 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
                   color: Colors.grey[300],
                   borderRadius: BorderRadius.circular(12.0),
                 ),
-                child:
-                    (imgPath.toString() == '')
-                        ? Icon(Icons.image, size: 80, color: Colors.grey)
-                        : ClipRRect(
-                          borderRadius: BorderRadius.circular(12.0),
-                          child: Image.file(
-                            File(imgPath.toString()),
-                            fit: BoxFit.cover,
-                          ),
+                child: (imgPath.toString() == '')
+                    ? Icon(Icons.image, size: 80, color: Colors.grey)
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(12.0),
+                        child: Image.file(
+                          File(imgPath.toString()),
+                          fit: BoxFit.cover,
                         ),
+                      ),
               ),
               spaceVertical(20),
               Row(
