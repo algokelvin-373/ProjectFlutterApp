@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:story_app_level_two/utils/snack_bar_helper.dart';
 
 import '../../data/model/register/register_request.dart';
 import '../../provider/auth/auth_provider.dart';
@@ -40,7 +41,7 @@ class _ButtonRegisterProcessWidgetState
       child: ElevatedButton(
         onPressed: () async {
           if (widget.formKey.currentState!.validate()) {
-            final scaffoldMessage = ScaffoldMessenger.of(context);
+            final snackBarHelper = SnackBarHelper(context);
             final request = RegisterRequest(
               name: widget.fullNameController.text,
               email: widget.emailController.text,
@@ -52,36 +53,13 @@ class _ButtonRegisterProcessWidgetState
             if (result.error) {
               final errorState = authRegister.resultState;
               if (errorState is AuthErrorState) {
-                scaffoldMessage.showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      errorState.error,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    backgroundColor: Colors.red,
-                  ),
-                );
+                snackBarHelper.showMessage(errorState.error, Colors.red);
               } else {
-                scaffoldMessage.showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      "Failed for Register",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    backgroundColor: Colors.red,
-                  ),
-                );
+                final message = "Failed for Register";
+                snackBarHelper.showMessage(message, Colors.red);
               }
             } else {
-              scaffoldMessage.showSnackBar(
-                SnackBar(
-                  content: Text(
-                    result.message,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  backgroundColor: Colors.green,
-                ),
-              );
+              snackBarHelper.showMessage(result.message, Colors.green);
               widget.onRegister();
             }
           }

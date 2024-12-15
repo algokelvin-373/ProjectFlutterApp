@@ -35,7 +35,8 @@ class StoryListProvider extends ChangeNotifier {
         notifyListeners();
       }
     } on Exception catch (e) {
-      _resultState = StoryListErrorState(e.toString());
+      final message = "Failed to Get List Story";
+      _resultState = StoryListErrorState(message);
       notifyListeners();
     }
   }
