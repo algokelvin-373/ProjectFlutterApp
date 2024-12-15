@@ -46,6 +46,7 @@ dependencies:
   flutter_cache_manager: ^3.3.0
   image_picker: ^1.0.4
   image: ^3.2.0
+  connectivity_plus: ^6.1.1
 
 dev_dependencies:
   flutter_test:
