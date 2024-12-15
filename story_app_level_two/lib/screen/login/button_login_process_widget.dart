@@ -49,17 +49,36 @@ class _ButtonLoginProcessWidgetState extends State<ButtonLoginProcessWidget> {
 
             final result = authProvider.isLoggedIn;
             if (result) {
+              scaffoldMessage.showSnackBar(
+                SnackBar(
+                  content: Text(
+                    'Login Success',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  backgroundColor: Colors.green,
+                ),
+              );
               widget.onLogin();
             } else {
               final errorState = authProvider.resultState;
               if (errorState is AuthErrorState) {
                 scaffoldMessage.showSnackBar(
-                  SnackBar(content: Text(errorState.error)),
+                  SnackBar(
+                    content: Text(
+                      errorState.error,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    backgroundColor: Colors.red,
+                  ),
                 );
               } else {
                 scaffoldMessage.showSnackBar(
-                  const SnackBar(
-                    content: Text("Your email or password is invalid"),
+                  SnackBar(
+                    content: Text(
+                      "Your email or password is invalid",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    backgroundColor: Colors.red,
                   ),
                 );
               }
