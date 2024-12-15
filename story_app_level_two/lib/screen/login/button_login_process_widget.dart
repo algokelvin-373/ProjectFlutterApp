@@ -64,21 +64,21 @@ class _ButtonLoginProcessWidgetState extends State<ButtonLoginProcessWidget> {
   }
 
   Widget btnLoginAction() {
-    final authProvider = Provider.of<AuthProvider>(context);
     return Center(
       child: ElevatedButton(
         onPressed: () async {
+          final scaffoldMessage = ScaffoldMessenger.of(context);
+          final authProvider = context.read<AuthProvider>();
           await _checkInternetConnection();
           if (isConnected) {
             if (widget.formKey.currentState != null &&
                 widget.formKey.currentState!.validate()) {
-              final scaffoldMessage = ScaffoldMessenger.of(context);
               final request = LoginRequest(
                 email: widget.emailController.text,
                 password: widget.passwordController.text,
               );
 
-              await context.read<AuthProvider>().login(request);
+              await authProvider.login(request);
 
               final result = authProvider.isLoggedIn;
               if (result) {
@@ -118,7 +118,6 @@ class _ButtonLoginProcessWidgetState extends State<ButtonLoginProcessWidget> {
               }
             }
           } else {
-            final scaffoldMessage = ScaffoldMessenger.of(context);
             scaffoldMessage.showSnackBar(
               SnackBar(
                 content: Text(
@@ -129,7 +128,6 @@ class _ButtonLoginProcessWidgetState extends State<ButtonLoginProcessWidget> {
               ),
             );
           }
-
         },
         style: ElevatedButton.styleFrom(
           padding: EdgeInsets.symmetric(horizontal: 120, vertical: 15),
