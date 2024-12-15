@@ -2,6 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:story_app_level_two/static/auth_result.dart';
+import 'package:story_app_level_two/utils/snack_bar_helper.dart';
 
 import '../../data/model/login/login_request.dart';
 import '../../provider/auth/auth_provider.dart';
@@ -67,7 +68,7 @@ class _ButtonLoginProcessWidgetState extends State<ButtonLoginProcessWidget> {
     return Center(
       child: ElevatedButton(
         onPressed: () async {
-          final scaffoldMessage = ScaffoldMessenger.of(context);
+          final snackBarHelper = SnackBarHelper(context);
           final authProvider = context.read<AuthProvider>();
           await _checkInternetConnection();
           if (isConnected) {
@@ -82,51 +83,22 @@ class _ButtonLoginProcessWidgetState extends State<ButtonLoginProcessWidget> {
 
               final result = authProvider.isLoggedIn;
               if (result) {
-                scaffoldMessage.showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      'Login Success',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    backgroundColor: Colors.green,
-                  ),
-                );
+                final message = 'Login Success';
+                snackBarHelper.showMessage(message, Colors.green);
                 widget.onLogin();
               } else {
                 final errorState = authProvider.resultState;
                 if (errorState is AuthErrorState) {
-                  scaffoldMessage.showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        errorState.error,
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
+                  snackBarHelper.showMessage(errorState.error, Colors.red);
                 } else {
-                  scaffoldMessage.showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        "Your email or password is invalid",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
+                  final message = "Your email or password is invalid";
+                  snackBarHelper.showMessage(message, Colors.red);
                 }
               }
             }
           } else {
-            scaffoldMessage.showSnackBar(
-              SnackBar(
-                content: Text(
-                  "No Internet Connection",
-                  style: TextStyle(color: Colors.white),
-                ),
-                backgroundColor: Colors.red,
-              ),
-            );
+            final message = "No Internet Connection";
+            snackBarHelper.showMessage(message, Colors.red);
           }
         },
         style: ElevatedButton.styleFrom(
