@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:story_app_level_two/flavor_config.dart';
 
 import '../../utils/global_function.dart';
 import 'button_login_process_widget.dart';
@@ -110,6 +111,13 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
                 formKey: formKey,
                 emailController: _emailController,
                 passwordController: _passwordController,
+              ),
+              spaceVertical(30),
+              Center(
+                child: Text(
+                  "Version 1.0-${FlavorConfig.instance.flavor.name}",
+                  style: TextStyle(color: Colors.grey, fontSize: 14),
+                ),
               ),
             ],
           ),
