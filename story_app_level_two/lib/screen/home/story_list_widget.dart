@@ -26,9 +26,22 @@ class _StoryListWidgetState extends State<StoryListWidget> {
   void initState() {
     super.initState();
     //_checkInternetConnection();
-    Future.microtask(() {
-      context.read<StoryListProvider>().fetchStoryList();
+    final provider = context.read<StoryListProvider>();
+
+    scrollController.addListener(() {
+      if (scrollController.position.pixels >=
+          scrollController.position.maxScrollExtent) {
+        provider.fetchStoryListPagination();
+      }
     });
+
+    Future.microtask(() => provider.fetchStoryListPagination());
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 
   /*Future<void> _checkInternetConnection() async {
