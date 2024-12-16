@@ -165,7 +165,7 @@ class ApiServices {
     final String responseData = String.fromCharCodes(responseList);
     print(jsonDecode(responseData));
     if (statusCode == 200 || statusCode == 201) {
-      return UploadStoryResponse.fromJson(responseData);
+      return UploadStoryResponse.fromJson(jsonDecode(responseData));
     } else {
       final json = jsonDecode(responseData);
       return UploadStoryResponse(
