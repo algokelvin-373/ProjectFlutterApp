@@ -37,8 +37,10 @@ class _ButtonLoginProcessWidgetState extends State<ButtonLoginProcessWidget> {
 
   Future<void> _checkInternetConnection() async {
     var connectivityResult = await Connectivity().checkConnectivity();
-    bool isMobileConnection = connectivityResult[0].name == ConnectivityResult.mobile.name;
-    bool isWifiConnection = connectivityResult[0].name == ConnectivityResult.wifi.name;
+    bool isMobileConnection =
+        connectivityResult[0].name == ConnectivityResult.mobile.name;
+    bool isWifiConnection =
+        connectivityResult[0].name == ConnectivityResult.wifi.name;
     if (isMobileConnection || isWifiConnection) {
       setState(() {
         isConnected = true;

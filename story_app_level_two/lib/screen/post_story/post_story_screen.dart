@@ -1,6 +1,10 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:story_app_level_two/provider/upload/upload_provider.dart';
@@ -18,6 +22,12 @@ class PostStoryScreen extends StatefulWidget {
 }
 
 class _PostStoryScreenState extends State<PostStoryScreen> {
+  late GoogleMapController mapController;
+  LatLng? myPlace;
+  late dynamic lat, lng;
+  final Set<Marker> markers = {};
+  String address = "Loading address...";
+
   final descriptionController = TextEditingController();
   final _picker = ImagePicker();
 
@@ -43,6 +53,73 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
         provider.setImagePath(pickedFile.path);
       });
     }
+  }
+
+  Future<void> _getCurrentLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Check service location is ON
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      await Geolocator.openLocationSettings();
+      return Future.error('Location services are disabled');
+    }
+
+    // Check permission location
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied.');
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error('Location permissions are permanently denied.');
+    }
+
+    // Get Location Now
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+
+    setState(() {
+      myPlace = LatLng(position.latitude, position.longitude);
+      markers.add(
+        Marker(
+          markerId: MarkerId('currentLocation'),
+          position: myPlace!,
+          infoWindow: InfoWindow(title: "Your Location"),
+        ),
+      );
+    });
+
+    // Convert coordinate to address
+    _getAddressFromLatLng(myPlace!.latitude, myPlace!.longitude);
+  }
+
+  Future<void> _getAddressFromLatLng(double latitude, double longitude) async {
+    try {
+      List<Placemark> placeMarks =
+          await placemarkFromCoordinates(latitude, longitude);
+      Placemark place = placeMarks[0];
+
+      setState(() {
+        address = "${place.street}, "
+            "${place.subLocality}, "
+            "${place.locality}, "
+            "${place.country}";
+      });
+    } catch (e) {
+      setState(() {
+        address = "Unable to get address: $e";
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentLocation();
   }
 
   @override
@@ -120,6 +197,54 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
                 ),
               ),
               spaceVertical(20),
+              Text(
+                "Current Address: $address",
+                style: const TextStyle(fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              if (myPlace != null)
+                SizedBox(
+                  height: 300,
+                  child: GoogleMap(
+                    initialCameraPosition: CameraPosition(
+                      zoom: 18,
+                      target: myPlace!,
+                    ),
+                    markers: markers,
+                    zoomControlsEnabled: true,
+                    myLocationButtonEnabled: true,
+                    onMapCreated: (controller) {
+                      mapController = controller;
+                    },
+                    onTap: (tappedPosition) {
+                      setState(() {
+                        myPlace = tappedPosition;
+                        markers.clear();
+                        markers.add(
+                          Marker(
+                              markerId: const MarkerId('selectedLocation'),
+                              position: tappedPosition,
+                              draggable: true,
+                              onDragEnd: (LatLng newPosition) {
+                                setState(() {
+                                  myPlace = newPosition;
+                                });
+                                _getAddressFromLatLng(
+                                  newPosition.latitude,
+                                  newPosition.longitude,
+                                );
+                              }),
+                        );
+                      });
+                      _getAddressFromLatLng(
+                        tappedPosition.latitude,
+                        tappedPosition.longitude,
+                      );
+                    },
+                  ),
+                ),
+              spaceVertical(20),
               context.watch<UploadProvider>().isUploading
                   ? const CircularProgressIndicator()
                   : _uploadStory(imgPath, imgFile, provider),
@@ -184,7 +309,18 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
 
           try {
             final description = descriptionController.text;
-            await uploadProvider.upload(bytesCompress, fileName, description);
+
+            print('Jalan');
+            final dataLat = myPlace!.latitude;
+            final dataLng = myPlace!.longitude;
+            if (dataLat == 0.0 && dataLng == 0.0) {
+              print('Jalan 1');
+              await uploadProvider.upload(bytesCompress, fileName, description);
+            } else {
+              print('Jalan 2');
+              await uploadProvider.upload(
+                  bytesCompress, fileName, description, dataLat, dataLng);
+            }
 
             final response = uploadProvider.uploadStoryResponse;
             if (response != null) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:story_app_level_two/data/model/story/story.dart';
 
 import '../../utils/global_function.dart';
@@ -14,8 +15,35 @@ class StoryDataWidget extends StatefulWidget {
 }
 
 class _StoryDataWidgetState extends State<StoryDataWidget> {
+  late GoogleMapController mapController;
+  late LatLng myPlace;
+  late dynamic lat, lng;
+  final Set<Marker> markers = {};
+
+  @override
+  void initState() {
+    super.initState();
+    lat = widget.storyDetail?.lat ?? 0.0;
+    lng = widget.storyDetail?.lon ?? 0.0;
+    print('Detail lat: $lat');
+    myPlace = LatLng(lat, lng);
+    final marker = Marker(
+      markerId: const MarkerId("myPlace"),
+      position: myPlace,
+      onTap: () {
+        mapController.animateCamera(
+          CameraUpdate.newLatLngZoom(myPlace, 18),
+        );
+      },
+    );
+    markers.add(marker);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final story = widget.storyDetail!;
+    print('Story: ${story.lat}');
+    print('Story: ${story.lon}');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -23,7 +51,7 @@ class _StoryDataWidgetState extends State<StoryDataWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              widget.storyDetail!.name,
+              widget.storyDetail?.name ?? '',
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ],
@@ -33,16 +61,44 @@ class _StoryDataWidgetState extends State<StoryDataWidget> {
           children: [
             IconText(
               icon: Icons.date_range,
-              label: widget.storyDetail!.createdAt.toString(),
+              label: widget.storyDetail?.createdAt.toString() ?? '',
             ),
           ],
         ),
         spaceVertical(20),
         Text(
-          widget.storyDetail!.description,
+          widget.storyDetail?.description ?? '',
           style: const TextStyle(fontSize: 14),
         ),
         spaceVertical(15),
+        (widget.storyDetail!.lat == 0.0 && widget.storyDetail!.lon == 0.0)
+            ? const SizedBox()
+            : _mapLocationWidget(),
+      ],
+    );
+  }
+
+  Widget _mapLocationWidget() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 20),
+        SizedBox(
+          height: 500,
+          child: GoogleMap(
+            markers: markers,
+            initialCameraPosition: CameraPosition(
+              target: LatLng(widget.storyDetail!.lat, widget.storyDetail!.lon),
+              zoom: 18,
+            ),
+            mapType: MapType.normal,
+            onMapCreated: (controller) {
+              setState(() {
+                mapController = controller;
+              });
+            },
+          ),
+        ),
       ],
     );
   }
