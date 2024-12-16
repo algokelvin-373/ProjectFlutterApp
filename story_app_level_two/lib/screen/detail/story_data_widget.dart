@@ -71,7 +71,7 @@ class _StoryDataWidgetState extends State<StoryDataWidget> {
           style: const TextStyle(fontSize: 14),
         ),
         spaceVertical(15),
-        (widget.storyDetail!.lat == 0.0 && widget.storyDetail!.lon == 0.0)
+        (story.lat == null && story.lon == null)
             ? const SizedBox()
             : _mapLocationWidget(),
       ],

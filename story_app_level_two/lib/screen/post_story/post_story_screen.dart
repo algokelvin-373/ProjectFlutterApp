@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -7,6 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:story_app_level_two/flavor_config.dart';
 import 'package:story_app_level_two/provider/upload/upload_provider.dart';
 import 'package:story_app_level_two/utils/global_function.dart';
 
@@ -25,6 +25,8 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
   late GoogleMapController mapController;
   LatLng? myPlace;
   late dynamic lat, lng;
+
+  final typeFlavor = FlavorConfig.instance.flavor.name;
   final Set<Marker> markers = {};
   String address = "Loading address...";
 
@@ -119,7 +121,9 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
   @override
   void initState() {
     super.initState();
-    _getCurrentLocation();
+    if (typeFlavor == 'paid') {
+      _getCurrentLocation();
+    }
   }
 
   @override
@@ -197,53 +201,58 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
                 ),
               ),
               spaceVertical(20),
-              Text(
-                "Current Address: $address",
-                style: const TextStyle(fontSize: 16),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 16),
-              if (myPlace != null)
-                SizedBox(
-                  height: 300,
-                  child: GoogleMap(
-                    initialCameraPosition: CameraPosition(
-                      zoom: 18,
-                      target: myPlace!,
-                    ),
-                    markers: markers,
-                    zoomControlsEnabled: true,
-                    myLocationButtonEnabled: true,
-                    onMapCreated: (controller) {
-                      mapController = controller;
-                    },
-                    onTap: (tappedPosition) {
-                      setState(() {
-                        myPlace = tappedPosition;
-                        markers.clear();
-                        markers.add(
-                          Marker(
-                              markerId: const MarkerId('selectedLocation'),
-                              position: tappedPosition,
-                              draggable: true,
-                              onDragEnd: (LatLng newPosition) {
-                                setState(() {
-                                  myPlace = newPosition;
-                                });
-                                _getAddressFromLatLng(
-                                  newPosition.latitude,
-                                  newPosition.longitude,
-                                );
-                              }),
-                        );
-                      });
-                      _getAddressFromLatLng(
-                        tappedPosition.latitude,
-                        tappedPosition.longitude,
-                      );
-                    },
-                  ),
-                ),
+              (typeFlavor == 'paid')
+                  ? Text(
+                      "Current Address: $address",
+                      style: const TextStyle(fontSize: 16),
+                      textAlign: TextAlign.center,
+                    )
+                  : const SizedBox(),
+              (typeFlavor == 'paid')
+                  ? const SizedBox(height: 16)
+                  : const SizedBox(),
+              (typeFlavor == 'paid' && myPlace != null)
+                  ? SizedBox(
+                      height: 300,
+                      child: GoogleMap(
+                        initialCameraPosition: CameraPosition(
+                          zoom: 18,
+                          target: myPlace!,
+                        ),
+                        markers: markers,
+                        zoomControlsEnabled: true,
+                        myLocationButtonEnabled: true,
+                        onMapCreated: (controller) {
+                          mapController = controller;
+                        },
+                        onTap: (tappedPosition) {
+                          setState(() {
+                            myPlace = tappedPosition;
+                            markers.clear();
+                            markers.add(
+                              Marker(
+                                  markerId: const MarkerId('selectedLocation'),
+                                  position: tappedPosition,
+                                  draggable: true,
+                                  onDragEnd: (LatLng newPosition) {
+                                    setState(() {
+                                      myPlace = newPosition;
+                                    });
+                                    _getAddressFromLatLng(
+                                      newPosition.latitude,
+                                      newPosition.longitude,
+                                    );
+                                  }),
+                            );
+                          });
+                          _getAddressFromLatLng(
+                            tappedPosition.latitude,
+                            tappedPosition.longitude,
+                          );
+                        },
+                      ),
+                    )
+                  : const SizedBox(),
               spaceVertical(20),
               context.watch<UploadProvider>().isUploading
                   ? const CircularProgressIndicator()
@@ -311,9 +320,9 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
             final description = descriptionController.text;
 
             print('Jalan');
-            final dataLat = myPlace!.latitude;
-            final dataLng = myPlace!.longitude;
-            if (dataLat == 0.0 && dataLng == 0.0) {
+            final dataLat = myPlace?.latitude;
+            final dataLng = myPlace?.longitude;
+            if (dataLat == null && dataLng == null) {
               print('Jalan 1');
               await uploadProvider.upload(bytesCompress, fileName, description);
             } else {
