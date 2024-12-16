@@ -40,8 +40,28 @@ android {
     }
 
     buildTypes {
-        release {
-            signingConfig = signingConfigs.getByName("debug")
+        buildTypes {
+            getByName("debug") {
+                applicationIdSuffix = ".debug"
+            }
+            getByName("release") {
+
+            }
+        }
+    }
+
+    flavorDimensions.add("flavors")
+
+    productFlavors {
+        create("dev") {
+            dimension = "flavors"
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = "-dev"
+            applicationId = "com.algokelvin.story_app_level_two.dev"
+        }
+        create("prod") {
+            dimension = "flavors"
+            applicationId = "com.algokelvin.story_app_level_two"
         }
     }
 }

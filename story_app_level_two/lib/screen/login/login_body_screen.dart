@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:story_app_level_two/flavor_config.dart';
+import 'package:story_app_level_two/flutter_mode_config.dart';
 
 import '../../utils/global_function.dart';
 import 'button_login_process_widget.dart';
@@ -6,11 +9,13 @@ import 'button_login_process_widget.dart';
 class LoginBodyScreen extends StatefulWidget {
   final Function() onLogin;
   final Function() onRegister;
+  final PackageInfo? packageInfo;
 
   const LoginBodyScreen({
     super.key,
     required this.onLogin,
     required this.onRegister,
+    required this.packageInfo,
   });
 
   @override
@@ -110,6 +115,19 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
                 formKey: formKey,
                 emailController: _emailController,
                 passwordController: _passwordController,
+              ),
+              spaceVertical(30),
+              Center(
+                child: Text(
+                  "Version: ${widget.packageInfo?.version} - ${FlavorConfig.instance.flavor.name}",
+                  style: TextStyle(color: Colors.grey, fontSize: 14),
+                ),
+              ),
+              Center(
+                child: Text(
+                  "App Name: ${widget.packageInfo?.appName}",
+                  style: TextStyle(color: Colors.grey, fontSize: 14),
+                ),
               ),
             ],
           ),

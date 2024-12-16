@@ -134,7 +134,7 @@ class ApiServices {
     // Set Body for Data Location (lat, lon)
     final lat = uploadStoryRequest.lat;
     final lon = uploadStoryRequest.lng;
-    if (lat != 0.0 && lon != 0.0) {
+    if (lat != null && lon != null) {
       print('Masuk If get lat lon');
       final Map<String, String> location = {
         "lat": lat.toString(),
