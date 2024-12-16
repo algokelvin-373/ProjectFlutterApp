@@ -17,20 +17,21 @@ class StoryListWidget extends StatefulWidget {
 }
 
 class _StoryListWidgetState extends State<StoryListWidget> {
-  final msgInternetOff =
+  final ScrollController scrollController = ScrollController();
+  /*final msgInternetOff =
       "No Internet Connection. Turn on your connection and refresh.";
-  bool? isConnected;
+  bool? isConnected;*/
 
   @override
   void initState() {
     super.initState();
-    _checkInternetConnection();
+    //_checkInternetConnection();
     Future.microtask(() {
       context.read<StoryListProvider>().fetchStoryList();
     });
   }
 
-  Future<void> _checkInternetConnection() async {
+  /*Future<void> _checkInternetConnection() async {
     var connectivityResult = await Connectivity().checkConnectivity();
     bool isMobileConnection =
         connectivityResult[0].name == ConnectivityResult.mobile.name;
@@ -39,17 +40,18 @@ class _StoryListWidgetState extends State<StoryListWidget> {
     setState(() {
       isConnected = isMobileConnection || isWifiConnection;
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return _getStoryList();
+    /*return Expanded(
       child: (isConnected == null)
           ? const Center(child: CircularProgressIndicator())
           : (isConnected!)
               ? _getStoryList()
               : _actionErrorDialog(msgInternetOff),
-    );
+    );*/
   }
 
   Widget _getStoryList() {
@@ -96,6 +98,7 @@ class _StoryListWidgetState extends State<StoryListWidget> {
   Widget _showListStory(List<Story> storyList) {
     return ListView.builder(
       key: const ValueKey("listStory"),
+      controller: scrollController,
       itemCount: storyList.length,
       itemBuilder: (context, index) {
         final story = storyList[index];
@@ -108,7 +111,7 @@ class _StoryListWidgetState extends State<StoryListWidget> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _showErrorDialog(message, () {
         context.read<StoryListProvider>().fetchStoryList(); // Refresh data
-        _checkInternetConnection();
+        //_checkInternetConnection();
       });
     });
     return const Center(child: Text("Error loading data."));
