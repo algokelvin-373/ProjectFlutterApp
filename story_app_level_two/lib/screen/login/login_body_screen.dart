@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:story_app_level_two/flavor_config.dart';
+import 'package:story_app_level_two/flutter_mode_config.dart';
 
 import '../../utils/global_function.dart';
 import 'button_login_process_widget.dart';
@@ -115,7 +116,8 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
               spaceVertical(30),
               Center(
                 child: Text(
-                  "Version 1.0-${FlavorConfig.instance.flavor.name}",
+                  "Version 1.0-${FlavorConfig.instance.flavor.name} \n"
+                      "${FlutterModeConfig.flutterMode}",
                   style: TextStyle(color: Colors.grey, fontSize: 14),
                 ),
               ),
