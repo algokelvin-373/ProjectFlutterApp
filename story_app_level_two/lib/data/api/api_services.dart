@@ -139,7 +139,11 @@ class ApiServices {
     if (statusCode == 200 || statusCode == 201) {
       return UploadStoryResponse.fromJson(responseData);
     } else {
-      throw Exception("Upload file error");
+      final json = jsonDecode(responseData);
+      return UploadStoryResponse(
+        error: json['error'],
+        message: json['message'],
+      );
     }
   }
 }

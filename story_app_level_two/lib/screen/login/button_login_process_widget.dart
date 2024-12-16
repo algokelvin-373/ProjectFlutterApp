@@ -36,21 +36,14 @@ class _ButtonLoginProcessWidgetState extends State<ButtonLoginProcessWidget> {
   }
 
   Future<void> _checkInternetConnection() async {
-    print('jalan');
     var connectivityResult = await Connectivity().checkConnectivity();
-    print("Connectivity Result: ${connectivityResult[0].name}"); // Debug: cek hasil
-    print("Connect: ${ConnectivityResult.mobile.name}");
     bool isMobileConnection = connectivityResult[0].name == ConnectivityResult.mobile.name;
-    print("isMobileConnection Result: $isMobileConnection");
-    bool isWifiConnection = connectivityResult.toString() == 'ConnectivityResult.wifi';
-    print("isWifiConnection Result: $isWifiConnection");
+    bool isWifiConnection = connectivityResult[0].name == ConnectivityResult.wifi.name;
     if (isMobileConnection || isWifiConnection) {
-      print('masuk if');
       setState(() {
         isConnected = true;
       });
     } else {
-      print('masuk else');
       setState(() {
         isConnected = false;
       });
