@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:story_app_level_two/flavor_config.dart';
 import 'package:story_app_level_two/flutter_mode_config.dart';
 
@@ -8,11 +9,13 @@ import 'button_login_process_widget.dart';
 class LoginBodyScreen extends StatefulWidget {
   final Function() onLogin;
   final Function() onRegister;
+  final PackageInfo? packageInfo;
 
   const LoginBodyScreen({
     super.key,
     required this.onLogin,
     required this.onRegister,
+    required this.packageInfo,
   });
 
   @override
@@ -116,8 +119,13 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
               spaceVertical(30),
               Center(
                 child: Text(
-                  "Version 1.0-${FlavorConfig.instance.flavor.name} \n"
-                      "${FlutterModeConfig.flutterMode}",
+                  "Version: ${widget.packageInfo?.version} - ${FlavorConfig.instance.flavor.name}",
+                  style: TextStyle(color: Colors.grey, fontSize: 14),
+                ),
+              ),
+              Center(
+                child: Text(
+                  "App Name: ${widget.packageInfo?.appName}",
                   style: TextStyle(color: Colors.grey, fontSize: 14),
                 ),
               ),
