@@ -31,7 +31,9 @@ class _StoryListWidgetState extends State<StoryListWidget> {
     scrollController.addListener(() {
       if (scrollController.position.pixels >=
           scrollController.position.maxScrollExtent) {
-        provider.fetchStoryListPagination();
+        if (provider.pageItems != null) {
+          provider.fetchStoryListPagination();
+        }
       }
     });
 
@@ -89,7 +91,7 @@ class _StoryListWidgetState extends State<StoryListWidget> {
         return _showMessageListStoryEmpty();
       } else {
         // For show list story
-        return _showListStory(storyList);
+        return _showListStory(storyList, list.pageItems);
       }
     } else if (list.resultState is StoryListErrorState) {
       final message = (list.resultState as StoryListErrorState).error;
@@ -108,12 +110,20 @@ class _StoryListWidgetState extends State<StoryListWidget> {
     );
   }
 
-  Widget _showListStory(List<Story> storyList) {
+  Widget _showListStory(List<Story> storyList, int? valuePageItems) {
     return ListView.builder(
       key: const ValueKey("listStory"),
       controller: scrollController,
-      itemCount: storyList.length,
+      itemCount: storyList.length + (valuePageItems != null ? 1 : 0),
       itemBuilder: (context, index) {
+        if (index == storyList.length && valuePageItems != null) {
+          return const Center(
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
         final story = storyList[index];
         return StoryItemCardWidget(story: story, onTapped: widget.onTapped);
       },
