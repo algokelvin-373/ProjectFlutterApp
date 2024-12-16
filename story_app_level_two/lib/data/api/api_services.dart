@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:story_app_level_two/data/model/login/login_request.dart';
 import 'package:story_app_level_two/data/model/login/login_response.dart';
 import 'package:story_app_level_two/data/model/register/register_request.dart';
@@ -62,16 +63,30 @@ class ApiServices {
     }
   }
 
-  Future<StoryListResponse> getStoryList(String token) async {
-    final response = await http.get(
-      Uri.parse("$_baseUrl/stories"),
-      headers: {
-        'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json',
-      },
-    );
+  Future<StoryListResponse> getStoryList(String token, [int? page, int? size]) async {
+    late Response response;
+    print('Page: $page');
+    print('Size: $size');
+    if (page != null && size != null) {
+      response = await http.get(
+        Uri.parse("$_baseUrl/stories?page=$page&size=$size"),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+      );
+    } else {
+      response = await http.get(
+        Uri.parse("$_baseUrl/stories"),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+      );
+    }
 
     final responseData = jsonDecode(response.body) as Map<String, dynamic>;
+    print('Response: $responseData');
     if (response.statusCode == 200 || response.statusCode == 201) {
       return StoryListResponse.fromJson(responseData);
     } else {

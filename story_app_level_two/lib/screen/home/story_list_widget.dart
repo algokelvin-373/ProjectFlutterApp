@@ -17,20 +17,36 @@ class StoryListWidget extends StatefulWidget {
 }
 
 class _StoryListWidgetState extends State<StoryListWidget> {
-  final msgInternetOff =
+  final ScrollController scrollController = ScrollController();
+  /*final msgInternetOff =
       "No Internet Connection. Turn on your connection and refresh.";
-  bool? isConnected;
+  bool? isConnected;*/
 
   @override
   void initState() {
     super.initState();
-    _checkInternetConnection();
-    Future.microtask(() {
-      context.read<StoryListProvider>().fetchStoryList();
+    //_checkInternetConnection();
+    final provider = context.read<StoryListProvider>();
+
+    scrollController.addListener(() {
+      if (scrollController.position.pixels >=
+          scrollController.position.maxScrollExtent) {
+        if (provider.pageItems != null) {
+          provider.fetchStoryListPagination();
+        }
+      }
     });
+
+    Future.microtask(() => provider.fetchStoryListPagination());
   }
 
-  Future<void> _checkInternetConnection() async {
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  /*Future<void> _checkInternetConnection() async {
     var connectivityResult = await Connectivity().checkConnectivity();
     bool isMobileConnection =
         connectivityResult[0].name == ConnectivityResult.mobile.name;
@@ -39,17 +55,18 @@ class _StoryListWidgetState extends State<StoryListWidget> {
     setState(() {
       isConnected = isMobileConnection || isWifiConnection;
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return _getStoryList();
+    /*return Expanded(
       child: (isConnected == null)
           ? const Center(child: CircularProgressIndicator())
           : (isConnected!)
               ? _getStoryList()
               : _actionErrorDialog(msgInternetOff),
-    );
+    );*/
   }
 
   Widget _getStoryList() {
@@ -74,7 +91,7 @@ class _StoryListWidgetState extends State<StoryListWidget> {
         return _showMessageListStoryEmpty();
       } else {
         // For show list story
-        return _showListStory(storyList);
+        return _showListStory(storyList, list.pageItems);
       }
     } else if (list.resultState is StoryListErrorState) {
       final message = (list.resultState as StoryListErrorState).error;
@@ -93,11 +110,20 @@ class _StoryListWidgetState extends State<StoryListWidget> {
     );
   }
 
-  Widget _showListStory(List<Story> storyList) {
+  Widget _showListStory(List<Story> storyList, int? valuePageItems) {
     return ListView.builder(
       key: const ValueKey("listStory"),
-      itemCount: storyList.length,
+      controller: scrollController,
+      itemCount: storyList.length + (valuePageItems != null ? 1 : 0),
       itemBuilder: (context, index) {
+        if (index == storyList.length && valuePageItems != null) {
+          return const Center(
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
         final story = storyList[index];
         return StoryItemCardWidget(story: story, onTapped: widget.onTapped);
       },
@@ -107,8 +133,8 @@ class _StoryListWidgetState extends State<StoryListWidget> {
   Widget _actionErrorDialog(String message) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _showErrorDialog(message, () {
-        context.read<StoryListProvider>().fetchStoryList(); // Refresh data
-        _checkInternetConnection();
+        context.read<StoryListProvider>().fetchStoryListPagination();
+        //_checkInternetConnection();
       });
     });
     return const Center(child: Text("Error loading data."));

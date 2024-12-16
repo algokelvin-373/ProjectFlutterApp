@@ -349,9 +349,7 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
                 ),
               );
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                context
-                    .read<StoryListProvider>()
-                    .fetchStoryList(); // Refresh data
+                context.read<StoryListProvider>().fetchStoryListPagination();
                 widget.onPostStory();
               });
             } else {
