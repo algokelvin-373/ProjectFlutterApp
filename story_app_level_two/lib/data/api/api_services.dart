@@ -131,11 +131,24 @@ class ApiServices {
     request.fields.addAll(fields);
     request.headers.addAll(headers);
 
+    // Set Body for Data Location (lat, lon)
+    final lat = uploadStoryRequest.lat;
+    final lon = uploadStoryRequest.lng;
+    if (lat != 0.0 && lon != 0.0) {
+      print('Masuk If get lat lon');
+      final Map<String, String> location = {
+        "lat": lat.toString(),
+        "lon": lon.toString(),
+      };
+      request.fields.addAll(location);
+    }
+
     final http.StreamedResponse streamedResponse = await request.send();
     final int statusCode = streamedResponse.statusCode;
 
     final Uint8List responseList = await streamedResponse.stream.toBytes();
     final String responseData = String.fromCharCodes(responseList);
+    print(jsonDecode(responseData));
     if (statusCode == 200 || statusCode == 201) {
       return UploadStoryResponse.fromJson(responseData);
     } else {

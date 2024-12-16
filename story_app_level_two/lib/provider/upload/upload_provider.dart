@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
@@ -37,14 +39,34 @@ class UploadProvider extends ChangeNotifier {
   Future<void> upload(
     List<int> bytes,
     String fileName,
-    String description,
-  ) async {
+    String description, [
+    double? lat,
+    double? lng,
+  ]) async {
     try {
       message = "";
       uploadStoryResponse = null;
       notifyListeners();
 
-      final request = UploadStoryRequest(bytes, fileName, description);
+      UploadStoryRequest request;
+      print("lat: $lat");
+      print("lng: $lng");
+      if (lat == null && lng == null) {
+        request = UploadStoryRequest(
+          bytes: bytes,
+          fileName: fileName,
+          description: description,
+        );
+      } else {
+        // With lat and lng for location map
+        request = UploadStoryRequest(
+          bytes: bytes,
+          fileName: fileName,
+          description: description,
+          lat: lat,
+          lng: lng,
+        );
+      }
       String token = await authRepository.getToken();
       uploadStoryResponse = await apiServices.uploadStory(token, request);
 

@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -309,7 +310,18 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
 
           try {
             final description = descriptionController.text;
-            await uploadProvider.upload(bytesCompress, fileName, description);
+
+            print ('Jalan');
+            final dataLat = myPlace!.latitude;
+            final dataLng = myPlace!.longitude;
+            if (dataLat == 0.0 && dataLng == 0.0) {
+              print ('Jalan 1');
+              await uploadProvider.upload(bytesCompress, fileName, description);
+            } else {
+              print ('Jalan 2');
+              await uploadProvider.upload(
+                  bytesCompress, fileName, description, dataLat, dataLng);
+            }
 
             final response = uploadProvider.uploadStoryResponse;
             if (response != null) {

@@ -25,6 +25,7 @@ class _StoryDataWidgetState extends State<StoryDataWidget> {
     super.initState();
     lat = widget.storyDetail?.lat ?? 0.0;
     lng = widget.storyDetail?.lon ?? 0.0;
+    print('Detail lat: $lat');
     myPlace = LatLng(lat, lng);
     final marker = Marker(
       markerId: const MarkerId("myPlace"),
@@ -40,6 +41,9 @@ class _StoryDataWidgetState extends State<StoryDataWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final story = widget.storyDetail!;
+    print('Story: ${story.lat}');
+    print('Story: ${story.lon}');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -67,7 +71,9 @@ class _StoryDataWidgetState extends State<StoryDataWidget> {
           style: const TextStyle(fontSize: 14),
         ),
         spaceVertical(15),
-        (lat == 0.0 && lng == 0.0) ? const SizedBox() : _mapLocationWidget(),
+        (widget.storyDetail!.lat == 0.0 && widget.storyDetail!.lon == 0.0)
+            ? const SizedBox()
+            : _mapLocationWidget(),
       ],
     );
   }
@@ -82,7 +88,7 @@ class _StoryDataWidgetState extends State<StoryDataWidget> {
           child: GoogleMap(
             markers: markers,
             initialCameraPosition: CameraPosition(
-              target: LatLng(lat, lng),
+              target: LatLng(widget.storyDetail!.lat, widget.storyDetail!.lon),
               zoom: 18,
             ),
             mapType: MapType.normal,
