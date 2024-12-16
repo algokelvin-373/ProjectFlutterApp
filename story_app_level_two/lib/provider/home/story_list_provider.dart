@@ -29,7 +29,7 @@ class StoryListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> fetchStoryList() async {
+  /*Future<void> fetchStoryList() async {
     _resultState = StoryListLoadingState();
     notifyListeners();
 
@@ -49,7 +49,7 @@ class StoryListProvider extends ChangeNotifier {
       _resultState = StoryListErrorState(message);
       notifyListeners();
     }
-  }
+  }*/
 
   Future<void> fetchStoryListPagination() async {
     try {
@@ -61,7 +61,8 @@ class StoryListProvider extends ChangeNotifier {
       }
 
       String token = await _authRepository.getToken();
-      final result = await _apiServices.getStoryList(token, pageItems, sizeItems);
+      final result =
+          await _apiServices.getStoryList(token, pageItems, sizeItems);
 
       if (result.error) {
         print('Error');
@@ -82,11 +83,6 @@ class StoryListProvider extends ChangeNotifier {
         }
         notifyListeners();
       }
-
-
-
-
-
     } catch (e) {
       final message = "Failed to Get List Story";
       _resultState = StoryListErrorState(message);

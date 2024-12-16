@@ -133,7 +133,7 @@ class _StoryListWidgetState extends State<StoryListWidget> {
   Widget _actionErrorDialog(String message) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _showErrorDialog(message, () {
-        context.read<StoryListProvider>().fetchStoryList(); // Refresh data
+        context.read<StoryListProvider>().fetchStoryListPagination();
         //_checkInternetConnection();
       });
     });
