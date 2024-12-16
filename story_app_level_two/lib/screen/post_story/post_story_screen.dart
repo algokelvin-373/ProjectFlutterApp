@@ -216,6 +216,32 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
                     onMapCreated: (controller) {
                       mapController = controller;
                     },
+                    onTap: (tappedPosition) {
+                      setState(() {
+                        myPlace = tappedPosition;
+                        markers.clear();
+                        markers.add(
+                          Marker(
+                            markerId: const MarkerId('selectedLocation'),
+                            position: tappedPosition,
+                            draggable: true,
+                            onDragEnd: (LatLng newPosition) {
+                              setState(() {
+                                myPlace = newPosition;
+                              });
+                              _getAddressFromLatLng(
+                                newPosition.latitude,
+                                newPosition.longitude,
+                              );
+                            }
+                          ),
+                        );
+                      });
+                      _getAddressFromLatLng(
+                          tappedPosition.latitude,
+                          tappedPosition.longitude,
+                      );
+                    },
                   ),
                 ),
               spaceVertical(20),
