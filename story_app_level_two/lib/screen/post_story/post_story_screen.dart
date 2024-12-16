@@ -318,15 +318,11 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
 
           try {
             final description = descriptionController.text;
-
-            print('Jalan');
             final dataLat = myPlace?.latitude;
             final dataLng = myPlace?.longitude;
             if (dataLat == null && dataLng == null) {
-              print('Jalan 1');
               await uploadProvider.upload(bytesCompress, fileName, description);
             } else {
-              print('Jalan 2');
               await uploadProvider.upload(
                   bytesCompress, fileName, description, dataLat, dataLng);
             }

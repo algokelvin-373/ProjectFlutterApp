@@ -25,7 +25,6 @@ class _StoryDataWidgetState extends State<StoryDataWidget> {
     super.initState();
     lat = widget.storyDetail?.lat ?? 0.0;
     lng = widget.storyDetail?.lon ?? 0.0;
-    print('Detail lat: $lat');
     myPlace = LatLng(lat, lng);
     final marker = Marker(
       markerId: const MarkerId("myPlace"),
@@ -42,8 +41,6 @@ class _StoryDataWidgetState extends State<StoryDataWidget> {
   @override
   Widget build(BuildContext context) {
     final story = widget.storyDetail!;
-    print('Story: ${story.lat}');
-    print('Story: ${story.lon}');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

@@ -22,9 +22,7 @@ void main() async {
 
   FlavorConfig(
     flavor: FlavorType.free,
-    values: const FlavorValues(
-      titleApp: "Free"
-    ),
+    values: const FlavorValues(titleApp: "Free"),
   );
 
   runApp(

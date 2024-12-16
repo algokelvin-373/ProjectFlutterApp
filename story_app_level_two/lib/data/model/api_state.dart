@@ -1,4 +1,4 @@
-enum ApiState{
+enum ApiState {
   initial,
   loading,
   loaded,

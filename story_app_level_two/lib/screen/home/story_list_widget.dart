@@ -1,4 +1,3 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,14 +17,10 @@ class StoryListWidget extends StatefulWidget {
 
 class _StoryListWidgetState extends State<StoryListWidget> {
   final ScrollController scrollController = ScrollController();
-  /*final msgInternetOff =
-      "No Internet Connection. Turn on your connection and refresh.";
-  bool? isConnected;*/
 
   @override
   void initState() {
     super.initState();
-    //_checkInternetConnection();
     final provider = context.read<StoryListProvider>();
 
     scrollController.addListener(() {
@@ -46,27 +41,9 @@ class _StoryListWidgetState extends State<StoryListWidget> {
     super.dispose();
   }
 
-  /*Future<void> _checkInternetConnection() async {
-    var connectivityResult = await Connectivity().checkConnectivity();
-    bool isMobileConnection =
-        connectivityResult[0].name == ConnectivityResult.mobile.name;
-    bool isWifiConnection =
-        connectivityResult[0].name == ConnectivityResult.wifi.name;
-    setState(() {
-      isConnected = isMobileConnection || isWifiConnection;
-    });
-  }*/
-
   @override
   Widget build(BuildContext context) {
     return _getStoryList();
-    /*return Expanded(
-      child: (isConnected == null)
-          ? const Center(child: CircularProgressIndicator())
-          : (isConnected!)
-              ? _getStoryList()
-              : _actionErrorDialog(msgInternetOff),
-    );*/
   }
 
   Widget _getStoryList() {

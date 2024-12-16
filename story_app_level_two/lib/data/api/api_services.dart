@@ -63,10 +63,9 @@ class ApiServices {
     }
   }
 
-  Future<StoryListResponse> getStoryList(String token, [int? page, int? size]) async {
+  Future<StoryListResponse> getStoryList(String token,
+      [int? page, int? size]) async {
     late Response response;
-    print('Page: $page');
-    print('Size: $size');
     if (page != null && size != null) {
       response = await http.get(
         Uri.parse("$_baseUrl/stories?page=$page&size=$size"),
@@ -86,7 +85,6 @@ class ApiServices {
     }
 
     final responseData = jsonDecode(response.body) as Map<String, dynamic>;
-    print('Response: $responseData');
     if (response.statusCode == 200 || response.statusCode == 201) {
       return StoryListResponse.fromJson(responseData);
     } else {
@@ -150,7 +148,6 @@ class ApiServices {
     final lat = uploadStoryRequest.lat;
     final lon = uploadStoryRequest.lng;
     if (lat != null && lon != null) {
-      print('Masuk If get lat lon');
       final Map<String, String> location = {
         "lat": lat.toString(),
         "lon": lon.toString(),
@@ -163,7 +160,6 @@ class ApiServices {
 
     final Uint8List responseList = await streamedResponse.stream.toBytes();
     final String responseData = String.fromCharCodes(responseList);
-    print(jsonDecode(responseData));
     if (statusCode == 200 || statusCode == 201) {
       return UploadStoryResponse.fromJson(jsonDecode(responseData));
     } else {

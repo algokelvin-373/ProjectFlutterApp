@@ -9,5 +9,4 @@ class FlutterModeConfig {
       : isPaid
           ? "release"
           : "unknown";
-
 }

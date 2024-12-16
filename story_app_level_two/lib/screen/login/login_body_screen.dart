@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:story_app_level_two/flavor_config.dart';
-import 'package:story_app_level_two/flutter_mode_config.dart';
 
 import '../../utils/global_function.dart';
 import 'button_login_process_widget.dart';

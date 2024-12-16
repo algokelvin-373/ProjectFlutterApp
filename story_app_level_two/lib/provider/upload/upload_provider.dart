@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
@@ -49,8 +47,6 @@ class UploadProvider extends ChangeNotifier {
       notifyListeners();
 
       UploadStoryRequest request;
-      print("lat: $lat");
-      print("lng: $lng");
       if (lat == null && lng == null) {
         request = UploadStoryRequest(
           bytes: bytes,

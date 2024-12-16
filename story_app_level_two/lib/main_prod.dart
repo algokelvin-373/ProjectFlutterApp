@@ -22,9 +22,7 @@ void main() async {
 
   FlavorConfig(
     flavor: FlavorType.paid,
-    values: const FlavorValues(
-      titleApp: "Paid"
-    ),
+    values: const FlavorValues(titleApp: "Paid"),
   );
 
   runApp(

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'upload_story_request.g.dart';
@@ -20,7 +18,8 @@ class UploadStoryRequest {
     this.lng,
   });
 
-  factory UploadStoryRequest.fromJson(Map<String, dynamic> json) => _$UploadStoryRequestFromJson(json);
+  factory UploadStoryRequest.fromJson(Map<String, dynamic> json) =>
+      _$UploadStoryRequestFromJson(json);
 
   Map<String, dynamic> toJson() => _$UploadStoryRequestToJson(this);
 }
