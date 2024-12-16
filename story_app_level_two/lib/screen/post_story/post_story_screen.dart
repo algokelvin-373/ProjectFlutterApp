@@ -223,24 +223,23 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
                         markers.clear();
                         markers.add(
                           Marker(
-                            markerId: const MarkerId('selectedLocation'),
-                            position: tappedPosition,
-                            draggable: true,
-                            onDragEnd: (LatLng newPosition) {
-                              setState(() {
-                                myPlace = newPosition;
-                              });
-                              _getAddressFromLatLng(
-                                newPosition.latitude,
-                                newPosition.longitude,
-                              );
-                            }
-                          ),
+                              markerId: const MarkerId('selectedLocation'),
+                              position: tappedPosition,
+                              draggable: true,
+                              onDragEnd: (LatLng newPosition) {
+                                setState(() {
+                                  myPlace = newPosition;
+                                });
+                                _getAddressFromLatLng(
+                                  newPosition.latitude,
+                                  newPosition.longitude,
+                                );
+                              }),
                         );
                       });
                       _getAddressFromLatLng(
-                          tappedPosition.latitude,
-                          tappedPosition.longitude,
+                        tappedPosition.latitude,
+                        tappedPosition.longitude,
                       );
                     },
                   ),
@@ -311,14 +310,14 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
           try {
             final description = descriptionController.text;
 
-            print ('Jalan');
+            print('Jalan');
             final dataLat = myPlace!.latitude;
             final dataLng = myPlace!.longitude;
             if (dataLat == 0.0 && dataLng == 0.0) {
-              print ('Jalan 1');
+              print('Jalan 1');
               await uploadProvider.upload(bytesCompress, fileName, description);
             } else {
-              print ('Jalan 2');
+              print('Jalan 2');
               await uploadProvider.upload(
                   bytesCompress, fileName, description, dataLat, dataLng);
             }
