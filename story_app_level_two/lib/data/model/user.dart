@@ -1,5 +1,8 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'user.g.dart';
+
+@JsonSerializable()
 class User {
   String? email;
   String? password;
@@ -13,11 +16,9 @@ class User {
     return {'email': email, 'password': password};
   }
 
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(email: map['email'], password: map['password']);
-  }
-  String toJson() => json.encode(toMap());
-  factory User.fromJson(String source) => User.fromMap(json.decode(source));
+  factory User.fromMap(Map<String, dynamic> json) => _$UserFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 
   @override
   bool operator ==(Object other) {
