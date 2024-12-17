@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:story_app_level_two/data/model/story/story.dart';
 
@@ -19,6 +20,7 @@ class _StoryDataWidgetState extends State<StoryDataWidget> {
   late LatLng myPlace;
   late dynamic lat, lng;
   final Set<Marker> markers = {};
+  String? currentAddress;
 
   @override
   void initState() {
@@ -29,13 +31,33 @@ class _StoryDataWidgetState extends State<StoryDataWidget> {
     final marker = Marker(
       markerId: const MarkerId("myPlace"),
       position: myPlace,
-      onTap: () {
-        mapController.animateCamera(
-          CameraUpdate.newLatLngZoom(myPlace, 18),
-        );
+      onTap: () async {
+        await _updateAddress(myPlace);
       },
     );
     markers.add(marker);
+  }
+
+  Future<void> _updateAddress(LatLng position) async {
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+        position.latitude,
+        position.longitude,
+      );
+      if (placemarks.isNotEmpty) {
+        Placemark place = placemarks.first;
+        setState(() {
+          currentAddress = "${place.street}, "
+              "${place.locality}, "
+              "${place.administrativeArea}, "
+              "${place.country}";
+        });
+      }
+    } catch (e) {
+      setState(() {
+        currentAddress = "Failed to Get Address";
+      });
+    }
   }
 
   @override
@@ -76,10 +98,8 @@ class _StoryDataWidgetState extends State<StoryDataWidget> {
   }
 
   Widget _mapLocationWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Stack(
       children: [
-        const SizedBox(height: 20),
         SizedBox(
           height: 500,
           child: GoogleMap(
@@ -96,6 +116,34 @@ class _StoryDataWidgetState extends State<StoryDataWidget> {
             },
           ),
         ),
+        if (currentAddress != null)
+          Positioned(
+            top: 10,
+            left: 10,
+            right: 10,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black,
+                    blurRadius: 4,
+                  ),
+                ],
+              ),
+              child: Text(
+                currentAddress!,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black87,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
       ],
     );
   }
