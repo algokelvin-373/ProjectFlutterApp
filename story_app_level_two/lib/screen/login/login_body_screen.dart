@@ -86,7 +86,7 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
                 controller: _emailController,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.email),
-                  hintText: 'Email',
+                  hintText: AppLocalizations.of(context)!.email,
                   hintStyle: TextStyle(color: Colors.grey),
                   filled: true,
                   border: OutlineInputBorder(
@@ -101,7 +101,7 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
                 controller: _passwordController,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.lock),
-                  hintText: 'Password',
+                  hintText: AppLocalizations.of(context)!.password,
                   hintStyle: TextStyle(color: Colors.grey),
                   filled: true,
                   border: OutlineInputBorder(

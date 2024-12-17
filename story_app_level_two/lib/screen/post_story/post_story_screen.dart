@@ -11,6 +11,7 @@ import 'package:story_app_level_two/provider/upload/upload_provider.dart';
 import 'package:story_app_level_two/utils/global_function.dart';
 
 import '../../provider/home/story_list_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PostStoryScreen extends StatefulWidget {
   final Function() onPostStory;
@@ -133,7 +134,10 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
     final imgFile = provider.imageFile;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Add New Story'), centerTitle: true),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.addNewStory),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -170,7 +174,7 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
                       ),
                     ),
                     child: Text(
-                      'Camera',
+                      AppLocalizations.of(context)!.camera,
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -183,7 +187,7 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
                       ),
                     ),
                     child: Text(
-                      'Gallery',
+                      AppLocalizations.of(context)!.gallery,
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -194,7 +198,7 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
                 controller: descriptionController,
                 maxLines: 5,
                 decoration: InputDecoration(
-                  hintText: 'Description',
+                  hintText: AppLocalizations.of(context)!.description,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0),
                   ),
@@ -282,11 +286,15 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
           final scaffoldMessage = ScaffoldMessenger.of(context);
           final uploadProvider = context.read<UploadProvider>();
 
+          final msgImageNoSelected =
+              AppLocalizations.of(context)!.noImageSelected;
+          final msgMoreThanMaximum =
+              AppLocalizations.of(context)!.imageMoreThan1MB;
           if (imgPath == '' || imgFile == null) {
             scaffoldMessage.showSnackBar(
               SnackBar(
                 content: Text(
-                  'No image selected. Please choose an image.',
+                  msgImageNoSelected,
                   style: TextStyle(color: Colors.white),
                 ),
                 backgroundColor: Colors.red,
@@ -307,7 +315,7 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
             scaffoldMessage.showSnackBar(
               SnackBar(
                 content: Text(
-                  'File size exceeds 1 MB. Please select a smaller file.',
+                  msgMoreThanMaximum,
                   style: TextStyle(color: Colors.white),
                 ),
                 backgroundColor: Colors.red,
@@ -374,7 +382,10 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
             );
           }
         },
-        child: const Text('Upload', style: TextStyle(color: Colors.white)),
+        child: Text(
+          AppLocalizations.of(context)!.upload,
+          style: TextStyle(color: Colors.white),
+        ),
       ),
     );
   }

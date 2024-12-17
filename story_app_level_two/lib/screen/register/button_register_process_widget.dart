@@ -6,6 +6,8 @@ import '../../data/model/register/register_request.dart';
 import '../../provider/auth/auth_provider.dart';
 import '../../static/auth_result.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ButtonRegisterProcessWidget extends StatefulWidget {
   final Function() onRegister;
   final TextEditingController fullNameController;
@@ -41,6 +43,8 @@ class _ButtonRegisterProcessWidgetState
       child: ElevatedButton(
         onPressed: () async {
           if (widget.formKey.currentState!.validate()) {
+            final msgFailedRegister =
+                AppLocalizations.of(context)!.failedRegister;
             final snackBarHelper = SnackBarHelper(context);
             final request = RegisterRequest(
               name: widget.fullNameController.text,
@@ -55,8 +59,7 @@ class _ButtonRegisterProcessWidgetState
               if (errorState is AuthErrorState) {
                 snackBarHelper.showMessage(errorState.error, Colors.red);
               } else {
-                final message = "Failed for Register";
-                snackBarHelper.showMessage(message, Colors.red);
+                snackBarHelper.showMessage(msgFailedRegister, Colors.red);
               }
             } else {
               snackBarHelper.showMessage(result.message, Colors.green);
@@ -71,7 +74,10 @@ class _ButtonRegisterProcessWidgetState
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        child: Text('Register', style: TextStyle(fontSize: 16)),
+        child: Text(
+          AppLocalizations.of(context)!.register,
+          style: TextStyle(fontSize: 16),
+        ),
       ),
     );
   }

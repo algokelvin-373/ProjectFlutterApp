@@ -40,12 +40,12 @@ class _StoryDataWidgetState extends State<StoryDataWidget> {
 
   Future<void> _updateAddress(LatLng position) async {
     try {
-      List<Placemark> placemarks = await placemarkFromCoordinates(
+      List<Placemark> placeMarks = await placemarkFromCoordinates(
         position.latitude,
         position.longitude,
       );
-      if (placemarks.isNotEmpty) {
-        Placemark place = placemarks.first;
+      if (placeMarks.isNotEmpty) {
+        Placemark place = placeMarks.first;
         setState(() {
           currentAddress = "${place.street}, "
               "${place.locality}, "

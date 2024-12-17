@@ -15,6 +15,8 @@ import 'provider/main/index_nav_provider.dart';
 import 'provider/theme/theme_provider.dart';
 import 'style/typography/restaurant_theme.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
@@ -92,6 +94,8 @@ class _StoryAppState extends State<StoryApp> {
             theme: RestaurantTheme.lightTheme,
             darkTheme: RestaurantTheme.darkTheme,
             themeMode: value.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             routerDelegate: myRouterDelegate,
             routeInformationParser: myRouteInformationParser,
             backButtonDispatcher: RootBackButtonDispatcher(),
