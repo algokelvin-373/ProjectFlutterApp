@@ -11,12 +11,16 @@
 
 ## All Project
 1. Flutter Beginner
-2. Gesture
-3. Lifecycle
-4. Navigation
-5. Restaurant (Level 1)
-6. Wisata (Level 1)
-7. Wisata (Level 2)
+2. Calculator Widget
+3. Calculator Unit Test
+4. Gesture
+5. Lifecycle
+6. Navigation
+7. Person List
+8. Restaurant (Level 1)
+9. Shared Preferences
+10. Wisata (Level 1)
+11. Wisata (Level 2)
 
 <table>
   <thead>
@@ -29,6 +33,14 @@
     <tr>
       <td>1.0.0</td>
       <td>Init 6 Project and Flutter Beginner Material</td>
+    </tr>
+    <tr>
+      <td>1.1.0</td>
+      <td>Init 4 Project</td>
+    </tr>
+    <tr>
+      <td>1.1.1</td>
+      <td>Add Template Flutter Project</td>
     </tr>
   </tbody>
 </table>
