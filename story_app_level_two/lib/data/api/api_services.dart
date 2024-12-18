@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:story_app_level_two/data/model/login/login_request.dart';
 import 'package:story_app_level_two/data/model/login/login_response.dart';
 import 'package:story_app_level_two/data/model/register/register_request.dart';
@@ -62,14 +63,26 @@ class ApiServices {
     }
   }
 
-  Future<StoryListResponse> getStoryList(String token) async {
-    final response = await http.get(
-      Uri.parse("$_baseUrl/stories"),
-      headers: {
-        'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json',
-      },
-    );
+  Future<StoryListResponse> getStoryList(String token,
+      [int? page, int? size]) async {
+    late Response response;
+    if (page != null && size != null) {
+      response = await http.get(
+        Uri.parse("$_baseUrl/stories?page=$page&size=$size"),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+      );
+    } else {
+      response = await http.get(
+        Uri.parse("$_baseUrl/stories"),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+      );
+    }
 
     final responseData = jsonDecode(response.body) as Map<String, dynamic>;
     if (response.statusCode == 200 || response.statusCode == 201) {
@@ -131,15 +144,30 @@ class ApiServices {
     request.fields.addAll(fields);
     request.headers.addAll(headers);
 
+    // Set Body for Data Location (lat, lon)
+    final lat = uploadStoryRequest.lat;
+    final lon = uploadStoryRequest.lng;
+    if (lat != null && lon != null) {
+      final Map<String, String> location = {
+        "lat": lat.toString(),
+        "lon": lon.toString(),
+      };
+      request.fields.addAll(location);
+    }
+
     final http.StreamedResponse streamedResponse = await request.send();
     final int statusCode = streamedResponse.statusCode;
 
     final Uint8List responseList = await streamedResponse.stream.toBytes();
     final String responseData = String.fromCharCodes(responseList);
     if (statusCode == 200 || statusCode == 201) {
-      return UploadStoryResponse.fromJson(responseData);
+      return UploadStoryResponse.fromJson(jsonDecode(responseData));
     } else {
-      throw Exception("Upload file error");
+      final json = jsonDecode(responseData);
+      return UploadStoryResponse(
+        error: json['error'],
+        message: json['message'],
+      );
     }
   }
 }

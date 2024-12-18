@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:story_app_level_two/screen/login/login_body_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -14,10 +15,21 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: LoginBodyScreen(onLogin: onLogin, onRegister: onRegister),
-        ),
+      body: FutureBuilder(
+        future: PackageInfo.fromPlatform(),
+        builder: (context, AsyncSnapshot<PackageInfo> snapshot) {
+          if (!snapshot.hasData) return Container();
+          PackageInfo? packageInfo = snapshot.data;
+          return Center(
+            child: SingleChildScrollView(
+              child: LoginBodyScreen(
+                onLogin: onLogin,
+                onRegister: onRegister,
+                packageInfo: packageInfo,
+              ),
+            ),
+          );
+        },
       ),
     );
   }

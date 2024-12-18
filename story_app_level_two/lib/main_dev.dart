@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:story_app_level_two/db/auth_repository.dart';
+import 'package:story_app_level_two/flavor_config.dart';
 import 'package:story_app_level_two/provider/auth/auth_provider.dart';
 import 'package:story_app_level_two/provider/upload/upload_provider.dart';
 import 'package:story_app_level_two/routes/route_information_parser.dart';
@@ -14,10 +16,17 @@ import 'provider/main/index_nav_provider.dart';
 import 'provider/theme/theme_provider.dart';
 import 'style/typography/restaurant_theme.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
   bool isDarkMode = prefs.getBool('isDarkMode') ?? false;
+
+  FlavorConfig(
+    flavor: FlavorType.free,
+    values: const FlavorValues(titleApp: "Free"),
+  );
 
   runApp(
     MultiProvider(
@@ -86,6 +95,8 @@ class _StoryAppState extends State<StoryApp> {
             theme: RestaurantTheme.lightTheme,
             darkTheme: RestaurantTheme.darkTheme,
             themeMode: value.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             routerDelegate: myRouterDelegate,
             routeInformationParser: myRouteInformationParser,
             backButtonDispatcher: RootBackButtonDispatcher(),

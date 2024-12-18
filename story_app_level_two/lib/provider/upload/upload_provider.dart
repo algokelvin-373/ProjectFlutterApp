@@ -37,14 +37,32 @@ class UploadProvider extends ChangeNotifier {
   Future<void> upload(
     List<int> bytes,
     String fileName,
-    String description,
-  ) async {
+    String description, [
+    double? lat,
+    double? lng,
+  ]) async {
     try {
       message = "";
       uploadStoryResponse = null;
       notifyListeners();
 
-      final request = UploadStoryRequest(bytes, fileName, description);
+      UploadStoryRequest request;
+      if (lat == null && lng == null) {
+        request = UploadStoryRequest(
+          bytes: bytes,
+          fileName: fileName,
+          description: description,
+        );
+      } else {
+        // With lat and lng for location map
+        request = UploadStoryRequest(
+          bytes: bytes,
+          fileName: fileName,
+          description: description,
+          lat: lat,
+          lng: lng,
+        );
+      }
       String token = await authRepository.getToken();
       uploadStoryResponse = await apiServices.uploadStory(token, request);
 

@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:story_app_level_two/flavor_config.dart';
 
 import '../../utils/global_function.dart';
 import 'button_login_process_widget.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class LoginBodyScreen extends StatefulWidget {
   final Function() onLogin;
   final Function() onRegister;
+  final PackageInfo? packageInfo;
 
   const LoginBodyScreen({
     super.key,
     required this.onLogin,
     required this.onRegister,
+    required this.packageInfo,
   });
 
   @override
@@ -46,7 +52,7 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
               spaceVertical(20),
               Center(
                 child: Text(
-                  'Sign in to your Account',
+                  AppLocalizations.of(context)!.titleLogin,
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -56,7 +62,7 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Don't have an account? ",
+                      AppLocalizations.of(context)!.titleNoHaveAccount,
                       style: TextStyle(fontSize: 18),
                     ),
                     GestureDetector(
@@ -64,7 +70,7 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
                         widget.onRegister();
                       },
                       child: Text(
-                        'Sign Up',
+                        AppLocalizations.of(context)!.signUp,
                         style: TextStyle(
                           color: Colors.blue,
                           fontSize: 18,
@@ -80,7 +86,7 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
                 controller: _emailController,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.email),
-                  hintText: 'Email',
+                  hintText: AppLocalizations.of(context)!.email,
                   hintStyle: TextStyle(color: Colors.grey),
                   filled: true,
                   border: OutlineInputBorder(
@@ -95,7 +101,7 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
                 controller: _passwordController,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.lock),
-                  hintText: 'Password',
+                  hintText: AppLocalizations.of(context)!.password,
                   hintStyle: TextStyle(color: Colors.grey),
                   filled: true,
                   border: OutlineInputBorder(
@@ -110,6 +116,19 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
                 formKey: formKey,
                 emailController: _emailController,
                 passwordController: _passwordController,
+              ),
+              spaceVertical(30),
+              Center(
+                child: Text(
+                  "Version: ${widget.packageInfo?.version} - ${FlavorConfig.instance.flavor.name}",
+                  style: TextStyle(color: Colors.grey, fontSize: 14),
+                ),
+              ),
+              Center(
+                child: Text(
+                  "App Name: ${widget.packageInfo?.appName}",
+                  style: TextStyle(color: Colors.grey, fontSize: 14),
+                ),
               ),
             ],
           ),

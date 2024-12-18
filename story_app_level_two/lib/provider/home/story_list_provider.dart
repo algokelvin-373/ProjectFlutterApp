@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:story_app_level_two/data/model/api_state.dart';
 
 import '../../data/api/api_services.dart';
+import '../../data/model/story/story.dart';
 import '../../db/auth_repository.dart';
 import '../../static/story_list_result.dart';
 
@@ -14,28 +16,47 @@ class StoryListProvider extends ChangeNotifier {
 
   StoryListResultState get resultState => _resultState;
 
+  ApiState storiesState = ApiState.initial;
+
+  String storiesMessage = "";
+  bool storiesError = false;
+  List<Story> stories = [];
+  int? pageItems = 1;
+  int sizeItems = 10;
+
   void setResultState(StoryListResultState state) {
     _resultState = state;
     notifyListeners();
   }
 
-  Future<void> fetchStoryList() async {
-    _resultState = StoryListLoadingState();
-    notifyListeners();
-
+  Future<void> fetchStoryListPagination() async {
     try {
+      if (pageItems == 1) {
+        _resultState = StoryListLoadingState();
+        notifyListeners();
+      }
+
       String token = await _authRepository.getToken();
-      final result = await _apiServices.getStoryList(token);
+      final result =
+          await _apiServices.getStoryList(token, pageItems, sizeItems);
 
       if (result.error) {
         _resultState = StoryListErrorState(result.message);
         notifyListeners();
       } else {
-        _resultState = StoryListLoadedState(result.listStory);
+        stories.addAll(result.listStory);
+        _resultState = StoryListLoadedState(stories);
+
+        if (result.listStory.length < sizeItems) {
+          pageItems = null;
+        } else {
+          pageItems = pageItems! + 1;
+        }
         notifyListeners();
       }
-    } on Exception catch (e) {
-      _resultState = StoryListErrorState(e.toString());
+    } catch (e) {
+      final message = "Failed to Get List Story";
+      _resultState = StoryListErrorState(message);
       notifyListeners();
     }
   }

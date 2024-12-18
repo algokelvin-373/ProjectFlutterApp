@@ -1,5 +1,10 @@
+import 'package:json_annotation/json_annotation.dart';
+
 import 'story.dart';
 
+part 'story_list_response.g.dart';
+
+@JsonSerializable()
 class StoryListResponse {
   bool error;
   String message;
@@ -12,17 +17,7 @@ class StoryListResponse {
   });
 
   factory StoryListResponse.fromJson(Map<String, dynamic> json) =>
-      StoryListResponse(
-        error: json["error"],
-        message: json["message"],
-        listStory: List<Story>.from(
-          json["listStory"].map((x) => Story.fromJson(x)),
-        ),
-      );
+      _$StoryListResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => {
-        "error": error,
-        "message": message,
-        "listStory": List<dynamic>.from(listStory.map((x) => x.toJson())),
-      };
+  Map<String, dynamic> toJson() => _$StoryListResponseToJson(this);
 }

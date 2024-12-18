@@ -1,12 +1,17 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:story_app_level_two/flavor_config.dart';
 import 'package:story_app_level_two/provider/upload/upload_provider.dart';
 import 'package:story_app_level_two/utils/global_function.dart';
 
 import '../../provider/home/story_list_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PostStoryScreen extends StatefulWidget {
   final Function() onPostStory;
@@ -18,6 +23,14 @@ class PostStoryScreen extends StatefulWidget {
 }
 
 class _PostStoryScreenState extends State<PostStoryScreen> {
+  late GoogleMapController mapController;
+  LatLng? myPlace;
+  late dynamic lat, lng;
+
+  final typeFlavor = FlavorConfig.instance.flavor.name;
+  final Set<Marker> markers = {};
+  String address = "Loading address...";
+
   final descriptionController = TextEditingController();
   final _picker = ImagePicker();
 
@@ -45,6 +58,75 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
     }
   }
 
+  Future<void> _getCurrentLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Check service location is ON
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      await Geolocator.openLocationSettings();
+      return Future.error('Location services are disabled');
+    }
+
+    // Check permission location
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied.');
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error('Location permissions are permanently denied.');
+    }
+
+    // Get Location Now
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+
+    setState(() {
+      myPlace = LatLng(position.latitude, position.longitude);
+      markers.add(
+        Marker(
+          markerId: MarkerId('currentLocation'),
+          position: myPlace!,
+          infoWindow: InfoWindow(title: "Your Location"),
+        ),
+      );
+    });
+
+    // Convert coordinate to address
+    _getAddressFromLatLng(myPlace!.latitude, myPlace!.longitude);
+  }
+
+  Future<void> _getAddressFromLatLng(double latitude, double longitude) async {
+    try {
+      List<Placemark> placeMarks =
+          await placemarkFromCoordinates(latitude, longitude);
+      Placemark place = placeMarks[0];
+
+      setState(() {
+        address = "${place.street}, "
+            "${place.subLocality}, "
+            "${place.locality}, "
+            "${place.country}";
+      });
+    } catch (e) {
+      setState(() {
+        address = "Unable to get address: $e";
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (typeFlavor == 'paid') {
+      _getCurrentLocation();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final provider = context.read<UploadProvider>();
@@ -52,7 +134,10 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
     final imgFile = provider.imageFile;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Add New Story'), centerTitle: true),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.addNewStory),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -89,7 +174,7 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
                       ),
                     ),
                     child: Text(
-                      'Camera',
+                      AppLocalizations.of(context)!.camera,
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -102,7 +187,7 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
                       ),
                     ),
                     child: Text(
-                      'Gallery',
+                      AppLocalizations.of(context)!.gallery,
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -113,12 +198,65 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
                 controller: descriptionController,
                 maxLines: 5,
                 decoration: InputDecoration(
-                  hintText: 'Description',
+                  hintText: AppLocalizations.of(context)!.description,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                 ),
               ),
+              spaceVertical(20),
+              (typeFlavor == 'paid')
+                  ? Text(
+                      "Current Address: $address",
+                      style: const TextStyle(fontSize: 16),
+                      textAlign: TextAlign.center,
+                    )
+                  : const SizedBox(),
+              (typeFlavor == 'paid')
+                  ? const SizedBox(height: 16)
+                  : const SizedBox(),
+              (typeFlavor == 'paid' && myPlace != null)
+                  ? SizedBox(
+                      height: 300,
+                      child: GoogleMap(
+                        initialCameraPosition: CameraPosition(
+                          zoom: 18,
+                          target: myPlace!,
+                        ),
+                        markers: markers,
+                        zoomControlsEnabled: true,
+                        myLocationButtonEnabled: true,
+                        onMapCreated: (controller) {
+                          mapController = controller;
+                        },
+                        onTap: (tappedPosition) {
+                          setState(() {
+                            myPlace = tappedPosition;
+                            markers.clear();
+                            markers.add(
+                              Marker(
+                                  markerId: const MarkerId('selectedLocation'),
+                                  position: tappedPosition,
+                                  draggable: true,
+                                  onDragEnd: (LatLng newPosition) {
+                                    setState(() {
+                                      myPlace = newPosition;
+                                    });
+                                    _getAddressFromLatLng(
+                                      newPosition.latitude,
+                                      newPosition.longitude,
+                                    );
+                                  }),
+                            );
+                          });
+                          _getAddressFromLatLng(
+                            tappedPosition.latitude,
+                            tappedPosition.longitude,
+                          );
+                        },
+                      ),
+                    )
+                  : const SizedBox(),
               spaceVertical(20),
               context.watch<UploadProvider>().isUploading
                   ? const CircularProgressIndicator()
@@ -148,11 +286,15 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
           final scaffoldMessage = ScaffoldMessenger.of(context);
           final uploadProvider = context.read<UploadProvider>();
 
+          final msgImageNoSelected =
+              AppLocalizations.of(context)!.noImageSelected;
+          final msgMoreThanMaximum =
+              AppLocalizations.of(context)!.imageMoreThan1MB;
           if (imgPath == '' || imgFile == null) {
             scaffoldMessage.showSnackBar(
               SnackBar(
                 content: Text(
-                  'No image selected. Please choose an image.',
+                  msgImageNoSelected,
                   style: TextStyle(color: Colors.white),
                 ),
                 backgroundColor: Colors.red,
@@ -173,7 +315,7 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
             scaffoldMessage.showSnackBar(
               SnackBar(
                 content: Text(
-                  'File size exceeds 1 MB. Please select a smaller file.',
+                  msgMoreThanMaximum,
                   style: TextStyle(color: Colors.white),
                 ),
                 backgroundColor: Colors.red,
@@ -184,7 +326,14 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
 
           try {
             final description = descriptionController.text;
-            await uploadProvider.upload(bytesCompress, fileName, description);
+            final dataLat = myPlace?.latitude;
+            final dataLng = myPlace?.longitude;
+            if (dataLat == null && dataLng == null) {
+              await uploadProvider.upload(bytesCompress, fileName, description);
+            } else {
+              await uploadProvider.upload(
+                  bytesCompress, fileName, description, dataLat, dataLng);
+            }
 
             final response = uploadProvider.uploadStoryResponse;
             if (response != null) {
@@ -204,9 +353,10 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
                 ),
               );
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                context
-                    .read<StoryListProvider>()
-                    .fetchStoryList(); // Refresh data
+                final providerListStory = context.read<StoryListProvider>();
+                providerListStory.pageItems = 1; // Back to page 1 (start)
+                providerListStory.stories.clear(); // Clear for refresh
+                providerListStory.fetchStoryListPagination();
                 widget.onPostStory();
               });
             } else {
@@ -232,7 +382,10 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
             );
           }
         },
-        child: const Text('Upload', style: TextStyle(color: Colors.white)),
+        child: Text(
+          AppLocalizations.of(context)!.upload,
+          style: TextStyle(color: Colors.white),
+        ),
       ),
     );
   }
