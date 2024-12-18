@@ -61,6 +61,20 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               },
             ),
             ListTile(
+              leading: Icon(Icons.tv),
+              title: Text('TV Shows'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.watch_later),
+              title: Text('Watchlist TV Show'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
               onTap: () {
                 Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
               },
