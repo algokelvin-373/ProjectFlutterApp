@@ -12,6 +12,7 @@ import 'package:movie_tv_level_maximum/presentation/provider/movie_list_notifier
 import 'package:movie_tv_level_maximum/presentation/provider/movie_search_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/popular_movies_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/top_rated_movies_notifier.dart';
+import 'package:movie_tv_level_maximum/presentation/provider/tv_show/tv_show_list_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:movie_tv_level_maximum/injection.dart' as di;
@@ -46,6 +47,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistMovieNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TvShowListNotifier>(),
         ),
       ],
       child: MaterialApp(
