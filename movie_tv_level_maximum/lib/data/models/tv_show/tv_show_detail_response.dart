@@ -1,7 +1,6 @@
 import 'package:movie_tv_level_maximum/data/models/genre_model.dart';
+import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_season_model.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_detail.dart';
-
-import '../../../domain/entities/genre.dart';
 
 class TvShowDetailResponse {
   bool adult;
@@ -29,7 +28,7 @@ class TvShowDetailResponse {
   String posterPath;
   //List<Network> productionCompanies;
   //List<ProductionCountry> productionCountries;
-  //List<Season> seasons;
+  List<Season> seasons;
   //List<SpokenLanguage> spokenLanguages;
   String status;
   String tagline;
@@ -63,7 +62,7 @@ class TvShowDetailResponse {
     required this.posterPath,
     //required this.productionCompanies,
     //required this.productionCountries,
-    //required this.seasons,
+    required this.seasons,
     //required this.spokenLanguages,
     required this.status,
     required this.tagline,
@@ -93,6 +92,7 @@ class TvShowDetailResponse {
         overview: overview,
         popularity: popularity,
         posterPath: posterPath,
+        seasons: seasons,
         status: status,
         tagline: tagline,
         type: type,
@@ -126,7 +126,7 @@ class TvShowDetailResponse {
     posterPath: json["poster_path"],
     //productionCompanies: List<Network>.from(json["production_companies"].map((x) => Network.fromJson(x))),
     //productionCountries: List<ProductionCountry>.from(json["production_countries"].map((x) => ProductionCountry.fromJson(x))),
-    //seasons: List<Season>.from(json["seasons"].map((x) => Season.fromJson(x))),
+    seasons: List<Season>.from(json["seasons"].map((x) => Season.fromJson(x))),
     //spokenLanguages: List<SpokenLanguage>.from(json["spoken_languages"].map((x) => SpokenLanguage.fromJson(x))),
     status: json["status"],
     tagline: json["tagline"],
@@ -161,7 +161,7 @@ class TvShowDetailResponse {
     "poster_path": posterPath,
     //"production_companies": List<dynamic>.from(productionCompanies.map((x) => x.toJson())),
     //"production_countries": List<dynamic>.from(productionCountries.map((x) => x.toJson())),
-    //"seasons": List<dynamic>.from(seasons.map((x) => x.toJson())),
+    "seasons": List<dynamic>.from(seasons.map((x) => x.toJson())),
     //"spoken_languages": List<dynamic>.from(spokenLanguages.map((x) => x.toJson())),
     "status": status,
     "tagline": tagline,

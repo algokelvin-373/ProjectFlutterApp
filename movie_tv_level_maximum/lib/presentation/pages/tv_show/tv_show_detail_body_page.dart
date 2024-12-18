@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movie_tv_level_maximum/data/models/genre_model.dart';
+import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_season_model.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_detail.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/tv_show/tv_show_detail_page.dart';
@@ -142,6 +143,12 @@ class TvShowDetailBodyPage extends StatelessWidget {
                               style: kHeading6,
                             ),
                             _recommendationTvShowWidget(),
+                            SizedBox(height: 16),
+                            Text(
+                              'All Seasons and Episodes',
+                              style: kHeading6,
+                            ),
+                            _allSeasons(tvShow.seasons),
                           ],
                         ),
                       ),
@@ -229,6 +236,44 @@ class TvShowDetailBodyPage extends StatelessWidget {
           return Container();
         }
       },
+    );
+  }
+
+  Widget _allSeasons(List<Season> listSeasons) {
+    return SizedBox(
+      height: 200,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: listSeasons.length,
+        itemBuilder: (context, index) {
+          final season = listSeasons[index];
+          return Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: InkWell(
+              onTap: () {
+                Navigator.pushReplacementNamed(
+                  context,
+                  TvShowDetailPage.ROUTE_NAME,
+                  arguments: tvShow.id,
+                );
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(8),
+                ),
+                child: CachedNetworkImage(
+                  imageUrl:
+                  'https://image.tmdb.org/t/p/w500${season.posterPath}',
+                  placeholder: (context, url) => Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 

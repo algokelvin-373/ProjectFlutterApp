@@ -1,4 +1,5 @@
 import '../../../data/models/genre_model.dart';
+import '../../../data/models/tv_show/tv_show_season_model.dart';
 
 class TvShowDetail {
   bool adult;
@@ -26,7 +27,7 @@ class TvShowDetail {
   String posterPath;
   //List<Network> productionCompanies;
   //List<ProductionCountry> productionCountries;
-  //List<Season> seasons;
+  List<Season> seasons;
   //List<SpokenLanguage> spokenLanguages;
   String status;
   String tagline;
@@ -62,6 +63,7 @@ class TvShowDetail {
     //required this.productionCountries,
     //required this.seasons,
     //required this.spokenLanguages,
+    required this.seasons,
     required this.status,
     required this.tagline,
     required this.type,
