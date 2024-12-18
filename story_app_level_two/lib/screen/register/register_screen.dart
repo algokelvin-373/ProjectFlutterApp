@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:story_app_level_two/screen/register/button_register_process_widget.dart';
 import 'package:story_app_level_two/utils/global_function.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class RegisterScreen extends StatefulWidget {
   final Function() onLogin;
   final Function() onRegister;
@@ -34,7 +36,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               spaceVertical(20),
               Center(
                 child: Text(
-                  'Sign up',
+                  AppLocalizations.of(context)!.signUp,
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -47,7 +49,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Already have an account? ',
+                    AppLocalizations.of(context)!.titleHaveAccount,
                     style: TextStyle(fontSize: 18),
                   ),
                   GestureDetector(
@@ -55,7 +57,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       widget.onRegister();
                     },
                     child: Text(
-                      'Login',
+                      AppLocalizations.of(context)!.logIn,
                       style: TextStyle(
                         color: Colors.blue,
                         fontSize: 18,
@@ -70,7 +72,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 controller: _fullNameController,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.person),
-                  hintText: 'Full Name',
+                  hintText: AppLocalizations.of(context)!.fullName,
                   hintStyle: TextStyle(color: Colors.grey),
                   filled: true,
                   border: OutlineInputBorder(
@@ -84,7 +86,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 controller: _emailController,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.email),
-                  hintText: 'Email',
+                  hintText: AppLocalizations.of(context)!.email,
                   hintStyle: TextStyle(color: Colors.grey),
                   filled: true,
                   border: OutlineInputBorder(
@@ -99,7 +101,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 obscureText: true,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.lock),
-                  hintText: 'Set Password',
+                  hintText: AppLocalizations.of(context)!.password,
                   hintStyle: TextStyle(color: Colors.grey),
                   filled: true,
                   border: OutlineInputBorder(

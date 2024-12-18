@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:story_app_level_two/provider/auth/auth_provider.dart';
 import 'package:story_app_level_two/utils/global_function.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ProfileUserScreen extends StatefulWidget {
   final Function() onLogout;
 
@@ -22,7 +24,7 @@ class _ProfileUserScreenState extends State<ProfileUserScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Profile User")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.profileUser)),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -53,6 +55,8 @@ class _ProfileUserScreenState extends State<ProfileUserScreen> {
   Widget btnLogoutAction() {
     return ElevatedButton(
       onPressed: () async {
+        final msgSuccess = AppLocalizations.of(context)!.successLogout;
+        final msgFailed = AppLocalizations.of(context)!.failedLogout;
         final scaffoldMessage = ScaffoldMessenger.of(context);
         final authRead = context.read<AuthProvider>();
         final result = await authRead.logout();
@@ -60,7 +64,7 @@ class _ProfileUserScreenState extends State<ProfileUserScreen> {
           scaffoldMessage.showSnackBar(
             SnackBar(
               content: Text(
-                'Success Logout',
+                msgSuccess,
                 style: TextStyle(color: Colors.white),
               ),
               backgroundColor: Colors.green,
@@ -71,7 +75,7 @@ class _ProfileUserScreenState extends State<ProfileUserScreen> {
           scaffoldMessage.showSnackBar(
             SnackBar(
               content: Text(
-                'Failed Logout',
+                msgFailed,
                 style: TextStyle(color: Colors.white),
               ),
               backgroundColor: Colors.red,
@@ -85,7 +89,7 @@ class _ProfileUserScreenState extends State<ProfileUserScreen> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
       child: Text(
-        'Logout',
+        AppLocalizations.of(context)!.logout,
         style: TextStyle(fontSize: 16, color: Colors.white),
       ),
     );

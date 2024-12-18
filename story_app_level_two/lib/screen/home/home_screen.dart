@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import '../../provider/theme/theme_provider.dart';
 import 'home_screen_body_widget.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class HomeScreen extends StatefulWidget {
   final Function(String) onTapped;
   final Function() onPostStory;
@@ -46,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Story App"),
+        title: Text(AppLocalizations.of(context)!.storyApp),
         elevation: 0,
         actions: [
           IconButton(

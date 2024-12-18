@@ -7,6 +7,8 @@ import 'package:story_app_level_two/utils/snack_bar_helper.dart';
 import '../../data/model/login/login_request.dart';
 import '../../provider/auth/auth_provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ButtonLoginProcessWidget extends StatefulWidget {
   final Function() onLogin;
   final GlobalKey<FormState> formKey;
@@ -63,6 +65,12 @@ class _ButtonLoginProcessWidgetState extends State<ButtonLoginProcessWidget> {
     return Center(
       child: ElevatedButton(
         onPressed: () async {
+          final successLogin = AppLocalizations.of(context)!.loginSuccess;
+          final failedLogin =
+              AppLocalizations.of(context)!.emailOrPasswordInvalid;
+          final noConnection =
+              AppLocalizations.of(context)!.noInternetConnection;
+
           final snackBarHelper = SnackBarHelper(context);
           final authProvider = context.read<AuthProvider>();
           await _checkInternetConnection();
@@ -78,22 +86,19 @@ class _ButtonLoginProcessWidgetState extends State<ButtonLoginProcessWidget> {
 
               final result = authProvider.isLoggedIn;
               if (result) {
-                final message = 'Login Success';
-                snackBarHelper.showMessage(message, Colors.green);
+                snackBarHelper.showMessage(successLogin, Colors.green);
                 widget.onLogin();
               } else {
                 final errorState = authProvider.resultState;
                 if (errorState is AuthErrorState) {
                   snackBarHelper.showMessage(errorState.error, Colors.red);
                 } else {
-                  final message = "Your email or password is invalid";
-                  snackBarHelper.showMessage(message, Colors.red);
+                  snackBarHelper.showMessage(failedLogin, Colors.red);
                 }
               }
             }
           } else {
-            final message = "No Internet Connection";
-            snackBarHelper.showMessage(message, Colors.red);
+            snackBarHelper.showMessage(noConnection, Colors.red);
           }
         },
         style: ElevatedButton.styleFrom(
