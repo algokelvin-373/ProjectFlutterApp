@@ -80,10 +80,21 @@ class TvShowRepositoryImpl implements TvShowRepository {
   Future<Either<Failure, List<TvShow>>> getTvShowRecommendations(int id) async {
     try {
       final result = await remoteDataSource.getTvShowRecommendation(id);
-      print('test result $result');
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
-      print('test result server exception');
+      return Left(ServerFailure(''));
+    } on SocketException {
+      return Left(ConnectionFailure('Failed to connect to the network'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<TvShow>>> searchTvShows(String query) async {
+    try {
+      final result = await remoteDataSource.searchTvShow(query);
+      print('Result Search TV: $result');
+      return Right(result.map((model) => model.toEntity()).toList());
+    } on ServerException {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));

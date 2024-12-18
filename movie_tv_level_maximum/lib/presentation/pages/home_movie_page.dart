@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/movie/movie_page_widget.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/search_page.dart';
+import 'package:movie_tv_level_maximum/presentation/pages/tv_show/search_tv_show_page.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/tv_show/tv_show_page_widget.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/watchlist_movies_page.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/tv_show_list_notifier.dart';
@@ -110,7 +111,11 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+              if (indexTab == 1) {
+                Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+              } else if (indexTab == 3) {
+                Navigator.pushNamed(context, SearchTvShowPage.ROUTE_NAME);
+              }
             },
             icon: Icon(Icons.search),
           )
