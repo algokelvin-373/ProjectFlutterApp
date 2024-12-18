@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:movie_tv_level_maximum/presentation/pages/tv_show/on_the_air_tv_shows_page.dart';
+import 'package:movie_tv_level_maximum/presentation/pages/tv_show/popular_tv_shows_page.dart';
+import 'package:movie_tv_level_maximum/presentation/pages/tv_show/top_rated_tv_shows_page.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/tv_show/tv_show_list_widget.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/tv_show_list_notifier.dart';
 import 'package:provider/provider.dart';
 
 import '../../../common/constants.dart';
 import '../../../common/state_enum.dart';
-import '../../provider/movie_list_notifier.dart';
-import '../popular_movies_page.dart';
-import '../top_rated_movies_page.dart';
 
 class TvShowPageWidget extends StatelessWidget {
   const TvShowPageWidget({super.key});
@@ -36,7 +36,7 @@ class TvShowPageWidget extends StatelessWidget {
         _buildSubHeading(
           title: 'On The Air',
           onTap: () =>
-              Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
+              Navigator.pushNamed(context, OnTheAirTvShowsPage.ROUTE_NAME),
         ),
         Consumer<TvShowListNotifier>(builder: (context, data, child) {
           final state = data.onTheAirState;
@@ -53,7 +53,7 @@ class TvShowPageWidget extends StatelessWidget {
         _buildSubHeading(
           title: 'Popular',
           onTap: () =>
-              Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
+              Navigator.pushNamed(context, PopularTvShowsPage.ROUTE_NAME),
         ),
         Consumer<TvShowListNotifier>(builder: (context, data, child) {
           final state = data.popularState;
@@ -70,7 +70,7 @@ class TvShowPageWidget extends StatelessWidget {
         _buildSubHeading(
           title: 'Top Rated',
           onTap: () =>
-              Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
+              Navigator.pushNamed(context, TopRatedTvShowsPage.ROUTE_NAME),
         ),
         Consumer<TvShowListNotifier>(builder: (context, data, child) {
           final state = data.topRatedState;
