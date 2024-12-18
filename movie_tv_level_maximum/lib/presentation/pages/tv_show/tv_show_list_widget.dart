@@ -1,10 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show.dart';
+import 'package:movie_tv_level_maximum/presentation/pages/tv_show/tv_show_detail_page.dart';
 
 import '../../../common/constants.dart';
-import '../../../domain/entities/movie.dart';
-import '../movie_detail_page.dart';
 
 class TvShowList extends StatelessWidget {
   final List<TvShow> tvShows;
@@ -25,7 +24,7 @@ class TvShowList extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  MovieDetailPage.ROUTE_NAME,
+                  TvShowDetailPage.ROUTE_NAME,
                   arguments: tvShow.id,
                 );
               },
