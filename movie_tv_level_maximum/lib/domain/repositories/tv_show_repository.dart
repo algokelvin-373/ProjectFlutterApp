@@ -11,6 +11,7 @@ abstract class TvShowRepository {
   Future<Either<Failure, List<TvShow>>> getTopRatedTvShow();
   Future<Either<Failure, TvShowDetail>> getTvShowDetail(int id);
   Future<Either<Failure, List<TvShow>>> getTvShowRecommendations(int id);
+  Future<Either<Failure, List<TvShow>>> searchTvShows(String query);
   //Future<Either<Failure, MovieDetail>> getMovieDetail(int id);
   //Future<Either<Failure, List<Movie>>> searchMovies(String query);
   //Future<Either<Failure, String>> saveWatchlist(MovieDetail movie);

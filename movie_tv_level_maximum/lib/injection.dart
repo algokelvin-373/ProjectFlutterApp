@@ -9,6 +9,7 @@ import 'package:movie_tv_level_maximum/domain/use_cases/tv_show/get_tv_show_on_t
 import 'package:movie_tv_level_maximum/domain/use_cases/tv_show/get_tv_show_popular.dart';
 import 'package:movie_tv_level_maximum/domain/use_cases/tv_show/get_tv_show_recommendations.dart';
 import 'package:movie_tv_level_maximum/domain/use_cases/tv_show/get_tv_show_top_rated.dart';
+import 'package:movie_tv_level_maximum/domain/use_cases/tv_show/search_tv_shows.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/movie_detail_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/movie_list_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/movie_search_notifier.dart';
@@ -19,6 +20,7 @@ import 'package:movie_tv_level_maximum/presentation/provider/tv_show/popular_tv_
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/top_rated_tv_shows_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/tv_show_detail_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/tv_show_list_notifier.dart';
+import 'package:movie_tv_level_maximum/presentation/provider/tv_show/tv_show_search_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/watchlist_movie_notifier.dart';
 
 import 'data/data_sources/db/database_helper.dart';
@@ -106,6 +108,11 @@ void init() {
       getTvShowRecommendations: locator(),
     ),
   );
+  locator.registerFactory(
+    () => TvShowSearchNotifier(
+      searchTvShows: locator(),
+    ),
+  );
 
   // use case
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));
@@ -124,6 +131,7 @@ void init() {
   locator.registerLazySingleton(() => GetTopRatedTvShow(locator()));
   locator.registerLazySingleton(() => GetTvShowDetail(locator()));
   locator.registerLazySingleton(() => GetTvShowRecommendations(locator()));
+  locator.registerLazySingleton(() => SearchTvShows(locator()));
 
   // repository
   locator.registerLazySingleton<MovieRepository>(
