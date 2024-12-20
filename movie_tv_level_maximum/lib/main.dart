@@ -11,6 +11,7 @@ import 'package:movie_tv_level_maximum/presentation/pages/tv_show/popular_tv_sho
 import 'package:movie_tv_level_maximum/presentation/pages/tv_show/search_tv_show_page.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/tv_show/top_rated_tv_shows_page.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/tv_show/tv_show_detail_page.dart';
+import 'package:movie_tv_level_maximum/presentation/pages/tv_show/watchlist_tv_shows_page.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/watchlist_movies_page.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/movie_detail_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/movie_list_notifier.dart';
@@ -23,6 +24,7 @@ import 'package:movie_tv_level_maximum/presentation/provider/tv_show/top_rated_t
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/tv_show_detail_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/tv_show_list_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/tv_show_search_notifier.dart';
+import 'package:movie_tv_level_maximum/presentation/provider/tv_show/watchlist_tv_show_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:movie_tv_level_maximum/injection.dart' as di;
@@ -76,6 +78,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<TvShowSearchNotifier>(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<WatchlistTvShowNotifier>(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -122,6 +127,8 @@ class MyApp extends StatelessWidget {
               );
             case SearchTvShowPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => SearchTvShowPage());
+            case WatchlistTvShowsPage.ROUTE_NAME:
+              return MaterialPageRoute(builder: (_) => WatchlistTvShowsPage());
             default:
               return MaterialPageRoute(builder: (_) {
                 return Scaffold(

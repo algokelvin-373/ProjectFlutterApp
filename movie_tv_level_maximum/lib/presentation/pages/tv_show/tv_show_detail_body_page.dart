@@ -15,11 +15,13 @@ import '../../provider/tv_show/tv_show_detail_notifier.dart';
 class TvShowDetailBodyPage extends StatelessWidget {
   final TvShowDetail tvShow;
   final List<TvShow> recommendations;
+  final bool isAddedWatchlist;
 
   const TvShowDetailBodyPage({
     super.key,
     required this.tvShow,
     required this.recommendations,
+    required this.isAddedWatchlist,
   });
 
   @override
@@ -38,136 +40,10 @@ class TvShowDetailBodyPage extends StatelessWidget {
         Container(
           margin: const EdgeInsets.only(top: 48 + 8),
           child: DraggableScrollableSheet(
-            builder: (context, scrollController) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: kRichBlack,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-                ),
-                padding: const EdgeInsets.only(
-                  left: 16,
-                  top: 16,
-                  right: 16,
-                ),
-                child: Stack(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(top: 16),
-                      child: SingleChildScrollView(
-                        controller: scrollController,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              tvShow.name,
-                              style: kHeading5,
-                            ),
-                            /*FilledButton(
-                              onPressed: () async {
-                                */ /*if (!isAddedWatchlist) {
-                                  await Provider.of<MovieDetailNotifier>(
-                                      context,
-                                      listen: false)
-                                      .addWatchlist(movie);
-                                } else {
-                                  await Provider.of<MovieDetailNotifier>(
-                                      context,
-                                      listen: false)
-                                      .removeFromWatchlist(movie);
-                                }
-
-                                final message =
-                                    Provider.of<MovieDetailNotifier>(context,
-                                        listen: false)
-                                        .watchlistMessage;
-
-                                if (message ==
-                                    MovieDetailNotifier
-                                        .watchlistAddSuccessMessage ||
-                                    message ==
-                                        MovieDetailNotifier
-                                            .watchlistRemoveSuccessMessage) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text(message)));
-                                } else {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          content: Text(message),
-                                        );
-                                      });
-                                }*/ /*
-                              },
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  isAddedWatchlist
-                                      ? Icon(Icons.check)
-                                      : Icon(Icons.add),
-                                  Text('Watchlist'),
-                                ],
-                              ),
-                            ),*/
-                            Text(
-                              _showGenres(tvShow.genres),
-                            ),
-                            /*Text(
-                              _showDuration(tvShow.episodeRunTime),
-                            ),*/
-                            Row(
-                              children: [
-                                RatingBarIndicator(
-                                  rating: tvShow.voteAverage / 2,
-                                  itemCount: 5,
-                                  itemBuilder: (context, index) => Icon(
-                                    Icons.star,
-                                    color: kMikadoYellow,
-                                  ),
-                                  itemSize: 24,
-                                ),
-                                Text('${tvShow.voteAverage}')
-                              ],
-                            ),
-                            SizedBox(height: 16),
-                            Text(
-                              'Overview',
-                              style: kHeading6,
-                            ),
-                            Text(
-                              tvShow.overview,
-                            ),
-                            SizedBox(height: 16),
-                            Text(
-                              'Recommendations',
-                              style: kHeading6,
-                            ),
-                            _recommendationTvShowWidget(),
-                            SizedBox(height: 16),
-                            Text(
-                              'All Seasons and Episodes',
-                              style: kHeading6,
-                            ),
-                            _allSeasons(tvShow.seasons),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        color: Colors.white,
-                        height: 4,
-                        width: 48,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-            // initialChildSize: 0.5,
             minChildSize: 0.25,
-            // maxChildSize: 1.0,
+            builder: (context, scrollController) {
+              return _btnActionWatchlistTvShow(scrollController, context);
+            },
           ),
         ),
         Padding(
@@ -185,6 +61,124 @@ class TvShowDetailBodyPage extends StatelessWidget {
         )
       ],
     );
+  }
+
+  Widget _btnActionWatchlistTvShow(
+      ScrollController scrollController, BuildContext context) {
+    final provider = Provider.of<TvShowDetailNotifier>(context, listen: false);
+    return Container(
+      decoration: BoxDecoration(
+        color: kRichBlack,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      padding: const EdgeInsets.only(
+        left: 16,
+        top: 16,
+        right: 16,
+      ),
+      child: Stack(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 16),
+            child: SingleChildScrollView(
+              controller: scrollController,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    tvShow.name,
+                    style: kHeading5,
+                  ),
+                  FilledButton(
+                    onPressed: () async {
+                      _actionAddOrRemoveWatchlist(provider, context);
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        isAddedWatchlist ? Icon(Icons.check) : Icon(Icons.add),
+                        Text('Watchlist'),
+                      ],
+                    ),
+                  ),
+                  Text(_showGenres(tvShow.genres)),
+                  Row(
+                    children: [
+                      RatingBarIndicator(
+                        rating: tvShow.voteAverage / 2,
+                        itemCount: 5,
+                        itemBuilder: (context, index) => Icon(
+                          Icons.star,
+                          color: kMikadoYellow,
+                        ),
+                        itemSize: 24,
+                      ),
+                      Text('${tvShow.voteAverage}')
+                    ],
+                  ),
+                  SizedBox(height: 16),
+                  Text(
+                    'Overview',
+                    style: kHeading6,
+                  ),
+                  Text(
+                    tvShow.overview,
+                  ),
+                  SizedBox(height: 16),
+                  Text(
+                    'Recommendations',
+                    style: kHeading6,
+                  ),
+                  _recommendationTvShowWidget(),
+                  SizedBox(height: 16),
+                  Text(
+                    'All Seasons and Episodes',
+                    style: kHeading6,
+                  ),
+                  _allSeasons(tvShow.seasons),
+                ],
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.topCenter,
+            child: Container(
+              color: Colors.white,
+              height: 4,
+              width: 48,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _actionAddOrRemoveWatchlist(
+      TvShowDetailNotifier provider, BuildContext context) async {
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+    if (!isAddedWatchlist) {
+      await provider.addWatchlistTvShow(tvShow);
+    } else {
+      await provider.removeFromWatchlist(tvShow);
+    }
+
+    final message = provider.watchlistTvShowMessage;
+    final isAddSuccess =
+        message == TvShowDetailNotifier.watchlistTvShowAddSuccessMessage;
+    final isRemoveSuccess =
+        message == TvShowDetailNotifier.watchlistTvShowRemoveSuccessMessage;
+    if (isAddSuccess || isRemoveSuccess) {
+      scaffoldMessenger.showSnackBar(SnackBar(content: Text(message)));
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text(message),
+          );
+        },
+      );
+    }
   }
 
   Widget _recommendationTvShowWidget() {
@@ -263,7 +257,7 @@ class TvShowDetailBodyPage extends StatelessWidget {
                 ),
                 child: CachedNetworkImage(
                   imageUrl:
-                  'https://image.tmdb.org/t/p/w500${season.posterPath}',
+                      'https://image.tmdb.org/t/p/w500${season.posterPath}',
                   placeholder: (context, url) => Center(
                     child: CircularProgressIndicator(),
                   ),
