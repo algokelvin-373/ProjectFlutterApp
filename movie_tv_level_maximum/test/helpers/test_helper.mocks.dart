@@ -4,8 +4,8 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i6;
-import 'dart:convert' as _i17;
-import 'dart:typed_data' as _i18;
+import 'dart:convert' as _i18;
+import 'dart:typed_data' as _i19;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:http/http.dart' as _i4;
@@ -22,6 +22,8 @@ import 'package:movie_tv_level_maximum/data/models/movie_detail_model.dart'
     as _i3;
 import 'package:movie_tv_level_maximum/data/models/movie_model.dart' as _i11;
 import 'package:movie_tv_level_maximum/data/models/movie_table.dart' as _i13;
+import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_table.dart'
+    as _i17;
 import 'package:movie_tv_level_maximum/domain/entities/movie.dart' as _i8;
 import 'package:movie_tv_level_maximum/domain/entities/movie_detail.dart'
     as _i9;
@@ -455,6 +457,47 @@ class MockDatabaseHelper extends _i1.Mock implements _i15.DatabaseHelper {
         returnValue: _i6.Future<List<Map<String, dynamic>>>.value(
             <Map<String, dynamic>>[]),
       ) as _i6.Future<List<Map<String, dynamic>>>);
+
+  @override
+  _i6.Future<int> insertWatchlistTvShow(_i17.TvShowTable? tvShow) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #insertWatchlistTvShow,
+          [tvShow],
+        ),
+        returnValue: _i6.Future<int>.value(0),
+      ) as _i6.Future<int>);
+
+  @override
+  _i6.Future<int> removeWatchlistTvShow(_i17.TvShowTable? tvShow) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #removeWatchlistTvShow,
+          [tvShow],
+        ),
+        returnValue: _i6.Future<int>.value(0),
+      ) as _i6.Future<int>);
+
+  @override
+  _i6.Future<List<Map<String, dynamic>>> getWatchlistTvShows() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getWatchlistTvShows,
+          [],
+        ),
+        returnValue: _i6.Future<List<Map<String, dynamic>>>.value(
+            <Map<String, dynamic>>[]),
+      ) as _i6.Future<List<Map<String, dynamic>>>);
+
+  @override
+  _i6.Future<Map<String, dynamic>?> getTvShowById(int? id) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getTvShowById,
+          [id],
+        ),
+        returnValue: _i6.Future<Map<String, dynamic>?>.value(),
+      ) as _i6.Future<Map<String, dynamic>?>);
 }
 
 /// A class which mocks [Client].
@@ -512,7 +555,7 @@ class MockHttpClient extends _i1.Mock implements _i4.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i17.Encoding? encoding,
+    _i18.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -543,7 +586,7 @@ class MockHttpClient extends _i1.Mock implements _i4.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i17.Encoding? encoding,
+    _i18.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -574,7 +617,7 @@ class MockHttpClient extends _i1.Mock implements _i4.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i17.Encoding? encoding,
+    _i18.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -605,7 +648,7 @@ class MockHttpClient extends _i1.Mock implements _i4.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i17.Encoding? encoding,
+    _i18.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -653,7 +696,7 @@ class MockHttpClient extends _i1.Mock implements _i4.Client {
       ) as _i6.Future<String>);
 
   @override
-  _i6.Future<_i18.Uint8List> readBytes(
+  _i6.Future<_i19.Uint8List> readBytes(
     Uri? url, {
     Map<String, String>? headers,
   }) =>
@@ -663,8 +706,8 @@ class MockHttpClient extends _i1.Mock implements _i4.Client {
           [url],
           {#headers: headers},
         ),
-        returnValue: _i6.Future<_i18.Uint8List>.value(_i18.Uint8List(0)),
-      ) as _i6.Future<_i18.Uint8List>);
+        returnValue: _i6.Future<_i19.Uint8List>.value(_i19.Uint8List(0)),
+      ) as _i6.Future<_i19.Uint8List>);
 
   @override
   _i6.Future<_i4.StreamedResponse> send(_i4.BaseRequest? request) =>
