@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_tv_level_maximum/domain/use_cases/tv_show/get_tv_show_episodes.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/about_page.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/home_movie_page.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/movie_detail_page.dart';
@@ -11,6 +12,7 @@ import 'package:movie_tv_level_maximum/presentation/pages/tv_show/popular_tv_sho
 import 'package:movie_tv_level_maximum/presentation/pages/tv_show/search_tv_show_page.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/tv_show/top_rated_tv_shows_page.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/tv_show/tv_show_detail_page.dart';
+import 'package:movie_tv_level_maximum/presentation/pages/tv_show/tv_show_episodes_page.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/tv_show/watchlist_tv_shows_page.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/watchlist_movies_page.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/movie_detail_notifier.dart';
@@ -22,6 +24,7 @@ import 'package:movie_tv_level_maximum/presentation/provider/tv_show/on_the_air_
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/popular_tv_shows_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/top_rated_tv_shows_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/tv_show_detail_notifier.dart';
+import 'package:movie_tv_level_maximum/presentation/provider/tv_show/tv_show_episodes_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/tv_show_list_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/tv_show_search_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/watchlist_tv_show_notifier.dart';
@@ -81,6 +84,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistTvShowNotifier>(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TvShowEpisodesNotifier>(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -129,6 +135,26 @@ class MyApp extends StatelessWidget {
               return CupertinoPageRoute(builder: (_) => SearchTvShowPage());
             case WatchlistTvShowsPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => WatchlistTvShowsPage());
+            case TvShowEpisodesPage.ROUTE_NAME:
+              final args = settings.arguments as Map<String, dynamic>?;
+              if (args != null) {
+                final id = args['id'] as int?;
+                final seasons = args['seasons'] as int?;
+                if (id != null && seasons != null) {
+                  return MaterialPageRoute(
+                    builder: (_) => TvShowEpisodesPage(id: id, season: seasons),
+                  );
+                }
+              }
+              /*final args = settings.arguments as Map;
+              final id = args['id'] as int;
+              final season = args['season'] as int;
+              print('di main: id = $id');
+              print('di main: season = $season');
+              return MaterialPageRoute(
+                builder: (_) => TvShowEpisodesPage(id: id, season: season),
+                settings: settings,
+              );*/
             default:
               return MaterialPageRoute(builder: (_) {
                 return Scaffold(

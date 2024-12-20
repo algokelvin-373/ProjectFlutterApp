@@ -7,6 +7,7 @@ import 'package:movie_tv_level_maximum/data/data_sources/tv_show/tv_show_remote_
 import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_table.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_detail.dart';
+import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_episode.dart';
 import 'package:movie_tv_level_maximum/domain/repositories/tv_show_repository.dart';
 
 import '../../common/exception.dart';
@@ -117,9 +118,11 @@ class TvShowRepositoryImpl implements TvShowRepository {
   }
 
   @override
-  Future<Either<Failure, String>> removeWatchlistTvShow(TvShowDetail tvShow) async {
+  Future<Either<Failure, String>> removeWatchlistTvShow(
+      TvShowDetail tvShow) async {
     try {
-      final result = await localDataSource.removeWatchlistTvShow(TvShowTable.fromEntity(tvShow));
+      final result = await localDataSource
+          .removeWatchlistTvShow(TvShowTable.fromEntity(tvShow));
       return Right(result);
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
@@ -137,6 +140,19 @@ class TvShowRepositoryImpl implements TvShowRepository {
       return Left(DatabaseFailure(e.message));
     } catch (e) {
       rethrow;
+    }
+  }
+
+  @override
+  Future<Either<Failure, TvShowEpisode>> getAllEpisodes(
+      int id, int season) async {
+    try {
+      final result = await remoteDataSource.getAllEpisodes(id, season);
+      return Right(result.toEntity());
+    } on ServerException {
+      return Left(ServerFailure(''));
+    } on SocketException {
+      return Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
 }
