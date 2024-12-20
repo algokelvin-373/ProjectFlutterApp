@@ -14,16 +14,17 @@ class TvShowResponse {
   });
 
   factory TvShowResponse.fromJson(Map<String, dynamic> json) => TvShowResponse(
-    page: json["page"],
-    tvShowList: List<TvShowModel>.from(json["results"].map((x) => TvShowModel.fromJson(x))),
-    totalPages: json["total_pages"],
-    totalResults: json["total_results"],
-  );
+        page: json["page"],
+        tvShowList: List<TvShowModel>.from(
+            json["results"].map((x) => TvShowModel.fromJson(x))),
+        totalPages: json["total_pages"],
+        totalResults: json["total_results"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "page": page,
-    "results": List<dynamic>.from(tvShowList.map((x) => x.toJson())),
-    "total_pages": totalPages,
-    "total_results": totalResults,
-  };
+        "page": page,
+        "results": List<dynamic>.from(tvShowList.map((x) => x.toJson())),
+        "total_pages": totalPages,
+        "total_results": totalResults,
+      };
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_tv_level_maximum/domain/use_cases/tv_show/get_tv_show_episodes.dart';
+import 'package:movie_tv_level_maximum/injection.dart' as di;
 import 'package:movie_tv_level_maximum/presentation/pages/about_page.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/home_movie_page.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/movie_detail_page.dart';
@@ -30,7 +30,6 @@ import 'package:movie_tv_level_maximum/presentation/provider/tv_show/tv_show_sea
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/watchlist_tv_show_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:provider/provider.dart';
-import 'package:movie_tv_level_maximum/injection.dart' as di;
 
 import 'common/constants.dart';
 import 'common/utils.dart';
@@ -41,6 +40,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -146,15 +147,6 @@ class MyApp extends StatelessWidget {
                   );
                 }
               }
-              /*final args = settings.arguments as Map;
-              final id = args['id'] as int;
-              final season = args['season'] as int;
-              print('di main: id = $id');
-              print('di main: season = $season');
-              return MaterialPageRoute(
-                builder: (_) => TvShowEpisodesPage(id: id, season: season),
-                settings: settings,
-              );*/
             default:
               return MaterialPageRoute(builder: (_) {
                 return Scaffold(
@@ -164,6 +156,7 @@ class MyApp extends StatelessWidget {
                 );
               });
           }
+          return null;
         },
       ),
     );

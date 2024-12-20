@@ -1,4 +1,4 @@
-import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_episode.dart';
+
 
 class TvShowEpisodeModel {
   DateTime? airDate;
@@ -33,7 +33,8 @@ class TvShowEpisodeModel {
 
   factory TvShowEpisodeModel.fromJson(Map<String, dynamic> json) =>
       TvShowEpisodeModel(
-        airDate: json["air_date"] != null ? DateTime.parse(json["air_date"]) : null,
+        airDate:
+            json["air_date"] != null ? DateTime.parse(json["air_date"]) : null,
         episodeNumber: json["episode_number"] ?? 0,
         episodeType: json["episode_type"] ?? '',
         id: json["id"],

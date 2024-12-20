@@ -13,9 +13,7 @@ abstract class TvShowLocalDataSource {
 class TvShowLocalDataSourceImpl implements TvShowLocalDataSource {
   final DatabaseHelper databaseHelper;
 
-  TvShowLocalDataSourceImpl({
-    required this.databaseHelper
-  });
+  TvShowLocalDataSourceImpl({required this.databaseHelper});
 
   @override
   Future<List<TvShowTable>> getWatchlistTvShow() async {

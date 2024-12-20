@@ -1,5 +1,5 @@
-import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
+import 'package:http/http.dart' as http;
 import 'package:movie_tv_level_maximum/data/data_sources/tv_show/tv_show_local_data_source.dart';
 import 'package:movie_tv_level_maximum/data/data_sources/tv_show/tv_show_remote_data_source.dart';
 import 'package:movie_tv_level_maximum/data/repositories/tv_show_repository_impl.dart';

@@ -1,6 +1,4 @@
-import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:movie_tv_level_maximum/common/failure.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_detail.dart';
 
@@ -37,7 +35,6 @@ class TvShowTable extends Equatable {
         'posterPath': posterPath,
         'overview': overview,
       };
-
 
   @override
   // TODO: implement props

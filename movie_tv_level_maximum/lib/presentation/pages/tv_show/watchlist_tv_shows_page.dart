@@ -15,8 +15,8 @@ class WatchlistTvShowsPage extends StatefulWidget {
   State<WatchlistTvShowsPage> createState() => _WatchlistTvShowsPageState();
 }
 
-class _WatchlistTvShowsPageState extends State<WatchlistTvShowsPage> with RouteAware {
-
+class _WatchlistTvShowsPageState extends State<WatchlistTvShowsPage>
+    with RouteAware {
   @override
   void initState() {
     super.initState();

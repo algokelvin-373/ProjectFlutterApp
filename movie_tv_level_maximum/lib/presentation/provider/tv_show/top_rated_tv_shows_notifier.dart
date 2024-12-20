@@ -3,7 +3,6 @@ import 'package:movie_tv_level_maximum/domain/use_cases/tv_show/get_tv_show_top_
 
 import '../../../common/state_enum.dart';
 import '../../../domain/entities/tv_show/tv_show.dart';
-import '../../../domain/use_cases/tv_show/get_tv_show_popular.dart';
 
 class TopRatedTvShowsNotifier extends ChangeNotifier {
   final GetTopRatedTvShow getTopRatedTvShow;

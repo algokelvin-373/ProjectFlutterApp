@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_detail_response.dart';
-import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_episode.dart';
 import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_episodes_response.dart';
 import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_model.dart';
 import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_response.dart';
@@ -108,7 +107,8 @@ class TvShowRemoteDataSourceImpl implements TvShowRemoteDataSource {
 
   @override
   Future<TvShowEpisodeResponse> getAllEpisodes(int id, int season) async {
-    final response = await client.get(Uri.parse('$BASE_URL/tv/$id/season/$season?$API_KEY'));
+    final response =
+        await client.get(Uri.parse('$BASE_URL/tv/$id/season/$season?$API_KEY'));
     if (response.statusCode == 200) {
       return TvShowEpisodeResponse.fromJson(json.decode(response.body));
     } else {
