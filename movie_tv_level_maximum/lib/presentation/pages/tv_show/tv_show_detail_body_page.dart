@@ -6,6 +6,7 @@ import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_season_model.
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_detail.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/tv_show/tv_show_detail_page.dart';
+import 'package:movie_tv_level_maximum/presentation/pages/tv_show/tv_show_episodes_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../../common/constants.dart';
@@ -245,10 +246,15 @@ class TvShowDetailBodyPage extends StatelessWidget {
             padding: const EdgeInsets.all(4.0),
             child: InkWell(
               onTap: () {
-                Navigator.pushReplacementNamed(
+                print('id: ${tvShow.id}');
+                print('season: ${season.seasonNumber}');
+                Navigator.pushNamed(
                   context,
-                  TvShowDetailPage.ROUTE_NAME,
-                  arguments: tvShow.id,
+                  TvShowEpisodesPage.ROUTE_NAME,
+                  arguments: {
+                    'id': tvShow.id,
+                    'seasons': season.seasonNumber,
+                  },
                 );
               },
               child: ClipRRect(
