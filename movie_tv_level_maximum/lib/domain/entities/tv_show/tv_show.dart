@@ -31,6 +31,22 @@ class TvShow {
     required this.voteCount,
   });
 
+  TvShow.simple({
+    required this.id,
+    required this.name,
+    required this.posterPath,
+    required this.overview,
+  })  : adult = false,
+        backdropPath = '',
+        genreIds = [],
+        originCountry = [],
+        originalLanguage = '',
+        originalName = '',
+        popularity = 0.0,
+        firstAirDate = DateTime(1970, 1, 1),
+        voteAverage = 0.0,
+        voteCount = 0;
+
   factory TvShow.fromJson(Map<String, dynamic> json) => TvShow(
     adult: json["adult"],
     backdropPath: json["backdrop_path"],

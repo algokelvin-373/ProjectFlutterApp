@@ -22,6 +22,8 @@ class _TvShowDetailPageState extends State<TvShowDetailPage> {
     Future.microtask(() {
       Provider.of<TvShowDetailNotifier>(context, listen: false)
           .fetchTvShowDetail(widget.id);
+      Provider.of<TvShowDetailNotifier>(context, listen: false)
+          .loadWatchlistTvShowStatus(widget.id);
     });
   }
 
@@ -40,12 +42,8 @@ class _TvShowDetailPageState extends State<TvShowDetailPage> {
               child: TvShowDetailBodyPage(
                 tvShow: tvShow,
                 recommendations: provider.tvShowRecommendations,
+                isAddedWatchlist: provider.isAddedToWatchlistTvShow,
               ),
-              /*child: DetailContent(
-                movie,
-                provider.movieRecommendations,
-                provider.isAddedToWatchlist,
-              ),*/
             );
           } else {
             return Text(provider.message);
