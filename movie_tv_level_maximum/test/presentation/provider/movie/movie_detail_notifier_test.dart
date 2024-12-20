@@ -12,7 +12,7 @@ import 'package:movie_tv_level_maximum/domain/use_cases/remove_watchlist.dart';
 import 'package:movie_tv_level_maximum/domain/use_cases/save_watchlist.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/movie_detail_notifier.dart';
 
-import '../../dummy_data/dummy_objects.dart';
+import '../../../dummy_data/dummy_objects.dart';
 import 'movie_detail_notifier_test.mocks.dart';
 
 @GenerateMocks([
