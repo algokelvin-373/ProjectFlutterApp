@@ -1,8 +1,7 @@
-import 'package:movie_tv_level_maximum/data/models/genre_model.dart';
-import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_season_model.dart';
-import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_detail.dart';
+import '../../../data/models/genre_model.dart';
+import '../../../data/models/tv_show/tv_show_season_model.dart';
 
-class TvShowDetailResponse {
+class TvShowDetail {
   bool adult;
   String backdropPath;
   //List<CreatedBy> createdBy;
@@ -36,7 +35,7 @@ class TvShowDetailResponse {
   double voteAverage;
   int voteCount;
 
-  TvShowDetailResponse({
+  TvShowDetail({
     required this.adult,
     required this.backdropPath,
     //required this.createdBy,
@@ -62,8 +61,9 @@ class TvShowDetailResponse {
     required this.posterPath,
     //required this.productionCompanies,
     //required this.productionCountries,
-    required this.seasons,
+    //required this.seasons,
     //required this.spokenLanguages,
+    required this.seasons,
     required this.status,
     required this.tagline,
     required this.type,
@@ -71,42 +71,13 @@ class TvShowDetailResponse {
     required this.voteCount,
   });
 
-  TvShowDetail toEntity() {
-    return TvShowDetail(
-        adult: adult,
-        backdropPath: backdropPath,
-        episodeRunTime: episodeRunTime,
-        firstAirDate: firstAirDate,
-        genres: genres,
-        homepage: homepage,
-        id: id,
-        inProduction: inProduction,
-        languages: languages,
-        lastAirDate: lastAirDate,
-        name: name,
-        numberOfEpisodes: numberOfEpisodes,
-        numberOfSeasons: numberOfSeasons,
-        originCountry: originCountry,
-        originalLanguage: originalLanguage,
-        originalName: originalName,
-        overview: overview,
-        popularity: popularity,
-        posterPath: posterPath,
-        seasons: seasons,
-        status: status,
-        tagline: tagline,
-        type: type,
-        voteAverage: voteAverage,
-        voteCount: voteCount);
-  }
-
-  factory TvShowDetailResponse.fromJson(Map<String, dynamic> json) => TvShowDetailResponse(
+  /*factory TvShowDetail.fromJson(Map<String, dynamic> json) => TvShowDetail(
     adult: json["adult"],
     backdropPath: json["backdrop_path"],
     //createdBy: List<CreatedBy>.from(json["created_by"].map((x) => CreatedBy.fromJson(x))),
     episodeRunTime: List<int>.from(json["episode_run_time"].map((x) => x)),
     firstAirDate: DateTime.parse(json["first_air_date"]),
-    genres: List<GenreModel>.from(json["genres"].map((x) => GenreModel.fromJson(x))),
+    genres: List<Genre>.from(json["genres"].map((x) => Genre.fromJson(x))),
     homepage: json["homepage"],
     id: json["id"],
     inProduction: json["in_production"],
@@ -126,7 +97,7 @@ class TvShowDetailResponse {
     posterPath: json["poster_path"],
     //productionCompanies: List<Network>.from(json["production_companies"].map((x) => Network.fromJson(x))),
     //productionCountries: List<ProductionCountry>.from(json["production_countries"].map((x) => ProductionCountry.fromJson(x))),
-    seasons: List<Season>.from(json["seasons"].map((x) => Season.fromJson(x))),
+    //seasons: List<Season>.from(json["seasons"].map((x) => Season.fromJson(x))),
     //spokenLanguages: List<SpokenLanguage>.from(json["spoken_languages"].map((x) => SpokenLanguage.fromJson(x))),
     status: json["status"],
     tagline: json["tagline"],
@@ -141,7 +112,7 @@ class TvShowDetailResponse {
     //"created_by": List<dynamic>.from(createdBy.map((x) => x.toJson())),
     "episode_run_time": List<dynamic>.from(episodeRunTime.map((x) => x)),
     "first_air_date": "${firstAirDate.year.toString().padLeft(4, '0')}-${firstAirDate.month.toString().padLeft(2, '0')}-${firstAirDate.day.toString().padLeft(2, '0')}",
-    "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
+    //"genres": List<dynamic>.from(genres.map((x) => x.toJson())),
     "homepage": homepage,
     "id": id,
     "in_production": inProduction,
@@ -161,12 +132,12 @@ class TvShowDetailResponse {
     "poster_path": posterPath,
     //"production_companies": List<dynamic>.from(productionCompanies.map((x) => x.toJson())),
     //"production_countries": List<dynamic>.from(productionCountries.map((x) => x.toJson())),
-    "seasons": List<dynamic>.from(seasons.map((x) => x.toJson())),
+    //"seasons": List<dynamic>.from(seasons.map((x) => x.toJson())),
     //"spoken_languages": List<dynamic>.from(spokenLanguages.map((x) => x.toJson())),
     "status": status,
     "tagline": tagline,
     "type": type,
     "vote_average": voteAverage,
     "vote_count": voteCount,
-  };
+  };*/
 }
