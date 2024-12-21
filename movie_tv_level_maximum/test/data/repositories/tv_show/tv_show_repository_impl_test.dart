@@ -8,7 +8,6 @@ import 'package:movie_tv_level_maximum/common/exception.dart';
 import 'package:movie_tv_level_maximum/common/failure.dart';
 import 'package:movie_tv_level_maximum/data/data_sources/tv_show/tv_show_local_data_source.dart';
 import 'package:movie_tv_level_maximum/data/data_sources/tv_show/tv_show_remote_data_source.dart';
-import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_detail_response.dart';
 import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_model.dart';
 import 'package:movie_tv_level_maximum/data/repositories/tv_show_repository_impl.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show.dart';
@@ -194,33 +193,6 @@ void main() {
 
   group('Get TV Show Detail', () {
     final tId = 1;
-    final tTvShowResponse = TvShowDetailResponse(
-      adult: false,
-      backdropPath: "backdropPath",
-      episodeRunTime: [],
-      firstAirDate: DateTime.parse('2024-12-31'),
-      genres: [],
-      homepage: "homepage",
-      id: 1,
-      inProduction: false,
-      languages: [],
-      lastAirDate: DateTime.parse('2024-12-31'),
-      name: "name",
-      numberOfEpisodes: 1,
-      numberOfSeasons: 1,
-      originCountry: [],
-      originalLanguage: "originalLanguage",
-      originalName: "originalName",
-      overview: "overview",
-      popularity: 1,
-      posterPath: "posterPath",
-      seasons: [],
-      status: "status",
-      tagline: "tagline",
-      type: "type",
-      voteAverage: 1,
-      voteCount: 1,
-    );
 
     /*test('Should return TV Show Detail when success call remote data source',
         () async {

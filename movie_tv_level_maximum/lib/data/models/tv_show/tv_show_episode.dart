@@ -1,5 +1,3 @@
-
-
 class TvShowEpisodeModel {
   DateTime? airDate;
   int episodeNumber;

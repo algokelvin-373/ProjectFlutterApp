@@ -33,6 +33,5 @@ class TvShowResponse {
     };
   }
 
-  @override
   List<Object?> get props => [tvShowList, page, totalPages, totalResults];
 }

@@ -1,12 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:movie_tv_level_maximum/domain/entities/movie.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show.dart';
-import 'package:movie_tv_level_maximum/domain/use_cases/search_movies.dart';
 import 'package:movie_tv_level_maximum/domain/use_cases/tv_show/search_tv_shows.dart';
 
-import '../../../helpers/test_helper.mocks.dart';
 import 'get_list_tv_shows_test.mocks.dart';
 
 void main() {
