@@ -1,0 +1,28 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "backdrop_path",
+      "genre_ids": [
+        10766,
+        18
+      ],
+      "id": 112470,
+      "origin_country": [
+        "FR"
+      ],
+      "original_language": "fr",
+      "original_name": "Original Name",
+      "overview": "Overview",
+      "popularity": 3468.51,
+      "poster_path": "poster_path",
+      "first_air_date": "2020-11-02",
+      "name": "Name",
+      "vote_average": 6.8,
+      "vote_count": 86
+    }
+  ],
+  "total_pages": 15,
+  "total_results": 292
+}
