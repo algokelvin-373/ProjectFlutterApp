@@ -1,3 +1,4 @@
+import 'package:movie_tv_level_maximum/data/models/genre_model.dart';
 import 'package:movie_tv_level_maximum/data/models/movie_table.dart';
 import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_table.dart';
 import 'package:movie_tv_level_maximum/domain/entities/genre.dart';
@@ -24,6 +25,34 @@ final testMovie = Movie(
 );
 
 final testMovieList = [testMovie];
+
+final testTvShowDetail = TvShowDetail(
+    adult: false,
+    backdropPath: "backdropPath",
+    episodeRunTime: [],
+    firstAirDate: DateTime.parse('2024-12-31'),
+    genres: [GenreModel(id: 1, name: 'Action')],
+    homepage: "homepage",
+    id: 1,
+    inProduction: false,
+    languages: ['', ''],
+    lastAirDate: DateTime.parse('2024-12-31'),
+    name: "name",
+    numberOfEpisodes: 1,
+    numberOfSeasons: 1,
+    originCountry: [],
+    originalLanguage: "originalLanguage",
+    originalName: "originalName",
+    overview: "overview",
+    popularity: 1.0,
+    posterPath: "posterPath",
+    seasons: [],
+    status: "status",
+    tagline: "tagline",
+    type: "type",
+    voteAverage: 1,
+    voteCount: 1,
+);
 
 final testMovieDetail = MovieDetail(
   adult: false,
