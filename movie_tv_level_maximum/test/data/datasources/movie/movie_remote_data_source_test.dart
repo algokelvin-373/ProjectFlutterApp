@@ -8,8 +8,8 @@ import 'package:movie_tv_level_maximum/data/data_sources/movie_remote_data_sourc
 import 'package:movie_tv_level_maximum/data/models/movie_detail_model.dart';
 import 'package:movie_tv_level_maximum/data/models/movie_response.dart';
 
-import '../../helpers/test_helper.mocks.dart';
-import '../../json_reader.dart';
+import '../../../helpers/test_helper.mocks.dart';
+import '../../../json_reader.dart';
 
 void main() {
   const apiKey = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
