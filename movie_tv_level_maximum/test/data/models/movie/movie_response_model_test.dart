@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:movie_tv_level_maximum/data/models/movie_model.dart';
 import 'package:movie_tv_level_maximum/data/models/movie_response.dart';
 
-import '../../json_reader.dart';
+import '../../../json_reader.dart';
 
 void main() {
   final tMovieModel = MovieModel(

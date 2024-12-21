@@ -3,8 +3,8 @@ import 'package:mockito/mockito.dart';
 import 'package:movie_tv_level_maximum/common/exception.dart';
 import 'package:movie_tv_level_maximum/data/data_sources/movie_local_data_source.dart';
 
-import '../../dummy_data/dummy_objects.dart';
-import '../../helpers/test_helper.mocks.dart';
+import '../../../dummy_data/dummy_objects.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late MovieLocalDataSourceImpl dataSource;

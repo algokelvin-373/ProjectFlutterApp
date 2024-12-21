@@ -1,0 +1,67 @@
+{
+  "adult": false,
+  "backdrop_path": "backdrop_path",
+  "episode_run_time": [
+    25
+  ],
+  "first_air_date": "2005-02-21",
+  "genres": [
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 10759,
+      "name": "Action & Adventure"
+    },
+    {
+      "id": 10765,
+      "name": "Sci-Fi & Fantasy"
+    }
+  ],
+  "homepage": "homepage",
+  "id": 246,
+  "in_production": false,
+  "languages": [
+    "en"
+  ],
+  "last_air_date": "2008-07-19",
+  "name": "name",
+  "number_of_episodes": 61,
+  "number_of_seasons": 3,
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_name": "original_name",
+  "overview": "overview",
+  "popularity": 95.699,
+  "poster_path": "poster_path",
+  "seasons": [
+    {
+      "air_date": "2002-04-30",
+      "episode_count": 24,
+      "id": 788,
+      "name": "Specials",
+      "overview": "overview",
+      "poster_path": "poster_path",
+      "season_number": 0,
+      "vote_average": 0.0
+    },
+    {
+      "air_date": "2002-04-30",
+      "episode_count": 24,
+      "id": 788,
+      "name": "Specials",
+      "overview": "overview",
+      "poster_path": "poster_path",
+      "season_number": 0,
+      "vote_average": 0.0
+    }
+  ],
+  "status": "Ended",
+  "tagline": "tagline",
+  "type": "Scripted",
+  "vote_average": 8.7,
+  "vote_count": 4163
+}

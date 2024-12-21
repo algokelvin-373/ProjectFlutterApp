@@ -1,8 +1,10 @@
 import 'package:movie_tv_level_maximum/data/models/genre_model.dart';
 import 'package:movie_tv_level_maximum/data/models/movie_table.dart';
+import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_table.dart';
 import 'package:movie_tv_level_maximum/domain/entities/genre.dart';
 import 'package:movie_tv_level_maximum/domain/entities/movie.dart';
 import 'package:movie_tv_level_maximum/domain/entities/movie_detail.dart';
+import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_detail.dart';
 
 final testMovie = Movie(
@@ -67,9 +69,44 @@ final testMovieDetail = MovieDetail(
   voteCount: 1,
 );
 
+final testTvShowDetail = TvShowDetail(
+  adult: false,
+  backdropPath: "backdropPath",
+  episodeRunTime: [],
+  firstAirDate: DateTime.parse('2024-12-31'),
+  genres: [],
+  homepage: "homepage",
+  id: 1,
+  inProduction: false,
+  languages: [],
+  lastAirDate: DateTime.parse('2024-12-31'),
+  name: "name",
+  numberOfEpisodes: 1,
+  numberOfSeasons: 1,
+  originCountry: [],
+  originalLanguage: "originalLanguage",
+  originalName: "originalName",
+  overview: "overview",
+  popularity: 1,
+  posterPath: "posterPath",
+  seasons: [],
+  status: "status",
+  tagline: "tagline",
+  type: "type",
+  voteAverage: 1,
+  voteCount: 1,
+);
+
 final testWatchlistMovie = Movie.watchlist(
   id: 1,
   title: 'title',
+  posterPath: 'posterPath',
+  overview: 'overview',
+);
+
+final testWatchlistTvShow = TvShow.simple(
+  id: 1,
+  name: 'name',
   posterPath: 'posterPath',
   overview: 'overview',
 );
@@ -81,9 +118,23 @@ final testMovieTable = MovieTable(
   overview: 'overview',
 );
 
+final testTvShowTable = TvShowTable(
+  id: 1,
+  name: 'name',
+  posterPath: 'posterPath',
+  overview: 'overview',
+);
+
 final testMovieMap = {
   'id': 1,
   'overview': 'overview',
   'posterPath': 'posterPath',
   'title': 'title',
+};
+
+final testTvShowMap = {
+  'id': 1,
+  'title': 'name',
+  'overview': 'overview',
+  'posterPath': 'posterPath',
 };

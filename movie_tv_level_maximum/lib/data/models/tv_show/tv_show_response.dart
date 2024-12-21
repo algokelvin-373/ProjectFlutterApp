@@ -13,18 +13,26 @@ class TvShowResponse {
     required this.totalResults,
   });
 
-  factory TvShowResponse.fromJson(Map<String, dynamic> json) => TvShowResponse(
-        page: json["page"],
-        tvShowList: List<TvShowModel>.from(
-            json["results"].map((x) => TvShowModel.fromJson(x))),
-        totalPages: json["total_pages"],
-        totalResults: json["total_results"],
-      );
+  factory TvShowResponse.fromJson(Map<String, dynamic> json) {
+    return TvShowResponse(
+      tvShowList: List<TvShowModel>.from(
+        (json['results'] as List).map((item) => TvShowModel.fromJson(item)),
+      ),
+      page: json['page'],
+      totalPages: json['total_pages'],
+      totalResults: json['total_results'],
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-        "page": page,
-        "results": List<dynamic>.from(tvShowList.map((x) => x.toJson())),
-        "total_pages": totalPages,
-        "total_results": totalResults,
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'results': tvShowList.map((item) => item.toJson()).toList(),
+      'page': page,
+      'total_pages': totalPages,
+      'total_results': totalResults,
+    };
+  }
+
+  @override
+  List<Object?> get props => [tvShowList, page, totalPages, totalResults];
 }
