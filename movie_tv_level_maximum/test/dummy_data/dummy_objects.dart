@@ -26,7 +26,7 @@ final testMovie = Movie(
 
 final testMovieList = [testMovie];
 
-final testTvShowDetail = TvShowDetail(
+/*final testTvShowDetail = TvShowDetail(
     adult: false,
     backdropPath: "backdropPath",
     episodeRunTime: [],
@@ -52,7 +52,7 @@ final testTvShowDetail = TvShowDetail(
     type: "type",
     voteAverage: 1,
     voteCount: 1,
-);
+);*/
 
 final testMovieDetail = MovieDetail(
   adult: false,
