@@ -6,9 +6,7 @@ import 'package:movie_tv_level_maximum/common/failure.dart';
 import 'package:movie_tv_level_maximum/common/state_enum.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show.dart';
 import 'package:movie_tv_level_maximum/domain/use_cases/tv_show/get_tv_show_on_the_air.dart';
-import 'package:movie_tv_level_maximum/domain/use_cases/tv_show/get_tv_show_top_rated.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/on_the_air_tv_shows_notifier.dart';
-import 'package:movie_tv_level_maximum/presentation/provider/tv_show/top_rated_tv_shows_notifier.dart';
 
 import 'on_the_air_tv_shows_notifier_test.mocks.dart';
 

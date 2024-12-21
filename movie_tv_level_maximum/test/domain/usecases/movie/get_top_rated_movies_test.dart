@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:movie_tv_level_maximum/domain/entities/movie.dart';
 import 'package:movie_tv_level_maximum/domain/use_cases/get_top_rated_movies.dart';
 
-import '../../helpers/test_helper.mocks.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late GetTopRatedMovies usecase;
