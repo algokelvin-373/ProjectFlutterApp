@@ -1,21 +1,22 @@
 import 'package:equatable/equatable.dart';
-import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show.dart';
+
+import '../../../domain/entities/tv_show/tv_show.dart';
 
 class TvShowModel extends Equatable {
-  bool adult;
-  String backdropPath;
-  List<int> genreIds;
-  int id;
-  List<String> originCountry;
-  String originalLanguage;
-  String originalName;
-  String overview;
-  double popularity;
-  String posterPath;
-  DateTime firstAirDate;
-  String name;
-  double voteAverage;
-  int voteCount;
+  final bool adult;
+  final String backdropPath;
+  final List<int> genreIds;
+  final int id;
+  final List<String> originCountry;
+  final String originalLanguage;
+  final String originalName;
+  final String overview;
+  final double popularity;
+  final String posterPath;
+  final DateTime firstAirDate;
+  final String name;
+  final double voteAverage;
+  final int voteCount;
 
   TvShowModel({
     required this.adult,
