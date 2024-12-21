@@ -11,8 +11,8 @@ import 'package:movie_tv_level_maximum/data/models/movie_model.dart';
 import 'package:movie_tv_level_maximum/data/repositories/movie_repository_impl.dart';
 import 'package:movie_tv_level_maximum/domain/entities/movie.dart';
 
-import '../../dummy_data/dummy_objects.dart';
-import '../../helpers/test_helper.mocks.dart';
+import '../../../dummy_data/dummy_objects.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late MovieRepositoryImpl repository;
