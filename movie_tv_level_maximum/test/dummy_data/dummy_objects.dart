@@ -1,4 +1,5 @@
 import 'package:movie_tv_level_maximum/data/models/movie_table.dart';
+import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_table.dart';
 import 'package:movie_tv_level_maximum/domain/entities/genre.dart';
 import 'package:movie_tv_level_maximum/domain/entities/movie.dart';
 import 'package:movie_tv_level_maximum/domain/entities/movie_detail.dart';
@@ -51,9 +52,23 @@ final testMovieTable = MovieTable(
   overview: 'overview',
 );
 
+final testTvShowTable = TvShowTable(
+  id: 1,
+  name: 'name',
+  posterPath: 'posterPath',
+  overview: 'overview',
+);
+
 final testMovieMap = {
   'id': 1,
   'overview': 'overview',
   'posterPath': 'posterPath',
   'title': 'title',
+};
+
+final testTvShowMap = {
+  'id': 1,
+  'title': 'name',
+  'overview': 'overview',
+  'posterPath': 'posterPath',
 };
