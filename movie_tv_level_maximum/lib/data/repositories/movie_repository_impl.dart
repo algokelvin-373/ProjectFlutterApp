@@ -7,8 +7,8 @@ import '../../common/failure.dart';
 import '../../domain/entities/movie.dart';
 import '../../domain/entities/movie_detail.dart';
 import '../../domain/repositories/movie_repository.dart';
-import '../data_sources/movie_local_data_source.dart';
-import '../data_sources/movie_remote_data_source.dart';
+import '../data_sources/movie/movie_local_data_source.dart';
+import '../data_sources/movie/movie_remote_data_source.dart';
 import '../models/movie_table.dart';
 
 class MovieRepositoryImpl implements MovieRepository {

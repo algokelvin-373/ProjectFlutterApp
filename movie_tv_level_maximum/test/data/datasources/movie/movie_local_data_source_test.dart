@@ -3,7 +3,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movie_tv_level_maximum/common/exception.dart';
 import 'package:movie_tv_level_maximum/data/data_sources/db/database_helper.dart';
-import 'package:movie_tv_level_maximum/data/data_sources/movie_local_data_source.dart';
+import 'package:movie_tv_level_maximum/data/data_sources/movie/movie_local_data_source.dart';
 
 import '../../../dummy_data/dummy_objects.dart';
 import 'movie_local_data_source_test.mocks.dart';

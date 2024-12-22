@@ -14,9 +14,9 @@ import 'package:mockito/src/dummies.dart' as _i14;
 import 'package:movie_tv_level_maximum/common/failure.dart' as _i7;
 import 'package:movie_tv_level_maximum/data/data_sources/db/database_helper.dart'
     as _i15;
-import 'package:movie_tv_level_maximum/data/data_sources/movie_local_data_source.dart'
+import 'package:movie_tv_level_maximum/data/data_sources/movie/movie_local_data_source.dart'
     as _i12;
-import 'package:movie_tv_level_maximum/data/data_sources/movie_remote_data_source.dart'
+import 'package:movie_tv_level_maximum/data/data_sources/movie/movie_remote_data_source.dart'
     as _i10;
 import 'package:movie_tv_level_maximum/data/models/movie_detail_model.dart'
     as _i3;

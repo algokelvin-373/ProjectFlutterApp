@@ -32,8 +32,8 @@ import 'package:movie_tv_level_maximum/presentation/provider/tv_show/watchlist_t
 import 'package:movie_tv_level_maximum/presentation/provider/watchlist_movie_notifier.dart';
 
 import 'data/data_sources/db/database_helper.dart';
-import 'data/data_sources/movie_local_data_source.dart';
-import 'data/data_sources/movie_remote_data_source.dart';
+import 'data/data_sources/movie/movie_local_data_source.dart';
+import 'data/data_sources/movie/movie_remote_data_source.dart';
 import 'data/repositories/movie_repository_impl.dart';
 import 'domain/repositories/movie_repository.dart';
 import 'domain/use_cases/get_movie_detail.dart';
