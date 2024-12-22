@@ -1,11 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movie_tv_level_maximum/common/exception.dart';
+import 'package:movie_tv_level_maximum/data/data_sources/db/database_helper.dart';
 import 'package:movie_tv_level_maximum/data/data_sources/tv_show/tv_show_local_data_source.dart';
 
 import '../../../dummy_data/dummy_objects.dart';
-import '../../../helpers/test_helper.mocks.dart';
+import 'tv_local_data_source_test.mocks.dart';
 
+@GenerateMocks([DatabaseHelper])
 void main() {
   late TvShowLocalDataSourceImpl dataSource;
   late MockDatabaseHelper mockDatabaseHelper;
