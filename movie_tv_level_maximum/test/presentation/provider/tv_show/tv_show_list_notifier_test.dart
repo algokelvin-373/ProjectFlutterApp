@@ -99,4 +99,118 @@ void main() {
       expect(listenerCallCount, 2);
     });
   });
+
+  group('On The Air TV Shows', () {
+    test('initialState should be Empty', () {
+      expect(provider.onTheAirState, equals(RequestState.Empty));
+    });
+
+    test('Should get data from the use case', () async {
+      when(mockGetOnTheAirTvShow.execute())
+          .thenAnswer((_) async => Right(tTvShowList));
+      provider.fetchOnTheAirTvShows();
+      verify(mockGetOnTheAirTvShow.execute());
+    });
+
+    test('Should change state to Loading when use case is called', () {
+      when(mockGetOnTheAirTvShow.execute())
+          .thenAnswer((_) async => Right(tTvShowList));
+      provider.fetchOnTheAirTvShows();
+      expect(provider.onTheAirState, RequestState.Loading);
+    });
+
+    test('Should change tv shows when data is gotten successfully', () async {
+      when(mockGetOnTheAirTvShow.execute())
+          .thenAnswer((_) async => Right(tTvShowList));
+      await provider.fetchOnTheAirTvShows();
+      expect(provider.onTheAirState, RequestState.Loaded);
+      expect(provider.onTheAirTvShows, tTvShowList);
+      expect(listenerCallCount, 2);
+    });
+
+    test('Should return error when data is unsuccessful', () async {
+      when(mockGetOnTheAirTvShow.execute())
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+      await provider.fetchOnTheAirTvShows();
+      expect(provider.onTheAirState, RequestState.Error);
+      expect(provider.message, 'Server Failure');
+      expect(listenerCallCount, 2);
+    });
+  });
+
+  group('Popular TV Shows', () {
+    test('initialState should be Empty', () {
+      expect(provider.popularState, equals(RequestState.Empty));
+    });
+
+    test('Should get data from the use case', () async {
+      when(mockGetPopularTvShow.execute())
+          .thenAnswer((_) async => Right(tTvShowList));
+      provider.fetchPopularTvShows();
+      verify(mockGetPopularTvShow.execute());
+    });
+
+    test('Should change state to Loading when use case is called', () {
+      when(mockGetPopularTvShow.execute())
+          .thenAnswer((_) async => Right(tTvShowList));
+      provider.fetchPopularTvShows();
+      expect(provider.popularState, RequestState.Loading);
+    });
+
+    test('Should change tv shows when data is gotten successfully', () async {
+      when(mockGetPopularTvShow.execute())
+          .thenAnswer((_) async => Right(tTvShowList));
+      await provider.fetchPopularTvShows();
+      expect(provider.popularState, RequestState.Loaded);
+      expect(provider.popularTvShows, tTvShowList);
+      expect(listenerCallCount, 2);
+    });
+
+    test('Should return error when data is unsuccessful', () async {
+      when(mockGetPopularTvShow.execute())
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+      await provider.fetchPopularTvShows();
+      expect(provider.popularState, RequestState.Error);
+      expect(provider.message, 'Server Failure');
+      expect(listenerCallCount, 2);
+    });
+  });
+
+  group('Top Rated TV Shows', () {
+    test('initialState should be Empty', () {
+      expect(provider.topRatedState, equals(RequestState.Empty));
+    });
+
+    test('Should get data from the use case', () async {
+      when(mockGetTopRatedTvShow.execute())
+          .thenAnswer((_) async => Right(tTvShowList));
+      provider.fetchTopRatedTvShows();
+      verify(mockGetTopRatedTvShow.execute());
+    });
+
+    test('Should change state to Loading when use case is called', () {
+      when(mockGetTopRatedTvShow.execute())
+          .thenAnswer((_) async => Right(tTvShowList));
+      provider.fetchTopRatedTvShows();
+      expect(provider.topRatedState, RequestState.Loading);
+    });
+
+    test('Should change tv shows when data is gotten successfully', () async {
+      when(mockGetTopRatedTvShow.execute())
+          .thenAnswer((_) async => Right(tTvShowList));
+      await provider.fetchTopRatedTvShows();
+      expect(provider.topRatedState, RequestState.Loaded);
+      expect(provider.topRatedTvShows, tTvShowList);
+      expect(listenerCallCount, 2);
+    });
+
+    test('Should return error when data is unsuccessful', () async {
+      when(mockGetTopRatedTvShow.execute())
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+      await provider.fetchTopRatedTvShows();
+      expect(provider.topRatedState, RequestState.Error);
+      expect(provider.message, 'Server Failure');
+      expect(listenerCallCount, 2);
+    });
+  });
 }

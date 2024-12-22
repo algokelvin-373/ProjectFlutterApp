@@ -13,6 +13,7 @@ class TvShowCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: const ValueKey('TvShowCard'),
       margin: const EdgeInsets.symmetric(vertical: 4),
       child: InkWell(
         onTap: () {
