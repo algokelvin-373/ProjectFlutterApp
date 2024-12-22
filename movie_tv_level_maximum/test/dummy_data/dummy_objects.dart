@@ -152,7 +152,7 @@ final testMovieMap = {
 
 final testTvShowMap = {
   'id': 1,
-  'title': 'name',
+  'name': 'name',
   'overview': 'overview',
   'posterPath': 'posterPath',
 };

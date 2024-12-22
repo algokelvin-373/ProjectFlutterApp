@@ -30,16 +30,4 @@ class Season {
         seasonNumber: json["season_number"],
         voteAverage: json["vote_average"]?.toDouble(),
       );
-
-  Map<String, dynamic> toJson() => {
-        "air_date":
-            "${airDate!.year.toString().padLeft(4, '0')}-${airDate!.month.toString().padLeft(2, '0')}-${airDate!.day.toString().padLeft(2, '0')}",
-        "episode_count": episodeCount,
-        "id": id,
-        "name": name,
-        "overview": overview,
-        "poster_path": posterPath,
-        "season_number": seasonNumber,
-        "vote_average": voteAverage,
-      };
 }

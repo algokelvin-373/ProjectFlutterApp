@@ -50,17 +50,4 @@ class TvShowEpisodeResponse {
         seasonNumber: json["season_number"],
         voteAverage: json["vote_average"]?.toDouble(),
       );
-
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "air_date":
-            "${airDate.year.toString().padLeft(4, '0')}-${airDate.month.toString().padLeft(2, '0')}-${airDate.day.toString().padLeft(2, '0')}",
-        "episodes": List<dynamic>.from(episodes.map((x) => x.toJson())),
-        "name": name,
-        "overview": overview,
-        "id": tvShowEpisodeResponseId,
-        "poster_path": posterPath,
-        "season_number": seasonNumber,
-        "vote_average": voteAverage,
-      };
 }

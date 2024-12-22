@@ -26,23 +26,16 @@ void main() {
       MovieResponse(movieList: <MovieModel>[tMovieModel]);
   group('fromJson', () {
     test('should return a valid model from JSON', () async {
-      // arrange
       final Map<String, dynamic> jsonMap =
           json.decode(readJson('dummy_data/now_playing.json'));
-      // act
       final result = MovieResponse.fromJson(jsonMap);
-      // assert
       expect(result, tMovieResponseModel);
     });
   });
 
   group('toJson', () {
     test('should return a JSON map containing proper data', () async {
-      // arrange
-
-      // act
       final result = tMovieResponseModel.toJson();
-      // assert
       final expectedJsonMap = {
         "results": [
           {

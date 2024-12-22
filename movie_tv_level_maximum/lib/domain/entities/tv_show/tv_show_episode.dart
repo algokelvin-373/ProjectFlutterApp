@@ -24,26 +24,25 @@ class TvShowEpisode {
   });
 
   factory TvShowEpisode.fromJson(Map<String, dynamic> json) => TvShowEpisode(
-        id: json["_id"],
-        airDate: DateTime.parse(json["air_date"]),
+        id: json["id"],
+        airDate: DateTime.parse(json["airDate"]),
         episodes: List<TvShowEpisodeModel>.from(
             json["episodes"].map((x) => TvShowEpisodeModel.fromJson(x))),
         name: json["name"],
         overview: json["overview"],
-        tvShowEpisodeResponseId: json["id"],
+        tvShowEpisodeResponseId: json["tvShowEpisodeResponseId"],
         posterPath: json["poster_path"],
         seasonNumber: json["season_number"],
         voteAverage: json["vote_average"]?.toDouble(),
       );
 
   Map<String, dynamic> toJson() => {
-        "_id": id,
-        "air_date":
-            "${airDate.year.toString().padLeft(4, '0')}-${airDate.month.toString().padLeft(2, '0')}-${airDate.day.toString().padLeft(2, '0')}",
+        "id": id,
+        "airDate": DateTime.parse("${airDate.year.toString().padLeft(4, '0')}-${airDate.month.toString().padLeft(2, '0')}-${airDate.day.toString().padLeft(2, '0')}"),
         "episodes": List<dynamic>.from(episodes.map((x) => x.toJson())),
         "name": name,
         "overview": overview,
-        "id": tvShowEpisodeResponseId,
+        "tvShowEpisodeResponseId": tvShowEpisodeResponseId,
         "poster_path": posterPath,
         "season_number": seasonNumber,
         "vote_average": voteAverage,
