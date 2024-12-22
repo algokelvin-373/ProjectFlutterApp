@@ -14,18 +14,20 @@ import 'package:mockito/src/dummies.dart' as _i14;
 import 'package:movie_tv_level_maximum/common/failure.dart' as _i7;
 import 'package:movie_tv_level_maximum/data/data_sources/db/database_helper.dart'
     as _i15;
-import 'package:movie_tv_level_maximum/data/data_sources/movie_local_data_source.dart'
+import 'package:movie_tv_level_maximum/data/data_sources/movie/movie_local_data_source.dart'
     as _i12;
-import 'package:movie_tv_level_maximum/data/data_sources/movie_remote_data_source.dart'
+import 'package:movie_tv_level_maximum/data/data_sources/movie/movie_remote_data_source.dart'
     as _i10;
-import 'package:movie_tv_level_maximum/data/models/movie_detail_model.dart'
+import 'package:movie_tv_level_maximum/data/models/movie/movie_detail_model.dart'
     as _i3;
-import 'package:movie_tv_level_maximum/data/models/movie_model.dart' as _i11;
-import 'package:movie_tv_level_maximum/data/models/movie_table.dart' as _i13;
+import 'package:movie_tv_level_maximum/data/models/movie/movie_model.dart'
+    as _i11;
+import 'package:movie_tv_level_maximum/data/models/movie/movie_table.dart'
+    as _i13;
 import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_table.dart'
     as _i17;
-import 'package:movie_tv_level_maximum/domain/entities/movie.dart' as _i8;
-import 'package:movie_tv_level_maximum/domain/entities/movie_detail.dart'
+import 'package:movie_tv_level_maximum/domain/entities/movie/movie.dart' as _i8;
+import 'package:movie_tv_level_maximum/domain/entities/movie/movie_detail.dart'
     as _i9;
 import 'package:movie_tv_level_maximum/domain/repositories/movie_repository.dart'
     as _i5;

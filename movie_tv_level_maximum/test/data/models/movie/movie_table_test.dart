@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movie_tv_level_maximum/data/models/movie_table.dart';
+import 'package:movie_tv_level_maximum/data/models/movie/movie_table.dart';
 
 void main() {
   final tMovieTable = MovieTable(

@@ -1,8 +1,8 @@
-import 'package:movie_tv_level_maximum/data/models/movie_table.dart';
+import 'package:movie_tv_level_maximum/data/models/movie/movie_table.dart';
 import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_table.dart';
-import 'package:movie_tv_level_maximum/domain/entities/genre.dart';
-import 'package:movie_tv_level_maximum/domain/entities/movie.dart';
-import 'package:movie_tv_level_maximum/domain/entities/movie_detail.dart';
+import 'package:movie_tv_level_maximum/domain/entities/movie/genre.dart';
+import 'package:movie_tv_level_maximum/domain/entities/movie/movie.dart';
+import 'package:movie_tv_level_maximum/domain/entities/movie/movie_detail.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_detail.dart';
 

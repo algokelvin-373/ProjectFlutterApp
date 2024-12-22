@@ -4,8 +4,8 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movie_tv_level_maximum/common/failure.dart';
 import 'package:movie_tv_level_maximum/common/state_enum.dart';
-import 'package:movie_tv_level_maximum/domain/use_cases/get_watchlist_movies.dart';
-import 'package:movie_tv_level_maximum/presentation/provider/watchlist_movie_notifier.dart';
+import 'package:movie_tv_level_maximum/domain/use_cases/movie/get_watchlist_movies.dart';
+import 'package:movie_tv_level_maximum/presentation/provider/movie/watchlist_movie_notifier.dart';
 
 import '../../../dummy_data/dummy_objects.dart';
 import 'watchlist_movie_notifier_test.mocks.dart';

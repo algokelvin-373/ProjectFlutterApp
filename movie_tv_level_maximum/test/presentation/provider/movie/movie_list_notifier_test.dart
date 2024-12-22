@@ -4,11 +4,11 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movie_tv_level_maximum/common/failure.dart';
 import 'package:movie_tv_level_maximum/common/state_enum.dart';
-import 'package:movie_tv_level_maximum/domain/entities/movie.dart';
-import 'package:movie_tv_level_maximum/domain/use_cases/get_now_playing_movies.dart';
-import 'package:movie_tv_level_maximum/domain/use_cases/get_popular_movies.dart';
-import 'package:movie_tv_level_maximum/domain/use_cases/get_top_rated_movies.dart';
-import 'package:movie_tv_level_maximum/presentation/provider/movie_list_notifier.dart';
+import 'package:movie_tv_level_maximum/domain/entities/movie/movie.dart';
+import 'package:movie_tv_level_maximum/domain/use_cases/movie/get_now_playing_movies.dart';
+import 'package:movie_tv_level_maximum/domain/use_cases/movie/get_popular_movies.dart';
+import 'package:movie_tv_level_maximum/domain/use_cases/movie/get_top_rated_movies.dart';
+import 'package:movie_tv_level_maximum/presentation/provider/movie/movie_list_notifier.dart';
 
 import 'movie_list_notifier_test.mocks.dart';
 

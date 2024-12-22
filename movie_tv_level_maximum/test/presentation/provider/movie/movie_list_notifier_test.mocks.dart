@@ -8,14 +8,14 @@ import 'dart:async' as _i5;
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:movie_tv_level_maximum/common/failure.dart' as _i6;
-import 'package:movie_tv_level_maximum/domain/entities/movie.dart' as _i7;
+import 'package:movie_tv_level_maximum/domain/entities/movie/movie.dart' as _i7;
 import 'package:movie_tv_level_maximum/domain/repositories/movie_repository.dart'
     as _i2;
-import 'package:movie_tv_level_maximum/domain/use_cases/get_now_playing_movies.dart'
+import 'package:movie_tv_level_maximum/domain/use_cases/movie/get_now_playing_movies.dart'
     as _i4;
-import 'package:movie_tv_level_maximum/domain/use_cases/get_popular_movies.dart'
+import 'package:movie_tv_level_maximum/domain/use_cases/movie/get_popular_movies.dart'
     as _i8;
-import 'package:movie_tv_level_maximum/domain/use_cases/get_top_rated_movies.dart'
+import 'package:movie_tv_level_maximum/domain/use_cases/movie/get_top_rated_movies.dart'
     as _i9;
 
 // ignore_for_file: type=lint

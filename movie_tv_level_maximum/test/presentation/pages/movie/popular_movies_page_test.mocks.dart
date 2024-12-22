@@ -9,10 +9,10 @@ import 'dart:ui' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i6;
 import 'package:movie_tv_level_maximum/common/state_enum.dart' as _i4;
-import 'package:movie_tv_level_maximum/domain/entities/movie.dart' as _i5;
-import 'package:movie_tv_level_maximum/domain/use_cases/get_popular_movies.dart'
+import 'package:movie_tv_level_maximum/domain/entities/movie/movie.dart' as _i5;
+import 'package:movie_tv_level_maximum/domain/use_cases/movie/get_popular_movies.dart'
     as _i2;
-import 'package:movie_tv_level_maximum/presentation/provider/popular_movies_notifier.dart'
+import 'package:movie_tv_level_maximum/presentation/provider/movie/popular_movies_notifier.dart'
     as _i3;
 
 // ignore_for_file: type=lint

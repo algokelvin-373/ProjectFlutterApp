@@ -8,20 +8,20 @@ import 'dart:async' as _i5;
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:movie_tv_level_maximum/common/failure.dart' as _i6;
-import 'package:movie_tv_level_maximum/domain/entities/movie.dart' as _i9;
-import 'package:movie_tv_level_maximum/domain/entities/movie_detail.dart'
+import 'package:movie_tv_level_maximum/domain/entities/movie/movie.dart' as _i9;
+import 'package:movie_tv_level_maximum/domain/entities/movie/movie_detail.dart'
     as _i7;
 import 'package:movie_tv_level_maximum/domain/repositories/movie_repository.dart'
     as _i2;
-import 'package:movie_tv_level_maximum/domain/use_cases/get_movie_detail.dart'
+import 'package:movie_tv_level_maximum/domain/use_cases/movie/get_movie_detail.dart'
     as _i4;
-import 'package:movie_tv_level_maximum/domain/use_cases/get_movie_recommendations.dart'
+import 'package:movie_tv_level_maximum/domain/use_cases/movie/get_movie_recommendations.dart'
     as _i8;
-import 'package:movie_tv_level_maximum/domain/use_cases/get_watchlist_status.dart'
+import 'package:movie_tv_level_maximum/domain/use_cases/movie/get_watchlist_status.dart'
     as _i10;
-import 'package:movie_tv_level_maximum/domain/use_cases/remove_watchlist.dart'
+import 'package:movie_tv_level_maximum/domain/use_cases/movie/remove_watchlist.dart'
     as _i12;
-import 'package:movie_tv_level_maximum/domain/use_cases/save_watchlist.dart'
+import 'package:movie_tv_level_maximum/domain/use_cases/movie/save_watchlist.dart'
     as _i11;
 
 // ignore_for_file: type=lint
