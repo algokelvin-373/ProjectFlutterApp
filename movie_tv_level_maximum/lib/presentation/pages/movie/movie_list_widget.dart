@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../common/constants.dart';
 import '../../../domain/entities/movie/movie.dart';
-import '../movie_detail_page.dart';
+import 'movie_detail_page.dart';
 
 class MovieList extends StatelessWidget {
   final List<Movie> movies;

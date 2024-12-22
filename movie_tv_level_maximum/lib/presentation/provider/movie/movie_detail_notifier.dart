@@ -1,14 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../../common/state_enum.dart';
-import '../../domain/entities/movie/movie.dart';
-import '../../domain/entities/movie/movie_detail.dart';
-import '../../domain/use_cases/get_movie_detail.dart';
-import '../../domain/use_cases/get_movie_recommendations.dart';
-import '../../domain/use_cases/get_watchlist_status.dart';
-import '../../domain/use_cases/remove_watchlist.dart';
-import '../../domain/use_cases/save_watchlist.dart';
+import '../../../common/state_enum.dart';
+import '../../../domain/entities/movie/movie.dart';
+import '../../../domain/entities/movie/movie_detail.dart';
+import '../../../domain/use_cases/movie/get_movie_detail.dart';
+import '../../../domain/use_cases/movie/get_movie_recommendations.dart';
+import '../../../domain/use_cases/movie/get_watchlist_status.dart';
+import '../../../domain/use_cases/movie/remove_watchlist.dart';
+import '../../../domain/use_cases/movie/save_watchlist.dart';
 
 class MovieDetailNotifier extends ChangeNotifier {
   static const watchlistAddSuccessMessage = 'Added to Watchlist';

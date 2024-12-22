@@ -16,11 +16,12 @@ import 'package:movie_tv_level_maximum/domain/use_cases/tv_show/get_watchlist_tv
 import 'package:movie_tv_level_maximum/domain/use_cases/tv_show/remove_watchlist_tv_show.dart';
 import 'package:movie_tv_level_maximum/domain/use_cases/tv_show/save_watchlist_tv_show.dart';
 import 'package:movie_tv_level_maximum/domain/use_cases/tv_show/search_tv_shows.dart';
-import 'package:movie_tv_level_maximum/presentation/provider/movie_detail_notifier.dart';
-import 'package:movie_tv_level_maximum/presentation/provider/movie_list_notifier.dart';
-import 'package:movie_tv_level_maximum/presentation/provider/movie_search_notifier.dart';
-import 'package:movie_tv_level_maximum/presentation/provider/popular_movies_notifier.dart';
-import 'package:movie_tv_level_maximum/presentation/provider/top_rated_movies_notifier.dart';
+import 'package:movie_tv_level_maximum/presentation/provider/movie/movie_detail_notifier.dart';
+import 'package:movie_tv_level_maximum/presentation/provider/movie/movie_list_notifier.dart';
+import 'package:movie_tv_level_maximum/presentation/provider/movie/movie_search_notifier.dart';
+import 'package:movie_tv_level_maximum/presentation/provider/movie/popular_movies_notifier.dart';
+import 'package:movie_tv_level_maximum/presentation/provider/movie/top_rated_movies_notifier.dart';
+import 'package:movie_tv_level_maximum/presentation/provider/movie/watchlist_movie_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/on_the_air_tv_shows_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/popular_tv_shows_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/top_rated_tv_shows_notifier.dart';
@@ -29,23 +30,22 @@ import 'package:movie_tv_level_maximum/presentation/provider/tv_show/tv_show_epi
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/tv_show_list_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/tv_show_search_notifier.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/watchlist_tv_show_notifier.dart';
-import 'package:movie_tv_level_maximum/presentation/provider/watchlist_movie_notifier.dart';
 
 import 'data/data_sources/db/database_helper.dart';
 import 'data/data_sources/movie/movie_local_data_source.dart';
 import 'data/data_sources/movie/movie_remote_data_source.dart';
 import 'data/repositories/movie_repository_impl.dart';
 import 'domain/repositories/movie_repository.dart';
-import 'domain/use_cases/get_movie_detail.dart';
-import 'domain/use_cases/get_movie_recommendations.dart';
-import 'domain/use_cases/get_now_playing_movies.dart';
-import 'domain/use_cases/get_popular_movies.dart';
-import 'domain/use_cases/get_top_rated_movies.dart';
-import 'domain/use_cases/get_watchlist_movies.dart';
-import 'domain/use_cases/get_watchlist_status.dart';
-import 'domain/use_cases/remove_watchlist.dart';
-import 'domain/use_cases/save_watchlist.dart';
-import 'domain/use_cases/search_movies.dart';
+import 'domain/use_cases/movie/get_movie_detail.dart';
+import 'domain/use_cases/movie/get_movie_recommendations.dart';
+import 'domain/use_cases/movie/get_now_playing_movies.dart';
+import 'domain/use_cases/movie/get_popular_movies.dart';
+import 'domain/use_cases/movie/get_top_rated_movies.dart';
+import 'domain/use_cases/movie/get_watchlist_movies.dart';
+import 'domain/use_cases/movie/get_watchlist_status.dart';
+import 'domain/use_cases/movie/remove_watchlist.dart';
+import 'domain/use_cases/movie/save_watchlist.dart';
+import 'domain/use_cases/movie/search_movies.dart';
 
 final locator = GetIt.instance;
 

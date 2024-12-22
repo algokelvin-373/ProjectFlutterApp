@@ -11,7 +11,7 @@ import 'package:movie_tv_level_maximum/common/failure.dart' as _i6;
 import 'package:movie_tv_level_maximum/domain/entities/movie/movie.dart' as _i7;
 import 'package:movie_tv_level_maximum/domain/repositories/movie_repository.dart'
     as _i2;
-import 'package:movie_tv_level_maximum/domain/use_cases/get_popular_movies.dart'
+import 'package:movie_tv_level_maximum/domain/use_cases/movie/get_popular_movies.dart'
     as _i4;
 
 // ignore_for_file: type=lint

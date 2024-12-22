@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 
-import '../../common/failure.dart';
-import '../entities/movie/movie.dart';
-import '../repositories/movie_repository.dart';
+import '../../../common/failure.dart';
+import '../../entities/movie/movie.dart';
+import '../../repositories/movie_repository.dart';
 
 class GetMovieRecommendations {
   final MovieRepository repository;

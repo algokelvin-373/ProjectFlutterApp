@@ -9,7 +9,7 @@ import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:movie_tv_level_maximum/common/failure.dart' as _i5;
 import 'package:movie_tv_level_maximum/domain/entities/movie/movie.dart' as _i6;
-import 'package:movie_tv_level_maximum/domain/use_cases/get_watchlist_movies.dart'
+import 'package:movie_tv_level_maximum/domain/use_cases/movie/get_watchlist_movies.dart'
     as _i3;
 
 // ignore_for_file: type=lint

@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
-import '../../common/constants.dart';
-import '../../common/state_enum.dart';
-import '../../domain/entities/movie/genre.dart';
-import '../../domain/entities/movie/movie.dart';
-import '../../domain/entities/movie/movie_detail.dart';
-import '../provider/movie_detail_notifier.dart';
+import '../../../common/constants.dart';
+import '../../../common/state_enum.dart';
+import '../../../domain/entities/movie/genre.dart';
+import '../../../domain/entities/movie/movie.dart';
+import '../../../domain/entities/movie/movie_detail.dart';
+import '../../provider/movie/movie_detail_notifier.dart';
 
 class MovieDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/detail';

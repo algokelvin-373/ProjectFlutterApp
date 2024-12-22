@@ -5,12 +5,12 @@ import 'package:mockito/mockito.dart';
 import 'package:movie_tv_level_maximum/common/failure.dart';
 import 'package:movie_tv_level_maximum/common/state_enum.dart';
 import 'package:movie_tv_level_maximum/domain/entities/movie/movie.dart';
-import 'package:movie_tv_level_maximum/domain/use_cases/get_movie_detail.dart';
-import 'package:movie_tv_level_maximum/domain/use_cases/get_movie_recommendations.dart';
-import 'package:movie_tv_level_maximum/domain/use_cases/get_watchlist_status.dart';
-import 'package:movie_tv_level_maximum/domain/use_cases/remove_watchlist.dart';
-import 'package:movie_tv_level_maximum/domain/use_cases/save_watchlist.dart';
-import 'package:movie_tv_level_maximum/presentation/provider/movie_detail_notifier.dart';
+import 'package:movie_tv_level_maximum/domain/use_cases/movie/get_movie_detail.dart';
+import 'package:movie_tv_level_maximum/domain/use_cases/movie/get_movie_recommendations.dart';
+import 'package:movie_tv_level_maximum/domain/use_cases/movie/get_watchlist_status.dart';
+import 'package:movie_tv_level_maximum/domain/use_cases/movie/remove_watchlist.dart';
+import 'package:movie_tv_level_maximum/domain/use_cases/movie/save_watchlist.dart';
+import 'package:movie_tv_level_maximum/presentation/provider/movie/movie_detail_notifier.dart';
 
 import '../../../dummy_data/dummy_objects.dart';
 import 'movie_detail_notifier_test.mocks.dart';
