@@ -8,7 +8,7 @@ import 'dart:async' as _i5;
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:movie_tv_level_maximum/common/failure.dart' as _i6;
-import 'package:movie_tv_level_maximum/domain/entities/movie.dart' as _i7;
+import 'package:movie_tv_level_maximum/domain/entities/movie/movie.dart' as _i7;
 import 'package:movie_tv_level_maximum/domain/repositories/movie_repository.dart'
     as _i2;
 import 'package:movie_tv_level_maximum/domain/use_cases/search_movies.dart'

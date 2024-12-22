@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 
 import '../../common/constants.dart';
 import '../../common/state_enum.dart';
-import '../../domain/entities/genre.dart';
-import '../../domain/entities/movie.dart';
-import '../../domain/entities/movie_detail.dart';
+import '../../domain/entities/movie/genre.dart';
+import '../../domain/entities/movie/movie.dart';
+import '../../domain/entities/movie/movie_detail.dart';
 import '../provider/movie_detail_notifier.dart';
 
 class MovieDetailPage extends StatefulWidget {

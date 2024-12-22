@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movie_tv_level_maximum/data/models/movie_model.dart';
-import 'package:movie_tv_level_maximum/domain/entities/movie.dart';
+import 'package:movie_tv_level_maximum/data/models/movie/movie_model.dart';
+import 'package:movie_tv_level_maximum/domain/entities/movie/movie.dart';
 
 void main() {
   final tMovieModel = MovieModel(

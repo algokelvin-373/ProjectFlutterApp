@@ -8,7 +8,8 @@ import 'dart:async' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:movie_tv_level_maximum/data/data_sources/db/database_helper.dart'
     as _i2;
-import 'package:movie_tv_level_maximum/data/models/movie_table.dart' as _i5;
+import 'package:movie_tv_level_maximum/data/models/movie/movie_table.dart'
+    as _i5;
 import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_table.dart'
     as _i6;
 import 'package:sqflite/sqflite.dart' as _i4;

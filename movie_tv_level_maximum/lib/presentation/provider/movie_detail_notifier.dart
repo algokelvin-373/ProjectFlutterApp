@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/state_enum.dart';
-import '../../domain/entities/movie.dart';
-import '../../domain/entities/movie_detail.dart';
+import '../../domain/entities/movie/movie.dart';
+import '../../domain/entities/movie/movie_detail.dart';
 import '../../domain/use_cases/get_movie_detail.dart';
 import '../../domain/use_cases/get_movie_recommendations.dart';
 import '../../domain/use_cases/get_watchlist_status.dart';

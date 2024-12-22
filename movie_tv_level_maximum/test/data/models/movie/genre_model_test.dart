@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movie_tv_level_maximum/data/models/genre_model.dart';
+import 'package:movie_tv_level_maximum/data/models/movie/genre_model.dart';
 
 import '../../../json_reader.dart';
 

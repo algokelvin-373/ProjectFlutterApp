@@ -5,8 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 import 'package:movie_tv_level_maximum/common/exception.dart';
 import 'package:movie_tv_level_maximum/data/data_sources/movie/movie_remote_data_source.dart';
-import 'package:movie_tv_level_maximum/data/models/movie_detail_model.dart';
-import 'package:movie_tv_level_maximum/data/models/movie_response.dart';
+import 'package:movie_tv_level_maximum/data/models/movie/movie_detail_model.dart';
+import 'package:movie_tv_level_maximum/data/models/movie/movie_response.dart';
 
 import '../../../helpers/test_helper.mocks.dart';
 import '../../../json_reader.dart';

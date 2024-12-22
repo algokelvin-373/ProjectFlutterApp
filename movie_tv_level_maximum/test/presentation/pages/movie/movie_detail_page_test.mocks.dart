@@ -9,8 +9,9 @@ import 'dart:ui' as _i13;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i11;
 import 'package:movie_tv_level_maximum/common/state_enum.dart' as _i9;
-import 'package:movie_tv_level_maximum/domain/entities/movie.dart' as _i10;
-import 'package:movie_tv_level_maximum/domain/entities/movie_detail.dart'
+import 'package:movie_tv_level_maximum/domain/entities/movie/movie.dart'
+    as _i10;
+import 'package:movie_tv_level_maximum/domain/entities/movie/movie_detail.dart'
     as _i7;
 import 'package:movie_tv_level_maximum/domain/use_cases/get_movie_detail.dart'
     as _i2;

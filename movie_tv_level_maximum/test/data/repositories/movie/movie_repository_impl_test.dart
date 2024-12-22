@@ -5,11 +5,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movie_tv_level_maximum/common/exception.dart';
 import 'package:movie_tv_level_maximum/common/failure.dart';
-import 'package:movie_tv_level_maximum/data/models/genre_model.dart';
-import 'package:movie_tv_level_maximum/data/models/movie_detail_model.dart';
-import 'package:movie_tv_level_maximum/data/models/movie_model.dart';
+import 'package:movie_tv_level_maximum/data/models/movie/genre_model.dart';
+import 'package:movie_tv_level_maximum/data/models/movie/movie_detail_model.dart';
+import 'package:movie_tv_level_maximum/data/models/movie/movie_model.dart';
 import 'package:movie_tv_level_maximum/data/repositories/movie_repository_impl.dart';
-import 'package:movie_tv_level_maximum/domain/entities/movie.dart';
+import 'package:movie_tv_level_maximum/domain/entities/movie/movie.dart';
 
 import '../../../dummy_data/dummy_objects.dart';
 import '../../../helpers/test_helper.mocks.dart';
