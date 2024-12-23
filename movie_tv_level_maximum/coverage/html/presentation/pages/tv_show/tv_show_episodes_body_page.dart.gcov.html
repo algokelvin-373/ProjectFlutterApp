@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">Mon Dec 23 14:48:59 2024</td>
+            <td class="headerValue">Mon Dec 23 18:08:33 2024</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -63,7 +63,7 @@
 <a name="1"><span class="lineNum">       1 </span>            : import 'package:cached_network_image/cached_network_image.dart';</a>
 <a name="2"><span class="lineNum">       2 </span>            : import 'package:flutter/material.dart';</a>
 <a name="3"><span class="lineNum">       3 </span>            : import 'package:flutter_rating_bar/flutter_rating_bar.dart';</a>
-<a name="4"><span class="lineNum">       4 </span>            : import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_episode.dart';</a>
+<a name="4"><span class="lineNum">       4 </span>            : import 'package:movie_tv_level_maximum/domain/entities/tv_show/episode_tv_show.dart';</a>
 <a name="5"><span class="lineNum">       5 </span>            : import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_episode.dart';</a>
 <a name="6"><span class="lineNum">       6 </span>            : </a>
 <a name="7"><span class="lineNum">       7 </span>            : import '../../../common/constants.dart';</a>
@@ -200,65 +200,63 @@
 <a name="138"><span class="lineNum">     138 </span>            :   }</a>
 <a name="139"><span class="lineNum">     139 </span>            : </a>
 <a name="140"><span class="lineNum">     140 </span><span class="lineCov">          2 :   Widget _listEpisodes(</span></a>
-<a name="141"><span class="lineNum">     141 </span>            :       BuildContext context, List&lt;TvShowEpisodeModel&gt; episodes) {</a>
+<a name="141"><span class="lineNum">     141 </span>            :       BuildContext context, List&lt;EpisodeTvShow&gt; episodes) {</a>
 <a name="142"><span class="lineNum">     142 </span><span class="lineCov">          2 :     return SizedBox(</span></a>
 <a name="143"><span class="lineNum">     143 </span><span class="lineCov">          8 :       height: MediaQuery.of(context).size.height * 0.6,</span></a>
 <a name="144"><span class="lineNum">     144 </span><span class="lineCov">          2 :       child: ListView.builder(</span></a>
 <a name="145"><span class="lineNum">     145 </span>            :         scrollDirection: Axis.vertical,</a>
-<a name="146"><span class="lineNum">     146 </span>            :         // shrinkWrap: true,</a>
-<a name="147"><span class="lineNum">     147 </span>            :         // physics: NeverScrollableScrollPhysics(),</a>
-<a name="148"><span class="lineNum">     148 </span><span class="lineCov">          2 :         itemCount: episodes.length,</span></a>
-<a name="149"><span class="lineNum">     149 </span><span class="lineCov">          1 :         itemBuilder: (context, index) {</span></a>
-<a name="150"><span class="lineNum">     150 </span><span class="lineCov">          1 :           final episode = episodes[index];</span></a>
-<a name="151"><span class="lineNum">     151 </span><span class="lineCov">          1 :           return Column(</span></a>
-<a name="152"><span class="lineNum">     152 </span>            :             crossAxisAlignment: CrossAxisAlignment.start,</a>
-<a name="153"><span class="lineNum">     153 </span><span class="lineCov">          1 :             children: [</span></a>
-<a name="154"><span class="lineNum">     154 </span><span class="lineCov">          1 :               Padding(</span></a>
-<a name="155"><span class="lineNum">     155 </span>            :                 padding: const EdgeInsets.all(4.0),</a>
-<a name="156"><span class="lineNum">     156 </span><span class="lineCov">          1 :                 child: ClipRRect(</span></a>
-<a name="157"><span class="lineNum">     157 </span><span class="lineCov">          1 :                   borderRadius: BorderRadius.all(</span></a>
-<a name="158"><span class="lineNum">     158 </span><span class="lineCov">          1 :                     Radius.circular(8),</span></a>
-<a name="159"><span class="lineNum">     159 </span>            :                   ),</a>
-<a name="160"><span class="lineNum">     160 </span><span class="lineCov">          1 :                   child: CachedNetworkImage(</span></a>
-<a name="161"><span class="lineNum">     161 </span>            :                     imageUrl:</a>
-<a name="162"><span class="lineNum">     162 </span><span class="lineCov">          2 :                         'https://image.tmdb.org/t/p/w500${episode.stillPath}',</span></a>
-<a name="163"><span class="lineNum">     163 </span><span class="lineCov">          2 :                     placeholder: (context, url) =&gt; Center(</span></a>
-<a name="164"><span class="lineNum">     164 </span><span class="lineCov">          1 :                       child: CircularProgressIndicator(),</span></a>
-<a name="165"><span class="lineNum">     165 </span>            :                     ),</a>
-<a name="166"><span class="lineNum">     166 </span><span class="lineNoCov">          0 :                     errorWidget: (context, url, error) =&gt; Icon(Icons.error),</span></a>
-<a name="167"><span class="lineNum">     167 </span>            :                   ),</a>
-<a name="168"><span class="lineNum">     168 </span>            :                 ),</a>
-<a name="169"><span class="lineNum">     169 </span>            :               ),</a>
-<a name="170"><span class="lineNum">     170 </span>            :               const SizedBox(height: 5),</a>
-<a name="171"><span class="lineNum">     171 </span><span class="lineCov">          1 :               Text(</span></a>
-<a name="172"><span class="lineNum">     172 </span><span class="lineCov">          3 :                 '${episode.episodeNumber} - ${episode.name}',</span></a>
-<a name="173"><span class="lineNum">     173 </span><span class="lineCov">          1 :                 style: kHeading6,</span></a>
-<a name="174"><span class="lineNum">     174 </span>            :               ),</a>
-<a name="175"><span class="lineNum">     175 </span><span class="lineCov">          1 :               Row(</span></a>
-<a name="176"><span class="lineNum">     176 </span><span class="lineCov">          1 :                 children: [</span></a>
-<a name="177"><span class="lineNum">     177 </span><span class="lineCov">          1 :                   RatingBarIndicator(</span></a>
-<a name="178"><span class="lineNum">     178 </span><span class="lineCov">          2 :                     rating: episode.voteAverage / 2,</span></a>
-<a name="179"><span class="lineNum">     179 </span>            :                     itemCount: 5,</a>
-<a name="180"><span class="lineNum">     180 </span><span class="lineCov">          2 :                     itemBuilder: (context, index) =&gt; Icon(</span></a>
-<a name="181"><span class="lineNum">     181 </span>            :                       Icons.star,</a>
-<a name="182"><span class="lineNum">     182 </span>            :                       color: kMikadoYellow,</a>
-<a name="183"><span class="lineNum">     183 </span>            :                     ),</a>
-<a name="184"><span class="lineNum">     184 </span>            :                     itemSize: 24,</a>
-<a name="185"><span class="lineNum">     185 </span>            :                   ),</a>
-<a name="186"><span class="lineNum">     186 </span><span class="lineCov">          3 :                   Text('${episode.voteAverage}')</span></a>
-<a name="187"><span class="lineNum">     187 </span>            :                 ],</a>
-<a name="188"><span class="lineNum">     188 </span>            :               ),</a>
-<a name="189"><span class="lineNum">     189 </span>            :               const SizedBox(height: 10),</a>
-<a name="190"><span class="lineNum">     190 </span><span class="lineCov">          2 :               Text('Overview', style: kSubtitle),</span></a>
-<a name="191"><span class="lineNum">     191 </span><span class="lineCov">          3 :               Text(episode.overview, style: kBodyText),</span></a>
-<a name="192"><span class="lineNum">     192 </span>            :               const SizedBox(height: 40),</a>
-<a name="193"><span class="lineNum">     193 </span>            :             ],</a>
-<a name="194"><span class="lineNum">     194 </span>            :           );</a>
-<a name="195"><span class="lineNum">     195 </span>            :         },</a>
-<a name="196"><span class="lineNum">     196 </span>            :       ),</a>
-<a name="197"><span class="lineNum">     197 </span>            :     );</a>
-<a name="198"><span class="lineNum">     198 </span>            :   }</a>
-<a name="199"><span class="lineNum">     199 </span>            : }</a>
+<a name="146"><span class="lineNum">     146 </span><span class="lineCov">          2 :         itemCount: episodes.length,</span></a>
+<a name="147"><span class="lineNum">     147 </span><span class="lineCov">          1 :         itemBuilder: (context, index) {</span></a>
+<a name="148"><span class="lineNum">     148 </span><span class="lineCov">          1 :           final episode = episodes[index];</span></a>
+<a name="149"><span class="lineNum">     149 </span><span class="lineCov">          1 :           return Column(</span></a>
+<a name="150"><span class="lineNum">     150 </span>            :             crossAxisAlignment: CrossAxisAlignment.start,</a>
+<a name="151"><span class="lineNum">     151 </span><span class="lineCov">          1 :             children: [</span></a>
+<a name="152"><span class="lineNum">     152 </span><span class="lineCov">          1 :               Padding(</span></a>
+<a name="153"><span class="lineNum">     153 </span>            :                 padding: const EdgeInsets.all(4.0),</a>
+<a name="154"><span class="lineNum">     154 </span><span class="lineCov">          1 :                 child: ClipRRect(</span></a>
+<a name="155"><span class="lineNum">     155 </span><span class="lineCov">          1 :                   borderRadius: BorderRadius.all(</span></a>
+<a name="156"><span class="lineNum">     156 </span><span class="lineCov">          1 :                     Radius.circular(8),</span></a>
+<a name="157"><span class="lineNum">     157 </span>            :                   ),</a>
+<a name="158"><span class="lineNum">     158 </span><span class="lineCov">          1 :                   child: CachedNetworkImage(</span></a>
+<a name="159"><span class="lineNum">     159 </span>            :                     imageUrl:</a>
+<a name="160"><span class="lineNum">     160 </span><span class="lineCov">          2 :                         'https://image.tmdb.org/t/p/w500${episode.stillPath}',</span></a>
+<a name="161"><span class="lineNum">     161 </span><span class="lineCov">          2 :                     placeholder: (context, url) =&gt; Center(</span></a>
+<a name="162"><span class="lineNum">     162 </span><span class="lineCov">          1 :                       child: CircularProgressIndicator(),</span></a>
+<a name="163"><span class="lineNum">     163 </span>            :                     ),</a>
+<a name="164"><span class="lineNum">     164 </span><span class="lineNoCov">          0 :                     errorWidget: (context, url, error) =&gt; Icon(Icons.error),</span></a>
+<a name="165"><span class="lineNum">     165 </span>            :                   ),</a>
+<a name="166"><span class="lineNum">     166 </span>            :                 ),</a>
+<a name="167"><span class="lineNum">     167 </span>            :               ),</a>
+<a name="168"><span class="lineNum">     168 </span>            :               const SizedBox(height: 5),</a>
+<a name="169"><span class="lineNum">     169 </span><span class="lineCov">          1 :               Text(</span></a>
+<a name="170"><span class="lineNum">     170 </span><span class="lineCov">          3 :                 '${episode.episodeNumber} - ${episode.name}',</span></a>
+<a name="171"><span class="lineNum">     171 </span><span class="lineCov">          1 :                 style: kHeading6,</span></a>
+<a name="172"><span class="lineNum">     172 </span>            :               ),</a>
+<a name="173"><span class="lineNum">     173 </span><span class="lineCov">          1 :               Row(</span></a>
+<a name="174"><span class="lineNum">     174 </span><span class="lineCov">          1 :                 children: [</span></a>
+<a name="175"><span class="lineNum">     175 </span><span class="lineCov">          1 :                   RatingBarIndicator(</span></a>
+<a name="176"><span class="lineNum">     176 </span><span class="lineCov">          2 :                     rating: episode.voteAverage / 2,</span></a>
+<a name="177"><span class="lineNum">     177 </span>            :                     itemCount: 5,</a>
+<a name="178"><span class="lineNum">     178 </span><span class="lineCov">          2 :                     itemBuilder: (context, index) =&gt; Icon(</span></a>
+<a name="179"><span class="lineNum">     179 </span>            :                       Icons.star,</a>
+<a name="180"><span class="lineNum">     180 </span>            :                       color: kMikadoYellow,</a>
+<a name="181"><span class="lineNum">     181 </span>            :                     ),</a>
+<a name="182"><span class="lineNum">     182 </span>            :                     itemSize: 24,</a>
+<a name="183"><span class="lineNum">     183 </span>            :                   ),</a>
+<a name="184"><span class="lineNum">     184 </span><span class="lineCov">          3 :                   Text('${episode.voteAverage}')</span></a>
+<a name="185"><span class="lineNum">     185 </span>            :                 ],</a>
+<a name="186"><span class="lineNum">     186 </span>            :               ),</a>
+<a name="187"><span class="lineNum">     187 </span>            :               const SizedBox(height: 10),</a>
+<a name="188"><span class="lineNum">     188 </span><span class="lineCov">          2 :               Text('Overview', style: kSubtitle),</span></a>
+<a name="189"><span class="lineNum">     189 </span><span class="lineCov">          3 :               Text(episode.overview, style: kBodyText),</span></a>
+<a name="190"><span class="lineNum">     190 </span>            :               const SizedBox(height: 40),</a>
+<a name="191"><span class="lineNum">     191 </span>            :             ],</a>
+<a name="192"><span class="lineNum">     192 </span>            :           );</a>
+<a name="193"><span class="lineNum">     193 </span>            :         },</a>
+<a name="194"><span class="lineNum">     194 </span>            :       ),</a>
+<a name="195"><span class="lineNum">     195 </span>            :     );</a>
+<a name="196"><span class="lineNum">     196 </span>            :   }</a>
+<a name="197"><span class="lineNum">     197 </span>            : }</a>
 </pre>
       </td>
     </tr>

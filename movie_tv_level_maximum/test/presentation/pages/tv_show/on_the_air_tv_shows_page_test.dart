@@ -30,6 +30,8 @@ void main() {
     );
   }
 
+  final tListTvShow = [testTvShow, testTvShow2];
+
   testWidgets('Page should display center progress bar when loading',
       (WidgetTester tester) async {
     when(mockNotifier.state).thenReturn(RequestState.Loading);
@@ -53,6 +55,15 @@ void main() {
     expect(listViewFinder, findsOneWidget);
   });
 
+  testWidgets('fetchOnTheAirTvShows should be called when page is initialized',
+      (WidgetTester tester) async {
+    when(mockNotifier.state).thenReturn(RequestState.Loaded);
+    when(mockNotifier.tvShows).thenReturn(<TvShow>[]);
+    when(mockNotifier.fetchOnTheAirTvShows()).thenAnswer((_) async {});
+    await tester.pumpWidget(makeTestableWidget(OnTheAirTvShowsPage()));
+    verify(mockNotifier.fetchOnTheAirTvShows()).called(1);
+  });
+
   testWidgets('TvShowCard should display tv show details correctly',
       (WidgetTester tester) async {
     await tester.pumpWidget(
@@ -66,6 +77,16 @@ void main() {
     expect(find.text('name'), findsOneWidget);
     expect(find.text('overview'), findsOneWidget);
     expect(find.byType(CachedNetworkImage), findsOneWidget);
+  });
+
+  testWidgets('ListView should display correct number of tv shows',
+      (WidgetTester tester) async {
+    when(mockNotifier.state).thenReturn(RequestState.Loaded);
+    when(mockNotifier.tvShows).thenReturn(tListTvShow);
+
+    await tester.pumpWidget(makeTestableWidget(OnTheAirTvShowsPage()));
+
+    expect(find.byType(TvShowCard), findsNWidgets(2));
   });
 
   testWidgets('Page should display text with message when Error',

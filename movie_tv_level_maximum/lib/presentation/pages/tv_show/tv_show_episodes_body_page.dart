@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_episode.dart';
+import 'package:movie_tv_level_maximum/domain/entities/tv_show/episode_tv_show.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_episode.dart';
 
 import '../../../common/constants.dart';
@@ -138,13 +138,11 @@ class TvShowEpisodesBodyPage extends StatelessWidget {
   }
 
   Widget _listEpisodes(
-      BuildContext context, List<TvShowEpisodeModel> episodes) {
+      BuildContext context, List<EpisodeTvShow> episodes) {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.6,
       child: ListView.builder(
         scrollDirection: Axis.vertical,
-        // shrinkWrap: true,
-        // physics: NeverScrollableScrollPhysics(),
         itemCount: episodes.length,
         itemBuilder: (context, index) {
           final episode = episodes[index];

@@ -31,4 +31,22 @@ void main() {
       expect(result, expectedJsonMap);
     });
   });
+
+  group('TV Show Episode Model toJson', () {
+    test('should return a JSON map containing proper data', () async {
+      final result = tTvShowEpisode.toJson();
+      final expectedJsonMap = {
+        'id': "1",
+        'airDate': DateTime.parse('2024-12-31'),
+        'episodes': [],
+        'name': "name",
+        'overview': "overview",
+        'tvShowEpisodeResponseId': 1,
+        'poster_path': "posterPath",
+        'season_number': 1,
+        'vote_average': 1.0,
+      };
+      expect(result, expectedJsonMap);
+    });
+  });
 }

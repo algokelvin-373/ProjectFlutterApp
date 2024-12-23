@@ -1,10 +1,11 @@
 import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_episode.dart';
+import 'package:movie_tv_level_maximum/domain/entities/tv_show/episode_tv_show.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_episode.dart';
 
 class TvShowEpisodeResponse {
   String id;
   DateTime airDate;
-  List<TvShowEpisodeModel> episodes;
+  List<EpisodeTvShow> episodes;
   String name;
   String overview;
   int tvShowEpisodeResponseId;
@@ -41,8 +42,8 @@ class TvShowEpisodeResponse {
       TvShowEpisodeResponse(
         id: json["_id"],
         airDate: DateTime.parse(json["air_date"]),
-        episodes: List<TvShowEpisodeModel>.from(
-            json["episodes"].map((x) => TvShowEpisodeModel.fromJson(x))),
+        episodes: List<EpisodeTvShow>.from(
+            json["episodes"].map((x) => EpisodeTvShow.fromJson(x))),
         name: json["name"],
         overview: json["overview"],
         tvShowEpisodeResponseId: json["id"],

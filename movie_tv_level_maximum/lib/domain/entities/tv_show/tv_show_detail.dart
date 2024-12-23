@@ -1,14 +1,13 @@
 import 'package:equatable/equatable.dart';
-
-import '../../../data/models/movie/genre_model.dart';
-import '../../../data/models/tv_show/tv_show_season_model.dart';
+import 'package:movie_tv_level_maximum/domain/entities/tv_show/genre_tv_show_model.dart';
+import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_season.dart';
 
 class TvShowDetail extends Equatable {
   final bool adult;
   final String backdropPath;
   final List<int> episodeRunTime;
   final DateTime firstAirDate;
-  final List<GenreModel> genres;
+  final List<GenreTvShowModel> genres;
   final String homepage;
   final int id;
   final bool inProduction;
@@ -23,7 +22,7 @@ class TvShowDetail extends Equatable {
   final String overview;
   final double popularity;
   final String posterPath;
-  final List<Season> seasons;
+  final List<TvShowSeason> seasons;
   final String status;
   final String tagline;
   final String type;

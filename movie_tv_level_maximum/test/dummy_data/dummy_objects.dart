@@ -58,6 +58,23 @@ final testTvShow = TvShow(
   genreIds: [],
 );
 
+final testTvShow2 = TvShow(
+  adult: false,
+  backdropPath: "backdropPath",
+  firstAirDate: DateTime.parse('2024-12-31'),
+  id: 2,
+  name: "name",
+  originCountry: [],
+  originalLanguage: "originalLanguage",
+  originalName: "originalName",
+  overview: "overview",
+  popularity: 1.0,
+  posterPath: "posterPath",
+  voteAverage: 1,
+  voteCount: 1,
+  genreIds: [],
+);
+
 final testMovieList = [testMovie];
 
 final testTvShowList = [testTvShow];
@@ -65,13 +82,34 @@ final testTvShowList = [testTvShow];
 final testMovieDetail = MovieDetail(
   adult: false,
   backdropPath: 'backdropPath',
-  genres: [Genre(id: 1, name: 'Action')],
+  genres: [
+    Genre(id: 1, name: 'Action'),
+    Genre(id: 2, name: 'Drama'),
+  ],
   id: 1,
   originalTitle: 'originalTitle',
   overview: 'overview',
   posterPath: 'posterPath',
   releaseDate: 'releaseDate',
-  runtime: 120,
+  runtime: 150,
+  title: 'title',
+  voteAverage: 1,
+  voteCount: 1,
+);
+
+final testMovieDetail2 = MovieDetail(
+  adult: false,
+  backdropPath: 'backdropPath',
+  genres: [
+    Genre(id: 1, name: 'Action'),
+    Genre(id: 2, name: 'Drama'),
+  ],
+  id: 10,
+  originalTitle: 'originalTitle',
+  overview: 'overview',
+  posterPath: 'posterPath',
+  releaseDate: 'releaseDate',
+  runtime: 45,
   title: 'title',
   voteAverage: 1,
   voteCount: 1,

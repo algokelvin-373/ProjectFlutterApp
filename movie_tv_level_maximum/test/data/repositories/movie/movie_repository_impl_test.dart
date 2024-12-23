@@ -194,7 +194,10 @@ void main() {
       adult: false,
       backdropPath: 'backdropPath',
       budget: 100,
-      genres: [GenreModel(id: 1, name: 'Action')],
+      genres: [
+        GenreModel(id: 1, name: 'Action'),
+        GenreModel(id: 2, name: 'Drama')
+      ],
       homepage: "https://google.com",
       id: 1,
       imdbId: 'imdb1',
@@ -217,12 +220,9 @@ void main() {
     test(
         'should return Movie data when the call to remote data source is successful',
         () async {
-      // arrange
       when(mockRemoteDataSource.getMovieDetail(tId))
           .thenAnswer((_) async => tMovieResponse);
-      // act
       final result = await repository.getMovieDetail(tId);
-      // assert
       verify(mockRemoteDataSource.getMovieDetail(tId));
       expect(result, equals(Right(testMovieDetail)));
     });

@@ -1,8 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:movie_tv_level_maximum/data/models/movie/genre_model.dart';
-import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_season_model.dart';
+import 'package:movie_tv_level_maximum/domain/entities/tv_show/genre_tv_show_model.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_detail.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/tv_show/tv_show_detail_page.dart';
@@ -11,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../../../common/constants.dart';
 import '../../../common/state_enum.dart';
+import '../../../domain/entities/tv_show/tv_show_season.dart';
 import '../../provider/tv_show/tv_show_detail_notifier.dart';
 
 class TvShowDetailBodyPage extends StatelessWidget {
@@ -235,7 +235,7 @@ class TvShowDetailBodyPage extends StatelessWidget {
     );
   }
 
-  Widget _allSeasons(List<Season> listSeasons) {
+  Widget _allSeasons(List<TvShowSeason> listSeasons) {
     return SizedBox(
       height: 200,
       child: ListView.builder(
@@ -278,7 +278,7 @@ class TvShowDetailBodyPage extends StatelessWidget {
     );
   }
 
-  String _showGenres(List<GenreModel> genres) {
+  String _showGenres(List<GenreTvShowModel> genres) {
     String result = '';
     for (var genre in genres) {
       result += '${genre.name}, ';

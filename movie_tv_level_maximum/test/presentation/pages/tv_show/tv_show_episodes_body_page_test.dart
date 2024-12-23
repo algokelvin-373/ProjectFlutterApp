@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_episode.dart';
+import 'package:movie_tv_level_maximum/domain/entities/tv_show/episode_tv_show.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_episode.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/tv_show/tv_show_episodes_body_page.dart';
 
@@ -10,7 +10,7 @@ void main() {
     id: "1",
     airDate: DateTime.parse('2024-12-31'),
     episodes: [
-      TvShowEpisodeModel(
+      EpisodeTvShow(
         airDate: DateTime.parse('2024-12-31'),
         episodeNumber: 1,
         episodeType: "1",
@@ -25,7 +25,7 @@ void main() {
         voteAverage: 1.0,
         voteCount: 1,
       ),
-      TvShowEpisodeModel(
+      EpisodeTvShow(
         airDate: DateTime.parse('2024-12-31'),
         episodeNumber: 1,
         episodeType: "1",

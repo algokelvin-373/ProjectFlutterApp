@@ -192,6 +192,8 @@ class DetailContent extends StatelessWidget {
                                 if (data.recommendationState ==
                                     RequestState.Loading) {
                                   return Center(
+                                    key: const ValueKey(
+                                        'LoadingMovieRecommendation'),
                                     child: CircularProgressIndicator(),
                                   );
                                 } else if (data.recommendationState ==

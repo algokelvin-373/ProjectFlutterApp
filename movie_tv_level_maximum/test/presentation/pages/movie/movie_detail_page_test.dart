@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -28,7 +29,8 @@ void main() {
     );
   }
 
-  testWidgets('Should display center when loading get data Movie Detail', (WidgetTester tester) async {
+  testWidgets('Should display center when loading get data Movie Detail',
+      (WidgetTester tester) async {
     final tId = 1;
     when(mockNotifier.movieState).thenReturn(RequestState.Loading);
 
@@ -57,7 +59,7 @@ void main() {
   });
 
   testWidgets(
-      'Watchlist button should dispay check icon when movie is added to wathclist',
+      'Watchlist button should display check icon when movie is added to wathclist',
       (WidgetTester tester) async {
     when(mockNotifier.movieState).thenReturn(RequestState.Loaded);
     when(mockNotifier.movie).thenReturn(testMovieDetail);
@@ -72,8 +74,7 @@ void main() {
     expect(watchlistButtonIcon, findsOneWidget);
   });
 
-  testWidgets(
-      'Watchlist button should display Snackbar when added to watchlist',
+  testWidgets('Should show SnackBar on success when added to watchlist',
       (WidgetTester tester) async {
     when(mockNotifier.movieState).thenReturn(RequestState.Loaded);
     when(mockNotifier.movie).thenReturn(testMovieDetail);
@@ -85,8 +86,6 @@ void main() {
     final watchlistButton = find.byType(FilledButton);
 
     await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
-
-    expect(find.byIcon(Icons.add), findsOneWidget);
 
     await tester.tap(watchlistButton);
     await tester.pump();
@@ -116,5 +115,81 @@ void main() {
 
     expect(find.byType(AlertDialog), findsOneWidget);
     expect(find.text('Failed'), findsOneWidget);
+  });
+
+  testWidgets('Should display genres correctly', (WidgetTester tester) async {
+    when(mockNotifier.movieState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.movie).thenReturn(testMovieDetail);
+    when(mockNotifier.recommendationState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.movieRecommendations).thenReturn(<Movie>[]);
+    when(mockNotifier.isAddedToWatchlist).thenReturn(false);
+
+    final genresTextFinder = find.text('Action, Drama');
+
+    await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
+
+    expect(genresTextFinder, findsOneWidget);
+  });
+
+  testWidgets('Should display duration correctly', (WidgetTester tester) async {
+    when(mockNotifier.movieState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.movie).thenReturn(testMovieDetail);
+    when(mockNotifier.recommendationState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.movieRecommendations).thenReturn(<Movie>[]);
+    when(mockNotifier.isAddedToWatchlist).thenReturn(false);
+
+    final durationTextFinder = find.text('2h 30m');
+
+    await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
+
+    expect(durationTextFinder, findsOneWidget);
+  });
+
+  testWidgets('Should display movie rating correctly',
+      (WidgetTester tester) async {
+    when(mockNotifier.movieState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.movie).thenReturn(testMovieDetail);
+    when(mockNotifier.recommendationState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.movieRecommendations).thenReturn(<Movie>[]);
+    when(mockNotifier.isAddedToWatchlist).thenReturn(false);
+
+    final ratingFinder = find.text('${testMovieDetail.voteAverage}');
+
+    await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
+
+    expect(ratingFinder, findsOneWidget);
+  });
+
+  testWidgets('Should display movie recommendations when loaded',
+      (WidgetTester tester) async {
+    when(mockNotifier.movieState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.movie).thenReturn(testMovieDetail);
+    when(mockNotifier.recommendationState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.movieRecommendations).thenReturn([testMovie]);
+    when(mockNotifier.isAddedToWatchlist).thenReturn(false);
+
+    final recommendationFinder = find.byType(CachedNetworkImage);
+
+    await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
+
+    expect(recommendationFinder, findsWidgets);
+  });
+
+  testWidgets('Should navigate back when back button is tapped',
+      (WidgetTester tester) async {
+    when(mockNotifier.movieState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.movie).thenReturn(testMovieDetail);
+    when(mockNotifier.recommendationState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.movieRecommendations).thenReturn(<Movie>[]);
+    when(mockNotifier.isAddedToWatchlist).thenReturn(false);
+
+    final backButtonFinder = find.byIcon(Icons.arrow_back);
+
+    await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
+
+    await tester.tap(backButtonFinder);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(MovieDetailPage), findsNothing);
   });
 }

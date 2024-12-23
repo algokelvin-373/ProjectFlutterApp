@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
             <td class="headerCovTableEntry">10</td>
-            <td class="headerCovTableEntry">10</td>
-            <td class="headerCovTableEntryHi">100.0 %</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">Mon Dec 23 14:48:59 2024</td>
+            <td class="headerValue">Mon Dec 23 18:08:33 2024</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -70,7 +70,7 @@
 <a name="8"><span class="lineNum">       8 </span>            :   int seasonNumber;</a>
 <a name="9"><span class="lineNum">       9 </span>            :   double voteAverage;</a>
 <a name="10"><span class="lineNum">      10 </span>            : </a>
-<a name="11"><span class="lineNum">      11 </span><span class="lineCov">          1 :   Season({</span></a>
+<a name="11"><span class="lineNum">      11 </span><span class="lineNoCov">          0 :   Season({</span></a>
 <a name="12"><span class="lineNum">      12 </span>            :     required this.airDate,</a>
 <a name="13"><span class="lineNum">      13 </span>            :     required this.episodeCount,</a>
 <a name="14"><span class="lineNum">      14 </span>            :     required this.id,</a>
@@ -81,16 +81,16 @@
 <a name="19"><span class="lineNum">      19 </span>            :     required this.voteAverage,</a>
 <a name="20"><span class="lineNum">      20 </span>            :   });</a>
 <a name="21"><span class="lineNum">      21 </span>            : </a>
-<a name="22"><span class="lineNum">      22 </span><span class="lineCov">          2 :   factory Season.fromJson(Map&lt;String, dynamic&gt; json) =&gt; Season(</span></a>
+<a name="22"><span class="lineNum">      22 </span><span class="lineNoCov">          0 :   factory Season.fromJson(Map&lt;String, dynamic&gt; json) =&gt; Season(</span></a>
 <a name="23"><span class="lineNum">      23 </span>            :         airDate:</a>
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">          3 :             json[&quot;air_date&quot;] == null ? null : DateTime.parse(json[&quot;air_date&quot;]),</span></a>
-<a name="25"><span class="lineNum">      25 </span><span class="lineCov">          1 :         episodeCount: json[&quot;episode_count&quot;],</span></a>
-<a name="26"><span class="lineNum">      26 </span><span class="lineCov">          1 :         id: json[&quot;id&quot;],</span></a>
-<a name="27"><span class="lineNum">      27 </span><span class="lineCov">          1 :         name: json[&quot;name&quot;],</span></a>
-<a name="28"><span class="lineNum">      28 </span><span class="lineCov">          1 :         overview: json[&quot;overview&quot;],</span></a>
-<a name="29"><span class="lineNum">      29 </span><span class="lineCov">          1 :         posterPath: json[&quot;poster_path&quot;],</span></a>
-<a name="30"><span class="lineNum">      30 </span><span class="lineCov">          1 :         seasonNumber: json[&quot;season_number&quot;],</span></a>
-<a name="31"><span class="lineNum">      31 </span><span class="lineCov">          2 :         voteAverage: json[&quot;vote_average&quot;]?.toDouble(),</span></a>
+<a name="24"><span class="lineNum">      24 </span><span class="lineNoCov">          0 :             json[&quot;air_date&quot;] == null ? null : DateTime.parse(json[&quot;air_date&quot;]),</span></a>
+<a name="25"><span class="lineNum">      25 </span><span class="lineNoCov">          0 :         episodeCount: json[&quot;episode_count&quot;],</span></a>
+<a name="26"><span class="lineNum">      26 </span><span class="lineNoCov">          0 :         id: json[&quot;id&quot;],</span></a>
+<a name="27"><span class="lineNum">      27 </span><span class="lineNoCov">          0 :         name: json[&quot;name&quot;],</span></a>
+<a name="28"><span class="lineNum">      28 </span><span class="lineNoCov">          0 :         overview: json[&quot;overview&quot;],</span></a>
+<a name="29"><span class="lineNum">      29 </span><span class="lineNoCov">          0 :         posterPath: json[&quot;poster_path&quot;],</span></a>
+<a name="30"><span class="lineNum">      30 </span><span class="lineNoCov">          0 :         seasonNumber: json[&quot;season_number&quot;],</span></a>
+<a name="31"><span class="lineNum">      31 </span><span class="lineNoCov">          0 :         voteAverage: json[&quot;vote_average&quot;]?.toDouble(),</span></a>
 <a name="32"><span class="lineNum">      32 </span>            :       );</a>
 <a name="33"><span class="lineNum">      33 </span>            : }</a>
 </pre>

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movie_tv_level_maximum/data/models/movie/genre_model.dart';
 import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_detail_response.dart';
+import 'package:movie_tv_level_maximum/domain/entities/tv_show/genre_tv_show_model.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_detail.dart';
 
 void main() {
@@ -10,8 +10,8 @@ void main() {
     episodeRunTime: [25],
     firstAirDate: DateTime.parse('2024-12-31'),
     genres: [
-      GenreModel(id: 1, name: "genre1"),
-      GenreModel(id: 2, name: "genre2"),
+      GenreTvShowModel(id: 1, name: "genre1"),
+      GenreTvShowModel(id: 2, name: "genre2"),
     ],
     homepage: "homepage",
     id: 1,
@@ -41,8 +41,8 @@ void main() {
     episodeRunTime: [25],
     firstAirDate: DateTime.parse('2024-12-31'),
     genres: [
-      GenreModel(id: 1, name: "genre1"),
-      GenreModel(id: 2, name: "genre2"),
+      GenreTvShowModel(id: 1, name: "genre1"),
+      GenreTvShowModel(id: 2, name: "genre2"),
     ],
     homepage: "homepage",
     id: 1,
@@ -72,8 +72,8 @@ void main() {
     episodeRunTime: [25],
     firstAirDate: DateTime.parse('2024-12-31'),
     genres: [
-      GenreModel(id: 1, name: "genre1"),
-      GenreModel(id: 2, name: "genre2"),
+      GenreTvShowModel(id: 1, name: "genre1"),
+      GenreTvShowModel(id: 2, name: "genre2"),
     ],
     homepage: "homepage",
     id: 1,
@@ -103,8 +103,8 @@ void main() {
     episodeRunTime: [25],
     firstAirDate: DateTime.parse('2024-12-31'),
     genres: [
-      GenreModel(id: 1, name: "genre1"),
-      GenreModel(id: 2, name: "genre2"),
+      GenreTvShowModel(id: 1, name: "genre1"),
+      GenreTvShowModel(id: 2, name: "genre2"),
     ],
     homepage: "homepage",
     id: 1,
@@ -134,8 +134,8 @@ void main() {
     episodeRunTime: [25],
     firstAirDate: DateTime.parse('2024-12-31'),
     genres: [
-      GenreModel(id: 1, name: "genre1"),
-      GenreModel(id: 2, name: "genre2"),
+      GenreTvShowModel(id: 1, name: "genre1"),
+      GenreTvShowModel(id: 2, name: "genre2"),
     ],
     homepage: "homepage",
     id: 1,

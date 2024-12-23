@@ -30,6 +30,8 @@ void main() {
     );
   }
 
+  final tListTvShow = [testTvShow, testTvShow2];
+
   testWidgets('Page should display center progress bar when loading',
       (WidgetTester tester) async {
     when(mockNotifier.state).thenReturn(RequestState.Loading);
@@ -51,6 +53,16 @@ void main() {
 
     await tester.pumpWidget(makeTestableWidget(TopRatedTvShowsPage()));
     expect(listViewFinder, findsOneWidget);
+  });
+
+  testWidgets('ListView should display correct number of tv shows',
+      (WidgetTester tester) async {
+    when(mockNotifier.state).thenReturn(RequestState.Loaded);
+    when(mockNotifier.tvShows).thenReturn(tListTvShow);
+
+    await tester.pumpWidget(makeTestableWidget(TopRatedTvShowsPage()));
+
+    expect(find.byType(TvShowCard), findsNWidgets(2));
   });
 
   testWidgets('TvShowCard should display tv show details correctly',

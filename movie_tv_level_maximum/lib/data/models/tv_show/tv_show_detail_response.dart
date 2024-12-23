@@ -1,14 +1,16 @@
 import 'package:equatable/equatable.dart';
 import 'package:movie_tv_level_maximum/data/models/movie/genre_model.dart';
 import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_season_model.dart';
+import 'package:movie_tv_level_maximum/domain/entities/tv_show/genre_tv_show_model.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_detail.dart';
+import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_season.dart';
 
 class TvShowDetailResponse extends Equatable {
   final bool adult;
   final String backdropPath;
   final List<int> episodeRunTime;
   final DateTime firstAirDate;
-  final List<GenreModel> genres;
+  final List<GenreTvShowModel> genres;
   final String homepage;
   final int id;
   final bool inProduction;
@@ -23,7 +25,7 @@ class TvShowDetailResponse extends Equatable {
   final String overview;
   final double popularity;
   final String posterPath;
-  final List<Season> seasons;
+  final List<TvShowSeason> seasons;
   final String status;
   final String tagline;
   final String type;
@@ -93,8 +95,8 @@ class TvShowDetailResponse extends Equatable {
         backdropPath: json["backdrop_path"],
         episodeRunTime: List<int>.from(json["episode_run_time"].map((x) => x)),
         firstAirDate: DateTime.parse(json["first_air_date"]),
-        genres: List<GenreModel>.from(
-            json["genres"].map((x) => GenreModel.fromJson(x))),
+        genres: List<GenreTvShowModel>.from(
+            json["genres"].map((x) => GenreTvShowModel.fromJson(x))),
         homepage: json["homepage"],
         id: json["id"],
         inProduction: json["in_production"],
@@ -110,7 +112,7 @@ class TvShowDetailResponse extends Equatable {
         popularity: json["popularity"]?.toDouble(),
         posterPath: json["poster_path"],
         seasons:
-            List<Season>.from(json["seasons"].map((x) => Season.fromJson(x))),
+            List<TvShowSeason>.from(json["seasons"].map((x) => TvShowSeason.fromJson(x))),
         status: json["status"],
         tagline: json["tagline"],
         type: json["type"],

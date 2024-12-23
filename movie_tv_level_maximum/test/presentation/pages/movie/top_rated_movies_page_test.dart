@@ -30,6 +30,18 @@ void main() {
     );
   }
 
+  final tListMovie = [testMovie, testMovie2];
+
+  testWidgets('Page should display AppBar with correct title',
+      (WidgetTester tester) async {
+    when(mockNotifier.state).thenReturn(RequestState.Loading);
+
+    await tester.pumpWidget(makeTestableWidget(TopRatedMoviesPage()));
+
+    expect(find.byType(AppBar), findsOneWidget);
+    expect(find.text('Top Rated Movies'), findsOneWidget);
+  });
+
   testWidgets('Page should display progress bar when loading',
       (WidgetTester tester) async {
     when(mockNotifier.state).thenReturn(RequestState.Loading);
@@ -41,6 +53,25 @@ void main() {
 
     expect(centerFinder, findsOneWidget);
     expect(progressFinder, findsOneWidget);
+  });
+
+  testWidgets('fetchTopRatedMovies should be called when page is initialized',
+      (WidgetTester tester) async {
+    when(mockNotifier.state).thenReturn(RequestState.Loaded);
+    when(mockNotifier.movies).thenReturn(<Movie>[]);
+    when(mockNotifier.fetchTopRatedMovies()).thenAnswer((_) async {});
+    await tester.pumpWidget(makeTestableWidget(TopRatedMoviesPage()));
+    verify(mockNotifier.fetchTopRatedMovies()).called(1);
+  });
+
+  testWidgets('ListView should display correct number of movies',
+      (WidgetTester tester) async {
+    when(mockNotifier.state).thenReturn(RequestState.Loaded);
+    when(mockNotifier.movies).thenReturn(tListMovie);
+
+    await tester.pumpWidget(makeTestableWidget(TopRatedMoviesPage()));
+
+    expect(find.byType(MovieCard), findsNWidgets(2));
   });
 
   testWidgets('Page should display when data is loaded',
@@ -68,6 +99,16 @@ void main() {
     expect(find.text('Spider-Man'), findsOneWidget);
     expect(find.text('overview'), findsOneWidget);
     expect(find.byType(CachedNetworkImage), findsOneWidget);
+  });
+
+  testWidgets('Page should display text when there are no movies',
+      (WidgetTester tester) async {
+    when(mockNotifier.state).thenReturn(RequestState.Empty);
+    when(mockNotifier.message).thenReturn('No movies available');
+
+    await tester.pumpWidget(makeTestableWidget(TopRatedMoviesPage()));
+
+    expect(find.text('No movies available'), findsOneWidget);
   });
 
   testWidgets('Page should display text with message when Error',

@@ -1,9 +1,9 @@
-import '../../../data/models/tv_show/tv_show_episode.dart';
+import 'package:movie_tv_level_maximum/domain/entities/tv_show/episode_tv_show.dart';
 
 class TvShowEpisode {
   String id;
   DateTime airDate;
-  List<TvShowEpisodeModel> episodes;
+  List<EpisodeTvShow> episodes;
   String name;
   String overview;
   int tvShowEpisodeResponseId;
