@@ -8,9 +8,12 @@ import 'package:movie_tv_level_maximum/common/exception.dart';
 import 'package:movie_tv_level_maximum/common/failure.dart';
 import 'package:movie_tv_level_maximum/data/data_sources/tv_show/tv_show_local_data_source.dart';
 import 'package:movie_tv_level_maximum/data/data_sources/tv_show/tv_show_remote_data_source.dart';
+import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_episodes_response.dart';
 import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_model.dart';
 import 'package:movie_tv_level_maximum/data/repositories/tv_show_repository_impl.dart';
+import 'package:movie_tv_level_maximum/domain/entities/tv_show/episode_tv_show.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show.dart';
+import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_episode.dart';
 
 import '../../../dummy_data/dummy_objects.dart';
 import 'tv_show_repository_impl_test.mocks.dart';
@@ -62,6 +65,30 @@ void main() {
     name: "name",
     voteAverage: 1,
     voteCount: 1,
+  );
+
+  final tEpisodeTvShow = TvShowEpisodeResponse(
+    id: "1",
+    airDate: DateTime.parse('2024-12-31'),
+    episodes: [],
+    name: "name",
+    overview: "overview",
+    tvShowEpisodeResponseId: 1,
+    posterPath: "posterPath",
+    seasonNumber: 1,
+    voteAverage: 1.0,
+  );
+
+  final testEpisodeTvShow = TvShowEpisode(
+    id: "1",
+    airDate: DateTime.parse('2024-12-31'),
+    episodes: [],
+    name: "name",
+    overview: "overview",
+    tvShowEpisodeResponseId: 1,
+    posterPath: "posterPath",
+    seasonNumber: 1,
+    voteAverage: 1.0,
   );
 
   final tTvShowModelList = <TvShowModel>[tTvShowModel];
@@ -340,6 +367,43 @@ void main() {
       final result = await repository.getWatchlistTvShow();
       final resultList = result.getOrElse(() => []);
       expect(resultList, [testWatchlistTvShow]);
+    });
+  });
+
+  group('getAllEpisodes', () {
+    final int tId = 1;
+    final int tSeason = 1;
+
+    /*test('Should return remote data when success call remote data source', () async {
+      // Arrange
+      when(mockTvShowRemoteDataSource.getAllEpisodes(tId, tSeason))
+          .thenAnswer((_) async => tEpisodeTvShow); // Pastikan ini mengembalikan TvShowEpisodeResponse
+      // Act
+      final result = await repository.getAllEpisodes(tId, tSeason);
+
+      // Assert
+      verify(mockTvShowRemoteDataSource.getAllEpisodes(tId, tSeason));
+      expect(result, equals(Right(testEpisodeTvShow))); // testEpisodeTvShow adalah hasil konversi
+    });*/
+
+
+    test('Should return ServerFailure when a ServerException is thrown',
+        () async {
+      when(mockTvShowRemoteDataSource.getAllEpisodes(tId, tSeason))
+          .thenThrow(ServerException());
+      final result = await repository.getAllEpisodes(tId, tSeason);
+      verify(mockTvShowRemoteDataSource.getAllEpisodes(tId, tSeason));
+      expect(result, equals(Left(ServerFailure(''))));
+    });
+
+    test('Should return connection failure when the device is not connected',
+        () async {
+      when(mockTvShowRemoteDataSource.getAllEpisodes(tId, tSeason))
+          .thenThrow(SocketException('Failed to connect to the network'));
+      final result = await repository.getAllEpisodes(tId, tSeason);
+      verify(mockTvShowRemoteDataSource.getAllEpisodes(tId, tSeason));
+      expect(result,
+          equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
   });
 }

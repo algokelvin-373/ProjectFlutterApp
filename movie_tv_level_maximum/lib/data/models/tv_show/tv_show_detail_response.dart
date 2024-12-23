@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:movie_tv_level_maximum/data/models/movie/genre_model.dart';
-import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_season_model.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/genre_tv_show_model.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_detail.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_season.dart';
