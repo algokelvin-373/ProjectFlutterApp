@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:movie_tv_level_maximum/data/models/movie/genre_model.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/genre_tv_show_model.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_detail.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_season.dart';
@@ -91,7 +90,7 @@ class TvShowDetailResponse extends Equatable {
   factory TvShowDetailResponse.fromJson(Map<String, dynamic> json) =>
       TvShowDetailResponse(
         adult: json["adult"],
-        backdropPath: json["backdrop_path"],
+        backdropPath: json["backdrop_path"] ?? '',
         episodeRunTime: List<int>.from(json["episode_run_time"].map((x) => x)),
         firstAirDate: DateTime.parse(json["first_air_date"]),
         genres: List<GenreTvShowModel>.from(
@@ -109,7 +108,7 @@ class TvShowDetailResponse extends Equatable {
         originalName: json["original_name"],
         overview: json["overview"],
         popularity: json["popularity"]?.toDouble(),
-        posterPath: json["poster_path"],
+        posterPath: json["poster_path"] ?? '',
         seasons:
             List<TvShowSeason>.from(json["seasons"].map((x) => TvShowSeason.fromJson(x))),
         status: json["status"],

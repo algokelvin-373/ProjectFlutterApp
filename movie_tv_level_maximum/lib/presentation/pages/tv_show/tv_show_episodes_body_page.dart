@@ -20,15 +20,21 @@ class TvShowEpisodesBodyPage extends StatelessWidget {
 
     return Stack(
       children: [
-        CachedNetworkImage(
-          imageUrl:
-              'https://image.tmdb.org/t/p/w500${tvShowEpisodes.posterPath}',
-          width: screenWidth,
-          placeholder: (context, url) => Center(
-            child: CircularProgressIndicator(),
-          ),
-          errorWidget: (context, url, error) => Icon(Icons.error),
-        ),
+        tvShowEpisodes.posterPath != ''
+            ? CachedNetworkImage(
+                key: ValueKey('ImageTvShowDetail'),
+                imageUrl:
+                    'https://image.tmdb.org/t/p/w500${tvShowEpisodes.posterPath}',
+                width: screenWidth,
+                placeholder: (context, url) => Center(
+                  child: CircularProgressIndicator(),
+                ),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+              )
+            : Icon(
+                Icons.broken_image,
+                size: screenWidth,
+              ),
         Container(
           margin: const EdgeInsets.only(top: 48 + 8),
           child: DraggableScrollableSheet(
@@ -67,7 +73,6 @@ class TvShowEpisodesBodyPage extends StatelessWidget {
         top: 16,
         right: 16,
       ),
-      //child: CircularProgressIndicator(),
       child: Stack(
         children: [
           Container(
@@ -137,8 +142,7 @@ class TvShowEpisodesBodyPage extends StatelessWidget {
     );
   }
 
-  Widget _listEpisodes(
-      BuildContext context, List<EpisodeTvShow> episodes) {
+  Widget _listEpisodes(BuildContext context, List<EpisodeTvShow> episodes) {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.6,
       child: ListView.builder(
@@ -155,14 +159,17 @@ class TvShowEpisodesBodyPage extends StatelessWidget {
                   borderRadius: BorderRadius.all(
                     Radius.circular(8),
                   ),
-                  child: CachedNetworkImage(
-                    imageUrl:
-                        'https://image.tmdb.org/t/p/w500${episode.stillPath}',
-                    placeholder: (context, url) => Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                  ),
+                  child: episode.stillPath != ''
+                      ? CachedNetworkImage(
+                          key: ValueKey('ImageTvShowDetail'),
+                          imageUrl: '$BASE_IMAGE_URL${episode.stillPath}',
+                          placeholder: (context, url) => Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
+                        )
+                      : Icon(Icons.broken_image),
                 ),
               ),
               const SizedBox(height: 5),

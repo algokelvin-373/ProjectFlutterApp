@@ -46,7 +46,7 @@ class TvShowEpisodeResponse {
         name: json["name"],
         overview: json["overview"],
         tvShowEpisodeResponseId: json["id"],
-        posterPath: json["poster_path"],
+        posterPath: json["poster_path"] ?? '',
         seasonNumber: json["season_number"],
         voteAverage: json["vote_average"]?.toDouble(),
       );

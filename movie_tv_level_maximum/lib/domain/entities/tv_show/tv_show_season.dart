@@ -4,7 +4,7 @@ class TvShowSeason {
   int id;
   String name;
   String overview;
-  String? posterPath;
+  String posterPath;
   int seasonNumber;
   double voteAverage;
 
@@ -26,7 +26,7 @@ class TvShowSeason {
         id: json["id"],
         name: json["name"],
         overview: json["overview"],
-        posterPath: json["poster_path"],
+        posterPath: json["poster_path"] ?? '',
         seasonNumber: json["season_number"],
         voteAverage: json["vote_average"]?.toDouble(),
       );

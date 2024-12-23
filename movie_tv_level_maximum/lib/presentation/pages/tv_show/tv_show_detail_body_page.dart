@@ -30,15 +30,20 @@ class TvShowDetailBodyPage extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     return Stack(
       children: [
-        CachedNetworkImage(
-          key: ValueKey('ImageTvShowDetail'),
-          imageUrl: 'https://image.tmdb.org/t/p/w500${tvShow.posterPath}',
-          width: screenWidth,
-          placeholder: (context, url) => Center(
-            child: CircularProgressIndicator(),
-          ),
-          errorWidget: (context, url, error) => Icon(Icons.error),
-        ),
+        (tvShow.posterPath != '')
+            ? CachedNetworkImage(
+                key: ValueKey('ImageTvShowDetail'),
+                imageUrl: '$BASE_IMAGE_URL${tvShow.posterPath}',
+                width: screenWidth,
+                placeholder: (context, url) => Center(
+                  child: CircularProgressIndicator(),
+                ),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+              )
+            : Icon(
+                Icons.broken_image,
+                size: screenWidth,
+              ),
         Container(
           margin: const EdgeInsets.only(top: 48 + 8),
           child: DraggableScrollableSheet(
@@ -213,14 +218,17 @@ class TvShowDetailBodyPage extends StatelessWidget {
                       borderRadius: BorderRadius.all(
                         Radius.circular(8),
                       ),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            'https://image.tmdb.org/t/p/w500${tvShow.posterPath}',
-                        placeholder: (context, url) => Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                      ),
+                      child: (tvShow.posterPath != null || tvShow.posterPath != '')
+                          ? CachedNetworkImage(
+                              key: ValueKey('ImageTvShowDetail'),
+                              imageUrl: '$BASE_IMAGE_URL${tvShow.posterPath}',
+                              placeholder: (context, url) => Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
+                            )
+                          : Icon(Icons.broken_image),
                     ),
                   ),
                 );
@@ -262,14 +270,17 @@ class TvShowDetailBodyPage extends StatelessWidget {
                 borderRadius: BorderRadius.all(
                   Radius.circular(8),
                 ),
-                child: CachedNetworkImage(
-                  imageUrl:
-                      'https://image.tmdb.org/t/p/w500${season.posterPath}',
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                ),
+                child: (season.posterPath.isNotEmpty)
+                    ? CachedNetworkImage(
+                        key: ValueKey('ImageTvShowDetail'),
+                        imageUrl:
+                            'https://image.tmdb.org/t/p/w500${tvShow.posterPath}',
+                        placeholder: (context, url) => Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      )
+                    : Icon(Icons.broken_image),
               ),
             ),
           );
