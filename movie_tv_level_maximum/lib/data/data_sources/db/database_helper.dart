@@ -67,6 +67,11 @@ class DatabaseHelper {
     );
   }
 
+  Future<int> removeAllWatchlist() async {
+    final db = await database;
+    return await db!.delete(_tblWatchlist);
+  }
+
   Future<Map<String, dynamic>?> getMovieById(int id) async {
     final db = await database;
     final results = await db!.query(
@@ -101,6 +106,11 @@ class DatabaseHelper {
       where: 'id = ?',
       whereArgs: [tvShow.id],
     );
+  }
+
+  Future<int> removeAllWatchlistTvShow() async {
+    final db = await database;
+    return await db!.delete(_tblWatchlistTvShow);
   }
 
   Future<List<Map<String, dynamic>>> getWatchlistTvShows() async {

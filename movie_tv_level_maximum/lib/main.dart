@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_tv_level_maximum/injection.dart' as di;
 import 'package:movie_tv_level_maximum/presentation/pages/about_page.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/movie/home_movie_page.dart';
@@ -36,6 +37,7 @@ import 'common/utils.dart';
 
 void main() {
   di.init();
+  GoogleFonts.config.allowRuntimeFetching = false;
   runApp(MyApp());
 }
 

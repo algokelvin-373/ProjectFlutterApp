@@ -440,6 +440,15 @@ class MockDatabaseHelper extends _i1.Mock implements _i15.DatabaseHelper {
       ) as _i6.Future<int>);
 
   @override
+  _i6.Future<int> removeAllWatchlist() => (super.noSuchMethod(
+        Invocation.method(
+          #removeAllWatchlist,
+          [],
+        ),
+        returnValue: _i6.Future<int>.value(0),
+      ) as _i6.Future<int>);
+
+  @override
   _i6.Future<Map<String, dynamic>?> getMovieById(int? id) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -476,6 +485,15 @@ class MockDatabaseHelper extends _i1.Mock implements _i15.DatabaseHelper {
         Invocation.method(
           #removeWatchlistTvShow,
           [tvShow],
+        ),
+        returnValue: _i6.Future<int>.value(0),
+      ) as _i6.Future<int>);
+
+  @override
+  _i6.Future<int> removeAllWatchlistTvShow() => (super.noSuchMethod(
+        Invocation.method(
+          #removeAllWatchlistTvShow,
+          [],
         ),
         returnValue: _i6.Future<int>.value(0),
       ) as _i6.Future<int>);

@@ -117,6 +117,18 @@ final testTvShowEpisodes = TvShowEpisode(
   voteAverage: 1.0,
 );
 
+final testTvShowEpisodes2 = TvShowEpisode(
+  id: "2",
+  airDate: DateTime.parse('2024-12-31'),
+  episodes: [],
+  name: "name",
+  overview: "overview",
+  tvShowEpisodeResponseId: 1,
+  posterPath: "posterPath",
+  seasonNumber: 1,
+  voteAverage: 1.0,
+);
+
 final testWatchlistMovie = Movie.watchlist(
   id: 1,
   title: 'title',

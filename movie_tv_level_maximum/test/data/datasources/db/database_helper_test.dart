@@ -1,13 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:movie_tv_level_maximum/data/data_sources/db/database_helper.dart';
 import 'package:movie_tv_level_maximum/data/models/movie/movie_table.dart';
 import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_table.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-import '../../../dummy_data/dummy_objects.dart';
-
-//@GenerateMocks([DatabaseHelper])
 void main() {
   late DatabaseHelper databaseHelper;
 
@@ -74,6 +70,11 @@ void main() {
       expect(results.length, 2);
     });
 
+    test('Should remove all movies in watchlist', () async {
+      final result = await databaseHelper.removeAllWatchlist();
+      expect(result, 2);
+    });
+
     final tvShow1 = TvShowTable(
       id: 1,
       name: "name 1",
@@ -120,6 +121,11 @@ void main() {
 
       final results = await databaseHelper.getWatchlistTvShows();
       expect(results.length, 2);
+    });
+
+    test('Should remove all tv shows in watchlist', () async {
+      final result = await databaseHelper.removeAllWatchlistTvShow();
+      expect(result, 2);
     });
   });
 }
