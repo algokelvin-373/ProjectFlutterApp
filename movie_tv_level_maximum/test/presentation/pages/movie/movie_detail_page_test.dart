@@ -28,6 +28,18 @@ void main() {
     );
   }
 
+  testWidgets('Should display center when loading get data Movie Detail', (WidgetTester tester) async {
+    final tId = 1;
+    when(mockNotifier.movieState).thenReturn(RequestState.Loading);
+
+    final progressBarFinder = find.byType(CircularProgressIndicator);
+    final centerFinder = find.byType(Center);
+
+    await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: tId)));
+    expect(centerFinder, findsOneWidget);
+    expect(progressBarFinder, findsOneWidget);
+  });
+
   testWidgets(
       'Watchlist button should display add icon when movie not added to watchlist',
       (WidgetTester tester) async {

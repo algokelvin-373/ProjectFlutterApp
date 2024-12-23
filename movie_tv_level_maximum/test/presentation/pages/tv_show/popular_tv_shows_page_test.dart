@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -6,8 +7,10 @@ import 'package:movie_tv_level_maximum/common/state_enum.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/tv_show/popular_tv_shows_page.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/tv_show/popular_tv_shows_notifier.dart';
+import 'package:movie_tv_level_maximum/presentation/widgets/tv_show_card_list.dart';
 import 'package:provider/provider.dart';
 
+import '../../../dummy_data/dummy_objects.dart';
 import 'popular_tv_shows_page_test.mocks.dart';
 
 @GenerateMocks([PopularTvShowsNotifier])
@@ -48,6 +51,21 @@ void main() {
 
     await tester.pumpWidget(makeTestableWidget(PopularTvShowsPage()));
     expect(listViewFinder, findsOneWidget);
+  });
+
+  testWidgets('TvShowCard should display tv show details correctly',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: TvShowCard(testTvShow),
+        ),
+      ),
+    );
+
+    expect(find.text('name'), findsOneWidget);
+    expect(find.text('overview'), findsOneWidget);
+    expect(find.byType(CachedNetworkImage), findsOneWidget);
   });
 
   testWidgets('Page should display text with message when Error',

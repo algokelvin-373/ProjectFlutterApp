@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -6,10 +7,11 @@ import 'package:movie_tv_level_maximum/common/state_enum.dart';
 import 'package:movie_tv_level_maximum/domain/entities/movie/movie.dart';
 import 'package:movie_tv_level_maximum/presentation/pages/movie/popular_movies_page.dart';
 import 'package:movie_tv_level_maximum/presentation/provider/movie/popular_movies_notifier.dart';
+import 'package:movie_tv_level_maximum/presentation/widgets/movie_card_list.dart';
 import 'package:provider/provider.dart';
 
+import '../../../dummy_data/dummy_objects.dart';
 import 'popular_movies_page_test.mocks.dart';
-
 
 @GenerateMocks([PopularMoviesNotifier])
 void main() {
@@ -51,6 +53,21 @@ void main() {
     await tester.pumpWidget(makeTestableWidget(PopularMoviesPage()));
 
     expect(listViewFinder, findsOneWidget);
+  });
+
+  testWidgets('MovieCard should display movie details correctly',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: MovieCard(testMovie2),
+        ),
+      ),
+    );
+
+    expect(find.text('Spider-Man'), findsOneWidget);
+    expect(find.text('overview'), findsOneWidget);
+    expect(find.byType(CachedNetworkImage), findsOneWidget);
   });
 
   testWidgets('Page should display text with message when Error',

@@ -24,8 +24,6 @@ class _TvShowEpisodesPageState extends State<TvShowEpisodesPage> {
   @override
   void initState() {
     super.initState();
-    print('Episode Page -- ${widget.id}');
-    print('Episode Page -- ${widget.season}');
     Future.microtask(() {
       Provider.of<TvShowEpisodesNotifier>(context, listen: false)
           .fetchTvShowEpisodes(widget.id, widget.season);
@@ -34,13 +32,6 @@ class _TvShowEpisodesPageState extends State<TvShowEpisodesPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>? ?? {};
-    // final id = args['id'] as int? ?? 0; // Gunakan 0 sebagai default
-    // final season = args['seasons'] as int? ?? 1; // Gunakan 1 sebagai default
-    //
-    // print('id new page $id');
-    // print('season new page $season');
-
     return Scaffold(
       body: Consumer<TvShowEpisodesNotifier>(
         builder: (context, provider, child) {
@@ -55,14 +46,6 @@ class _TvShowEpisodesPageState extends State<TvShowEpisodesPage> {
                 tvShowEpisodes: provider.tvShowEpisode,
               ),
             );
-            /*final tvShow = provider.tvShow;
-            return SafeArea(
-              child: TvShowDetailBodyPage(
-                tvShow: tvShow,
-                recommendations: provider.tvShowRecommendations,
-                isAddedWatchlist: provider.isAddedToWatchlistTvShow,
-              ),
-            );*/
           } else {
             return Text(provider.message);
           }

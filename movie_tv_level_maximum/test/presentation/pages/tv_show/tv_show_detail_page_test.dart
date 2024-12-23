@@ -28,6 +28,19 @@ void main() {
     );
   }
 
+  testWidgets('Should display center when loading get data TV Show Detail',
+      (WidgetTester tester) async {
+    final tId = 1;
+    when(mockNotifier.tvShowState).thenReturn(RequestState.Loading);
+
+    final progressBarFinder = find.byType(CircularProgressIndicator);
+    final centerFinder = find.byType(Center);
+
+    await tester.pumpWidget(makeTestableWidget(TvShowDetailPage(id: tId)));
+    expect(centerFinder, findsOneWidget);
+    expect(progressBarFinder, findsOneWidget);
+  });
+
   testWidgets(
       'Watchlist button should display add icon when movie not added to watchlist',
       (WidgetTester tester) async {
@@ -66,7 +79,8 @@ void main() {
     when(mockNotifier.recommendationState).thenReturn(RequestState.Loaded);
     when(mockNotifier.tvShowRecommendations).thenReturn(<TvShow>[]);
     when(mockNotifier.isAddedToWatchlistTvShow).thenReturn(false);
-    when(mockNotifier.watchlistTvShowMessage).thenReturn('Added to Watchlist TV Show');
+    when(mockNotifier.watchlistTvShowMessage)
+        .thenReturn('Added to Watchlist TV Show');
 
     final watchlistButton = find.byType(FilledButton);
 

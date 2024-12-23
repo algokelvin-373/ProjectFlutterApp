@@ -31,6 +31,7 @@ class TvShowDetailBodyPage extends StatelessWidget {
     return Stack(
       children: [
         CachedNetworkImage(
+          key: ValueKey('ImageTvShowDetail'),
           imageUrl: 'https://image.tmdb.org/t/p/w500${tvShow.posterPath}',
           width: screenWidth,
           placeholder: (context, url) => Center(
