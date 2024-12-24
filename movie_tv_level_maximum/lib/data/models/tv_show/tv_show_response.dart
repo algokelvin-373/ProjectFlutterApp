@@ -33,5 +33,4 @@ class TvShowResponse {
     };
   }
 
-  List<Object?> get props => [tvShowList, page, totalPages, totalResults];
 }
