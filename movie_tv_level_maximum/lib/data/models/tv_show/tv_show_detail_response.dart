@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
-import 'package:movie_tv_level_maximum/domain/entities/tv_show/genre_tv_show_model.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_detail.dart';
-import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_season.dart';
+
+import 'genre_tv_show_model.dart';
+import 'tv_show_season_model.dart';
 
 class TvShowDetailResponse extends Equatable {
   final bool adult;
@@ -23,7 +24,7 @@ class TvShowDetailResponse extends Equatable {
   final String overview;
   final double popularity;
   final String posterPath;
-  final List<TvShowSeason> seasons;
+  final List<TvShowSeasonModel> seasons;
   final String status;
   final String tagline;
   final String type;
@@ -64,7 +65,7 @@ class TvShowDetailResponse extends Equatable {
         backdropPath: backdropPath,
         episodeRunTime: episodeRunTime,
         firstAirDate: firstAirDate,
-        genres: genres,
+        genres: genres.map((genre) => genre.toEntity()).toList(),
         homepage: homepage,
         id: id,
         inProduction: inProduction,
@@ -79,7 +80,7 @@ class TvShowDetailResponse extends Equatable {
         overview: overview,
         popularity: popularity,
         posterPath: posterPath,
-        seasons: seasons,
+        seasons: seasons.map((season) => season.toEntity()).toList(),
         status: status,
         tagline: tagline,
         type: type,
@@ -87,37 +88,37 @@ class TvShowDetailResponse extends Equatable {
         voteCount: voteCount);
   }
 
-  factory TvShowDetailResponse.fromJson(Map<String, dynamic> json) =>
-      TvShowDetailResponse(
-        adult: json["adult"],
-        backdropPath: json["backdrop_path"] ?? '',
-        episodeRunTime: List<int>.from(json["episode_run_time"].map((x) => x)),
-        firstAirDate: DateTime.parse(json["first_air_date"]),
-        genres: List<GenreTvShowModel>.from(
-            json["genres"].map((x) => GenreTvShowModel.fromJson(x))),
-        homepage: json["homepage"],
-        id: json["id"],
-        inProduction: json["in_production"],
-        languages: List<String>.from(json["languages"].map((x) => x)),
-        lastAirDate: DateTime.parse(json["last_air_date"]),
-        name: json["name"],
-        numberOfEpisodes: json["number_of_episodes"],
-        numberOfSeasons: json["number_of_seasons"],
-        originCountry: List<String>.from(json["origin_country"].map((x) => x)),
-        originalLanguage: json["original_language"],
-        originalName: json["original_name"],
-        overview: json["overview"],
-        popularity: json["popularity"]?.toDouble(),
-        posterPath: json["poster_path"] ?? '',
-        seasons:
-            List<TvShowSeason>.from(json["seasons"].map((x) => TvShowSeason.fromJson(x))),
-        status: json["status"],
-        tagline: json["tagline"],
-        type: json["type"],
-        voteAverage: json["vote_average"]?.toDouble(),
-        voteCount: json["vote_count"],
-      );
-
+  factory TvShowDetailResponse.fromJson(Map<String, dynamic> json) {
+    return TvShowDetailResponse(
+      adult: json["adult"],
+      backdropPath: json["backdrop_path"] ?? '',
+      episodeRunTime: List<int>.from(json["episode_run_time"].map((x) => x)),
+      firstAirDate: DateTime.parse(json["first_air_date"]),
+      genres: List<GenreTvShowModel>.from(
+          json["genres"].map((x) => GenreTvShowModel.fromJson(x))),
+      homepage: json["homepage"],
+      id: json["id"],
+      inProduction: json["in_production"],
+      languages: List<String>.from(json["languages"].map((x) => x)),
+      lastAirDate: DateTime.parse(json["last_air_date"]),
+      name: json["name"],
+      numberOfEpisodes: json["number_of_episodes"],
+      numberOfSeasons: json["number_of_seasons"],
+      originCountry: List<String>.from(json["origin_country"].map((x) => x)),
+      originalLanguage: json["original_language"],
+      originalName: json["original_name"],
+      overview: json["overview"],
+      popularity: json["popularity"]?.toDouble(),
+      posterPath: json["poster_path"] ?? '',
+      seasons: List<TvShowSeasonModel>.from(
+          json["seasons"].map((x) => TvShowSeasonModel.fromJson(x))),
+      status: json["status"],
+      tagline: json["tagline"],
+      type: json["type"],
+      voteAverage: json["vote_average"]?.toDouble(),
+      voteCount: json["vote_count"],
+    );
+  }
   @override
   List<Object> get props => [
         adult,

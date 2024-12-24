@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
-import 'package:movie_tv_level_maximum/domain/entities/tv_show/genre_tv_show_model.dart';
-import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_season.dart';
+import 'genre_tv_show.dart';
+import 'tv_show_season.dart';
 
 class TvShowDetail extends Equatable {
   final bool adult;
   final String backdropPath;
   final List<int> episodeRunTime;
   final DateTime firstAirDate;
-  final List<GenreTvShowModel> genres;
+  final List<GenreTvShow> genres;
   final String homepage;
   final int id;
   final bool inProduction;
@@ -58,7 +58,6 @@ class TvShowDetail extends Equatable {
   });
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         adult,
         backdropPath,
