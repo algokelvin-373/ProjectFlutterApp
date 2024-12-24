@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">90</td>
-            <td class="headerCovTableEntry">142</td>
-            <td class="headerCovTableEntryLo">63.4 %</td>
+            <td class="headerCovTableEntry">141</td>
+            <td class="headerCovTableEntryLo">63.8 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">Tue Dec 24 12:13:02 2024</td>
+            <td class="headerValue">Tue Dec 24 12:51:11 2024</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -280,90 +280,89 @@
 <a name="218"><span class="lineNum">     218 </span><span class="lineNoCov">          0 :                       borderRadius: BorderRadius.all(</span></a>
 <a name="219"><span class="lineNum">     219 </span><span class="lineNoCov">          0 :                         Radius.circular(8),</span></a>
 <a name="220"><span class="lineNum">     220 </span>            :                       ),</a>
-<a name="221"><span class="lineNum">     221 </span><span class="lineNoCov">          0 :                       child: (tvShow.posterPath != null || tvShow.posterPath != '')</span></a>
-<a name="222"><span class="lineNum">     222 </span><span class="lineNoCov">          0 :                           ? CachedNetworkImage(</span></a>
-<a name="223"><span class="lineNum">     223 </span><span class="lineNoCov">          0 :                               key: ValueKey('ImageTvShowDetail'),</span></a>
-<a name="224"><span class="lineNum">     224 </span><span class="lineNoCov">          0 :                               imageUrl: '$BASE_IMAGE_URL${tvShow.posterPath}',</span></a>
-<a name="225"><span class="lineNum">     225 </span><span class="lineNoCov">          0 :                               placeholder: (context, url) =&gt; Center(</span></a>
-<a name="226"><span class="lineNum">     226 </span><span class="lineNoCov">          0 :                                 child: CircularProgressIndicator(),</span></a>
-<a name="227"><span class="lineNum">     227 </span>            :                               ),</a>
-<a name="228"><span class="lineNum">     228 </span><span class="lineNoCov">          0 :                               errorWidget: (context, url, error) =&gt;</span></a>
-<a name="229"><span class="lineNum">     229 </span><span class="lineNoCov">          0 :                                   Icon(Icons.error),</span></a>
-<a name="230"><span class="lineNum">     230 </span>            :                             )</a>
-<a name="231"><span class="lineNum">     231 </span><span class="lineNoCov">          0 :                           : Icon(Icons.broken_image),</span></a>
-<a name="232"><span class="lineNum">     232 </span>            :                     ),</a>
-<a name="233"><span class="lineNum">     233 </span>            :                   ),</a>
-<a name="234"><span class="lineNum">     234 </span>            :                 );</a>
-<a name="235"><span class="lineNum">     235 </span>            :               },</a>
-<a name="236"><span class="lineNum">     236 </span><span class="lineCov">          2 :               itemCount: recommendations.length,</span></a>
-<a name="237"><span class="lineNum">     237 </span>            :             ),</a>
-<a name="238"><span class="lineNum">     238 </span>            :           );</a>
-<a name="239"><span class="lineNum">     239 </span>            :         } else {</a>
-<a name="240"><span class="lineNum">     240 </span><span class="lineNoCov">          0 :           return Container();</span></a>
-<a name="241"><span class="lineNum">     241 </span>            :         }</a>
-<a name="242"><span class="lineNum">     242 </span>            :       },</a>
-<a name="243"><span class="lineNum">     243 </span>            :     );</a>
-<a name="244"><span class="lineNum">     244 </span>            :   }</a>
-<a name="245"><span class="lineNum">     245 </span>            : </a>
-<a name="246"><span class="lineNum">     246 </span><span class="lineCov">          1 :   Widget _allSeasons(List&lt;TvShowSeason&gt; listSeasons) {</span></a>
-<a name="247"><span class="lineNum">     247 </span><span class="lineCov">          1 :     return SizedBox(</span></a>
-<a name="248"><span class="lineNum">     248 </span>            :       height: 200,</a>
-<a name="249"><span class="lineNum">     249 </span><span class="lineCov">          1 :       child: ListView.builder(</span></a>
-<a name="250"><span class="lineNum">     250 </span>            :         scrollDirection: Axis.horizontal,</a>
-<a name="251"><span class="lineNum">     251 </span><span class="lineCov">          1 :         itemCount: listSeasons.length,</span></a>
-<a name="252"><span class="lineNum">     252 </span><span class="lineNoCov">          0 :         itemBuilder: (context, index) {</span></a>
-<a name="253"><span class="lineNum">     253 </span><span class="lineNoCov">          0 :           final season = listSeasons[index];</span></a>
-<a name="254"><span class="lineNum">     254 </span><span class="lineNoCov">          0 :           return Padding(</span></a>
-<a name="255"><span class="lineNum">     255 </span>            :             padding: const EdgeInsets.all(4.0),</a>
-<a name="256"><span class="lineNum">     256 </span><span class="lineNoCov">          0 :             child: InkWell(</span></a>
-<a name="257"><span class="lineNum">     257 </span><span class="lineNoCov">          0 :               onTap: () {</span></a>
-<a name="258"><span class="lineNum">     258 </span><span class="lineNoCov">          0 :                 print('id: ${tvShow.id}');</span></a>
-<a name="259"><span class="lineNum">     259 </span><span class="lineNoCov">          0 :                 print('season: ${season.seasonNumber}');</span></a>
-<a name="260"><span class="lineNum">     260 </span><span class="lineNoCov">          0 :                 Navigator.pushNamed(</span></a>
-<a name="261"><span class="lineNum">     261 </span>            :                   context,</a>
-<a name="262"><span class="lineNum">     262 </span>            :                   TvShowEpisodesPage.ROUTE_NAME,</a>
-<a name="263"><span class="lineNum">     263 </span><span class="lineNoCov">          0 :                   arguments: {</span></a>
-<a name="264"><span class="lineNum">     264 </span><span class="lineNoCov">          0 :                     'id': tvShow.id,</span></a>
-<a name="265"><span class="lineNum">     265 </span><span class="lineNoCov">          0 :                     'seasons': season.seasonNumber,</span></a>
-<a name="266"><span class="lineNum">     266 </span>            :                   },</a>
-<a name="267"><span class="lineNum">     267 </span>            :                 );</a>
-<a name="268"><span class="lineNum">     268 </span>            :               },</a>
-<a name="269"><span class="lineNum">     269 </span><span class="lineNoCov">          0 :               child: ClipRRect(</span></a>
-<a name="270"><span class="lineNum">     270 </span><span class="lineNoCov">          0 :                 borderRadius: BorderRadius.all(</span></a>
-<a name="271"><span class="lineNum">     271 </span><span class="lineNoCov">          0 :                   Radius.circular(8),</span></a>
-<a name="272"><span class="lineNum">     272 </span>            :                 ),</a>
-<a name="273"><span class="lineNum">     273 </span><span class="lineNoCov">          0 :                 child: (season.posterPath.isNotEmpty)</span></a>
-<a name="274"><span class="lineNum">     274 </span><span class="lineNoCov">          0 :                     ? CachedNetworkImage(</span></a>
-<a name="275"><span class="lineNum">     275 </span><span class="lineNoCov">          0 :                         key: ValueKey('ImageTvShowDetail'),</span></a>
-<a name="276"><span class="lineNum">     276 </span>            :                         imageUrl:</a>
-<a name="277"><span class="lineNum">     277 </span><span class="lineNoCov">          0 :                             'https://image.tmdb.org/t/p/w500${tvShow.posterPath}',</span></a>
-<a name="278"><span class="lineNum">     278 </span><span class="lineNoCov">          0 :                         placeholder: (context, url) =&gt; Center(</span></a>
-<a name="279"><span class="lineNum">     279 </span><span class="lineNoCov">          0 :                           child: CircularProgressIndicator(),</span></a>
-<a name="280"><span class="lineNum">     280 </span>            :                         ),</a>
-<a name="281"><span class="lineNum">     281 </span><span class="lineNoCov">          0 :                         errorWidget: (context, url, error) =&gt; Icon(Icons.error),</span></a>
-<a name="282"><span class="lineNum">     282 </span>            :                       )</a>
-<a name="283"><span class="lineNum">     283 </span><span class="lineNoCov">          0 :                     : Icon(Icons.broken_image),</span></a>
-<a name="284"><span class="lineNum">     284 </span>            :               ),</a>
-<a name="285"><span class="lineNum">     285 </span>            :             ),</a>
-<a name="286"><span class="lineNum">     286 </span>            :           );</a>
-<a name="287"><span class="lineNum">     287 </span>            :         },</a>
-<a name="288"><span class="lineNum">     288 </span>            :       ),</a>
-<a name="289"><span class="lineNum">     289 </span>            :     );</a>
-<a name="290"><span class="lineNum">     290 </span>            :   }</a>
-<a name="291"><span class="lineNum">     291 </span>            : </a>
-<a name="292"><span class="lineNum">     292 </span><span class="lineCov">          1 :   String _showGenres(List&lt;GenreTvShow&gt; genres) {</span></a>
-<a name="293"><span class="lineNum">     293 </span>            :     String result = '';</a>
-<a name="294"><span class="lineNum">     294 </span><span class="lineCov">          1 :     for (var genre in genres) {</span></a>
-<a name="295"><span class="lineNum">     295 </span><span class="lineNoCov">          0 :       result += '${genre.name}, ';</span></a>
-<a name="296"><span class="lineNum">     296 </span>            :     }</a>
-<a name="297"><span class="lineNum">     297 </span>            : </a>
-<a name="298"><span class="lineNum">     298 </span><span class="lineCov">          1 :     if (result.isEmpty) {</span></a>
-<a name="299"><span class="lineNum">     299 </span>            :       return result;</a>
-<a name="300"><span class="lineNum">     300 </span>            :     }</a>
-<a name="301"><span class="lineNum">     301 </span>            : </a>
-<a name="302"><span class="lineNum">     302 </span><span class="lineNoCov">          0 :     return result.substring(0, result.length - 2);</span></a>
-<a name="303"><span class="lineNum">     303 </span>            :   }</a>
-<a name="304"><span class="lineNum">     304 </span>            : }</a>
+<a name="221"><span class="lineNum">     221 </span><span class="lineNoCov">          0 :                       child: (tvShow.posterPath != null ||</span></a>
+<a name="222"><span class="lineNum">     222 </span><span class="lineNoCov">          0 :                               tvShow.posterPath != '')</span></a>
+<a name="223"><span class="lineNum">     223 </span><span class="lineNoCov">          0 :                           ? CachedNetworkImage(</span></a>
+<a name="224"><span class="lineNum">     224 </span><span class="lineNoCov">          0 :                               key: ValueKey('ImageTvShowDetail'),</span></a>
+<a name="225"><span class="lineNum">     225 </span><span class="lineNoCov">          0 :                               imageUrl: '$BASE_IMAGE_URL${tvShow.posterPath}',</span></a>
+<a name="226"><span class="lineNum">     226 </span><span class="lineNoCov">          0 :                               placeholder: (context, url) =&gt; Center(</span></a>
+<a name="227"><span class="lineNum">     227 </span><span class="lineNoCov">          0 :                                 child: CircularProgressIndicator(),</span></a>
+<a name="228"><span class="lineNum">     228 </span>            :                               ),</a>
+<a name="229"><span class="lineNum">     229 </span><span class="lineNoCov">          0 :                               errorWidget: (context, url, error) =&gt;</span></a>
+<a name="230"><span class="lineNum">     230 </span><span class="lineNoCov">          0 :                                   Icon(Icons.error),</span></a>
+<a name="231"><span class="lineNum">     231 </span>            :                             )</a>
+<a name="232"><span class="lineNum">     232 </span><span class="lineNoCov">          0 :                           : Icon(Icons.broken_image),</span></a>
+<a name="233"><span class="lineNum">     233 </span>            :                     ),</a>
+<a name="234"><span class="lineNum">     234 </span>            :                   ),</a>
+<a name="235"><span class="lineNum">     235 </span>            :                 );</a>
+<a name="236"><span class="lineNum">     236 </span>            :               },</a>
+<a name="237"><span class="lineNum">     237 </span><span class="lineCov">          2 :               itemCount: recommendations.length,</span></a>
+<a name="238"><span class="lineNum">     238 </span>            :             ),</a>
+<a name="239"><span class="lineNum">     239 </span>            :           );</a>
+<a name="240"><span class="lineNum">     240 </span>            :         } else {</a>
+<a name="241"><span class="lineNum">     241 </span><span class="lineNoCov">          0 :           return Container();</span></a>
+<a name="242"><span class="lineNum">     242 </span>            :         }</a>
+<a name="243"><span class="lineNum">     243 </span>            :       },</a>
+<a name="244"><span class="lineNum">     244 </span>            :     );</a>
+<a name="245"><span class="lineNum">     245 </span>            :   }</a>
+<a name="246"><span class="lineNum">     246 </span>            : </a>
+<a name="247"><span class="lineNum">     247 </span><span class="lineCov">          1 :   Widget _allSeasons(List&lt;TvShowSeason&gt; listSeasons) {</span></a>
+<a name="248"><span class="lineNum">     248 </span><span class="lineCov">          1 :     return SizedBox(</span></a>
+<a name="249"><span class="lineNum">     249 </span>            :       height: 200,</a>
+<a name="250"><span class="lineNum">     250 </span><span class="lineCov">          1 :       child: ListView.builder(</span></a>
+<a name="251"><span class="lineNum">     251 </span>            :         scrollDirection: Axis.horizontal,</a>
+<a name="252"><span class="lineNum">     252 </span><span class="lineCov">          1 :         itemCount: listSeasons.length,</span></a>
+<a name="253"><span class="lineNum">     253 </span><span class="lineNoCov">          0 :         itemBuilder: (context, index) {</span></a>
+<a name="254"><span class="lineNum">     254 </span><span class="lineNoCov">          0 :           final season = listSeasons[index];</span></a>
+<a name="255"><span class="lineNum">     255 </span><span class="lineNoCov">          0 :           return Padding(</span></a>
+<a name="256"><span class="lineNum">     256 </span>            :             padding: const EdgeInsets.all(4.0),</a>
+<a name="257"><span class="lineNum">     257 </span><span class="lineNoCov">          0 :             child: InkWell(</span></a>
+<a name="258"><span class="lineNum">     258 </span><span class="lineNoCov">          0 :               onTap: () {</span></a>
+<a name="259"><span class="lineNum">     259 </span><span class="lineNoCov">          0 :                 Navigator.pushNamed(</span></a>
+<a name="260"><span class="lineNum">     260 </span>            :                   context,</a>
+<a name="261"><span class="lineNum">     261 </span>            :                   TvShowEpisodesPage.ROUTE_NAME,</a>
+<a name="262"><span class="lineNum">     262 </span><span class="lineNoCov">          0 :                   arguments: {</span></a>
+<a name="263"><span class="lineNum">     263 </span><span class="lineNoCov">          0 :                     'id': tvShow.id,</span></a>
+<a name="264"><span class="lineNum">     264 </span><span class="lineNoCov">          0 :                     'seasons': season.seasonNumber,</span></a>
+<a name="265"><span class="lineNum">     265 </span>            :                   },</a>
+<a name="266"><span class="lineNum">     266 </span>            :                 );</a>
+<a name="267"><span class="lineNum">     267 </span>            :               },</a>
+<a name="268"><span class="lineNum">     268 </span><span class="lineNoCov">          0 :               child: ClipRRect(</span></a>
+<a name="269"><span class="lineNum">     269 </span><span class="lineNoCov">          0 :                 borderRadius: BorderRadius.all(</span></a>
+<a name="270"><span class="lineNum">     270 </span><span class="lineNoCov">          0 :                   Radius.circular(8),</span></a>
+<a name="271"><span class="lineNum">     271 </span>            :                 ),</a>
+<a name="272"><span class="lineNum">     272 </span><span class="lineNoCov">          0 :                 child: (season.posterPath.isNotEmpty)</span></a>
+<a name="273"><span class="lineNum">     273 </span><span class="lineNoCov">          0 :                     ? CachedNetworkImage(</span></a>
+<a name="274"><span class="lineNum">     274 </span><span class="lineNoCov">          0 :                         key: ValueKey('ImageTvShowDetail'),</span></a>
+<a name="275"><span class="lineNum">     275 </span>            :                         imageUrl:</a>
+<a name="276"><span class="lineNum">     276 </span><span class="lineNoCov">          0 :                             'https://image.tmdb.org/t/p/w500${tvShow.posterPath}',</span></a>
+<a name="277"><span class="lineNum">     277 </span><span class="lineNoCov">          0 :                         placeholder: (context, url) =&gt; Center(</span></a>
+<a name="278"><span class="lineNum">     278 </span><span class="lineNoCov">          0 :                           child: CircularProgressIndicator(),</span></a>
+<a name="279"><span class="lineNum">     279 </span>            :                         ),</a>
+<a name="280"><span class="lineNum">     280 </span><span class="lineNoCov">          0 :                         errorWidget: (context, url, error) =&gt; Icon(Icons.error),</span></a>
+<a name="281"><span class="lineNum">     281 </span>            :                       )</a>
+<a name="282"><span class="lineNum">     282 </span><span class="lineNoCov">          0 :                     : Icon(Icons.broken_image),</span></a>
+<a name="283"><span class="lineNum">     283 </span>            :               ),</a>
+<a name="284"><span class="lineNum">     284 </span>            :             ),</a>
+<a name="285"><span class="lineNum">     285 </span>            :           );</a>
+<a name="286"><span class="lineNum">     286 </span>            :         },</a>
+<a name="287"><span class="lineNum">     287 </span>            :       ),</a>
+<a name="288"><span class="lineNum">     288 </span>            :     );</a>
+<a name="289"><span class="lineNum">     289 </span>            :   }</a>
+<a name="290"><span class="lineNum">     290 </span>            : </a>
+<a name="291"><span class="lineNum">     291 </span><span class="lineCov">          1 :   String _showGenres(List&lt;GenreTvShow&gt; genres) {</span></a>
+<a name="292"><span class="lineNum">     292 </span>            :     String result = '';</a>
+<a name="293"><span class="lineNum">     293 </span><span class="lineCov">          1 :     for (var genre in genres) {</span></a>
+<a name="294"><span class="lineNum">     294 </span><span class="lineNoCov">          0 :       result += '${genre.name}, ';</span></a>
+<a name="295"><span class="lineNum">     295 </span>            :     }</a>
+<a name="296"><span class="lineNum">     296 </span>            : </a>
+<a name="297"><span class="lineNum">     297 </span><span class="lineCov">          1 :     if (result.isEmpty) {</span></a>
+<a name="298"><span class="lineNum">     298 </span>            :       return result;</a>
+<a name="299"><span class="lineNum">     299 </span>            :     }</a>
+<a name="300"><span class="lineNum">     300 </span>            : </a>
+<a name="301"><span class="lineNum">     301 </span><span class="lineNoCov">          0 :     return result.substring(0, result.length - 2);</span></a>
+<a name="302"><span class="lineNum">     302 </span>            :   }</a>
+<a name="303"><span class="lineNum">     303 </span>            : }</a>
 </pre>
       </td>
     </tr>

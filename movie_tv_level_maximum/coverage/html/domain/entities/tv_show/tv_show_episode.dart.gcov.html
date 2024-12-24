@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">12</td>
-            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">Tue Dec 24 12:13:02 2024</td>
+            <td class="headerValue">Tue Dec 24 12:51:11 2024</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -60,46 +60,31 @@
       <td>
 <pre class="sourceHeading">          Line data    Source code</pre>
 <pre class="source">
-<a name="1"><span class="lineNum">       1 </span>            : import 'package:equatable/equatable.dart';</a>
+<a name="1"><span class="lineNum">       1 </span>            : import 'episode_tv_show.dart';</a>
 <a name="2"><span class="lineNum">       2 </span>            : </a>
-<a name="3"><span class="lineNum">       3 </span>            : import 'episode_tv_show.dart';</a>
-<a name="4"><span class="lineNum">       4 </span>            : </a>
-<a name="5"><span class="lineNum">       5 </span>            : class TvShowEpisode extends Equatable {</a>
-<a name="6"><span class="lineNum">       6 </span>            :   final String id;</a>
-<a name="7"><span class="lineNum">       7 </span>            :   final DateTime airDate;</a>
-<a name="8"><span class="lineNum">       8 </span>            :   final List&lt;EpisodeTvShow&gt; episodes;</a>
-<a name="9"><span class="lineNum">       9 </span>            :   final String name;</a>
-<a name="10"><span class="lineNum">      10 </span>            :   final String overview;</a>
-<a name="11"><span class="lineNum">      11 </span>            :   final int tvShowEpisodeResponseId;</a>
-<a name="12"><span class="lineNum">      12 </span>            :   final String posterPath;</a>
-<a name="13"><span class="lineNum">      13 </span>            :   final int seasonNumber;</a>
-<a name="14"><span class="lineNum">      14 </span>            :   final double voteAverage;</a>
-<a name="15"><span class="lineNum">      15 </span>            : </a>
-<a name="16"><span class="lineNum">      16 </span><span class="lineCov">          6 :   const TvShowEpisode({</span></a>
-<a name="17"><span class="lineNum">      17 </span>            :     required this.id,</a>
-<a name="18"><span class="lineNum">      18 </span>            :     required this.airDate,</a>
-<a name="19"><span class="lineNum">      19 </span>            :     required this.episodes,</a>
-<a name="20"><span class="lineNum">      20 </span>            :     required this.name,</a>
-<a name="21"><span class="lineNum">      21 </span>            :     required this.overview,</a>
-<a name="22"><span class="lineNum">      22 </span>            :     required this.tvShowEpisodeResponseId,</a>
-<a name="23"><span class="lineNum">      23 </span>            :     required this.posterPath,</a>
-<a name="24"><span class="lineNum">      24 </span>            :     required this.seasonNumber,</a>
-<a name="25"><span class="lineNum">      25 </span>            :     required this.voteAverage,</a>
-<a name="26"><span class="lineNum">      26 </span>            :   });</a>
-<a name="27"><span class="lineNum">      27 </span>            : </a>
-<a name="28"><span class="lineNum">      28 </span><span class="lineCov">          1 :   @override</span></a>
-<a name="29"><span class="lineNum">      29 </span><span class="lineCov">          1 :   List&lt;Object?&gt; get props =&gt; [</span></a>
-<a name="30"><span class="lineNum">      30 </span><span class="lineCov">          1 :         id,</span></a>
-<a name="31"><span class="lineNum">      31 </span><span class="lineCov">          1 :         airDate,</span></a>
-<a name="32"><span class="lineNum">      32 </span><span class="lineCov">          1 :         episodes,</span></a>
-<a name="33"><span class="lineNum">      33 </span><span class="lineCov">          1 :         name,</span></a>
-<a name="34"><span class="lineNum">      34 </span><span class="lineCov">          1 :         overview,</span></a>
-<a name="35"><span class="lineNum">      35 </span><span class="lineCov">          1 :         tvShowEpisodeResponseId,</span></a>
-<a name="36"><span class="lineNum">      36 </span><span class="lineCov">          1 :         posterPath,</span></a>
-<a name="37"><span class="lineNum">      37 </span><span class="lineCov">          1 :         seasonNumber,</span></a>
-<a name="38"><span class="lineNum">      38 </span><span class="lineCov">          1 :         voteAverage,</span></a>
-<a name="39"><span class="lineNum">      39 </span>            :       ];</a>
-<a name="40"><span class="lineNum">      40 </span>            : }</a>
+<a name="3"><span class="lineNum">       3 </span>            : class TvShowEpisode {</a>
+<a name="4"><span class="lineNum">       4 </span>            :   final String id;</a>
+<a name="5"><span class="lineNum">       5 </span>            :   final DateTime airDate;</a>
+<a name="6"><span class="lineNum">       6 </span>            :   final List&lt;EpisodeTvShow&gt; episodes;</a>
+<a name="7"><span class="lineNum">       7 </span>            :   final String name;</a>
+<a name="8"><span class="lineNum">       8 </span>            :   final String overview;</a>
+<a name="9"><span class="lineNum">       9 </span>            :   final int tvShowEpisodeResponseId;</a>
+<a name="10"><span class="lineNum">      10 </span>            :   final String posterPath;</a>
+<a name="11"><span class="lineNum">      11 </span>            :   final int seasonNumber;</a>
+<a name="12"><span class="lineNum">      12 </span>            :   final double voteAverage;</a>
+<a name="13"><span class="lineNum">      13 </span>            : </a>
+<a name="14"><span class="lineNum">      14 </span><span class="lineCov">          6 :   const TvShowEpisode({</span></a>
+<a name="15"><span class="lineNum">      15 </span>            :     required this.id,</a>
+<a name="16"><span class="lineNum">      16 </span>            :     required this.airDate,</a>
+<a name="17"><span class="lineNum">      17 </span>            :     required this.episodes,</a>
+<a name="18"><span class="lineNum">      18 </span>            :     required this.name,</a>
+<a name="19"><span class="lineNum">      19 </span>            :     required this.overview,</a>
+<a name="20"><span class="lineNum">      20 </span>            :     required this.tvShowEpisodeResponseId,</a>
+<a name="21"><span class="lineNum">      21 </span>            :     required this.posterPath,</a>
+<a name="22"><span class="lineNum">      22 </span>            :     required this.seasonNumber,</a>
+<a name="23"><span class="lineNum">      23 </span>            :     required this.voteAverage,</a>
+<a name="24"><span class="lineNum">      24 </span>            :   });</a>
+<a name="25"><span class="lineNum">      25 </span>            : }</a>
 </pre>
       </td>
     </tr>
