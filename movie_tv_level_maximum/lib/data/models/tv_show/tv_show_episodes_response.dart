@@ -41,7 +41,9 @@ class TvShowEpisodeResponse {
   factory TvShowEpisodeResponse.fromJson(Map<String, dynamic> json) =>
       TvShowEpisodeResponse(
         id: json["_id"],
-        airDate: DateTime.parse(json["air_date"]),
+        airDate: (json["air_date"] != null)
+            ? DateTime.parse(json["air_date"])
+            : DateTime.parse("1999-12-12"),
         episodes: List<EpisodeTvShowModel>.from(
             json["episodes"].map((x) => EpisodeTvShowModel.fromJson(x))),
         name: json["name"],

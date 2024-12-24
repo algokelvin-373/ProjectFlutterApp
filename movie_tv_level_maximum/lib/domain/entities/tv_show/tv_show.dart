@@ -66,5 +66,4 @@ class TvShow extends Equatable {
         firstAirDate = DateTime(1970, 1, 1),
         voteAverage = 0.0,
         voteCount = 0;
-
 }

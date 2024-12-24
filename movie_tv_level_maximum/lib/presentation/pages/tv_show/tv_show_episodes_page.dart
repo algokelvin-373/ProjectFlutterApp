@@ -40,7 +40,6 @@ class _TvShowEpisodesPageState extends State<TvShowEpisodesPage> {
               child: CircularProgressIndicator(),
             );
           } else if (provider.tvShowEpisodeState == RequestState.Loaded) {
-            print('Result data : ${provider.tvShowEpisode}');
             return SafeArea(
               child: TvShowEpisodesBodyPage(
                 tvShowEpisodes: provider.tvShowEpisode,

@@ -218,7 +218,8 @@ class TvShowDetailBodyPage extends StatelessWidget {
                       borderRadius: BorderRadius.all(
                         Radius.circular(8),
                       ),
-                      child: (tvShow.posterPath != null || tvShow.posterPath != '')
+                      child: (tvShow.posterPath != null ||
+                              tvShow.posterPath != '')
                           ? CachedNetworkImage(
                               key: ValueKey('ImageTvShowDetail'),
                               imageUrl: '$BASE_IMAGE_URL${tvShow.posterPath}',
@@ -255,8 +256,6 @@ class TvShowDetailBodyPage extends StatelessWidget {
             padding: const EdgeInsets.all(4.0),
             child: InkWell(
               onTap: () {
-                print('id: ${tvShow.id}');
-                print('season: ${season.seasonNumber}');
                 Navigator.pushNamed(
                   context,
                   TvShowEpisodesPage.ROUTE_NAME,

@@ -46,7 +46,9 @@ class TvShowModel extends Equatable {
         overview: json["overview"],
         popularity: json["popularity"]?.toDouble(),
         posterPath: json["poster_path"],
-        firstAirDate: (json["first_air_date"] != null) ? DateTime.parse(json["first_air_date"]) : DateTime.parse("1999-12-12"),
+        firstAirDate: (json["first_air_date"] != '')
+            ? DateTime.parse(json["first_air_date"])
+            : DateTime.parse("1999-12-12"),
         name: json["name"],
         voteAverage: json["vote_average"]?.toDouble(),
         voteCount: json["vote_count"],

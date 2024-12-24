@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_detail_response.dart';
 import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_episodes_response.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_episode.dart';
 

@@ -11,7 +11,6 @@ import 'package:movie_tv_level_maximum/data/data_sources/tv_show/tv_show_remote_
 import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_episodes_response.dart';
 import 'package:movie_tv_level_maximum/data/models/tv_show/tv_show_model.dart';
 import 'package:movie_tv_level_maximum/data/repositories/tv_show_repository_impl.dart';
-import 'package:movie_tv_level_maximum/domain/entities/tv_show/episode_tv_show.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show.dart';
 import 'package:movie_tv_level_maximum/domain/entities/tv_show/tv_show_episode.dart';
 

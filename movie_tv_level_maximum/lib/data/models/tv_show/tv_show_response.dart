@@ -32,5 +32,4 @@ class TvShowResponse {
       'total_results': totalResults,
     };
   }
-
 }
