@@ -45,6 +45,10 @@
         - Add Template Flutter Project <br>
         - Setup Title
       </td>
+      <td>1.1.2</td>
+      <td>
+        - Update env project
+      </td>
     </tr>
   </tbody>
 </table>
