@@ -1,6 +1,6 @@
 <h1 align="center">Project Flutter Application</h1>
 <h3 align="center">Project Flutter Application</h3>
-<h6 align="center">v1.1.1</h6>
+<h6 align="center">v1.1.2</h6>
 
 <p align="center">
   <a href="https://github.com/algokelvin-373"><img alt="Github" src="https://img.shields.io/github/followers/algokelvin-373?label=follow&style=social"></a>
@@ -44,6 +44,10 @@
       <td>
         - Add Template Flutter Project <br>
         - Setup Title
+      </td>
+      <td>1.1.2</td>
+      <td>
+        - Update env project
       </td>
     </tr>
   </tbody>
