@@ -7,24 +7,28 @@ void main() {
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Train',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
+          seedColor: Colors.blueAccent,
         ),
         useMaterial3: true,
       ),
-      home: const HomePageState(title: 'Flutter Train'),
+      home: const HomePageState(
+        title: 'Flutter Train',
+      ),
     );
   }
 }
 
 class HomePageState extends StatefulWidget {
-  const HomePageState({super.key, required this.title});
+  const HomePageState({
+    super.key,
+    required this.title,
+  });
 
   final String title;
 
@@ -37,18 +41,22 @@ class _HomePageState extends State<HomePageState> {
     return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [Text('Flutter Developer with AlgoKelvin')],
+        children: [
+          Text('Flutter Developer with AlgoKelvin'),
+        ],
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    var colorTheme = Theme.of(context).colorScheme.inversePrimary;
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(widget.title),
-        ),
-        body: _mainPageWidget(context));
+      appBar: AppBar(
+        backgroundColor: colorTheme,
+        title: Text(widget.title),
+      ),
+      body: _mainPageWidget(context),
+    );
   }
 }
