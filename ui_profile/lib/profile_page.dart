@@ -3,9 +3,38 @@ import 'package:flutter/material.dart';
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Profile Page',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blueAccent,
+        ),
+        useMaterial3: true,
+      ),
+      home: const ProfilePageState(
+        title: 'Profile Page',
+      ),
+    );
+  }
+}
+
+class ProfilePageState extends StatefulWidget {
+  const ProfilePageState({
+    super.key,
+    required this.title,
+  });
+
+  final String title;
+
+  @override
+  State<ProfilePageState> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePageState> {
   // Create Method Widget Page
-  // ignore: non_constant_identifier_names
-  Widget _main_page(BuildContext context) {
+  Widget _mainPage(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -16,9 +45,9 @@ class ProfilePage extends StatelessWidget {
             );
           },
           child: Image.asset(
-            'assets/images/ic_fresh_shop.png',
-            width: 200,
-            height: 200,
+            'assets/images/img_posting.png',
+            width: 300,
+            height: 300,
           ),
         ),
         const SizedBox(height: 8),
@@ -46,7 +75,7 @@ class ProfilePage extends StatelessWidget {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: _main_page(context),
+          child: _mainPage(context),
         ),
       ),
     );
