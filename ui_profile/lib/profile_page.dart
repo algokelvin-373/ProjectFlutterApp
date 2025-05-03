@@ -4,6 +4,7 @@ class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   // Create Method Widget Page
+  // ignore: non_constant_identifier_names
   Widget _main_page(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -11,7 +12,7 @@ class ProfilePage extends StatelessWidget {
         GestureDetector(
           onTap: () {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('FreshShop clicked!')),
+              const SnackBar(content: Text('AlgoKelvin clicked!')),
             );
           },
           child: Image.asset(
@@ -20,29 +21,19 @@ class ProfilePage extends StatelessWidget {
             height: 200,
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 8),
         Text(
-          'FRESHOP',
+          'ALGOKELVIN',
           style: TextStyle(
             fontSize: 24,
             color: Colors.green[800],
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 8),
-        Text(
-          'Discover Grocery and Food',
+        const SizedBox(height: 8),
+        const Text(
+          'Flutter Developer - UI Widget',
           style: TextStyle(fontSize: 18),
-        ),
-        SizedBox(height: 16),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
-          child: Text(
-            'If you eat fresh foods that have a living energy, '
-            'the food returns that living energy.',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 14),
-          ),
         ),
       ],
     );
