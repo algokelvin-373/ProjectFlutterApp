@@ -38,17 +38,10 @@ class _ProfilePageState extends State<ProfilePageState> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        GestureDetector(
-          onTap: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('AlgoKelvin clicked!')),
-            );
-          },
-          child: Image.asset(
-            'assets/images/img_posting.png',
-            width: 300,
-            height: 300,
-          ),
+        Image.asset(
+          'assets/images/img_posting.png',
+          width: 300,
+          height: 300,
         ),
         const SizedBox(height: 8),
         Text(
