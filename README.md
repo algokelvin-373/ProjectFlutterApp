@@ -11,47 +11,30 @@
 <img src="https://github.com/algokelvin-373/ProjectFlutterApp/blob/master/Template_Flutter_Project.png"/>
 
 ## All Project
-1. Flutter Beginner
-2. Calculator Widget
-3. Calculator Unit Test
-4. Gesture
-5. Lifecycle
-6. Navigation
-7. Person List
-8. Restaurant (Level 1)
-9. Shared Preferences
-10. Wisata (Level 1)
-11. Wisata (Level 2)
-
-<table>
-  <thead>
-    <tr>
-      <th>Version</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1.0.0</td>
-      <td>Init 6 Project and Flutter Beginner Material</td>
-    </tr>
-    <tr>
-      <td>1.1.0</td>
-      <td>Init 4 Project</td>
-    </tr>
-    <tr>
-      <td>1.1.1</td>
-      <td>
-        - Add Template Flutter Project <br>
-        - Setup Title
-      </td>
-      <td>1.1.2</td>
-      <td>
-        - Update env project
-      </td>
-    </tr>
-  </tbody>
-</table>
+1. Audio Player
+2. Calculator Unit Testing
+3. Calculator Widget Testing
+4. Gallery Photo Camera
+5. Gesture
+6. Lifecycle
+7. Localization
+8. Movie TV Season 1
+9. Movie TV Season 2
+10. Navigation
+11. Open Health Connect
+12. Person List
+13. Players Video Data
+14. Quotes
+15. Restaurant Season 1
+16. Shared Preferences
+17. Story Application Season 1
+18. UI Profile
+19. UI Text
+20. UI Widget
+21. User List
+22. Video Players Data
+23. Wisata Season 1
+24. Wisata Season 2
 
 ## Contributors
 Thanks all contributors for build this repository
