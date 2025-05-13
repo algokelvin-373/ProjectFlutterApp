@@ -1,0 +1,27 @@
+{
+  "_id": "5253481219c29579400dcd18",
+  "air_date": "2005-02-21",
+  "episodes": [
+    {
+      "air_date": "2005-02-21",
+      "episode_number": 1,
+      "episode_type": "standard",
+      "id": 13535,
+      "name": "name",
+      "overview": "overview",
+      "production_code": "101",
+      "runtime": 24,
+      "season_number": 1,
+      "show_id": 246,
+      "still_path": "still_path",
+      "vote_average": 7.7,
+      "vote_count": 51
+    }
+  ],
+  "name": "name",
+  "overview": "overview",
+  "id": 785,
+  "poster_path": "poster_path",
+  "season_number": 1,
+  "vote_average": 7.9
+}
