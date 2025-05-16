@@ -33,9 +33,6 @@ class ProfilePageState extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePageState> {
-  static const URL_Image =
-      'https://github.com/algokelvin-373/algokelvin-373.github.io/blob/master/img/ic_logo_algokelvin.png';
-
   // Create Header
   AppBar _header() {
     return AppBar(
@@ -66,7 +63,7 @@ class _ProfilePageState extends State<ProfilePageState> {
         children: [
           CircleAvatar(
             radius: 36,
-            backgroundImage: NetworkImage(URL_Image),
+            backgroundImage: AssetImage('assets/images/ic_logo.png'),
           ),
           SizedBox(width: 16),
           Column(
