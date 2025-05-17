@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -43,7 +44,12 @@ class _ProfilePageState extends State<ProfilePageState> {
       centerTitle: true,
       backgroundColor: Colors.white,
       elevation: 0,
-      leading: const BackButton(color: Colors.black),
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back, color: Colors.black),
+        onPressed: () {
+          SystemNavigator.pop();
+        },
+      ),
       actions: [
         IconButton(
           icon: const Icon(Icons.edit, color: Colors.black),
