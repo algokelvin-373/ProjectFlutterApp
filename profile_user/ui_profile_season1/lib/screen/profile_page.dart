@@ -34,7 +34,7 @@ class ProfilePageState extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePageState> {
   // Create Header
-  AppBar _header() {
+  AppBar _header(BuildContext context) {
     return AppBar(
       title: const Text(
         'My Profile',
@@ -43,15 +43,12 @@ class _ProfilePageState extends State<ProfilePageState> {
       centerTitle: true,
       backgroundColor: Colors.white,
       elevation: 0,
-      leading: const BackButton(color: Colors.black),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.edit, color: Colors.black),
-          onPressed: () {
-            print('Click Action');
-          },
-        ),
-      ],
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back, color: Colors.black),
+        onPressed: () {
+          SystemNavigator.pop();
+        },
+      ),
     );
   }
 
