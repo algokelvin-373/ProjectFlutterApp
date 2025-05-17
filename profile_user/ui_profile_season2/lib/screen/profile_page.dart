@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ui_profile_season2/data/profile_data.dart';
+import 'package:ui_profile_season2/screen/edit_profile_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -35,6 +36,8 @@ class ProfilePageState extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePageState> {
+  var _infoProfile = ProfileData().infoList;
+
   // Create Header
   AppBar _header() {
     return AppBar(
@@ -60,8 +63,18 @@ class _ProfilePageState extends State<ProfilePageState> {
             Icons.edit,
             color: Colors.black,
           ),
-          onPressed: () {
-            print('Click Action');
+          onPressed: () async {
+            final updatedList = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EditProfilePage(infoList: _infoProfile),
+              ),
+            );
+            if (updatedList != null) {
+              setState(() {
+                _infoProfile = List<Map<String, dynamic>>.from(updatedList);
+              });
+            }
           },
         ),
       ],
@@ -136,7 +149,7 @@ class _ProfilePageState extends State<ProfilePageState> {
   Widget _personalInfo() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: ProfileData().infoList.map((item) {
+      children: _infoProfile.map((item) {
         return _infoItem(
           item['icon'],
           item['label'],
