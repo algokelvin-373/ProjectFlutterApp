@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ui_profile_season2/data/profile_data.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -119,13 +120,13 @@ class _ProfilePageState extends State<ProfilePageState> {
   Widget _personalInfo() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _infoItem(Icons.verified_user, 'Username', 'ragip'),
-        _infoItem(Icons.email, 'Email', 'dilerragip@gmail.com'),
-        _infoItem(Icons.phone, 'Phone', '+1 (555)-555-5555'),
-        _infoItem(Icons.work, 'Job Title', 'Product Designer'),
-        _infoItem(Icons.location_on, 'Location', 'Angara, Turkey'),
-      ],
+      children: ProfileData().infoList.map((item) {
+        return _infoItem(
+          item['icon'],
+          item['label'],
+          item['value'],
+        );
+      }).toList(),
     );
   }
 
@@ -138,8 +139,9 @@ class _ProfilePageState extends State<ProfilePageState> {
         children: [
           _profileHeader(),
           const SizedBox(height: 20),
-          SingleChildScrollView(child: _personalInfo()),
-          const Center(child: Text('Teams Info Here')),
+          SingleChildScrollView(
+            child: _personalInfo(),
+          ),
         ],
       ),
     );
