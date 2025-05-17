@@ -46,14 +46,20 @@ class _ProfilePageState extends State<ProfilePageState> {
       backgroundColor: Colors.white,
       elevation: 0,
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back, color: Colors.black),
+        icon: const Icon(
+          Icons.arrow_back,
+          color: Colors.black,
+        ),
         onPressed: () {
           SystemNavigator.pop();
         },
       ),
       actions: [
         IconButton(
-          icon: const Icon(Icons.edit, color: Colors.black),
+          icon: const Icon(
+            Icons.edit,
+            color: Colors.black,
+          ),
           onPressed: () {
             print('Click Action');
           },
@@ -63,29 +69,27 @@ class _ProfilePageState extends State<ProfilePageState> {
   }
 
   Widget _profileHeader() {
-    return Row(
+    return const Row(
       children: [
-        const CircleAvatar(
+        CircleAvatar(
           radius: 36,
           backgroundImage: AssetImage('assets/images/ic_logo.png'),
         ),
-        const SizedBox(width: 16),
+        SizedBox(width: 16),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Ragip Diler',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 4),
-            GestureDetector(
-              onTap: () {
-                print('Add Status Clicked');
-              },
-              child: Text(
-                '+ Add Status',
-                style: TextStyle(color: Colors.blue),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
+            ),
+            SizedBox(height: 4),
+            Text(
+              '@algokelvin',
+              style: TextStyle(color: Colors.blue),
             ),
           ],
         )
@@ -99,16 +103,28 @@ class _ProfilePageState extends State<ProfilePageState> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, size: 20, color: Colors.grey),
+          Icon(
+            icon,
+            size: 20,
+            color: Colors.grey,
+          ),
           const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(label,
-                    style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                Text(
+                  label,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey,
+                  ),
+                ),
                 const SizedBox(height: 4),
-                Text(value, style: const TextStyle(fontSize: 14)),
+                Text(
+                  value,
+                  style: const TextStyle(fontSize: 14),
+                ),
               ],
             ),
           ),
