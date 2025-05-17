@@ -61,38 +61,85 @@ class _ProfilePageState extends State<ProfilePageState> {
     );
   }
 
-  // Create Method Widget Page
-  Widget _mainPage(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(16.0),
+  Widget _profileHeader() {
+    return Row(
+      children: [
+        const CircleAvatar(
+          radius: 36,
+          backgroundImage: AssetImage('assets/images/ic_logo.png'),
+        ),
+        const SizedBox(width: 16),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Ragip Diler',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 4),
+            GestureDetector(
+              onTap: () {
+                print('Add Status Clicked');
+              },
+              child: Text(
+                '+ Add Status',
+                style: TextStyle(color: Colors.blue),
+              ),
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
+  Widget _infoItem(IconData icon, String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CircleAvatar(
-            radius: 36,
-            backgroundImage: AssetImage('assets/images/ic_logo.png'),
+          Icon(icon, size: 20, color: Colors.grey),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(label,
+                    style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                const SizedBox(height: 4),
+                Text(value, style: const TextStyle(fontSize: 14)),
+              ],
+            ),
           ),
-          SizedBox(width: 16),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'ALGOKELVIN',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 4),
-              Text(
-                '@algokelvin',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.blue,
-                ),
-              ),
-            ],
-          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _personalInfo() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _infoItem(Icons.verified_user, 'Username', 'ragip'),
+        _infoItem(Icons.email, 'Email', 'dilerragip@gmail.com'),
+        _infoItem(Icons.phone, 'Phone', '+1 (555)-555-5555'),
+        _infoItem(Icons.work, 'Job Title', 'Product Designer'),
+        _infoItem(Icons.location_on, 'Location', 'Angara, Turkey'),
+      ],
+    );
+  }
+
+  // Widget Main Page
+  Widget _mainPage(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _profileHeader(),
+          const SizedBox(height: 20),
+          SingleChildScrollView(child: _personalInfo()),
+          const Center(child: Text('Teams Info Here')),
         ],
       ),
     );
