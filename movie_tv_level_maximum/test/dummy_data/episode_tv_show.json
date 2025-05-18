@@ -1,0 +1,15 @@
+{
+  "air_date": "2024-12-23",
+  "episode_number": 1,
+  "episode_type": "regular",
+  "id": 101,
+  "name": "Episode 1",
+  "overview": "This is episode 1.",
+  "production_code": "P001",
+  "runtime": 42,
+  "season_number": 1,
+  "show_id": 1001,
+  "still_path": "/path/to/image.jpg",
+  "vote_average": 8.5,
+  "vote_count": 1000
+}

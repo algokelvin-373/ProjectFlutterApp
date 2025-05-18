@@ -1,6 +1,6 @@
 <h1 align="center">Project Flutter Application</h1>
 <h3 align="center">Project Flutter Application</h3>
-<h6 align="center">v1.1.2</h6>
+<h6 align="center">v1.3.1</h6>
 
 <p align="center">
   <a href="https://github.com/algokelvin-373"><img alt="Github" src="https://img.shields.io/github/followers/algokelvin-373?label=follow&style=social"></a>
@@ -11,47 +11,35 @@
 <img src="https://github.com/algokelvin-373/ProjectFlutterApp/blob/master/Template_Flutter_Project.png"/>
 
 ## All Project
-1. Flutter Beginner
-2. Calculator Widget
-3. Calculator Unit Test
-4. Gesture
-5. Lifecycle
-6. Navigation
-7. Person List
-8. Restaurant (Level 1)
-9. Shared Preferences
-10. Wisata (Level 1)
-11. Wisata (Level 2)
-
-<table>
-  <thead>
-    <tr>
-      <th>Version</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1.0.0</td>
-      <td>Init 6 Project and Flutter Beginner Material</td>
-    </tr>
-    <tr>
-      <td>1.1.0</td>
-      <td>Init 4 Project</td>
-    </tr>
-    <tr>
-      <td>1.1.1</td>
-      <td>
-        - Add Template Flutter Project <br>
-        - Setup Title
-      </td>
-      <td>1.1.2</td>
-      <td>
-        - Update env project
-      </td>
-    </tr>
-  </tbody>
-</table>
+1. Audio Player
+2. Calculator Unit Testing
+3. Calculator Widget Testing
+4. Gallery Photo Camera
+5. Gesture
+6. Lifecycle
+7. Localization
+8. Movie TV Season 1
+9. Movie TV Season 2
+10. Navigation
+11. Open Health Connect
+12. Person List
+13. Players Video Data
+14. Profile User
+15. Quotes
+16. Restaurant Season 1
+17. Shared Preferences
+18. Story Application Season 1
+19. UI Button TextField
+20. UI Column
+21. UI Image
+22. UI ListView
+23. UI Row
+24. UI Text
+25. UI Widget
+26. User List
+27. Video Players Data
+28. Wisata Season 1
+29. Wisata Season 2
 
 ## Contributors
 Thanks all contributors for build this repository
