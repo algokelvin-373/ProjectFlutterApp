@@ -168,9 +168,7 @@ class _ProfilePageState extends State<ProfilePageState> {
         children: [
           _profileHeader(),
           const SizedBox(height: 20),
-          SingleChildScrollView(
-            child: _personalInfo(),
-          ),
+          _personalInfo(),
         ],
       ),
     );
