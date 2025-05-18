@@ -30,19 +30,89 @@ class MainPageState extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPageState> {
+  bool isVertical = true;
+
+  // Generate 20 Items
+  final List<Map<String, dynamic>> items = List.generate(
+    20,
+    (index) => {
+      'icon': Icons.star,
+      'label': 'Item ${index + 1}',
+    },
+  );
+
+  Widget _listViewVerticalWidget() {
+    return ListView.builder(
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        final item = items[index];
+        return ListTile(
+          leading: Icon(item['icon']),
+          title: Text(item['label']),
+        );
+      },
+    );
+  }
+
+  Widget _listViewHorizontalWidget() {
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        final item = items[index];
+        return Container(
+          width: 120,
+          margin: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            color: Colors.blue[100],
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(item['icon'], size: 40),
+              const SizedBox(height: 8),
+              Text(item['label']),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   Widget _mainPageWidget(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ElevatedButton(
-            onPressed: () => {print("You click ListView Vertical")},
-            child: const Text('ListView Vertical'),
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    isVertical = true;
+                  });
+                },
+                child: const Text('ListView Vertical'),
+              ),
+              const Spacer(flex: 5),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    isVertical = false;
+                  });
+                },
+                child: const Text('ListView Horizontal'),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () => {print("You click ListView Vertical")},
-            child: const Text('ListView Horizontal'),
-          ),
+          const SizedBox(height: 16),
+          Expanded(
+            child: isVertical
+                ? _listViewVerticalWidget()
+                : _listViewHorizontalWidget(),
+          )
         ],
       ),
     );
