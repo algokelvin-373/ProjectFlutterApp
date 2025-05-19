@@ -136,19 +136,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          Positioned(
-            left: 20,
-            bottom: 20,
-            right: 20,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Icon(Icons.settings, color: Colors.white),
-                Icon(Icons.favorite_border, color: Colors.white),
-                Icon(Icons.share, color: Colors.white),
-              ],
-            ),
-          ),
         ],
       ),
     );
