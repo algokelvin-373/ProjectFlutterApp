@@ -55,46 +55,102 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _mainPage(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Consumer<AudioNotifier>(
-          builder: (context, provider, child) {
-            final duration = provider.duration;
-            final position = provider.position;
+    return SafeArea(
+      child: Stack(
+        children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 40),
+                const Text(
+                  "How To Not Feel\nOverwhelmed",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    CircleAvatar(
+                      radius: 12,
+                      backgroundImage: NetworkImage(
+                        "https://i.pravatar.cc/100",
+                      ),
+                    ),
+                    SizedBox(width: 6),
+                    Text(
+                      "Azunyan McDonalds",
+                      style: TextStyle(color: Colors.white70),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 40),
+                Consumer<AudioNotifier>(
+                  builder: (context, provider, child) {
+                    final bool isPlay = provider.isPlay;
+                    return GestureDetector(
+                      onTap: () {
+                        isPlay
+                            ? audioPlayer.pause()
+                            : audioPlayer.play(audioSource);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                        child: Icon(
+                          isPlay ? Icons.pause : Icons.play_arrow,
+                          size: 48,
+                          color: Color(0xFFA3C16F),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 40),
+                Consumer<AudioNotifier>(
+                  builder: (context, provider, child) {
+                    final duration = provider.duration;
+                    final position = provider.position;
 
-            return BufferSliderControllerWidget(
-              maxValue: duration.inSeconds.toDouble(),
-              currentValue: position.inSeconds.toDouble(),
-              minText: durationToTimeString(position),
-              maxText: durationToTimeString(duration),
-              onChanged: (value) async {
-                final newPosition = Duration(seconds: value.toInt());
-                await audioPlayer.seek(newPosition);
-                await audioPlayer.resume();
-              },
-            );
-          },
-        ),
-
-        Consumer<AudioNotifier>(
-          builder: (context, provider, child) {
-            final bool isPlay = provider.isPlay;
-            return AudioControllerWidget(
-              onPlayTapped: () {
-                audioPlayer.play(audioSource);
-              },
-              onPauseTapped: () {
-                audioPlayer.pause();
-              },
-              onStopTapped: () {
-                audioPlayer.stop();
-              },
-              isPlay: isPlay,
-            );
-          },
-        ),
-      ],
+                    return BufferSliderControllerWidget(
+                      maxValue: duration.inSeconds.toDouble(),
+                      currentValue: position.inSeconds.toDouble(),
+                      minText: durationToTimeString(position),
+                      maxText: durationToTimeString(duration),
+                      onChanged: (value) async {
+                        final newPosition = Duration(seconds: value.toInt());
+                        await audioPlayer.seek(newPosition);
+                        await audioPlayer.resume();
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            left: 20,
+            bottom: 20,
+            right: 20,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                Icon(Icons.settings, color: Colors.white),
+                Icon(Icons.favorite_border, color: Colors.white),
+                Icon(Icons.share, color: Colors.white),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -107,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Audio Player Project")),
+      backgroundColor: const Color(0xFFA3C16F), // latar hijau muda
       body: _mainPage(context),
     );
   }
