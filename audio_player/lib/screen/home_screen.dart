@@ -26,10 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
     audioSource = AssetSource("sample_music.mp3");
     audioPlayer.setSource(audioSource);
 
-    /// todo-05-url-01: if audio source from url
-    // audioSource = UrlSource("https://github.com/dicodingacademy/assets/raw/main/flutter_intermediate_academy/bensound_ukulele.mp3");
-    // audioPlayer.setSource(audioSource);
-
     audioPlayer.onPlayerStateChanged.listen((state) {
       provider.isPlay = state == PlayerState.playing;
 
@@ -64,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 const SizedBox(height: 40),
                 const Text(
-                  "How To Not Feel\nOverwhelmed",
+                  "Summertime Sadness",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 24,
@@ -84,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     SizedBox(width: 6),
                     Text(
-                      "Azunyan McDonalds",
+                      "Lana Del Rey",
                       style: TextStyle(color: Colors.white70),
                     ),
                   ],
