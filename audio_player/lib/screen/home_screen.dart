@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final provider = context.read<AudioNotifier>();
 
     audioPlayer = AudioPlayer();
-    audioSource = AssetSource("cricket.wav");
+    audioSource = AssetSource("sample_music.mp3");
     audioPlayer.setSource(audioSource);
 
     /// todo-05-url-01: if audio source from url
