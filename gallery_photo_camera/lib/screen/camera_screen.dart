@@ -13,10 +13,30 @@ class CameraScreen extends StatefulWidget {
 class _CameraScreenState extends State<CameraScreen>
     with WidgetsBindingObserver {
   bool _isCameraInitialized = false;
-
   CameraController? controller;
-
   bool _isBackCameraSelected = true;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    onNewCameraSelected(widget.cameras.first);
+    super.initState();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final CameraController? cameraController = controller;
+
+    if (cameraController == null || !cameraController.value.isInitialized) {
+      return;
+    }
+
+    if (state == AppLifecycleState.inactive) {
+      cameraController.dispose();
+    } else if (state == AppLifecycleState.resumed) {
+      onNewCameraSelected(cameraController.description);
+    }
+  }
 
   void onNewCameraSelected(CameraDescription cameraDescription) async {
     final previousCameraController = controller;
@@ -39,67 +59,6 @@ class _CameraScreenState extends State<CameraScreen>
         _isCameraInitialized = controller!.value.isInitialized;
       });
     }
-  }
-
-  @override
-  void initState() {
-    WidgetsBinding.instance.addObserver(this);
-    onNewCameraSelected(widget.cameras.first);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    controller?.dispose();
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    final CameraController? cameraController = controller;
-
-    if (cameraController == null || !cameraController.value.isInitialized) {
-      return;
-    }
-
-    if (state == AppLifecycleState.inactive) {
-      cameraController.dispose();
-    } else if (state == AppLifecycleState.resumed) {
-      onNewCameraSelected(cameraController.description);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData.dark(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Ambil Gambar"),
-          actions: [
-            IconButton(
-              onPressed: () => _onCameraSwitch(),
-              icon: const Icon(Icons.cameraswitch),
-            ),
-          ],
-        ),
-        body: Center(
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              _isCameraInitialized
-                  ? CameraPreview(controller!)
-                  : const Center(child: CircularProgressIndicator()),
-              Align(
-                alignment: const Alignment(0, 0.95),
-                child: _actionWidget(),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 
   Widget _actionWidget() {
@@ -129,5 +88,46 @@ class _CameraScreenState extends State<CameraScreen>
     setState(() {
       _isBackCameraSelected = !_isBackCameraSelected;
     });
+  }
+
+  AppBar _header() {
+    return AppBar(
+      title: const Text("Ambil Gambar"),
+      actions: [
+        IconButton(
+          onPressed: () => _onCameraSwitch(),
+          icon: const Icon(Icons.cameraswitch),
+        ),
+      ],
+    );
+  }
+
+  Widget _mainPage(BuildContext context) {
+    return Center(
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          _isCameraInitialized
+              ? CameraPreview(controller!)
+              : const Center(child: CircularProgressIndicator()),
+          Align(alignment: const Alignment(0, 0.95), child: _actionWidget()),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    controller?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Theme(
+      data: ThemeData.dark(),
+      child: Scaffold(appBar: _header(), body: _mainPage(context)),
+    );
   }
 }

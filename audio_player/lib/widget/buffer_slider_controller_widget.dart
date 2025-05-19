@@ -20,21 +20,18 @@ class BufferSliderControllerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Slider(
-          value: currentValue,
-          min: 0,
-          max: maxValue,
-          onChanged: (value) => onChanged(value),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(minText),
-              Text(maxText),
-            ],
+        SliderTheme(
+          data: SliderTheme.of(context).copyWith(
+            activeTrackColor: Colors.white,
+            inactiveTrackColor: Colors.white54,
+            thumbColor: Colors.white,
+            overlayColor: Colors.white24,
+          ),
+          child: Slider(
+            value: currentValue,
+            min: 0,
+            max: maxValue,
+            onChanged: (value) => onChanged(value),
           ),
         ),
       ],

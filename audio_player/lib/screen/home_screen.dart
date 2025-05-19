@@ -15,7 +15,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  /// todo-02-init-01: create two variabel to declare an instance AudioPlayer and Source
   late final AudioPlayer audioPlayer;
   late final Source audioSource;
 
@@ -23,37 +22,26 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     final provider = context.read<AudioNotifier>();
 
-    /// todo-02-init-02: initialize those two variable in initState
     audioPlayer = AudioPlayer();
-    audioSource = AssetSource("cricket.wav");
+    audioSource = AssetSource("sample_music.mp3");
     audioPlayer.setSource(audioSource);
 
-    /// todo-05-url-01: if audio source from url
-    // audioSource = UrlSource("https://github.com/dicodingacademy/assets/raw/main/flutter_intermediate_academy/bensound_ukulele.mp3");
-    // audioPlayer.setSource(audioSource);
-
-    /// todo-03-listen-01: listen on player state change
     audioPlayer.onPlayerStateChanged.listen((state) {
-      /// todo-03-listen-02: update isPlay state if state is playing using provider
       provider.isPlay = state == PlayerState.playing;
 
-      /// todo-03-listen-06: update position state if state is stopped using provider
       if (state == PlayerState.stopped) {
         provider.position = Duration.zero;
       }
     });
 
-    /// todo-03-listen-03: listen on duration change
     audioPlayer.onDurationChanged.listen((duration) {
       provider.duration = duration;
     });
 
-    /// todo-03-listen-04: listen on position change
     audioPlayer.onPositionChanged.listen((position) {
       provider.position = position;
     });
 
-    /// todo-03-listen-05: listen on player complete
     audioPlayer.onPlayerComplete.listen((_) {
       provider.position = Duration.zero;
       provider.isPlay = false;
@@ -62,71 +50,104 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
+  Widget _mainPage(BuildContext context) {
+    return SafeArea(
+      child: Stack(
+        children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 40),
+                const Text(
+                  "Summertime Sadness",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    CircleAvatar(
+                      radius: 12,
+                      backgroundImage: NetworkImage(
+                        "https://i.pravatar.cc/100",
+                      ),
+                    ),
+                    SizedBox(width: 6),
+                    Text(
+                      "Lana Del Rey",
+                      style: TextStyle(color: Colors.white70),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 40),
+                Consumer<AudioNotifier>(
+                  builder: (context, provider, child) {
+                    final bool isPlay = provider.isPlay;
+                    return GestureDetector(
+                      onTap: () {
+                        isPlay
+                            ? audioPlayer.pause()
+                            : audioPlayer.play(audioSource);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                        child: Icon(
+                          isPlay ? Icons.pause : Icons.play_arrow,
+                          size: 48,
+                          color: Color(0xFFA3C16F),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 40),
+                Consumer<AudioNotifier>(
+                  builder: (context, provider, child) {
+                    final duration = provider.duration;
+                    final position = provider.position;
+
+                    return BufferSliderControllerWidget(
+                      maxValue: duration.inSeconds.toDouble(),
+                      currentValue: position.inSeconds.toDouble(),
+                      minText: durationToTimeString(position),
+                      maxText: durationToTimeString(duration),
+                      onChanged: (value) async {
+                        final newPosition = Duration(seconds: value.toInt());
+                        await audioPlayer.seek(newPosition);
+                        await audioPlayer.resume();
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   void dispose() {
-    /// todo-02-init-03: don't forget to dispose the controller
     audioPlayer.dispose();
-
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Audio Player Project")),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          /// todo-04-ui-01: cover with Consumer widget to update the value
-          Consumer<AudioNotifier>(
-            builder: (context, provider, child) {
-              /// todo-04-ui-02: fill the value based on provider value
-              /// you can add the utils file to support text formatting
-              final duration = provider.duration;
-              final position = provider.position;
-
-              return BufferSliderControllerWidget(
-                maxValue: duration.inSeconds.toDouble(),
-                currentValue: position.inSeconds.toDouble(),
-                minText: durationToTimeString(position),
-                maxText: durationToTimeString(duration),
-                onChanged: (value) async {
-                  /// todo-04-ui-03: update the audio player when slider is move
-                  final newPosition = Duration(seconds: value.toInt());
-                  await audioPlayer.seek(newPosition);
-
-                  /// todo-04-ui-04: resume the audio player after user move the slider
-                  await audioPlayer.resume();
-                },
-              );
-            },
-          ),
-
-          /// todo-04-ui-05: cover with Consumer widget to update the value
-          Consumer<AudioNotifier>(
-            builder: (context, provider, child) {
-              final bool isPlay = provider.isPlay;
-              return AudioControllerWidget(
-                onPlayTapped: () {
-                  /// todo-04-ui-07: play the player when user tap the pause button
-                  audioPlayer.play(audioSource);
-                },
-                onPauseTapped: () {
-                  /// todo-04-ui-08: pause the player when user tap the play button
-                  audioPlayer.pause();
-                },
-                onStopTapped: () {
-                  /// todo-04-ui-09: stop the player when user tap the stop button
-                  audioPlayer.stop();
-                },
-
-                /// todo-04-ui-096 update the isPlay state
-                isPlay: isPlay,
-              );
-            },
-          ),
-        ],
-      ),
+      backgroundColor: const Color(0xFFA3C16F), // latar hijau muda
+      body: _mainPage(context),
     );
   }
 }
