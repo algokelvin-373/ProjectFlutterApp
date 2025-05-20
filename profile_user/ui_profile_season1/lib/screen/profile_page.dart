@@ -9,23 +9,16 @@ class ProfilePage extends StatelessWidget {
     return MaterialApp(
       title: 'Profile Page',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blueAccent,
-        ),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
         useMaterial3: true,
       ),
-      home: const ProfilePageState(
-        title: 'Profile Page',
-      ),
+      home: const ProfilePageState(title: 'Profile Page'),
     );
   }
 }
 
 class ProfilePageState extends StatefulWidget {
-  const ProfilePageState({
-    super.key,
-    required this.title,
-  });
+  const ProfilePageState({super.key, required this.title});
 
   final String title;
 
@@ -35,12 +28,9 @@ class ProfilePageState extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePageState> {
   // Create Header
-  AppBar _header(BuildContext context) {
+  AppBar _header() {
     return AppBar(
-      title: const Text(
-        'My Profile',
-        style: TextStyle(color: Colors.black),
-      ),
+      title: const Text('My Profile', style: TextStyle(color: Colors.black)),
       centerTitle: true,
       backgroundColor: Colors.white,
       elevation: 0,
@@ -70,18 +60,12 @@ class _ProfilePageState extends State<ProfilePageState> {
             children: [
               Text(
                 'ALGOKELVIN',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 4),
               Text(
                 '@algokelvin',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.blue,
-                ),
+                style: TextStyle(fontSize: 16, color: Colors.blue),
               ),
             ],
           ),
