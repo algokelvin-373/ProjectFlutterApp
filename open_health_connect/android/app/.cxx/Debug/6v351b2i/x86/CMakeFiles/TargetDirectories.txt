@@ -1,2 +1,0 @@
-D:/AlgoKelvin/My_Project/Desember 2024/ProjectFlutterApp/open_health_connect/android/app/.cxx/Debug/6v351b2i/x86/CMakeFiles/edit_cache.dir
-D:/AlgoKelvin/My_Project/Desember 2024/ProjectFlutterApp/open_health_connect/android/app/.cxx/Debug/6v351b2i/x86/CMakeFiles/rebuild_cache.dir
