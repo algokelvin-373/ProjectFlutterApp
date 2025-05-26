@@ -8,9 +8,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Text',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blueAccent,
-        ),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Text'),
@@ -39,19 +37,8 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(message1), // Without TextStyle
-          Text(
-            message2,
-            style: TextStyle(
-              fontSize: 14,
-            ),
-          ),
-          Text(
-            message3,
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.red,
-            ),
-          ),
+          Text(message2, style: TextStyle(fontSize: 14)),
+          Text(message3, style: TextStyle(fontSize: 16, color: Colors.red)),
           Text(
             message4,
             style: TextStyle(
