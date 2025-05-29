@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_absen_season1/widget/home_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -21,6 +22,7 @@ class HomePageState extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePageState> {
+  final homeWidget = HomeWidget();
   final TextEditingController _nameController = TextEditingController();
   final List<String> _absenList = [];
 
@@ -53,17 +55,7 @@ class _HomePageState extends State<HomePageState> {
           SizedBox(height: 10),
           ElevatedButton(onPressed: _addAbsen, child: Text('Absen')),
           SizedBox(height: 20),
-          Expanded(
-            child: ListView.builder(
-              itemCount: _absenList.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: CircleAvatar(child: Text('${index + 1}')),
-                  title: Text(_absenList[index]),
-                );
-              },
-            ),
-          ),
+          homeWidget.listAbsenWidget(_absenList),
         ],
       ),
     );
