@@ -26,6 +26,8 @@ class _HomePageState extends State<HomePageState> {
   final TextEditingController _nameController = TextEditingController();
   final List<String> _absenList = [];
 
+  String _currentListType = 'vertical';
+
   void _addAbsen() {
     final name = _nameController.text.trim();
     if (name.isNotEmpty) {
@@ -34,6 +36,76 @@ class _HomePageState extends State<HomePageState> {
         _nameController.clear();
       });
     }
+  }
+
+  AppBar _header() {
+    return AppBar(
+      title: const Text('GoAbsen'),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.menu), // Hamburger menu icon
+          onPressed: () {
+            _showMenuTypeItem(context);
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _menuItem(IconData icon, String label) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, size: 30, color: Colors.blue),
+        const SizedBox(height: 5),
+        Text(label),
+      ],
+    );
+  }
+
+  void _showMenuTypeItem(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          padding: const EdgeInsets.all(16.0),
+          height: 180,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Pilih Tipe List',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _currentListType = 'vertical';
+                      });
+                      Navigator.pop(context);
+                    },
+                    child: _menuItem(Icons.view_list, 'List Vertikal'),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _currentListType = 'horizontal';
+                      });
+                      Navigator.pop(context);
+                    },
+                    child: _menuItem(Icons.view_carousel, 'List Horizontal'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   Widget _mainPage(BuildContext context) {
@@ -55,7 +127,7 @@ class _HomePageState extends State<HomePageState> {
           SizedBox(height: 10),
           ElevatedButton(onPressed: _addAbsen, child: Text('Absen')),
           SizedBox(height: 20),
-          homeWidget.listAbsenWidget(_absenList),
+          homeWidget.listAbsenWidget(_absenList, _currentListType),
         ],
       ),
     );
@@ -63,9 +135,6 @@ class _HomePageState extends State<HomePageState> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('GoAbsen')),
-      body: _mainPage(context),
-    );
+    return Scaffold(appBar: _header(), body: _mainPage(context));
   }
 }

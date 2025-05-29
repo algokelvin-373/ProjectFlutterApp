@@ -11,14 +11,34 @@ class HomeWidget {
     );
   }
 
-  Widget listAbsenWidget(List<String> absenList) {
+  Widget listVerticalWidget(List<String> absenList) {
+    return ListView.builder(
+      itemCount: absenList.length,
+      itemBuilder: (context, index) {
+        return itemListWidget(absenList[index]);
+      },
+    );
+  }
+
+  Widget listHorizontalWidget(List<String> absenList) {
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: absenList.length,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: itemListWidget(absenList[index]),
+        );
+      },
+    );
+  }
+
+  Widget listAbsenWidget(List<String> absenList, String listType) {
     return Expanded(
-      child: ListView.builder(
-        itemCount: absenList.length,
-        itemBuilder: (context, index) {
-          return itemListWidget(absenList[index]);
-        },
-      ),
+      child:
+          listType == 'horizontal'
+              ? listHorizontalWidget(absenList)
+              : listVerticalWidget(absenList),
     );
   }
 }
