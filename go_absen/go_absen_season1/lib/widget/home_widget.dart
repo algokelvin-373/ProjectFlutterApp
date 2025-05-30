@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 
 class HomeWidget {
-  Widget itemListWidget(String data) {
+  Widget itemListVerticalWidget(String data) {
     return Row(
       children: [
         Icon(Icons.account_circle, size: 50, color: Colors.blue),
+        SizedBox(width: 5),
+        Text(data, style: TextStyle(fontSize: 20.0, color: Colors.black)),
+      ],
+    );
+  }
+
+  Widget itemListHorizontalWidget(String data) {
+    return Column(
+      children: [
+        Icon(Icons.account_circle, size: 100, color: Colors.blue),
         SizedBox(width: 5),
         Text(data, style: TextStyle(fontSize: 20.0, color: Colors.black)),
       ],
@@ -15,7 +25,7 @@ class HomeWidget {
     return ListView.builder(
       itemCount: absenList.length,
       itemBuilder: (context, index) {
-        return itemListWidget(absenList[index]);
+        return itemListVerticalWidget(absenList[index]);
       },
     );
   }
@@ -27,7 +37,7 @@ class HomeWidget {
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: itemListWidget(absenList[index]),
+          child: itemListHorizontalWidget(absenList[index]),
         );
       },
     );
