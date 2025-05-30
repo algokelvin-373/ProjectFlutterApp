@@ -14,7 +14,7 @@ class HomeWidget {
   Widget itemListHorizontalWidget(String data) {
     return Column(
       children: [
-        Icon(Icons.account_circle, size: 100, color: Colors.blue),
+        Icon(Icons.account_circle, size: 50, color: Colors.blue),
         SizedBox(width: 5),
         Text(data, style: TextStyle(fontSize: 20.0, color: Colors.black)),
       ],

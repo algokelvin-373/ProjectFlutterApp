@@ -114,9 +114,9 @@ class _HomePageState extends State<HomePageState> {
       child: Column(
         children: [
           Icon(Icons.account_circle, size: 100, color: Colors.blue),
-          SizedBox(height: 20),
-          Text('Masukkan Nama untuk Absen:', style: TextStyle(fontSize: 18)),
           SizedBox(height: 10),
+          Text('Masukkan Nama untuk Absen:', style: TextStyle(fontSize: 18)),
+          SizedBox(height: 5),
           TextField(
             controller: _nameController,
             decoration: InputDecoration(
@@ -124,9 +124,9 @@ class _HomePageState extends State<HomePageState> {
               border: OutlineInputBorder(),
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 5),
           ElevatedButton(onPressed: _addAbsen, child: Text('Absen')),
-          SizedBox(height: 20),
+          SizedBox(height: 10),
           homeWidget.listAbsenWidget(_absenList, _currentListType),
         ],
       ),
