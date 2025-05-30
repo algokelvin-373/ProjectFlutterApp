@@ -33,28 +33,31 @@ class _MainPageState extends State<MainPageState> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          // Image Original with Size 200 x 200
           Image.asset(
             pathImage,
             width: 200,
             height: 200,
             fit: BoxFit.cover,
-          ), // Image with size 200 x 200
-
+          ), // Image Original
+          SizedBox(height: 5),
+          // Implement Image with ClipOval
           ClipOval(
             child: Image.asset(
               pathImage,
-              width: 250,
-              height: 250,
+              width: 200,
+              height: 200,
               fit: BoxFit.cover,
             ),
           ), // Implement Image with ClipOval
-
+          SizedBox(height: 5),
+          // Implement Image with ClipOval
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Image.asset(
               pathImage,
-              width: 250,
-              height: 250,
+              width: 200,
+              height: 200,
               fit: BoxFit.cover,
             ), // Implement Image with ClipRect
           ),
