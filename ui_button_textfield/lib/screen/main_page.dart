@@ -6,12 +6,12 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Training',
+      title: 'Flutter开发者',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MainPageState(title: 'Flutter Training - Button TextField'),
+      home: const MainPageState(title: 'Flutter开发者 - Button TextField'),
     );
   }
 }
@@ -31,11 +31,7 @@ class _MainPageState extends State<MainPageState> {
   void _showSnackBar(BuildContext context) {
     final inputData = _controller.text.trim();
     var snackBar = SnackBar(
-      content: Text(
-        inputData.isEmpty
-            ? 'Masukkan sesuatu dulu!'
-            : 'Kamu mengetik: $inputData',
-      ),
+      content: Text(inputData.isEmpty ? '先输入数据！' : '你写道: $inputData'),
       duration: const Duration(seconds: 2),
       behavior: SnackBarBehavior.floating,
     );
@@ -52,13 +48,13 @@ class _MainPageState extends State<MainPageState> {
             controller: _controller,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
-              labelText: 'Tulis sesuatu...',
+              labelText: '写点东西',
             ),
           ),
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () => _showSnackBar(context),
-            child: const Text('Tampilkan di SnackBar'),
+            child: const Text('展示'),
           ),
         ],
       ),

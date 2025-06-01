@@ -8,9 +8,7 @@ class MainPage extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Training',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blueAccent,
-        ),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
         useMaterial3: true,
       ),
       home: const MainPageState(title: 'Flutter Training - Image'),
@@ -28,18 +26,40 @@ class MainPageState extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPageState> {
-  var path_image = 'assets/images/sample_image.png';
+  var pathImage = 'assets/images/sample_image.JPG';
 
   Widget _mainPage(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          // Image Original with Size 200 x 200
           Image.asset(
-            path_image,
+            pathImage,
             width: 200,
             height: 200,
             fit: BoxFit.cover,
+          ), // Image Original
+          SizedBox(height: 5),
+          // Implement Image with ClipOval
+          ClipOval(
+            child: Image.asset(
+              pathImage,
+              width: 200,
+              height: 200,
+              fit: BoxFit.cover,
+            ),
+          ), // Implement Image with ClipOval
+          SizedBox(height: 5),
+          // Implement Image with ClipOval
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.asset(
+              pathImage,
+              width: 200,
+              height: 200,
+              fit: BoxFit.cover,
+            ), // Implement Image with ClipRect
           ),
         ],
       ),
