@@ -1,6 +1,6 @@
 {
-    "name": "ui_profile",
-    "short_name": "ui_profile",
+    "name": "ui_profile_season1",
+    "short_name": "ui_profile_season1",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
