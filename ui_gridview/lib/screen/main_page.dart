@@ -31,10 +31,7 @@ class _MainPageState extends State<MainPageState> {
   // Generate 20 items
   final List<Map<String, dynamic>> items = List.generate(
     20,
-    (index) => {
-      'icon': Icons.star,
-      'label': 'Item ${index + 1}',
-    },
+    (index) => {'icon': Icons.star, 'label': 'Item ${index + 1}'},
   );
 
   Widget _gridViewWidget() {
@@ -49,13 +46,21 @@ class _MainPageState extends State<MainPageState> {
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
-        final iconSize = gridColumnCount >= 5
-            ? 28.0
-            : gridColumnCount == 4
+
+        // Get Issue Bottom Overflow when grid column is 4 or 5
+        // final iconSize = 60.0;
+        // final fontSize = 22.0;
+        // final spacing = 8.0;
+
+        // Solving
+        final iconSize =
+            gridColumnCount >= 5
+                ? 28.0
+                : gridColumnCount == 4
                 ? 32.0
-                : 40.0;
-        final fontSize = gridColumnCount >= 5 ? 12.0 : 14.0;
-        final spacing = gridColumnCount >= 5 ? 2.0 : 4.0;
+                : 60.0;
+        final fontSize = gridColumnCount >= 5 ? 12.0 : 22.0;
+        final spacing = gridColumnCount >= 5 ? 2.0 : 8.0;
 
         return Container(
           padding: const EdgeInsets.all(8.0),
@@ -104,9 +109,7 @@ class _MainPageState extends State<MainPageState> {
           ),
         ),
         const SizedBox(height: 8),
-        Expanded(
-          child: _gridViewWidget(),
-        ),
+        Expanded(child: _gridViewWidget()),
       ],
     );
   }
