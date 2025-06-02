@@ -34,7 +34,7 @@ class _ProfilePageState extends State<ProfilePageState> {
   // Create Header
   AppBar _header() {
     return AppBar(
-      title: const Text('My Profile', style: TextStyle(color: Colors.black)),
+      title: const Text('轮廓', style: TextStyle(color: Colors.black)),
       centerTitle: true,
       backgroundColor: Colors.white,
       elevation: 0,
@@ -70,18 +70,18 @@ class _ProfilePageState extends State<ProfilePageState> {
       children: [
         CircleAvatar(
           radius: 36,
-          backgroundImage: AssetImage('assets/images/ic_logo.png'),
+          backgroundImage: AssetImage('assets/images/my_profile.png'),
         ),
         SizedBox(width: 16),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Full Name',
+              '姓名',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 4),
-            Text('@username', style: TextStyle(color: Colors.blue)),
+            Text('@用户名', style: TextStyle(color: Colors.blue)),
           ],
         ),
       ],
