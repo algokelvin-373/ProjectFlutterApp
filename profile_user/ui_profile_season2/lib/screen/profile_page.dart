@@ -11,23 +11,16 @@ class ProfilePage extends StatelessWidget {
     return MaterialApp(
       title: 'Profile Page',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blueAccent,
-        ),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
         useMaterial3: true,
       ),
-      home: const ProfilePageState(
-        title: 'Profile Page',
-      ),
+      home: const ProfilePageState(title: 'Profile Page'),
     );
   }
 }
 
 class ProfilePageState extends StatefulWidget {
-  const ProfilePageState({
-    super.key,
-    required this.title,
-  });
+  const ProfilePageState({super.key, required this.title});
 
   final String title;
 
@@ -41,28 +34,19 @@ class _ProfilePageState extends State<ProfilePageState> {
   // Create Header
   AppBar _header() {
     return AppBar(
-      title: const Text(
-        'My Profile',
-        style: TextStyle(color: Colors.black),
-      ),
+      title: const Text('My Profile', style: TextStyle(color: Colors.black)),
       centerTitle: true,
       backgroundColor: Colors.white,
       elevation: 0,
       leading: IconButton(
-        icon: const Icon(
-          Icons.arrow_back,
-          color: Colors.black,
-        ),
+        icon: const Icon(Icons.arrow_back, color: Colors.black),
         onPressed: () {
           SystemNavigator.pop();
         },
       ),
       actions: [
         IconButton(
-          icon: const Icon(
-            Icons.edit,
-            color: Colors.black,
-          ),
+          icon: const Icon(Icons.edit, color: Colors.black),
           onPressed: () async {
             final updatedList = await Navigator.push(
               context,
@@ -93,19 +77,13 @@ class _ProfilePageState extends State<ProfilePageState> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Ragip Diler',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+              'Full Name',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 4),
-            Text(
-              '@algokelvin',
-              style: TextStyle(color: Colors.blue),
-            ),
+            Text('@username', style: TextStyle(color: Colors.blue)),
           ],
-        )
+        ),
       ],
     );
   }
@@ -116,11 +94,7 @@ class _ProfilePageState extends State<ProfilePageState> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(
-            icon,
-            size: 20,
-            color: Colors.grey,
-          ),
+          Icon(icon, size: 20, color: Colors.grey),
           const SizedBox(width: 16),
           Expanded(
             child: Column(
@@ -128,16 +102,10 @@ class _ProfilePageState extends State<ProfilePageState> {
               children: [
                 Text(
                   label,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey,
-                  ),
+                  style: const TextStyle(fontSize: 12, color: Colors.grey),
                 ),
                 const SizedBox(height: 4),
-                Text(
-                  value,
-                  style: const TextStyle(fontSize: 14),
-                ),
+                Text(value, style: const TextStyle(fontSize: 14)),
               ],
             ),
           ),
@@ -149,13 +117,10 @@ class _ProfilePageState extends State<ProfilePageState> {
   Widget _personalInfo() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: _infoProfile.map((item) {
-        return _infoItem(
-          item['icon'],
-          item['label'],
-          item['value'],
-        );
-      }).toList(),
+      children:
+          _infoProfile.map((item) {
+            return _infoItem(item['icon'], item['label'], item['value']);
+          }).toList(),
     );
   }
 
