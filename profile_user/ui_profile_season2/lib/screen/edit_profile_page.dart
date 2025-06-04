@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 class EditProfilePage extends StatefulWidget {
   final List<Map<String, dynamic>> infoList;
 
-  const EditProfilePage({
-    Key? key,
-    required this.infoList,
-  }) : super(key: key);
+  const EditProfilePage({Key? key, required this.infoList}) : super(key: key);
 
   @override
   State<EditProfilePage> createState() => _EditProfilePage();
@@ -18,9 +15,10 @@ class _EditProfilePage extends State<EditProfilePage> {
   @override
   void initState() {
     super.initState();
-    _controllers = widget.infoList
-        .map((item) => TextEditingController(text: item['value']))
-        .toList();
+    _controllers =
+        widget.infoList
+            .map((item) => TextEditingController(text: item['value']))
+            .toList();
   }
 
   void _saveProfile() {
@@ -37,10 +35,7 @@ class _EditProfilePage extends State<EditProfilePage> {
 
   AppBar _header() {
     return AppBar(
-      title: const Text(
-        'Edit Profile Info',
-        style: TextStyle(color: Colors.black),
-      ),
+      title: const Text('编辑个人资料', style: TextStyle(color: Colors.black)),
       centerTitle: true,
       backgroundColor: Colors.white,
       elevation: 0,
@@ -56,14 +51,14 @@ class _EditProfilePage extends State<EditProfilePage> {
           const Center(
             child: CircleAvatar(
               radius: 36,
-              backgroundImage: AssetImage('assets/images/ic_logo.png'),
+              backgroundImage: AssetImage('assets/images/my_profile.png'),
             ),
           ),
-          const SizedBox(height: 8),
-          TextButton(
-            onPressed: () {},
-            child: const Text("Change Profile Picture"),
-          ),
+          // const SizedBox(height: 8),
+          // TextButton(
+          //   onPressed: () {},
+          //   child: const Text("Change Profile Picture"),
+          // ),
           const SizedBox(height: 20),
           for (int i = 0; i < widget.infoList.length; i++)
             Padding(
@@ -75,9 +70,10 @@ class _EditProfilePage extends State<EditProfilePage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  hintText: widget.infoList[i]['label'] == 'Location'
-                      ? 'Ex: San Francisco, CA'
-                      : null,
+                  hintText:
+                      widget.infoList[i]['label'] == 'Location'
+                          ? 'Ex: San Francisco, CA'
+                          : null,
                 ),
               ),
             ),
@@ -91,7 +87,7 @@ class _EditProfilePage extends State<EditProfilePage> {
               ),
               padding: const EdgeInsets.symmetric(vertical: 16),
             ),
-            child: const Text("Save"),
+            child: const Text("节省"),
           ),
         ],
       ),
